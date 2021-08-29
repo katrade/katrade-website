@@ -1,6 +1,6 @@
 # Welcome to Katrade website
 
-Katrade website is mainly use [React](https://github.com/facebook/react) for building user interfaces.
+Katrade website mainly use [React](https://github.com/facebook/react) for building user interfaces.
 
 ## Getting started
 Cloning this repository
