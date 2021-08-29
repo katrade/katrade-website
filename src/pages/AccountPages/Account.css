@@ -1,0 +1,21 @@
+.bg-katrade {
+    background-color: rgb(244,244,252);
+}
+
+.menu-area {
+    width: 20%;
+    height: 400px;
+    float: left;
+}
+
+.information-area {
+    width: 80%;
+    height: auto;
+    float: right;
+}
+
+.clear::after {
+    content: "";
+    clear: both;
+    display: table;
+}

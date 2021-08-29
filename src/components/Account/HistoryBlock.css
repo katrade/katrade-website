@@ -1,0 +1,21 @@
+.historyblock > div {
+    display: inline-block;
+}
+
+.historyblock p {
+    margin-bottom: 0;
+}
+
+.myItem, .tradeItem {
+    padding: 20px;
+    width: 45%;
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.swap-icon {
+    width: 10%;
+    font-size: 35px;
+    margin: auto 0;
+}
