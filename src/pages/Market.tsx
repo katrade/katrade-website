@@ -23,137 +23,143 @@ const SeeMore = styled.button`
     font-size: 18px;
 `
 
+async function getRandomWord(): Promise<string> {
+    return new Promise(async (resolve,reject) => {
+        const a = await axios.get('https://random-word-api.herokuapp.com/word?number=1')
+        resolve(a.data)
+    })
+
+}
 
 export default function Market() {
-    axios.get('http://localhost:5000/auth', {withCredentials: true}).then(res => console.log(res.data));
-
+    axios.get('http://localhost:5000/auth', {withCredentials: true})
     const id_item = [
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
         {
-            name_item: "Cat",
+            name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
     ]

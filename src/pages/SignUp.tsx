@@ -29,14 +29,12 @@ export default function SignUp() {
 
     return (
         <>
-            <Navbar />
-            <Block height="200" backgroundImage={wallpaper1}>
+            <Block height="200" backgroundImage={wallpaper1} className="fix-screen-size">
                 <>
                     <SignupHead/>
                     <SignupForm pw={pw} setPw={setPw}/>
                 </>
             </Block>
-            <Footer />
         </>
     )
 }

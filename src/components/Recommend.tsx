@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import './Recommend.css';
 
-function Recommend(props:any) {
+function Recommend(props: any) {
     const { item, index } = props;
 
     const history = useHistory();
@@ -16,11 +16,12 @@ function Recommend(props:any) {
 
     return (
         <div className="recommend-card" onClick={LinkItemData}>
-                <img className="recommend-photo-card" src={item.photo_src}/>
-                <div className="recommend-text-card py-3">
-                    <p>{item.name_item}</p>
-                    <p className="desc item-desc">Some quick example</p>
-                </div>  
+            <div className="recommend-photo-card" style={{ backgroundImage: `url(${item.photo_src})` }}>
+            </div>
+            <div className="recommend-text-card py-3">
+                <p>{item.name_item}</p>
+                <p className="desc item-desc text-truncate">Cat is weird when they are with human.</p>
+            </div>
         </div>
     );
 };

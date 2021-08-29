@@ -27,14 +27,14 @@ import usePopup from '../hooks/popup'
 
 const popup1Content = (
     <div className="text-center">
-        <h5>ตลาดอยู่ระหว่างการพัฒนา</h5>
-        <TransparentButton buttonColor="#1f6ab5" onClick={() => window.location.href = "/app/market"}>ฉันทราบและพาฉันไปที่ตลาด</TransparentButton>
+        <h5>Seriously? This page is not ready.</h5>
+        <TransparentButton buttonColor="#1f6ab5" onClick={() => window.location.href = "/app/market"}>Yeah, I know. Just take me there !!</TransparentButton>
     </div>
 )
 const popup2Content = (
     <div className="text-center">
-        <h5>ระบบบัญชีผู้ใช้อยู่ระหว่างการพัฒนา</h5>
-        <TransparentButton buttonColor="#1f6ab5" onClick={() => window.location.href = "/app/signin"}>ฉันทราบและพาฉันไปที่หน้าเข้าสู่ระบบ</TransparentButton>
+        <h5>Seriously? This page is not ready.</h5>
+        <TransparentButton buttonColor="#1f6ab5" onClick={() => window.location.href = "/app/signin"}>Yeah, I know. Just take me there !!</TransparentButton>
     </div>
 )
 
