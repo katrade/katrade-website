@@ -31,7 +31,7 @@ export default function Footer() {
                         <hr />
                         <a href={`/articles/why-katrade`} className="no-underline"><p className="footer-desc">{activeLang[1]}</p></a>
                         <a href={`/app/market`} className="no-underline"><p className="footer-desc">{activeLang[2]}</p></a>
-                        <a href={`/articles/about`} className="no-underline"><p className="footer-desc">{activeLang[3]}</p></a>
+                        <a href={`/articles/about/developers`} className="no-underline"><p className="footer-desc">{activeLang[3]}</p></a>
                         <a href={`/articles/contact-us`} className="no-underline"><p className="footer-desc">{activeLang[4]}</p></a>
                     </div>
                     <div className="col-sm">
