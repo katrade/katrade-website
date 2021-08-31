@@ -2,7 +2,7 @@
     margin: 20px 0;
 }
 
-.recommend-grid-less10 {
+/* .recommend-grid-less10 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -18,7 +18,7 @@
     grid-template-rows: 1fr 1fr;
     column-gap: 10px;
     row-gap: 20px;
-}
+} */
 
 .category {
     height: 350px;
@@ -31,7 +31,7 @@
     background-color: rgb(169, 216, 189);
 }
 
-.interest {
+/* .interest {
     margin: 20px 0;
 }
 
@@ -50,7 +50,7 @@
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     column-gap: 5px;
     row-gap: 5px;
-}
+} */
 
 @media screen and (max-width: 1160px) {
     /* Rocommend */

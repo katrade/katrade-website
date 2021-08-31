@@ -197,14 +197,11 @@ export default function Market() {
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
                 <>
-                    {/* <h3 className="recommend">Just For You</h3>
-                    <div className={id_item.length <= 10 ? "recommend-grid-less10" : "recommend-grid-than10"}>
-                        {rec_item}
-                    </div> */}
+
                     <h5 className="recommend">Match with you</h5>
-                    <div className="d-flex justify-content-center full-width">
+                    <div className="d-flex justify-content-between full-width">
                         <div>
-                            <div className="d-flex justify-content-start flex-wrap">
+                            <div className="d-flex justify-content-between flex-wrap">
                                 {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)}
                             </div>
                             <div className="d-flex justify-content-center align-items-center my-3">
@@ -221,13 +218,9 @@ export default function Market() {
                         </div>
                     </div>
 
-                    {/* <h3 className="interest">Suggest</h3>
-                    <div className={id_item.length <= 30 ? "interest-grid-less30" : "interest-grid-than30"}>
-                        {interest_item}
-                    </div> */}
                     <h5 className="recommend">Popular</h5>
-                    <div className="d-flex justify-content-center full-width">
-                        <div className="d-flex justify-content-start flex-wrap">
+                    <div className="d-flex justify-content-between full-width">
+                        <div className="d-flex justify-content-between flex-wrap">
                             {interest_item.length <= 40 ? interest_item : interest_item.slice(0, 40)}
                         </div>
                     </div>

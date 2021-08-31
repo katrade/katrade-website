@@ -9,6 +9,8 @@ import { FaRegListAlt } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropUpLine } from "react-icons/ri";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -26,13 +28,6 @@ import Block from './Block';
 const google = "https://www.google.com";
 
 function Navbar() {
-
-    const [clickShowCate, SetClickShowCate] = useState(false);
-    const handleClickShowCate = () => SetClickShowCate(!clickShowCate);
-    const closeCateMenu = () => SetClickShowCate(false);
-
-    const [clickMobile, SetClickMobile] = useState(false);
-    const handleClickMobile = () => SetClickMobile(!clickMobile);
 
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
@@ -65,39 +60,45 @@ function Navbar() {
         return <MobileNavbar />
     }
 
-
+    function dropIcon() {
+        if (!drop) {
+            return <RiArrowDropDownLine />
+        }else{
+            return <RiArrowDropUpLine />
+        }
+    }
 
     return (
         <div className="header py-3">
-            <Block height="200px">
-                <>
+            <Block height="90px">
                     <div className="header-con">
                         <a href="/app/Market">
                             <img className="logo" src={Logo} />
                         </a>
                         <div>
-                            <p className="cate" onClick={() => setDrop(!drop)}>Categories<RiArrowDropDownLine /></p>
+                            <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
                             <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                             <ul className={drop ? "categories active" : "categories"}>
-                                <li>
-                                    <a href={google}>Clothes</a>
-                                    
-                                </li>
-                                <li>
-                                    <a href={google}>Book</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Sports</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Clothes</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Book</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Sports</a>
-                                </li>
+                                <Block height="50px">
+                                    <li>
+                                        <a href={google}>Clothes</a>
+                                    </li>
+                                    <li>
+                                        <a href={google}>Book</a>
+                                    </li>
+                                    <li>
+                                        <a href={google}>Sports</a>
+                                    </li>
+                                    <li>
+                                        <a href={google}>Clothes</a>
+                                    </li>
+                                    <li>
+                                        <a href={google}>Book</a>
+                                    </li>
+                                    <li>
+                                        <a href={google}>Sports</a>
+                                    </li>
+                                </Block>
                             </ul>
                         </div>
                         {/* <div className="dropdown-categories" onClick={() => setDrop(!drop)}>
@@ -155,7 +156,6 @@ function Navbar() {
                         </ul> */}
                         
                     </div>
-                </>
             </Block>
         </div>
     );

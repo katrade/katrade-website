@@ -7,7 +7,6 @@
     border-radius: 3px;
     background-color: #ffffff;
     transition: 400ms ease;
-    z-index: 0;
     border: solid rgb(218, 224, 231) 1px;
 
 }
@@ -17,7 +16,7 @@
 }
 
 .recommend-photo-card {
-    height: 130px;
+    height: 155px;
     width: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
