@@ -1,0 +1,16 @@
+.container-favorite {
+    width: auto;
+    height: auto;
+    background-color: white;
+    padding: 10px 30px 30px 30px;
+    margin-bottom: 20px;
+    
+}
+
+.span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #95bddfd5;
+    margin-left: 20px;
+}
+

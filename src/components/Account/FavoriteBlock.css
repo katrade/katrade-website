@@ -1,0 +1,16 @@
+.block-item-favorite .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column-img {
+    width: 190px;
+}
+.deleteFavorite {
+    margin-top: 40px;
+    float: right;
+    width: 18%;
+    font-size: 30px;
+    color: red;
+    height: fit-content;
+}

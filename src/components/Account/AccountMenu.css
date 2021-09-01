@@ -11,3 +11,8 @@
 .accountmenu a{
     text-decoration: none;
 }
+
+.accountmenu-mobile {
+    text-align: center;
+    font-size: 30px;
+}

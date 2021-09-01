@@ -6,6 +6,7 @@
     width: 20%;
     height: 400px;
     float: left;
+    /* background-color: tomato; */
 }
 
 .information-area {
@@ -18,4 +19,11 @@
     content: "";
     clear: both;
     display: table;
+}
+
+.menu-area-mobile {
+    width: 50px;
+    height: 400px;
+    float: left;
+    /* background-color: seagreen; */
 }

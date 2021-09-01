@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from 'react';
 
 import './AccountMenu.css';
 
@@ -7,7 +7,32 @@ import { BiHistory } from "react-icons/bi";
 // import { BsBookmarkFill } from "react-icons/";
 // import { BsBookmarkFill } from "react-icons/";
 
-export default function AccountMenu() {
+function AccountMenu() {
+    
+    const [mobile, setMobile] = useState(false);
+
+    window.addEventListener("resize", resize);
+
+    function resize() {
+        console.log(window.innerWidth)
+        if (window.innerWidth < 600) {
+            if (mobile) {
+                return
+            }
+            return setMobile(true) 
+        }
+        else {
+            if (!mobile) {
+                return
+            }
+            return setMobile(false)
+        }
+    }
+
+    if (mobile) {
+        return <MobileAccountMenu />
+    }
+
     return (
         <div className="accountmenu">
             <h5><BsPersonFill />&nbsp;&nbsp;My Account</h5>
@@ -22,3 +47,17 @@ export default function AccountMenu() {
         </div>
     );
 }
+
+function MobileAccountMenu() {
+    return(
+        <div className="accountmenu-mobile">
+            <BsPersonFill />
+            <BsBookmarkFill />
+            <BsStarFill />
+            <BsBagFill />
+            <BiHistory />
+        </div>
+    );
+}
+
+export default AccountMenu;

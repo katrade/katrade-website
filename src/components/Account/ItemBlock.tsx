@@ -13,12 +13,10 @@ export default function ItemBlock(props:any) {
         <p className="tag">{dataTag}</p>
     );
 
-    console.log(manage.length);
-
     return (
         <AccountBlock padding="10px">
             <div className="block-item">
-                <div className="row">
+                <div className="rowling">
                     <div className="column-img">
                         <img src={data.image} />
                     </div>

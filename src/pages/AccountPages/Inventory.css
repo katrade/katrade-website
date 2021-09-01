@@ -6,21 +6,15 @@
     margin-bottom: 20px;
 }
 
-.container-inventory > h4, .container-inventory > h5 {
-    display: inline-block;
-    margin-right: 20px;
+.inventory-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.container-inventory > h5 {
+.span {
+    font-size: 30px;
+    font-weight: 700;
     color: #95bddfd5;
-}
-
-.container-inventory > a {
-    float: right;
-    text-decoration: none;
-    color: #888888;
-}
-
-.container-inventory > a:hover {
-    color: rgb(63, 63, 63);
+    margin-left: 20px;
 }

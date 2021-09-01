@@ -42,9 +42,10 @@ export default function Account() {
         <>
             <MenuAccount>
                 <div className="container-inventory">
-                    <h4>Your items</h4>
-                    <h5>({listOfItem.length})</h5>
-                    <a href="/">Manage Inventory<CgPlayListAdd /></a>
+                    <div className="inventory-head">
+                        <h4>Your items<span className="span">({listOfItem.length})</span></h4>
+                        <a href="/">Manage Inventory<CgPlayListAdd /></a>
+                    </div>
                     <div className="data-inventory">
                         {item_data}
                     </div>
