@@ -35,7 +35,6 @@ export const AccountBlockCSS = styled.button`
     margin-bottom: 10px;
 
     cursor: cell;
-
 `
 
 export function AccountBlock({width, height, color, children, paddingBottom, paddingLeft, paddingRight, paddingTop, padding}: AccountBlockProps) {

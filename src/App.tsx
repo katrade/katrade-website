@@ -37,6 +37,10 @@ import EditItem from './pages/AccountPages/EditItem';
 import ChangePassword from './pages/AccountPages/ChangePasswordPage';
 import Profile from './pages/AccountPages/Profile';
 
+import Request from './pages/RequestPending/Request'
+import Pending from './pages/RequestPending/Pending'
+import Inprogress from './pages/RequestPending/Inprogress'
+
 import ProfileCanvas from './components/ProfileCanvas';
 
 import Popup from './components/Popup';
@@ -82,6 +86,11 @@ function App() {
                                     <Route exact path="/app/history" component={History}></Route>
                                     <Route exact path="/app/inventory" component={Inventory}></Route>
                                     <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
+
+                                    <Route exact path="/app/request" component={Request}></Route>
+                                    <Route exact path="/app/pending" component={Pending}></Route>
+                                    <Route exact path="/app/inprogress" component={Inprogress}></Route>
+
                                     <Route exact path="/404" component={NotFound}></Route>
                                     <Route exact path="/error/server-in-maintainance" component={Maintainance}></Route>
                                     <Route exact path="/" component={Home}></Route>

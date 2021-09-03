@@ -1,0 +1,22 @@
+.outline {
+    border: 2px solid #C4C4C4;
+    border-radius: 8px;
+}
+
+.myItem-request {
+    padding: 13px;
+    width: 5000px;
+    min-width:400px;
+    max-width: 45%;
+    border-radius: 8px;
+    background-color: #E2E2E2;
+}
+
+.yourItem-request {
+    padding: 13px;
+    width: 5000px;
+    min-width:400px;
+    max-width: 45%;
+    border-radius: 8px;
+    background-color: #F5F5F5;
+}
