@@ -37,7 +37,7 @@ function Navbar() {
     window.addEventListener("resize", resize);
 
     function resize() {
-        console.log(window.innerWidth)
+        // console.log(window.innerWidth)
         if (window.innerWidth < 600) {
             if (mobile) {
                 return
@@ -98,26 +98,10 @@ function Navbar() {
                                     <li>
                                         <a href={google}>Sports</a>
                                     </li>
+                                    
                                 </Block>
                             </ul>
                         </div>
-                        {/* <div className="dropdown-categories" onClick={() => setDrop(!drop)}>
-                            <span>Click me</span>
-                            <div className={"dropdown-categories-content"+ drop ? " show" : ""}>
-                                <p>Hello World!</p>
-                            </div>
-                        </div> */}
-
-                        {/* <div className="categories-button" onClick={() => setDrop(!drop)}>
-                            <WidgetsIcon style={{ color: "#5e5e5e", width: "20px", margin: "4px" }} /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}
-                            <div className={"categories-drop" + (drop ? " show" : " hide")}>
-                                <p>Cats</p>
-                                <p>Meowww</p>
-                                <p>Lemons</p>
-                                <p>Master Yoda</p>
-                                <p>Snoopdog</p>
-                            </div>
-                        </div> */}
                         <form className="search" action="https://www.google.com">
                             <input type="search" className="search-bar" placeholder="Search an items"></input>
                             <button type="submit" className="search-btn" ><GoSearch /></button>
@@ -131,29 +115,12 @@ function Navbar() {
                         <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                             <MenuIcon />
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                <a href={google}>Account</a>
+                                <a href="/app/account">Account</a>
                                 <a href={google}>Chat</a>
                                 <a href={google}>Notification</a>
                                 <a href={google}>Ding Dong</a>
                             </div>
                         </div>
-                        {/* <div className="mobile-icon" onClick={handleClickMobile}>
-                            <MenuIcon />
-                        </div><ul className={clickMobile ? "mobile-menu active" : "mobile-menu"}>
-                            <li>
-                                <a href={google}>Account</a>
-                                <a href="#">I dont know</a>
-                            </li>
-                            <li>
-                                <a href={google}>Chat</a>
-                            </li>
-                            <li>
-                                <a href={google}>Notification</a>
-                            </li>
-                            <li>
-                                <a href={google}>Ding Dong</a>
-                            </li>
-                        </ul> */}
                         
                     </div>
             </Block>
@@ -166,22 +133,35 @@ const MobileNavbarContainer = styled.div`
     width: 100%;
     max-width: 100%;
     background-color: white;
-    min-height: 90px;
+    min-height: 60px;
     height: auto;
+    position: sticky;
+    top: 0;
 `
 
 function MobileNavbar() {
 
     const [clickMobile, SetClickMobile] = useState(false);
     const handleClickMobile = () => SetClickMobile(!clickMobile);
-    // const handleClickMobile = () => SetClickMobile(!clickMobile);
-    // const handleClickMobile = () => alert("Boommmm");
     
     const [drop, setDrop] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
+
+    var pathname = window.location.pathname.split('/')[2];
+    // console.log(`pathname = ${pathname}`);
+    function displaySearch() {
+        if (pathname != "Market"){
+            // console.log("Not Market");
+            return "hideSearchbar";
+        }else{
+            // console.log("Market");
+            return "header-con justify-content-center";
+        }
+    }
+
     return (
         <MobileNavbarContainer>
-            <Block height="90px">
+            <Block height="60px">
                 <div className="header-con float-right">
                     <a href="/app/Market">
                         <img className="logo" src={Logo} height="60px" />
@@ -198,30 +178,34 @@ function MobileNavbar() {
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
-                        <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a href={google}>Account</a>
-                            <a href={google}>Chat</a>
-                            <a href={google}>Notification</a>
-                            <a href={google}>Ding Dong</a>
-                        </div>
                     </div>
-                    {/* <ul className={clickMobile ? "mobile-menu active" : "mobile-menu"}>
-                        <li>
-                            <a href={google}>Account</a>
-                            <a href="#">I dont know</a>
-                        </li>
-                        <li>
-                            <a href={google}>Chat</a>
-                        </li>
-                        <li>
-                            <a href={google}>Notification</a>
-                        </li>
-                        <li>
-                            <a href={google}>Ding Dong</a>
-                        </li>
-                    </ul> */}
+                    <ul className={dropMenu ? "sidemenu activexyz" : "sidemenu"}>
+                        <Block height="50px">
+                            <li>
+                                <a href="/app/account">Account</a>
+                            </li>
+                            <li>
+                                <a href={google}>Following</a>
+                            </li>
+                            <li>
+                                <a href={google}>Followers</a>
+                            </li>
+                            <li>
+                                <a href={google}>My Favorite</a>
+                            </li>
+                            <li>
+                                <a href={google}>Inventory</a>
+                            </li>
+                            <li>
+                                <a href={google}>History</a>
+                            </li>
+                            <li>
+                                <a href={google}>Logout</a>
+                            </li>
+                        </Block>
+                    </ul>
                 </div>
-                <div className="header-con justify-content-center">
+                <div className={displaySearch()}>
                     <form className="search" action="https://www.google.com">
                         <input type="search" className="search-bar" placeholder="Search an items"></input>
                         <button type="submit" className="search-btn" ><GoSearch /></button>

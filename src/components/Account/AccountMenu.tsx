@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 
 import './AccountMenu.css';
 
@@ -12,9 +12,7 @@ function AccountMenu() {
     const [mobile, setMobile] = useState(false);
 
     window.addEventListener("resize", resize);
-
     function resize() {
-        console.log(window.innerWidth)
         if (window.innerWidth < 600) {
             if (mobile) {
                 return
@@ -28,6 +26,10 @@ function AccountMenu() {
             return setMobile(false)
         }
     }
+
+    useEffect(() => {
+        resize();
+    }, [])
 
     if (mobile) {
         return <MobileAccountMenu />

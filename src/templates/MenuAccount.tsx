@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 
 import '../pages/AccountPages/Account.css'
 
@@ -17,7 +17,7 @@ function MenuAccount({ children }: propsInterface) {
     const [mobile, setMobile] = useState(false);
 
     window.addEventListener("resize", resize);
-
+    // resize();
     function resize() {
         console.log(window.innerWidth)
         if (window.innerWidth < 600) {
@@ -34,8 +34,12 @@ function MenuAccount({ children }: propsInterface) {
         }
     }
 
+    useEffect(() => {
+        resize();
+    }, [])
+
     if (mobile) {
-        return <MobileMenuAccount />
+        return <MobileMenuAccount children={children} />
     }
 
     return (
@@ -74,10 +78,10 @@ function MobileMenuAccount({ children }: propsInterface) {
                             <Accountbar />
 
                             <div className="area">
-                                <div className="menu-area-mobile">
+                                {/* <div className="menu-area-mobile">
                                     <AccountMenu />
-                                </div>
-                                <div className="information-area">
+                                </div> */}
+                                <div className="information-area-mobile">
                                     {children}
                                 </div>
                             </div>

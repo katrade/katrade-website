@@ -25,5 +25,10 @@
     width: 50px;
     height: 400px;
     float: left;
-    /* background-color: seagreen; */
+    background-color: seagreen;
+}
+
+.information-area-mobile {
+    background-color: hotpink;
+    height: 300px;
 }

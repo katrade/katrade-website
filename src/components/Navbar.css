@@ -47,6 +47,7 @@
 
 .categories {
     /* display: flex; */
+    padding: 0;
     list-style-type: none;
     width: 100%;
     height: auto;
@@ -56,9 +57,10 @@
     top: 90px;
     left: -1500px;
     opacity: 0;
-    /* transition: 0.1s ease; */
+    /* transition: 0.3s ease; */
     background-color: rgba(0, 0, 0, 1);
 }
+
 
 .active {
     background-color: rgba(0, 0, 0, 1);
@@ -68,7 +70,7 @@
     position: absolute;
     z-index: 2;
     align-content: center;
-    /* transition: 0.1s ease; */
+    /* transition: 0.3s ease; */
 }
 
 .categories li a {
@@ -76,9 +78,17 @@
     color: white;
 }
 
+.categories li:hover {
+    background-color: hotpink;
+}
+
+.hideSearchbar{
+    display: none;
+}
+
 .search {
     margin: auto 0 auto 0;
-    min-width: 300px !important;
+    min-width: 300px;
     width: 460px;
     max-width: 700px;
     height: auto;
@@ -135,48 +145,39 @@
     border-radius: 50%;
 }
 
-.mobile-icon {
-    font-size: 20px;
-    background-color: rgb(236, 241, 247);
-    color: rgb(94, 108, 124);
-    float: right;
-    margin: 0 10px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-
-.mobile-menu {
-    display: flex;
+.sidemenu {
+    padding: 0;
     list-style-type: none;
-    width: 100%;
-    height: auto;
+    width: 249px;
+    height: 100vh;
     position: absolute;
-    flex-direction: column;
-    top: 90px;
-    left: 0;
+    top: 60px;
+    left: 100vh;
     opacity: 0;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
     background-color: rgba(0, 0, 0, 1);
+    display: none;
+
+    text-transform: uppercase;
 }
 
-.mobile-menu.active {
+.activexyz {
     background-color: rgba(0, 0, 0, 1);
     opacity: 1;
-    left: 0;
-    z-index: 1;
+    top: 60px;
+    left: calc(100% - 250px);
+    position: absolute;
+    z-index: 30;
     align-content: center;
-    transition: 0.5s ease;
-
-    cursor: pointer;
+    transition: 0.3s ease;
+    display: block;
 }
 
-.mobile-menu li a {
-    text-decoration: none;
-    color: white;
+.grayscreen {
+    width: 100vw;
+    height: 100vh;
+    background-color: gray;
+    opacity: 0.5;
 }
 
 .categories-button {

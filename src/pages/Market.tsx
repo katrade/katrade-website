@@ -162,6 +162,42 @@ export default function Market() {
             name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
+        {
+            name_item: "Cats, a weird creature",
+            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
+        },
     ]
 
     // สร้างตัวอย่างมาโชว์ Just For You
@@ -221,7 +257,7 @@ export default function Market() {
                     <h5 className="recommend">Popular</h5>
                     <div className="d-flex justify-content-between full-width">
                         <div className="d-flex justify-content-between flex-wrap">
-                            {interest_item.length <= 40 ? interest_item : interest_item.slice(0, 40)}
+                            {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)}
                         </div>
                     </div>
                 </>
