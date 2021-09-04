@@ -22,6 +22,8 @@ import WhyKatrade from './pages/Why-Katrade';
 import Home from './pages/Home';
 import Market from './pages/Market';
 
+import Search from './pages/Search'
+
 import SignIn from './pages/Signin';
 import SignUp from './pages/SignUp';
 
@@ -80,6 +82,8 @@ function App() {
                                     <Route exact path="/app/changepassword" component={ChangePassword}></Route>
 
                                     <Route exact path="/app/market" component={Market}></Route>
+                                    <Route exact path="/app/search" component={Search}></Route>
+
                                     <Route exact path="/app/account" component={Account}></Route>
                                     <Route exact path="/app/favorite" component={Favorite}></Route>
                                     <Route exact path="/app/following" component={Following}></Route>

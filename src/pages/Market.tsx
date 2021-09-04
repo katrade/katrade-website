@@ -232,9 +232,8 @@ export default function Market() {
 
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
-                <>
-
-                    <h5 className="recommend">Match with you</h5>
+                <div className="my-4">
+                    <h5 className="mb-3">Match with you</h5>
                     <div className="d-flex justify-content-between full-width">
                         <div>
                             <div className="d-flex justify-content-between flex-wrap">
@@ -245,7 +244,6 @@ export default function Market() {
                             </div>
                             
                         </div>
-
                     </div>
 
                     <div className="category">
@@ -254,13 +252,13 @@ export default function Market() {
                         </div>
                     </div>
 
-                    <h5 className="recommend">Popular</h5>
+                    <h5 className="mb-3">Popular</h5>
                     <div className="d-flex justify-content-between full-width">
                         <div className="d-flex justify-content-between flex-wrap">
                             {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)}
                         </div>
                     </div>
-                </>
+                </div>
             </Block>
 
             <br /><br />

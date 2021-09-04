@@ -104,7 +104,7 @@ function Navbar() {
                                 </Block>
                             </ul>
                         </div>
-                        <form className="search" action="https://www.google.com">
+                        <form className="search" action="/app/search">
                             <input type="search" className="search-bar" placeholder="Search an items"></input>
                             <button type="submit" className="search-btn" ><GoSearch /></button>
                         </form>
@@ -152,7 +152,7 @@ function MobileNavbar() {
 
     var pathname = window.location.pathname.split('/')[2];
     function displaySearch() {
-        if (pathname != "Market"){
+        if (pathname != "Market" && pathname != "search"){
             return "d-none";
         }else{
             return "header-con justify-content-center";
@@ -210,7 +210,7 @@ function MobileNavbar() {
                     </ul>
                 </div>
                 <div className={displaySearch()}>
-                    <form className="search" action="https://www.google.com">
+                    <form className="search" action="/app/search">
                         <input type="search" className="search-bar" placeholder="Search an items"></input>
                         <button type="submit" className="search-btn" ><GoSearch /></button>
                     </form>
