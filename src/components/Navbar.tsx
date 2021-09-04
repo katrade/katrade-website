@@ -60,6 +60,8 @@ function Navbar() {
         return <MobileNavbar />
     }
 
+    
+
     function dropIcon() {
         if (!drop) {
             return <RiArrowDropDownLine />
@@ -108,17 +110,17 @@ function Navbar() {
                         </form>
                         <div className="desktop-icon">
                             <a href="/app/account"><BsPersonFill /></a>
-                            <a href={google}><FaRegListAlt /></a>
+                            <a href="/app/request"><FaRegListAlt /></a>
                             <a href={google}><MdChat /></a>
-                            <a href="/app/request"><IoIosNotifications /></a>
+                            <a href=""><IoIosNotifications /></a>
                         </div>
                         <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                             <MenuIcon />
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a href="/app/account">Account</a>
                                 <a href={google}>Chat</a>
-                                <a href={google}>Notification</a>
-                                <a href="/app/request">Ding Dong</a>
+                                <a href="/app/request">Notification</a>
+                                <a href="">Ding Dong</a>
                             </div>
                         </div>
                         
@@ -137,24 +139,22 @@ const MobileNavbarContainer = styled.div`
     height: auto;
     position: sticky;
     top: 0;
+    z-index: 50;
 `
 
 function MobileNavbar() {
 
-    const [clickMobile, SetClickMobile] = useState(false);
-    const handleClickMobile = () => SetClickMobile(!clickMobile);
+    // const [clickMobile, SetClickMobile] = useState(false);
+    // const handleClickMobile = () => SetClickMobile(!clickMobile);
     
     const [drop, setDrop] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
 
     var pathname = window.location.pathname.split('/')[2];
-    // console.log(`pathname = ${pathname}`);
     function displaySearch() {
         if (pathname != "Market"){
-            // console.log("Not Market");
-            return "hideSearchbar";
+            return "d-none";
         }else{
-            // console.log("Market");
             return "header-con justify-content-center";
         }
     }
@@ -166,46 +166,47 @@ function MobileNavbar() {
                     <a href="/app/Market">
                         <img className="logo" src={Logo} height="60px" />
                     </a>
+
                     <div className="categories-button mx-2" onClick={() => setDrop(!drop)}>
                         <WidgetsIcon style={{ color: "#5e5e5e", width: "20px", margin: "4px" }} /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}
-                        <div className={"categories-drop" + (drop ? " show" : " hide")}>
+                        {/* <div className={"categories-drop" + (drop ? " show" : " hide")}>
                             <p>Cats</p>
                             <p>Meowww</p>
                             <p>Lemons</p>
                             <p>Master Yoda</p>
                             <p>Snoopdog</p>
-                        </div>
+                        </div> */}
                     </div>
-                    <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
-                        <MenuIcon />
-                    </div>
-                    <ul className={dropMenu ? "sidemenu activexyz" : "sidemenu"}>
-                        <Block height="50px">
-                            <li>
+
+                    <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}><MenuIcon /></div>
+                    <div className={dropMenu ? "sidemenu-bg" : "d-none"} onClick={() => setDropMenu(!dropMenu)} />
+                    <ul className={dropMenu ? "sidemenu active-sidemenu" : "sidemenu"}>
+                        <div className="sidemenu-content d-block">
+                            <li className="text-center">
                                 <a href="/app/account">Account</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href="/app/following">Following</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href="/app/followers">Followers</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href="/app/favorite">My Favorite</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href="/app/inventory">Inventory</a>
                             </li>
-                            <li>
-                                <a href="/app/request">Followers</a>
+                            <li className="text-center">
+                                <a href="/app/request">Request</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href="/app/history">History</a>
                             </li>
-                            <li>
+                            <li className="text-center">
                                 <a href={google}>Logout</a>
                             </li>
-                        </Block>
+                        </div>
                     </ul>
                 </div>
                 <div className={displaySearch()}>
@@ -215,6 +216,29 @@ function MobileNavbar() {
                     </form>
                 </div>
             </Block>
+            <ul className={drop ? "categories-mobile active-mobile" : "categories-mobile"}>
+                <Block height="50px">
+                    <li>
+                        <a href={google}>Clothes</a>
+                    </li>
+                    <li>
+                        <a href={google}>Book</a>
+                    </li>
+                    <li>
+                        <a href={google}>Sports</a>
+                    </li>
+                    <li>
+                        <a href={google}>Clothes</a>
+                    </li>
+                    <li>
+                        <a href={google}>Book</a>
+                    </li>
+                    <li>
+                        <a href={google}>Sports</a>
+                    </li>
+                                    
+                </Block>
+            </ul>
         </MobileNavbarContainer>
     )
 }

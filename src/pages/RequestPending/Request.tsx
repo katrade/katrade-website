@@ -116,7 +116,7 @@ export default function Request() {
     return(
         <div>
             <Navbar/>
-                <Block height="50px">
+                <Block height="50px" backgroundColor="#f7fafc">
                     <div className="my-4 py-3 px-4 background">
                         <div className="mb-3 d-flex flex-row topic-request">
                             {/* <a href="" className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</a> */}
