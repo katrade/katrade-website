@@ -23,6 +23,7 @@ export default function Request() {
                     pic:"https://www.ishida.com/images/popcorn-640x480.gif",
                 }
             ],
+            status:"0",
         },
         {
             name:"bema",
@@ -38,11 +39,78 @@ export default function Request() {
                     pic:"https://www.ishida.com/images/popcorn-640x480.gif",
                 }
             ],
+            status:"0",
+        },
+        {
+            name:"bema",
+            myItem:[
+                {
+                    nameItem:"Popcorn",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            yourItem:[
+                {
+                    nameItem:"Apple",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            status:"1",
+        },
+        {
+            name:"bema",
+            myItem:[
+                {
+                    nameItem:"Popcorn",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            yourItem:[
+                {
+                    nameItem:"Apple",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            status:"2",
+        },
+        {
+            name:"bema",
+            myItem:[
+                {
+                    nameItem:"Popcorn",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            yourItem:[
+                {
+                    nameItem:"Apple",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            status:"3",
+        },
+        {
+            name:"bema",
+            myItem:[
+                {
+                    nameItem:"Popcorn",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            yourItem:[
+                {
+                    nameItem:"Apple",
+                    pic:"https://www.ishida.com/images/popcorn-640x480.gif",
+                }
+            ],
+            status:"3",
         },
     ]
 
     const item_data = data.map((data,index) => {
-        return <RequestBlock data={data} index={index} />;
+        if (data.status == "0") {
+            return <RequestBlock data={data} key={index} />;
+        }
     })
 
     return(
@@ -54,7 +122,7 @@ export default function Request() {
                             {/* <a href="" className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</a> */}
                             <p className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</p>
                             <a href="/app/pending" className="p-1 fs-4 me-3 font-weight-bold">Your Pending</a>
-                            <a href="/app/pending" className="p-1 fs-4 font-weight-bold">Inprogress</a>
+                            <a href="/app/inprogress" className="p-1 fs-4 font-weight-bold">Inprogress</a>
                         </div>
                         <div>
                             {item_data}

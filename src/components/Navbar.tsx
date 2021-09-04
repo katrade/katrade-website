@@ -110,7 +110,7 @@ function Navbar() {
                             <a href="/app/account"><BsPersonFill /></a>
                             <a href={google}><FaRegListAlt /></a>
                             <a href={google}><MdChat /></a>
-                            <a href={google}><IoIosNotifications /></a>
+                            <a href="/app/request"><IoIosNotifications /></a>
                         </div>
                         <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                             <MenuIcon />
@@ -118,7 +118,7 @@ function Navbar() {
                                 <a href="/app/account">Account</a>
                                 <a href={google}>Chat</a>
                                 <a href={google}>Notification</a>
-                                <a href={google}>Ding Dong</a>
+                                <a href="/app/request">Ding Dong</a>
                             </div>
                         </div>
                         
@@ -185,19 +185,22 @@ function MobileNavbar() {
                                 <a href="/app/account">Account</a>
                             </li>
                             <li>
-                                <a href={google}>Following</a>
+                                <a href="/app/following">Following</a>
                             </li>
                             <li>
-                                <a href={google}>Followers</a>
+                                <a href="/app/followers">Followers</a>
                             </li>
                             <li>
-                                <a href={google}>My Favorite</a>
+                                <a href="/app/favorite">My Favorite</a>
                             </li>
                             <li>
-                                <a href={google}>Inventory</a>
+                                <a href="/app/inventory">Inventory</a>
                             </li>
                             <li>
-                                <a href={google}>History</a>
+                                <a href="/app/request">Followers</a>
+                            </li>
+                            <li>
+                                <a href="/app/history">History</a>
                             </li>
                             <li>
                                 <a href={google}>Logout</a>

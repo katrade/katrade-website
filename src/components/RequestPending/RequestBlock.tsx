@@ -5,6 +5,28 @@ import { TransparentButton } from '../standard/Button'
 import { IoMdSwap } from 'react-icons/io';
 
 export default function RequestBlock({data, index}:any) {
+    var pathname = window.location.pathname.split('/')[2];
+    console.log(`pathname = ${pathname}`);
+    function btnRPI(status:string, itemstatus:string) {
+        console.log(status+itemstatus)
+        if (pathname == "request"){
+            if(status != "0"){
+                return "d-none";
+            }
+        }else if (pathname == "pending"){
+            if(status != "1"){
+                return "d-none";
+            }
+        }else if (pathname == "inprogress"){
+            if(status!="2" && itemstatus!="2"){
+                return "d-none";
+            }else if(status!="3" && itemstatus!="3"){
+                return "d-none";
+            }
+        }
+    }
+
+    console.log(data.status)
     return (
         <div>
             <div className="outline p-3 mb-3">
@@ -25,8 +47,12 @@ export default function RequestBlock({data, index}:any) {
                     </div>
                 </div>
                 <div className="d-flex justify-content-end mt-3">
-                    <TransparentButton buttonColor="limegreen">Accept Request</TransparentButton>
-                    <TransparentButton buttonColor="red">Cancel Request</TransparentButton>
+                    <TransparentButton className={btnRPI("0","0")} buttonColor="limegreen">Accept Request</TransparentButton>
+                    <TransparentButton className={btnRPI("0","0")} buttonColor="red">Cancel Request</TransparentButton>
+                    <TransparentButton className={btnRPI("1","0")} buttonColor="red">Cancel Request</TransparentButton>
+                    <p className={btnRPI("2",data.status) + " fs-5"}>Please deal and confirm for trading in your personal chat</p>
+                    <TransparentButton className={btnRPI("3",data.status)} buttonColor="limegreen">Finish Trade</TransparentButton>
+                    <TransparentButton className={btnRPI("3",data.status)} buttonColor="red">Cancel Trade</TransparentButton>
                 </div>
             </div>
         </div>
