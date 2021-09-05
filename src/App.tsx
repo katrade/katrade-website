@@ -24,6 +24,8 @@ import Market from './pages/Market';
 
 import Search from './pages/Search'
 
+import Product from './pages/Product';
+
 import SignIn from './pages/Signin';
 import SignUp from './pages/SignUp';
 
@@ -83,6 +85,7 @@ function App() {
 
                                     <Route exact path="/app/market" component={Market}></Route>
                                     <Route exact path="/app/search" component={Search}></Route>
+                                    <Route exact path="/app/product" component={Product}></Route>
 
                                     <Route exact path="/app/account" component={Account}></Route>
                                     <Route exact path="/app/favorite" component={Favorite}></Route>

@@ -1,5 +1,3 @@
-import { useState , useEffect } from 'react';
-
 import { BsPersonFill , BsBookmarkFill , BsStarFill , BsBagFill } from "react-icons/bs";
 import { BiHistory } from "react-icons/bi";
 

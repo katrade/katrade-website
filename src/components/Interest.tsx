@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 import './Interest.css';
-import StarIcon from '@material-ui/icons/Star';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 
 export default function Interest(props:any) {
@@ -11,7 +10,8 @@ export default function Interest(props:any) {
         // โหมดเปลี่ยนภาษา ให้เปลี่ยนเป็น function ตัวนี้
         // history.push(`/${lang}/market`);
 
-        history.push(`/app/market/${index}`);
+        // history.push(`/app/market/${index}`);
+        history.push(`/app/product`);
     }
 
     return (

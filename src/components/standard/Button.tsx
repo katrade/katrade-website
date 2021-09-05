@@ -7,6 +7,8 @@ interface ButtonProps {
     width?: string
     height?: string
     padding?: string
+    margin?: string
+    fontSize?: string
     buttonColor?: string
     color?: string
     children?: string | JSX.Element | JSX.Element[] | null 
@@ -25,14 +27,13 @@ export const TransparentButton = styled.button`
     border-color: ${(props: ButtonProps) => props.buttonColor ? props.buttonColor : "black"};
     border-width: 1px;
 
-    font-size: 20px;
+    font-size: ${(props: ButtonProps) => props.fontSize ? props.fontSize : "20px"};
 
     padding: ${(props: ButtonProps) => props.padding ? props.padding : "0 20px 0 20px"};
 
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
+    
+    display: block;
 
     transition: 300ms ease;
 
@@ -52,17 +53,15 @@ export const SolidButton = styled.button`
 
     opacity: 0.8;
 
-    font-size: 20px;
+    font-size: ${(props: ButtonProps) => props.fontSize ? props.fontSize : "20px"};
 
     border-radius: 5px;
 
     padding: ${(props: ButtonProps) => props.padding ? props.padding : "0 20px 0 20px"};
 
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    
+    margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
+
+    display: block;
 
     transition: 300ms ease;
 
