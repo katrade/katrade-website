@@ -76,7 +76,7 @@ export default function Following() {
                         <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({following.length})</h5>
                     </div>
                     <p>ยังไม่เสร็จเรียบร้อย รอหน่อยได้มั้ยละ?</p>
-                    <div className="block-follow d-flex justify-content-between flex-wrap">
+                    <div className="d-flex justify-content-between flex-wrap">
                         {following_data}
                     </div>
                 </div>

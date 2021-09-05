@@ -1,7 +1,5 @@
 import { useState , useEffect} from 'react';
 
-// import '../pages/AccountPages/Account.css'
-
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Block from '../components/Block';
@@ -50,7 +48,7 @@ function MenuAccount({ children }: propsInterface) {
                         <div>
                             <Accountbar />
                             <div className="d-flex">
-                                <div style={{minWidth:"180px"}}>
+                                <div style={{minWidth:"160px"}}>
                                     <AccountMenu />
                                 </div>
                                 <div style={{width:"100%"}}>

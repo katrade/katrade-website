@@ -1,7 +1,5 @@
 import { useState , useEffect } from 'react';
 
-import './AccountMenu.css';
-
 import { BsPersonFill , BsBookmarkFill , BsStarFill , BsBagFill } from "react-icons/bs";
 import { BiHistory } from "react-icons/bi";
 
@@ -28,8 +26,8 @@ function AccountMenu() {
             </div>
             <p className="d-flex align-items-center fs-4 fw-bold mb-0" style={{color:"black"}}><BsBookmarkFill />&nbsp;&nbsp;Follow</p>
             <div className="mb-3 ms-4">
-                <a href="/app/account" className="d-block" style={{color:"black",textDecoration:"none"}}>Following</a>
-                <a href="/app/changepassword" className="d-block" style={{color:"black",textDecoration:"none"}}>Followers</a>
+                <a href="/app/following" className="d-block" style={{color:"black",textDecoration:"none"}}>Following</a>
+                <a href="/app/followers" className="d-block" style={{color:"black",textDecoration:"none"}}>Followers</a>
             </div>
             <a href="/app/favorite" className="d-flex align-items-center fs-4 fw-bold mb-3" style={{color:"black",textDecoration:"none"}}><BsStarFill />&nbsp;&nbsp;My Favorite</a>
             <a href="/app/inventory" className="d-flex align-items-center fs-4 fw-bold mb-3" style={{color:"black",textDecoration:"none"}}><BsBagFill />&nbsp;&nbsp;Inventory</a>
