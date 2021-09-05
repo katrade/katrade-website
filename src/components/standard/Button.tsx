@@ -6,6 +6,7 @@ import styled from "styled-components";
 interface ButtonProps {
     width?: string
     height?: string
+    padding?: string
     buttonColor?: string
     color?: string
     children?: string | JSX.Element | JSX.Element[] | null 
@@ -26,8 +27,7 @@ export const TransparentButton = styled.button`
 
     font-size: 20px;
 
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: ${(props: ButtonProps) => props.padding ? props.padding : "0 20px 0 20px"};
 
     margin-left: 20px;
     margin-right: 20px;
@@ -56,8 +56,7 @@ export const SolidButton = styled.button`
 
     border-radius: 5px;
 
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: ${(props: ButtonProps) => props.padding ? props.padding : "0 20px 0 20px"};
 
     margin-left: 20px;
     margin-right: 20px;

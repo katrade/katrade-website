@@ -1,6 +1,6 @@
 import { useState , useEffect} from 'react';
 
-import '../pages/AccountPages/Account.css'
+// import '../pages/AccountPages/Account.css'
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -49,18 +49,15 @@ function MenuAccount({ children }: propsInterface) {
                     <div>
                         <div>
                             <Accountbar />
-
-                            <div className="area">
-                                <div className="menu-area">
+                            <div className="d-flex">
+                                <div style={{minWidth:"180px"}}>
                                     <AccountMenu />
                                 </div>
-                                <div className="information-area">
+                                <div style={{width:"100%"}}>
                                     {children}
                                 </div>
                             </div>
                         </div>
-                        
-                        <div className="clear"></div>
                     </div>
                 </Block>
             <Footer/>
@@ -76,18 +73,10 @@ function MobileMenuAccount({ children }: propsInterface) {
                     <div>
                         <div>
                             <Accountbar />
-
-                            <div className="area">
-                                {/* <div className="menu-area-mobile">
-                                    <AccountMenu />
-                                </div> */}
-                                <div className="information-area-mobile">
-                                    {children}
-                                </div>
+                            <div style={{height:"auto"}}>
+                                {children}
                             </div>
                         </div>
-                        
-                        <div className="clear"></div>
                     </div>
                 </Block>
             <Footer/>

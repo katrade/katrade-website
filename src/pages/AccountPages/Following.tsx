@@ -2,6 +2,7 @@
 import './Following.css'
 
 import MenuAccount from '../../templates/MenuAccount';
+import Block from '../../components/Block';
 
 import FollowingBlock from '../../components/Account/FollowingBlock';
 
@@ -67,17 +68,19 @@ export default function Following() {
     });
 
     return (
-        <>
+        <div>
             <MenuAccount>
                 <div className="container-following">
-                    <h4>Following</h4>
-                    <h5>({following.length})</h5>
+                    <div>
+                        <h4 className="d-inline-block me-3">Following</h4>
+                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({following.length})</h5>
+                    </div>
                     <p>ยังไม่เสร็จเรียบร้อย รอหน่อยได้มั้ยละ?</p>
-                    <div className="following-grid">
+                    <div className="block-follow d-flex justify-content-between flex-wrap">
                         {following_data}
                     </div>
                 </div>
             </MenuAccount>
-        </>
+        </div>
     );
 }
