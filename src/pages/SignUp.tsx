@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import Footer from '../components/Footer'
 import Block from '../components/Block'
-import Navbar from '../components/Navbar'
 import SignupForm from '../components/Signup/SignupForm';
 import SignupHead from '../components/Signup/SignupHead';
 import wallpaper1 from '../pics/katrade-wallpaper1.png';
-
-
 
 interface paramsInterface {
     lang?: string

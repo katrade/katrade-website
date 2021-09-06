@@ -28,6 +28,8 @@ import Product from './pages/Product';
 import SignIn from './pages/Signin';
 import SignUp from './pages/SignUp';
 
+import VerifyTest from './pages/VerifyPages/VerifyTest';
+
 import Account from './pages/AccountPages/Account';
 import Favorite from './pages/AccountPages/Favorite';
 import Following from './pages/AccountPages/Following';
@@ -80,6 +82,8 @@ function App() {
                                     <Route exact path="/app/profile" component={Profile}></Route>
                                     <Route exact path="/app/register" component={SignUp}></Route>
                                     <Route exact path="/app/changepassword" component={ChangePassword}></Route>
+
+                                    <Route exact path="/app/verifytest" component={VerifyTest}></Route>
 
                                     <Route exact path="/app/market" component={Market}></Route>
                                     <Route exact path="/app/search" component={Search}></Route>

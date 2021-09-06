@@ -144,7 +144,7 @@ export default function SignupForm({pw, setPw}:p){
                             <label className="ml-2"><input className="mr-2" type="checkbox"/>Accept the Terms of Service.</label>
                             <a href="https://scontent.fbkk2-4.fna.fbcdn.net/v/t1.6435-9/66231507_109603010346815_7721927349360394240_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=8bfeb9&_nc_eui2=AeGWdC-Ytxlk9-gLJKhLseQIaVrAoqfB6ExpWsCip8HoTInKoJ9RqqEYFzRwvTTX0PdkTqHbQQ2TXOqhR4K2vMBU&_nc_ohc=gpZM0V1ED7MAX_f7NWz&_nc_ht=scontent.fbkk2-4.fna&oh=5ed8b35053a8e690a2c31251063ebf02&oe=612692BE" className="blue-font-link ml-1">learn more</a>
                             <br/>
-                            <SolidButton type="button" className="mybutton-grey pl-5 pr-5 mt-3" onClick={onFormSubmit}>Sign up</SolidButton>
+                            <SolidButton type="button" className="mybutton-grey pl-5 pr-5 mt-3" margin="0 auto" onClick={onFormSubmit}>Sign up</SolidButton>
                         </div>
                         <br/><br/>
             </div>
