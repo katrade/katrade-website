@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Block from '../components/Block';
+import ProductPost from '../components/ProductPost';
 
 import { BsStarFill } from "react-icons/bs";
 import { SolidButton , TransparentButton } from '../components/standard/Button';
@@ -9,8 +12,33 @@ function Product() {
 
     const requireTag = "ใส่ค่าตัวแปร";
 
+    const photoLink = {
+        namePhoto:"Katom ทรงพลัง",
+        link:["https://www.aljazeera.com/wp-content/uploads/2021/08/2021-08-27T152656Z_298019127_RC2KMA70M1Q8_RTRMADP_3_SOCCER-ENGLAND-MUN-RONALDO.jpg?resize=1200%2C630",
+        "https://static.posttoday.com/media/content/2017/07/28/812D33C6776043039F06467A946D474B.jpg",   
+        ],
+    }
+
+    console.log(typeof(photoLink.link))
+
+    const [selectPhoto , setSelectPhoto] = useState(null);
+
+    function clickPhoto(photoLink:any) {
+        setSelectPhoto(photoLink);
+    }
+
+    function closePhoto() {
+        setSelectPhoto(null);
+    }
+
+    let photoPost = null;
+    if (!!selectPhoto) {
+        photoPost = <ProductPost onBgClick={closePhoto} photoLink={photoLink.link} />
+    }
+
     return (
         <div>
+            {photoPost}
             <Navbar />
             <Block height="auto" backgroundColor="#f7fafc">
                 <div className="py-3 px-5 my-3 bg-white">
@@ -19,7 +47,7 @@ function Product() {
                         <div className="py-3" style={{width:"38%"}}>
                             <div className="mb-3 d-flex justify-content-center" style={{height:"auto"}}>
                                 <div style={{width:"350px",height:"auto",backgroundColor:"#F1F1F1",padding:"30px 10px"}}>
-                                    <img className="my-auto" src="https://static.posttoday.com/media/content/2017/07/28/812D33C6776043039F06467A946D474B.jpg" style={{width:"100%",height:"170px"}}/>
+                                    <img className="my-auto" src="https://static.posttoday.com/media/content/2017/07/28/812D33C6776043039F06467A946D474B.jpg" style={{width:"100%",height:"170px",cursor:"zoom-in"}} onClick={() => {clickPhoto(photoLink)}}/>
                                 </div>
                             </div>
                             <div className="">

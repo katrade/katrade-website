@@ -42,7 +42,7 @@ export default function ProfileCanvas() {
                         <div className="row m-0 p-0" style={{ width: "80%" }}>
 
                             <Profile name="Chalanthorn Aengaguga" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU" label="Developer"/>
-                            <Profile name="Chonchanat Tubtiang" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NIFM8QiRrDJqNRJ9xj-_b09MQwQK0Io5xg3Ge9z2wnmdglim2PCOzHdWsjq0qT_Y8v4&usqp=CAU" label="Developer"/>
+                            <Profile name="Chonchanat Tubtiang" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NIFM8QiRrDJqNRJ9xj-_b09MQwQK0Io5xg3Ge9z2wnmdglim2PCOzHdWsjq0qT_Y8v4&usqp=CAU" label="Chef"/>
                             <Profile name="Jirat Wangslae" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3aDHlzgAfDG4_gGi4P2MKfwY-dqaqLwH-kPuyfU240-BZd32D5NsX_NSbdj6l1gg0OQU&usqp=CAU" label="Developer"/>
                             <Profile name="Napasin Saengthong" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuiaJ3au5xztqR3mOekUEnNHdnI1l_BxfiDQ7M4CX1QRKz59NFFWPNkfRY2tmRHlzUyUk&usqp=CAU" label="Developer"/>
                             <Profile name="Nattawat Mmmm" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBlT6tWFRvqh1_3Y59fCt0Ml7kQaCECCCHt7IvZRfy3wWwqFW3_EP2qF_nkcKfYgD-rnU&usqp=CAU" label="Developer"/>

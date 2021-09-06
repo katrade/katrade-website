@@ -87,8 +87,10 @@ export default function Home() {
                             <div className="center-content-screen">
                                 <H3>{activeLang[0]}</H3>
                                 <P>{activeLang[1]}</P>
-                                <DynamicTransparentButton buttonColor="limegreen" width="140px" onClick={LinkMarket}>{activeLang[2]}</DynamicTransparentButton>
-                                <DynamicSolidButton width="140px" onClick={LinkSignIn}>{activeLang[3]}</DynamicSolidButton>
+                                <div className="d-flex justify-content-center">
+                                    <DynamicTransparentButton buttonColor="limegreen" width="140px" onClick={LinkMarket}>{activeLang[2]}</DynamicTransparentButton>
+                                    <DynamicSolidButton width="140px" onClick={LinkSignIn}>{activeLang[3]}</DynamicSolidButton>
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg text-center">

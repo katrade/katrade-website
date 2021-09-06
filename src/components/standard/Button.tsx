@@ -9,6 +9,7 @@ interface ButtonProps {
     padding?: string
     margin?: string
     fontSize?: string
+    display?: string
     buttonColor?: string
     color?: string
     children?: string | JSX.Element | JSX.Element[] | null 
@@ -33,7 +34,7 @@ export const TransparentButton = styled.button`
 
     margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
     
-    display: block;
+    display: ${(props: ButtonProps) => props.display ? props.display : "block"};
 
     transition: 300ms ease;
 
@@ -61,7 +62,7 @@ export const SolidButton = styled.button`
 
     margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
 
-    display: block;
+    display: ${(props: ButtonProps) => props.display ? props.display : "block"};
 
     transition: 300ms ease;
 

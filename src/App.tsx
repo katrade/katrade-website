@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,8 +35,8 @@ import Follower from './pages/AccountPages/Follower';
 import History from './pages/AccountPages/History';
 import Inventory from './pages/AccountPages/Inventory';
 import ManageInventory from './pages/AccountPages/ManageInventory';
-import AddItem from './pages/AccountPages/AddItem';
-import EditItem from './pages/AccountPages/EditItem';
+// import AddItem from './pages/AccountPages/AddItem';
+// import EditItem from './pages/AccountPages/EditItem';
 import ChangePassword from './pages/AccountPages/ChangePasswordPage';
 import Profile from './pages/AccountPages/Profile';
 
@@ -55,7 +54,6 @@ import { Application } from './contexts/Application';
 
 require('dotenv').config({ path: ".env" })
 console.log(process.env)
-
 
 function App() {
     

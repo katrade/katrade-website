@@ -44,7 +44,7 @@ export default function Account() {
                 <div className="container-inventory">
                     <div className="inventory-head">
                         <h4>Your items<span className="span">({listOfItem.length})</span></h4>
-                        <a href="/">Manage Inventory<CgPlayListAdd /></a>
+                        <a href="/app/manageInventory">Manage Inventory<CgPlayListAdd /></a>
                     </div>
                     <div className="data-inventory">
                         {item_data}
