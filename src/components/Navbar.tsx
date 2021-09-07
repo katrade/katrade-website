@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import './Navbar.css';
 
@@ -32,7 +33,8 @@ function Navbar() {
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
-
+    const [searchText, setSearchText] = useState('');
+    const history = useHistory();
 
     window.addEventListener("resize", resize);
 
@@ -69,6 +71,12 @@ function Navbar() {
             return <RiArrowDropUpLine />
         }
     }
+    function search() {
+        if (!searchText) {
+            return alert('Type something, Idiot!!!')
+        }
+        history.push(`/app/search/${searchText}`)
+    }
 
     return (
         <div className="header py-3">
@@ -104,9 +112,9 @@ function Navbar() {
                                 </Block>
                             </ul>
                         </div>
-                        <form className="search" action="/app/search">
-                            <input type="search" className="search-bar" placeholder="Search an items"></input>
-                            <button type="submit" className="search-btn" ><GoSearch /></button>
+                        <form className="search">
+                            <input type="search" className="search-bar" placeholder="Search an items" id="searchbar" onChange={(e) => setSearchText(e.target.value)} value={searchText}></input>
+                            <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                         </form>
                         <div className="desktop-icon">
                             <a href="/app/account"><BsPersonFill /></a>

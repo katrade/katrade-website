@@ -1,5 +1,4 @@
 import MenuAccount from '../../templates/MenuAccount';
-import ItemBlock from '../../components/Account/ItemBlock';
 import FavoriteBlock from '../../components/Account/FavoriteBlock';
 
 

@@ -21,7 +21,7 @@ function Account() {
     window.addEventListener("resize", resize);
     // resize();
     function resize() {
-        console.log(window.innerWidth)
+
         if (window.innerWidth < 600) {
             if (mobile) {
                 return

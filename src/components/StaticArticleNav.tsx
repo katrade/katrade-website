@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { useParams , useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { themeDataType , ThemeContext } from '../contexts/Theme'
 import { LanguageContext } from '../contexts/Language'
@@ -11,25 +11,9 @@ import moon from '../pics/moon.png';
 import sunrise from '../pics/sunrise.png';
 import logo_black from '../pics/mainlogo-dark.png'
 import logo_white from '../pics/mainlogo-white.png'
-import translate from '../pics/translate.png'
+
 import en from '../pics/en.png';
 import th from '../pics/th.png';
-
-
-interface navPropsInterface {
-    themeData?: themeDataType | null
-}
-
-interface paramsInterface {
-    lang?: string | null | undefined
-}
-
-const thLangSelector = "TH"
-const enLangSelector = "EN"
-
-interface NavBGProps {
-    theme: boolean
-}
 
 const NavBG = styled.div`
     margin: 0;
@@ -53,7 +37,6 @@ const NavBG = styled.div`
 export default function StaticArticleNav() {
 
     const { theme , setTheme } = useContext(ThemeContext);
-    const { lang , toggleLanguage} = useContext(LanguageContext);
     const [ mobile , setMobile ] = useState<boolean>(false);
     const history = useHistory();
     window.addEventListener("resize" , resize)
@@ -110,7 +93,7 @@ export default function StaticArticleNav() {
 
 function LanguageSelector() {
 
-    const { theme, setTheme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     const { lang, toggleLanguage } = useContext(LanguageContext);
 
     function preToggleLanguage(setToLang: string) {

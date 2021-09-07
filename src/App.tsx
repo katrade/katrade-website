@@ -48,8 +48,6 @@ import Inprogress from './pages/RequestPending/Inprogress'
 
 import ProfileCanvas from './components/ProfileCanvas';
 
-import Popup from './components/Popup';
-
 import { Window } from './system/System'
 import { Error, Maintainance } from './system/Error'
 import { Application } from './contexts/Application';
@@ -70,7 +68,7 @@ function App() {
                             <Router>
                                 <Switch>
 
-                                    <Route exact path="/test" component={Popup}></Route>
+                                    {/* <Route exact path="/test" component={}></Route> */}
 
                                     {/* Add path here!!  */}
 
@@ -86,7 +84,7 @@ function App() {
                                     <Route exact path="/app/verifytest" component={VerifyTest}></Route>
 
                                     <Route exact path="/app/market" component={Market}></Route>
-                                    <Route exact path="/app/search" component={Search}></Route>
+                                    <Route exact path="/app/search/:quote" component={Search}></Route>
                                     <Route exact path="/app/product" component={Product}></Route>
 
                                     <Route exact path="/app/account" component={Account}></Route>
