@@ -14,7 +14,6 @@ interface BlockProps {
 const BlockDiv = styled.div`
     min-height: ${({height}: BlockProps) => height};
     height: auto;
-    background-color: ${(props: BlockProps) => props.backgroundColor ? props.backgroundColor : "#f7fafc"};
     width: 100%;
     display: flex;
     justify-content: center;
