@@ -12,25 +12,6 @@ const themeDataStorage = {
     }
 }
 
-function setCookie(cname: string, cvalue: string) {
-    document.cookie = cname + "=" + cvalue + ";";
-}
-
-function getCookie(cname: string) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 export type themeDataType = {
     backgroundColor: string,
@@ -43,22 +24,14 @@ type ThemeContextType = {
     themeData: themeDataType
 }
 
-// Context
-export const ThemeContext = React.createContext<ThemeContextType | any>(null);
-
 type propsType = {
     children: JSX.Element | null | undefined
 }
 
-function initTheme() {
-    if (!localStorage.getItem("theme")) {
-        localStorage.setItem("theme", "light")
-        return "light"
-    }
-    else {
-        return localStorage.getItem("theme")
-    }
-}
+
+// Context
+export const ThemeContext = React.createContext<ThemeContextType | any>(null);
+
 
 // Provider
 export function ThemeProvider({ children }: propsType) {

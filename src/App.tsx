@@ -48,9 +48,6 @@ import Inprogress from './pages/RequestPending/Inprogress'
 
 import ProfileCanvas from './components/ProfileCanvas';
 
-import { Window } from './system/System'
-import { Error, Maintainance } from './system/Error'
-import { Application } from './contexts/Application';
 
 require('dotenv').config({ path: ".env" })
 console.log(process.env)
@@ -59,9 +56,6 @@ function App() {
     
     return (
         <>
-            <Application>
-                <Window />
-                <Error />
                 <UserProvider>
                     <LanguageProvider>
                         <ThemeProvider>
@@ -100,7 +94,6 @@ function App() {
                                     <Route exact path="/app/inprogress" component={Inprogress}></Route>
 
                                     <Route exact path="/404" component={NotFound}></Route>
-                                    <Route exact path="/error/server-in-maintainance" component={Maintainance}></Route>
                                     <Route exact path="/" component={Home}></Route>
                                     <Route><Redirect to="/404" /></Route>
                                 </Switch>
@@ -108,7 +101,6 @@ function App() {
                         </ThemeProvider>
                     </LanguageProvider>
                 </UserProvider>
-            </Application>
         </>
     );
 }
