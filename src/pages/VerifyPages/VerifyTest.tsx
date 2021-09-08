@@ -6,20 +6,21 @@ import { AfterSignUp ,
     ResetPassComplete } from '../../components/Verify/Verify'
 import Block from '../../components/Block';
 
-import Logo from '../../pics/logo_dark_green.png';
+import StaticNav from '../../components/StaticNav'
+
 
 export default function VerifyTest() {
     return (
         <div>
-            <Block height="100vh">
-                <div className="pt-4" style={{}} ><img style={{width:"200px"}} src={Logo} /></div>
+            <StaticNav/>
+            <Block height="90vh" backgroundColor="#f7fafc">
                 <div className="d-flex" style={{}}>
                     <AfterSignUp/>
-                    <EmailComplete/>
+                    {/* <EmailComplete/>
                     <EmailResetPass/>
                     <AfterEmailResetPass/>
                     <ResetPass/>
-                    <ResetPassComplete/>
+                    <ResetPassComplete/> */}
                 </div>
             </Block>
         </div>

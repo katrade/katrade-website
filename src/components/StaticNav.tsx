@@ -46,7 +46,7 @@ const NavBG = styled.div`
     position: sticky;
     top: 0;
     z-index: 3;
-    margin-bottom: 70px;
+    margin-bottom: 0px;
 
     transition 400ms ease;
 `
