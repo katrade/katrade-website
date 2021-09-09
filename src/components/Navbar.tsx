@@ -62,8 +62,6 @@ function Navbar() {
         return <MobileNavbar />
     }
 
-    
-
     function dropIcon() {
         if (!drop) {
             return <RiArrowDropDownLine />
