@@ -5,11 +5,11 @@ import { AccountBlock } from './AccountBlock';
 import { FaPen } from 'react-icons/fa';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 
-export default function ItemBlock(props:any) {
-    
-    const { data , index , manage} = props;
+export default function ItemBlock(props: any) {
 
-    const dataTag = data.tag.map((dataTag:any) => 
+    const { data, index, manage } = props;
+
+    const dataTag = data.tag.map((dataTag: any) =>
         <p className="tag">{dataTag}</p>
     );
 

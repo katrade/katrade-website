@@ -69,7 +69,7 @@ function Product() {
 								<p className="m-0 rounded-left px-4 fw-bold p-1" style={{ color: "white", backgroundColor: "#F66464" }}>Require</p>
 								<div className="d-inline bagde bagde-sm rounded-pill px-2 m-1 py-1" style={{ backgroundColor: "#EDF2F4" }}>{requireTag}</div>
 								<div className="d-inline bagde bagde-sm rounded-pill px-2 m-1 py-1" style={{ backgroundColor: "#EDF2F4" }}>{requireTag}</div>
-								{/* ############################### Not Responsive ############################### ทำยังไงครับได้โปรดสอนข้าพเจ้าด้วย*/}
+								{/* ############################### Not Responsive ############################## ทำยังไงครับได้โปรดสอนข้าพเจ้าด้วย*/}
 							</div>
 							<div className="mt-2 px-3 py-1 border border-secondary rounded-3">
 								<p className="mb-1 fw-bold" style={{ color: "black" }}>Requirement Detail</p>

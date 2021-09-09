@@ -1,8 +1,8 @@
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect
 } from 'react-router-dom';
 
 // CSS
@@ -56,61 +56,61 @@ require('dotenv').config({ path: ".env" })
 console.log(process.env)
 
 function App() {
-    
-    return (
-        <>
-                <UserProvider>
-                    <LanguageProvider>
-                        <ThemeProvider>
-                            <Router>
-                                <Switch>
 
-                                    {/* <Route exact path="/test" component={}></Route> */}
+	return (
+		<>
+			<UserProvider>
+				<LanguageProvider>
+					<ThemeProvider>
+						<Router>
+							<Switch>
 
-                                    {/* Add path here!!  */}
+								{/* <Route exact path="/test" component={}></Route> */}
 
-                                    {/* Articles and static pages */}
-                                    <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
-                                    <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
+								{/* Add path here!!  */}
 
-                                    <Route exact path="/app/signin" component={SignIn}></Route>
-                                    <Route exact path="/app/profile" component={Profile}></Route>
-                                    <Route exact path="/app/register" component={SignUp}></Route>
-                                    <Route exact path="/app/changepassword" component={ChangePassword}></Route>
+								{/* Articles and static pages */}
+								<Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
+								<Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
 
-                                    <Route exact path="/app/verifytest" component={VerifyTest}></Route>
+								<Route exact path="/app/signin" component={SignIn}></Route>
+								<Route exact path="/app/profile" component={Profile}></Route>
+								<Route exact path="/app/register" component={SignUp}></Route>
+								<Route exact path="/app/changepassword" component={ChangePassword}></Route>
 
-                                    <Route exact path="/app/market" component={Market}></Route>
-                                    <Route exact path="/app/search/:quote" component={Search}></Route>
-                                    <Route exact path="/app/product" component={Product}></Route>
+								<Route exact path="/app/verifytest" component={VerifyTest}></Route>
 
-                                    <Route exact path="/app/account" component={Account}></Route>
-                                    <Route exact path="/app/favorite" component={Favorite}></Route>
-                                    <Route exact path="/app/following" component={Following}></Route>
-                                    <Route exact path="/app/followers" component={Follower}></Route>
-                                    <Route exact path="/app/history" component={History}></Route>
-                                    <Route exact path="/app/inventory" component={Inventory}></Route>
-                                    <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
+								<Route exact path="/app/market" component={Market}></Route>
+								<Route exact path="/app/search/:quote" component={Search}></Route>
+								<Route exact path="/app/product" component={Product}></Route>
 
-                                    <Route exact path="/app/additem" component={AddItem}></Route>
-                                    <Route exact path="/app/edititem" component={EditItem}></Route>
+								<Route exact path="/app/account" component={Account}></Route>
+								<Route exact path="/app/favorite" component={Favorite}></Route>
+								<Route exact path="/app/following" component={Following}></Route>
+								<Route exact path="/app/followers" component={Follower}></Route>
+								<Route exact path="/app/history" component={History}></Route>
+								<Route exact path="/app/inventory" component={Inventory}></Route>
+								<Route exact path="/app/manageinventory" component={ManageInventory}></Route>
 
-                                    <Route exact path="/app/request" component={Request}></Route>
-                                    <Route exact path="/app/pending" component={Pending}></Route>
-                                    <Route exact path="/app/inprogress" component={Inprogress}></Route>
+								<Route exact path="/app/additem" component={AddItem}></Route>
+								<Route exact path="/app/edititem" component={EditItem}></Route>
 
-                                    <Route exact path="/app/testFrontend" component={Test01}></Route>
+								<Route exact path="/app/request" component={Request}></Route>
+								<Route exact path="/app/pending" component={Pending}></Route>
+								<Route exact path="/app/inprogress" component={Inprogress}></Route>
 
-                                    <Route exact path="/404" component={NotFound}></Route>
-                                    <Route exact path="/" component={Home}></Route>
-                                    <Route><Redirect to="/404" /></Route>
-                                </Switch>
-                            </Router>
-                        </ThemeProvider>
-                    </LanguageProvider>
-                </UserProvider>
-        </>
-    );
+								<Route exact path="/app/testFrontend" component={Test01}></Route>
+
+								<Route exact path="/404" component={NotFound}></Route>
+								<Route exact path="/" component={Home}></Route>
+								<Route><Redirect to="/404" /></Route>
+							</Switch>
+						</Router>
+					</ThemeProvider>
+				</LanguageProvider>
+			</UserProvider>
+		</>
+	);
 }
 
 export default App;
