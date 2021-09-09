@@ -235,26 +235,37 @@
     padding: 0;
     list-style-type: none;
     width: 100%;
-    height: auto;
+    height: 0;
     position: absolute;
     z-index: 0;
     flex-direction: column;
     top: 60px;
-    left: -1500px;
     opacity: 0;
     transition: 0.3s ease;
     background-color: rgba(0, 0, 0, 1);
+    overflow: hidden;
 }
 
 .active-mobile {
     background-color: rgba(0, 0, 0, 1);
     opacity: 1;
+    padding: 10px 0;
+    height: 220px;
     top: 60px;
-    left: 0px;
     position: absolute;
     z-index: 2;
     align-content: center;
     transition: 0.3s ease;
+}
+
+.categories-mobile li a {
+    padding: 0 50px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.categories-mobile li:hover {
+    background-color: rgb(88, 88, 88);
 }
 
 .menu-button {
