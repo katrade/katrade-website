@@ -1,5 +1,3 @@
 {
-    "GHOST_MODE": true,
-    "ONLINE": false,
-    "SERVER": true
+    "API": "https://katrade-backend.herokuapp.com"
 }

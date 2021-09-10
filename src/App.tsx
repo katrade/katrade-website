@@ -78,7 +78,7 @@ function App() {
                                 <Route exact path="/app/register" component={SignUp}></Route>
                                 <Route exact path="/app/changepassword" component={ChangePassword}></Route>
 
-                                <Route exact path="/app/verifytest" component={VerifyTest}></Route>
+                                <Route exact path="/app/verify" component={VerifyTest}></Route>
 
                                 <Route exact path="/app/market" component={Market}></Route>
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
