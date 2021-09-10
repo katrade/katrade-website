@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import eye_open from '../../pics/red-eye.png'
 import eye_close from '../../pics/hide.png'
+import { API } from '../../app.setting.json'
 
 // const eye1: string = "https://cdn.discordapp.com/attachments/858916776029323274/863822479667363851/image0.jpg"
 // const eye2: string = "https://media.discordapp.net/attachments/858916776029323274/863825153997799435/image0.jpg?width=273&height=485"
@@ -34,7 +35,7 @@ const SignInForm = () => {
     const [form, handleForm] = useForm();
 
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
-        let result = await axios.post('http://localhost:5000/auth/signin', {
+        let result = await axios.post(`${API}/auth/signin`, {
             Email: form.email,
             Password: form.password
         }, {withCredentials: true});
