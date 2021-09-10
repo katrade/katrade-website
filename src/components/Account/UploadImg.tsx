@@ -22,6 +22,9 @@ function UploadImg() {
                 }}
                 ></img>
                 <p>Picture</p>
+                <button onClick={() => {
+                    SetImage("https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png");
+                }}>delete</button>
             </form>
         </div>
     );
