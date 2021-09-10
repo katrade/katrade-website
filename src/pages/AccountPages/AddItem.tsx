@@ -2,6 +2,7 @@ import Block from '../../components/Block';
 
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import UploadImg from '../../components/Account/UploadImg';
 
 export default function AddItem() {
     return (
@@ -18,8 +19,15 @@ export default function AddItem() {
                         </div>
 
                         <div className="mb-3" style={{height:"auto",backgroundColor:"#C4C4C4"}}>
-                            <div className="row px-3 py-4">
-                                <p className="col-12">Picture</p>
+                            <div className="px-3 py-4">
+                                <p className="">Picture</p>
+                                <div className="d-flex justify-content-around flex-wrap">
+                                    <UploadImg />
+                                    <UploadImg />
+                                    <UploadImg />
+                                    <UploadImg />
+                                    <UploadImg />
+                                </div>
                             </div>
                         </div>
 

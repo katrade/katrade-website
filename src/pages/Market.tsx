@@ -234,9 +234,9 @@ export default function Market() {
             <Block height="700" backgroundColor="#f7fafc">
                 <div className="my-4">
                     <h5 className="mb-3">Match with you</h5>
-                    <div className="d-flex justify-content-between full-width">
+                    <div className="full-width">
                         <div>
-                            <div className="d-flex justify-content-between flex-wrap">
+                            <div className="d-flex justify-content-around flex-wrap">
                                 {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)}
                             </div>
                             <div className="d-flex justify-content-center align-items-center my-3">
@@ -253,8 +253,8 @@ export default function Market() {
                     </div>
 
                     <h5 className="mb-3">Popular</h5>
-                    <div className="d-flex justify-content-between full-width">
-                        <div className="d-flex justify-content-between flex-wrap">
+                    <div className="full-width">
+                        <div className="d-flex justify-content-around flex-wrap">
                             {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)}
                         </div>
                     </div>
