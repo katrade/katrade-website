@@ -25,7 +25,7 @@ export default function Footer() {
     return (
         <>
             <Block height="300px" backgroundColor="rgb(36,36,36)" className="py-5">
-                <div className="row m-0 p-0 full-width">
+                <div className="row m-0 p-0 full-width" >
                     <div className="col-sm">
                         <h6 className="white">{activeLang[0]}</h6>
                         <hr />
@@ -56,7 +56,6 @@ export default function Footer() {
                         <a href="https://github.com/nutpedteam/katrade" target="_blank"><img src={github} width="30" className="m-2" /></a>
                     </div>
                 </div>
-
             </Block>
         </>
     )

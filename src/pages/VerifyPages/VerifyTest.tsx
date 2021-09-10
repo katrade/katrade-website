@@ -3,17 +3,17 @@ import { AfterSignUp ,
     EmailResetPass , 
     AfterEmailResetPass ,
     ResetPass ,
-    ResetPassComplete } from '../../components/Verify/Verify'
+    ResetPassComplete } from '../../components/Verify/Verify';
 import Block from '../../components/Block';
 
-import StaticNav from '../../components/StaticNav'
-
+import StaticNav from '../../components/StaticNav';
+import Footer from '../../components/Footer';
 
 export default function VerifyTest() {
     return (
         <div>
             <StaticNav/>
-            <Block height="90vh" backgroundColor="#f7fafc">
+            <Block height="60vh" backgroundColor="#f7fafc">
                 <div className="d-flex" style={{}}>
                     <AfterSignUp/>
                     {/* <EmailComplete/>
@@ -23,6 +23,7 @@ export default function VerifyTest() {
                     <ResetPassComplete/> */}
                 </div>
             </Block>
+            <Footer/>
         </div>
     );
 }
