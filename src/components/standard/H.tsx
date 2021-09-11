@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../contexts/Theme';
 
 interface propsType {
-    children?: JSX.Element | JSX.Element[] | undefined | null | string;
+    children?: any
     className?: string
 }
 

@@ -36,14 +36,15 @@ const SignInForm = () => {
 
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
         let result = await axios.post(`${API}/auth/signin`, {
-            Email: form.email,
-            Password: form.password
+            email: form.email,
+            password: form.password
         }, {withCredentials: true});
-        if(result.data.message === "sc"){
+
+        if (result.data.value === true){
             window.location.pathname="/app/market";
         }
         else{
-            alert("sw");
+            alert("You email or password is wrong.");
         }
     }
 

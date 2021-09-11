@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom'
 import { SolidButton } from '../standard/Button';
 import { useHistory } from 'react-router';
 import queryString from 'query-string';
-import { H4 }  from '../standard/H';
+import { H4, H5 }  from '../standard/H';
 import Div from '../standard/Div';
 import P from '../standard/P';
 
@@ -19,9 +19,9 @@ export function AfterSignUp() {
         <div className="" style={{ width: "1000px", minWidth: "500px", height: "auto", margin: "70px auto"}}>
             <H4>Verify Your Email</H4>
             <Div className="p-5 mt-3" style={{ height: "314px" }} dynamicPair={["#ffffff","#1c1c1c"]}>
-                <P>ลิงค์ยืนยัน Email ถูกส่งไปที่</P>
-                <P>{email}</P>
-                <P className="mb-5" >กรุณายืนยัน Email ก่อนเข้าสู่ระบบ</P>
+                <H5>ยินดีต้อนรับ คุณ {firstname} {lastname}</H5>
+                <P>ลิงค์ยืนยัน Email ของคุณถูกส่งไปที่ <span className="text-primary">{email}</span>, กรุณายืนยัน Email ก่อนเข้าสู่ระบบ</P>
+    
                 <SolidButton width="120px" buttonColor="#2BC986" padding="5px" margin="0" onClick={() => history.push(`/app/signin`)}>OK</SolidButton>
             </Div>
         </div>

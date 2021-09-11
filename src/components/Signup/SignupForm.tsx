@@ -1,5 +1,4 @@
-
-
+import { useHistory } from 'react-router';
 import { SolidButton } from '../../components/standard/Button';
 import { useForm } from '../../utils/useForm';
 import { useEffect } from 'react';
@@ -11,7 +10,7 @@ interface p {
 }
 
 export default function SignupForm({ pw, setPw }: p) {
-    console.log(API)
+    const history = useHistory();
     const [form, handleForm] = useForm();
 
     // const checkSame = async () => {
@@ -61,7 +60,7 @@ export default function SignupForm({ pw, setPw }: p) {
         console.log(result);
         if (result.message === "Please check your email to verify") {
             alert("Your account has been created, please check your email inbox and visit the verification link.")
-            window.location.pathname = `/app/verify?email=${form.email}`;
+            history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
         }
         else {
             alert("sw");
