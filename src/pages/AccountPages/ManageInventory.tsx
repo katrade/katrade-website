@@ -49,7 +49,7 @@ export default function Account() {
                     <h4>Manage Inventory</h4>
                     <p>save changes<BiCheck /></p>
                     <div className="data-manage">
-                        <a href="#">
+                        <a href="/app/additem">
                             <AccountBlock padding="10px">
                                 <div className="add-block">
                                     <br/>
