@@ -7,7 +7,7 @@ import ProductPost from '../components/ProductPost';
 
 import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from '../components/standard/Button';
-//hellooooooo
+
 function Product() {
 
     const requireTag = "Categories";

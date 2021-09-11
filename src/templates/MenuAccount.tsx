@@ -48,7 +48,7 @@ function MenuAccount({ children }: propsInterface) {
                         <div>
                             <Accountbar />
                             <div className="d-flex">
-                                <div style={{minWidth:"160px"}}>
+                                <div style={{minWidth:"180px"}}>
                                     <AccountMenu />
                                 </div>
                                 <div style={{width:"100%"}}>
