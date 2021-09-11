@@ -128,6 +128,9 @@
 }
 
 .desktop-icon > a {
+    border: solid 1px rgb(236, 241, 247);
+    min-width: 40px;
+    min-height: 40px;
     font-size: 20px;
     background-color: rgb(236, 241, 247);
     color: rgb(94, 108, 124);
@@ -136,6 +139,17 @@
     margin: 0 10px;
     padding: 10px;
     border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.profile-pic {
+    min-width: 30px;
+    min-height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(236, 241, 247);
+    background-size: cover;
 }
 
 .sidemenu {

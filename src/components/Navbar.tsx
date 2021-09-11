@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API } from '../app.setting.json';
 import './Navbar.css';
 
 // icon
@@ -12,12 +14,14 @@ import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiArrowDropUpLine } from "react-icons/ri";
 
-import { GiHamburgerMenu } from "react-icons/gi";
+
+
+// import { GiHamburgerMenu } from "react-icons/gi";
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import CategoryIcon from '@material-ui/icons/Category';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+// import CategoryIcon from '@material-ui/icons/Category';
+// import DashboardIcon from '@material-ui/icons/Dashboard';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -26,9 +30,13 @@ import Logo from '../pics/logo_dark_green.png';
 
 import Block from './Block';
 
-const google = "https://www.google.com";
+const google = 'https://google.com'
 
-function Navbar() {
+interface INavbar {
+    img?: string
+}
+
+function Navbar({ img }: INavbar) {
 
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
@@ -44,7 +52,7 @@ function Navbar() {
             if (mobile) {
                 return
             }
-            return setMobile(true) 
+            return setMobile(true)
         }
         else {
             if (!mobile) {
@@ -54,86 +62,89 @@ function Navbar() {
         }
     }
 
-    useEffect(() => {
-        resize();
-    }, [])
 
-    if (mobile) {
-        return <MobileNavbar />
-    }
+if (mobile) {
+    return <MobileNavbar />
+}
 
-    function dropIcon() {
-        if (!drop) {
-            return <RiArrowDropDownLine />
-        }else{
-            return <RiArrowDropUpLine />
-        }
+function dropIcon() {
+    if (!drop) {
+        return <RiArrowDropDownLine />
+    } else {
+        return <RiArrowDropUpLine />
     }
-    function search() {
-        if (!searchText) {
-            return alert('Type something, Idiot!!!')
-        }
-        history.push(`/app/search/${searchText}`)
+}
+function search() {
+    if (!searchText) {
+        return alert('Type something, Idiot!!!')
     }
+    history.push(`/app/search/${searchText}`)
+}
+function signout() {
+    axios.get(`${API}/auth/signout`, { withCredentials: true })
+        .then(res => {
+            history.push('/app/signin');
+        })
+}
 
-    return (
-        <div className="header py-3">
-            <Block height="90px">
-                    <div className="header-con">
-                        <a href="/app/Market">
-                            <img className="logo" src={Logo} />
-                        </a>
-                        <div>
-                            <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
-                            <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
-                            <ul className={drop ? "categories active" : "categories"}>
-                                <Block height="50px">
-                                    <li>
-                                        <a href={google}>Clothes</a>
-                                    </li>
-                                    <li>
-                                        <a href={google}>Book</a>
-                                    </li>
-                                    <li>
-                                        <a href={google}>Sports</a>
-                                    </li>
-                                    <li>
-                                        <a href={google}>Clothes</a>
-                                    </li>
-                                    <li>
-                                        <a href={google}>Book</a>
-                                    </li>
-                                    <li>
-                                        <a href={google}>Sports</a>
-                                    </li>
-                                    
-                                </Block>
-                            </ul>
-                        </div>
-                        <form className="search">
-                            <input type="search" className="search-bar" placeholder="Search an items" id="searchbar" onChange={(e) => setSearchText(e.target.value)} value={searchText}></input>
-                            <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
-                        </form>
-                        <div className="desktop-icon">
-                            <a href="/app/account"><BsPersonFill /></a>
-                            <a href="/app/request"><FaRegListAlt /></a>
-                            <a href={google}><MdChat /></a>
-                            <a href=""><IoIosNotifications /></a>
-                        </div>
-                        <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
-                            <MenuIcon />
-                            <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                <a href="/app/account">Account</a>
-                                <a href={google}>Chat</a>
-                                <a href="/app/request">Notification</a>
-                                <a href="">Ding Dong</a>
-                            </div>
-                        </div>
-                        
+return (
+    <div className="header py-3">
+        <Block height="90px">
+            <div className="header-con">
+                <a href="/app/Market">
+                    <img className="logo" src={Logo} />
+                </a>
+                <div>
+                    <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
+                    <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
+                    <ul className={drop ? "categories active" : "categories"}>
+                        <Block height="50px">
+                            <li>
+                                <a href={google}>Clothes</a>
+                            </li>
+                            <li>
+                                <a href={google}>Book</a>
+                            </li>
+                            <li>
+                                <a href={google}>Sports</a>
+                            </li>
+                            <li>
+                                <a href={google}>Clothes</a>
+                            </li>
+                            <li>
+                                <a href={google}>Book</a>
+                            </li>
+                            <li>
+                                <a href={google}>Sports</a>
+                            </li>
+
+                        </Block>
+                    </ul>
+                </div>
+                <form className="search">
+                    <input type="search" className="search-bar" placeholder="Search an items" id="searchbar" onChange={(e) => setSearchText(e.target.value)} value={searchText}></input>
+                    <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
+                </form>
+                <div className="desktop-icon">
+                    <a href="/app/account" style={{ backgroundImage: `url(${img})` }}>{img ? <></> : <BsPersonFill />}</a>
+                    <a href="/app/request"><FaRegListAlt /></a>
+                    <a onClick={signout}><MdChat /></a>
+                    <a href=""><IoIosNotifications /></a>
+                </div>
+                <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
+                    <MenuIcon />
+                    <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
+                        <a href="/app/account">Account</a>
+                        <a href={google}>Chat</a>
+                        <a href="/app/request">Notification</a>
+                        <a href="">Ding Dong</a>
                     </div>
-            </Block>
-        </div>
-    );
+                </div>
+
+            </div>
+        </Block>
+    </div>
+);
 }
 
 
@@ -152,15 +163,15 @@ function MobileNavbar() {
 
     // const [clickMobile, SetClickMobile] = useState(false);
     // const handleClickMobile = () => SetClickMobile(!clickMobile);
-    
+
     const [drop, setDrop] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
 
     var pathname = window.location.pathname.split('/')[2];
     function displaySearch() {
-        if (pathname != "Market" && pathname != "search"){
+        if (pathname != "Market" && pathname != "search") {
             return "d-none";
-        }else{
+        } else {
             return "header-con justify-content-center";
         }
     }
@@ -242,7 +253,7 @@ function MobileNavbar() {
                     <li>
                         <a href={google}>Sports</a>
                     </li>
-                                    
+
                 </Block>
             </ul>
         </MobileNavbarContainer>

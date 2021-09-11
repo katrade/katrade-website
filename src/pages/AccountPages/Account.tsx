@@ -3,20 +3,49 @@ import { useState , useEffect} from 'react';
 import MenuAccount from '../../templates/MenuAccount';
 
 import profilePic from '../../pics/facebook.png';
+import axios from 'axios';
+import useLoadingScreen from '../../hooks/useLoading'
+import { API } from '../../app.setting.json'
+
+interface IAccount {
+    firstname: string
+	lastname: string
+    username: string
+    password: string
+	address: string
+	email: string
+	phoneNumber: string
+	profilePic: string
+	verifyEmail: number
+	favourite: string
+	followers: string[]
+	following: string[]
+	inventories: string[]
+}
+
+const defaultEmptyAccount: IAccount = {
+    firstname: "",
+	lastname: "",
+    username: "",
+    password: "",
+	address: "",
+	email: "",
+	phoneNumber: "",
+	profilePic: "",
+	verifyEmail: 0,
+	favourite: "",
+	followers: [],
+	following: [],
+	inventories: [],
+}
+
+
 
 function Account() {
 
-    const account = {
-        username: "FranKydeSU",
-        firstname: "Napasin",
-        lastname: "Saengthong",
-        following: "1066",
-        followers: "2",
-        email: "frankydesu@hotmail.com",
-        mobile: "08********",
-    }
-
     const [mobile, setMobile] = useState(false);
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const [show, hide] = useLoadingScreen();
 
     window.addEventListener("resize", resize);
     // resize();
@@ -38,6 +67,12 @@ function Account() {
 
     useEffect(() => {
         resize();
+        show();
+        axios.get(`${API}/auth/getUserData`, { withCredentials: true })
+            .then(res => {
+                setAccount(res.data.data);
+                hide();
+            })
     }, [])
 
     if (mobile) {
@@ -47,7 +82,7 @@ function Account() {
     return (
 
         <div>
-            <MenuAccount>
+            <MenuAccount data={account}>
                 <div className="d-flex flex-wrap-reverse bg-white" style={{padding:"10px 30px 30px 30px"}}>
                     <div className="pe-3 bg-white" style={{width:"70%"}} >
                             <div>
@@ -73,7 +108,7 @@ function Account() {
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <p className="me-3">Mobile</p>
-                                    <p className="" style={{minWidth:"400px",maxWidth:"400px", color:"black"}}>{account.mobile}</p>
+                                    <p className="" style={{minWidth:"400px",maxWidth:"400px", color:"black"}}>{account.phoneNumber}</p>
                                 </div>
                             </div>
                     </div>

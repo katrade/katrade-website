@@ -8,6 +8,7 @@ import axios from 'axios';
 import eye_open from '../../pics/red-eye.png'
 import eye_close from '../../pics/hide.png'
 import { API } from '../../app.setting.json'
+import useLoading from '../../hooks/useLoading';
 
 // const eye1: string = "https://cdn.discordapp.com/attachments/858916776029323274/863822479667363851/image0.jpg"
 // const eye2: string = "https://media.discordapp.net/attachments/858916776029323274/863825153997799435/image0.jpg?width=273&height=485"
@@ -17,7 +18,7 @@ import { API } from '../../app.setting.json'
 // }
 
 function ValidateEmail(mail: string) { // Comment by Franky
-    if(mail){
+    if (mail) {
         if (mail.length === 0) return true
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
             // console.log(true)
@@ -30,20 +31,29 @@ function ValidateEmail(mail: string) { // Comment by Franky
 }
 
 const SignInForm = () => {
-    const [show, setShow] = useState<number>(1);
+    const [showPassword, setShowPassword] = useState<number>(1);
     const history = useHistory();
     const [form, handleForm] = useForm();
+    const [show, hide] = useLoading();
 
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
+        show();
         let result = await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
-        }, {withCredentials: true});
+        }, {
+            withCredentials: true, headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) => {
+            hide()
+            return res;
+        });
 
-        if (result.data.value === true){
-            window.location.pathname="/app/market";
+        if (result.data.value === true) {
+            window.location.pathname = "/app/market";
         }
-        else{
+        else {
             alert("You email or password is wrong.");
         }
     }
@@ -62,7 +72,7 @@ const SignInForm = () => {
                             <p>Email</p>
                             <input
                                 className={"input-register w-100 px-2" + (ValidateEmail(form.email) ? "" : " error")}
-                                value={form.email || ""} 
+                                value={form.email || ""}
                                 name="email"
                                 onChange={handleForm}
                                 type="text"
@@ -76,10 +86,10 @@ const SignInForm = () => {
                                     value={form.password || ""}
                                     onChange={handleForm}
                                     name="password"
-                                    className="input-none px-2" type={show === 1 ? "password" : "text"}
+                                    className="input-none px-2" type={showPassword === 1 ? "password" : "text"}
                                     placeholder="Your password">
                                 </input>
-                                <img src={show === 1 ? eye_open : eye_close} width="20" onClick={() => setShow(show * -1)} className="pointer" />
+                                <img src={showPassword === 1 ? eye_open : eye_close} width="20" onClick={() => setShowPassword(showPassword * -1)} className="pointer" />
                             </div>
                             <div className="row mt-2">
                                 <div className="col m-0 p-0">

@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .vercel
+
+# Firebase
+.firebase
+.firebaserc
+firebase.json

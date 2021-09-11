@@ -9,6 +9,11 @@ import Recommend from '../components/Recommend';
 import Interest from '../components/Interest';
 import Block from '../components/Block';
 import axios from 'axios';
+import { API } from '../app.setting.json';
+import { IAccount, defaultEmptyAccount } from '../interfaces/IUser';
+import { useHistory } from 'react-router';
+
+
 
 function getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
@@ -32,7 +37,7 @@ async function getRandomWord(): Promise<string> {
 }
 
 export default function Market() {
-    axios.get('http://localhost:5000/auth', {withCredentials: true})
+    
     const id_item = [
         {
             name_item: "Cats, a weird creature",
@@ -211,11 +216,20 @@ export default function Market() {
     });
 
     const [mobile, setMobile] = useState(false);
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const history = useHistory();
 
     window.addEventListener("resize", resize)
 
     useEffect(() => {
         resize();
+        axios.get(`${API}/auth/getUserData`, {withCredentials: true})
+            .then(res => {
+                setAccount(res.data.data);
+            })
+            .catch(() => {
+                history.push('/app/signin')
+            })
     }, []);
 
     function resize() {
@@ -228,8 +242,7 @@ export default function Market() {
 
     return (
         <div >
-            <Navbar />
-
+            <Navbar img={account.profilePic}/>
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
                 <div className="my-4">

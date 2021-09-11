@@ -3,7 +3,7 @@ import { SolidButton } from '../../components/standard/Button';
 import { useForm } from '../../utils/useForm';
 import { useEffect } from 'react';
 import { API } from '../../app.setting.json'
-
+import useLoading from '../../hooks/useLoading';
 interface p {
     pw: number;
     setPw: any
@@ -12,7 +12,7 @@ interface p {
 export default function SignupForm({ pw, setPw }: p) {
     const history = useHistory();
     const [form, handleForm] = useForm();
-
+    const [show, hide] = useLoading();
     // const checkSame = async () => {
     //     let result = await fetch(`${API}/user/checkUn?username=${form.username}`).then(res => res.json());
     //     if(result.message === "AU"){
@@ -44,6 +44,7 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
+        show()
         let result: any = await fetch(`${API}/auth/signup`, {
             method: 'POST',
             mode: 'cors',
@@ -56,14 +57,17 @@ export default function SignupForm({ pw, setPw }: p) {
             referrerPolicy: 'no-referrer',
             body: JSON.stringify(data)
         }).then(res => res.json());
+
         console.clear();
         console.log(result);
+
+        hide();
         if (result.message === "Please check your email to verify") {
             alert("Your account has been created, please check your email inbox and visit the verification link.")
             history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
         }
         else {
-            alert("sw");
+            alert("Error");
         }
     }
 

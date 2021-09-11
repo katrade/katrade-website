@@ -1,21 +1,16 @@
-import React from "react";
-
+import { useEffect, useState } from "react";
+import axios from 'axios'
+import { API } from '../../app.setting.json'
 import './Accountbar.css'
+import useLoading from '../../hooks/useLoading';
 
 // import profilePic from '../../pics/facebook.png';
 import { MdAccountBalance } from "react-icons/md";
 
 const profilePic = "https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
 
-export default function Profilebar() {
 
-    const account = {
-        username: "pornmaster69",
-        firstname: "Nik",
-        lastname: "Watchporn",
-        following: "69",
-        followers: "2",
-    }
+export default function Profilebar({ data: account }: any) {
 
     return (
         <div className="container-profile">
@@ -55,7 +50,7 @@ export default function Profilebar() {
             </div> */}
             <div className="container-profile-data">
                 <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
-                    <img width="142" height="142" src={profilePic} className="mx-5" />
+                    <img width="142" height="142" src={account.profilePic} className="mx-5" style={{borderRadius: '50%', boxShadow: '0 0 20px rgba(0,0,0,0.1)'}}/>
                     <div>
                         <h3 style={{ color: "#4a5659" }}>{account.firstname} {account.lastname}</h3>
                         <p style={{ color: "#86979c" }}>@{account.username}</p>
@@ -63,10 +58,10 @@ export default function Profilebar() {
                 </div>
                 <div className="full-width d-flex justify-content-center align-items-center px-5 mb-3 flex-wrap">
                     <div className="d-flex justify-content-center align-items-center followers mx-2 px-5 py-3 my-2">
-                        <b className="mx-2 number">{account.followers} </b> followers
+                        <b className="mx-2 number">{account.followers.length} </b> followers
                     </div>
                     <div className="d-flex justify-content-center align-items-center following mx-2 px-5 py-3 my-2">
-                        <b className="mx-2 number">{account.following} </b> following
+                        <b className="mx-2 number">{account.following.length} </b> following
                     </div>
                 </div>
             </div>

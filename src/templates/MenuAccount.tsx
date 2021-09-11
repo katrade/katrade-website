@@ -8,9 +8,10 @@ import AccountMenu from "../components/Account/AccountMenu";
 
 interface propsInterface {
     children: JSX.Element | JSX.Element[] | never[] | null | undefined;
+    data?: any
 }
 
-function MenuAccount({ children }: propsInterface) {
+function MenuAccount({ children, data }: propsInterface) {
 
     const [mobile, setMobile] = useState(false);
 
@@ -42,11 +43,11 @@ function MenuAccount({ children }: propsInterface) {
 
     return (
         <>
-            <Navbar />
+            <Navbar img={data.profilePic} />
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>
-                            <Accountbar />
+                            <Accountbar data={data}/>
                             <div className="d-flex">
                                 <div style={{minWidth:"180px"}}>
                                     <AccountMenu />
