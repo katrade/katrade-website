@@ -9,6 +9,9 @@ import eye_open from '../../pics/red-eye.png'
 import eye_close from '../../pics/hide.png'
 import { API } from '../../app.setting.json'
 import useLoading from '../../hooks/useLoading';
+import { useCookies } from 'react-cookie';
+
+
 
 // const eye1: string = "https://cdn.discordapp.com/attachments/858916776029323274/863822479667363851/image0.jpg"
 // const eye2: string = "https://media.discordapp.net/attachments/858916776029323274/863825153997799435/image0.jpg?width=273&height=485"
@@ -27,7 +30,6 @@ function ValidateEmail(mail: string) { // Comment by Franky
         // console.log(false)
         return (false)
     }
-    return true;
 }
 
 const SignInForm = () => {
@@ -35,7 +37,8 @@ const SignInForm = () => {
     const history = useHistory();
     const [form, handleForm] = useForm();
     const [show, hide] = useLoading();
-
+    const [cookie, setCookie, removeCookies] = useCookies(['DaveTheHornyDuck']);
+    
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
         show();
         let result = await axios.post(`${API}/auth/signin`, {
@@ -51,7 +54,8 @@ const SignInForm = () => {
         });
 
         if (result.data.value === true) {
-            window.location.pathname = "/app/market";
+            setCookie('DaveTheHornyDuck', result.data.DaveTheHornyDuck, {path: '/' , sameSite: 'none' , secure: true});
+            history.push("/app/market");
         }
         else {
             alert("You email or password is wrong.");

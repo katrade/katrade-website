@@ -29,6 +29,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../pics/logo_dark_green.png';
 
 import Block from './Block';
+import { useCookies } from 'react-cookie';
 
 const google = 'https://google.com'
 
@@ -43,6 +44,7 @@ function Navbar({ img }: INavbar) {
     const [dropMenu, setDropMenu] = useState(false);
     const [searchText, setSearchText] = useState('');
     const history = useHistory();
+    const [cookies,setCookies,removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
 
@@ -81,10 +83,8 @@ function search() {
     history.push(`/app/search/${searchText}`)
 }
 function signout() {
-    axios.get(`${API}/auth/signout`, { withCredentials: true })
-        .then(res => {
-            history.push('/app/signin');
-        })
+    setCookies('DaveTheHornyDuck', '' , {path: '/'});
+    history.push('/app/signin');
 }
 
 return (

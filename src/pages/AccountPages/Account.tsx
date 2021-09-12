@@ -3,9 +3,10 @@ import { useState , useEffect} from 'react';
 import MenuAccount from '../../templates/MenuAccount';
 
 import profilePic from '../../pics/facebook.png';
-import axios from 'axios';
-import useLoadingScreen from '../../hooks/useLoading'
-import { API } from '../../app.setting.json'
+import { useHistory } from 'react-router';
+import useAuthorization from '../../hooks/useAuthorization';
+
+
 
 interface IAccount {
     firstname: string
@@ -45,7 +46,8 @@ function Account() {
 
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
-    const [show, hide] = useLoadingScreen();
+    const [getUserData] = useAuthorization();
+    const history = useHistory();
 
     window.addEventListener("resize", resize);
     // resize();
@@ -67,12 +69,17 @@ function Account() {
 
     useEffect(() => {
         resize();
-        show();
-        axios.get(`${API}/auth/getUserData`, { withCredentials: true })
-            .then(res => {
-                setAccount(res.data.data);
-                hide();
-            })
+        async function init() {
+            var userData = await getUserData();
+            if (userData) {
+                setAccount(userData);
+            }
+            else {
+                console.clear();
+                history.push('/app/signin');
+            }
+        }
+        init();
     }, [])
 
     if (mobile) {

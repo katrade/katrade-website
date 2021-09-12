@@ -12,6 +12,9 @@ import axios from 'axios';
 import { API } from '../app.setting.json';
 import { IAccount, defaultEmptyAccount } from '../interfaces/IUser';
 import { useHistory } from 'react-router';
+import { useCookies } from 'react-cookie';
+import useLoading from '../hooks/useLoading';
+import useAuthorization from '../hooks/useAuthorization';
 
 
 
@@ -218,18 +221,24 @@ export default function Market() {
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const history = useHistory();
-
+    const [cookies] = useCookies(['DaveTheHornyDuck']);
+    const [show, hide] = useLoading();
+    const [getUserData] = useAuthorization();    
     window.addEventListener("resize", resize)
-
     useEffect(() => {
         resize();
-        axios.get(`${API}/auth/getUserData`, {withCredentials: true})
-            .then(res => {
-                setAccount(res.data.data);
-            })
-            .catch(() => {
-                history.push('/app/signin')
-            })
+        async function init() {
+            var userData = await getUserData();
+            if (userData) {
+                setAccount(userData);
+            }
+            else {
+                console.clear();
+                history.push('/app/signin');
+            }
+        }
+        init();
+        
     }, []);
 
     function resize() {
@@ -238,7 +247,7 @@ export default function Market() {
         }
         return setMobile(false)
     }
-
+    
 
     return (
         <div >
