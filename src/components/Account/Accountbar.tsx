@@ -1,56 +1,17 @@
-import { useEffect, useState } from "react";
-import axios from 'axios'
-import { API } from '../../app.setting.json'
+// import { useEffect, useState } from "react";
+// import axios from 'axios'
+// import { API } from '../../app.setting.json'
 import './Accountbar.css'
-import useLoading from '../../hooks/useLoading';
-
-// import profilePic from '../../pics/facebook.png';
-import { MdAccountBalance } from "react-icons/md";
-
-const profilePic = "https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
-
+// import useLoading from '../../hooks/useLoading';
 
 export default function Profilebar({ data: account }: any) {
-
+    console.log(account);
     return (
         <div className="container-profile">
             <h5>Prosonal Profile</h5>
-            {/* <div className="container-profile-data">
-                <div className="row">
-                    <div className="profile-column1">
-                        <img width="142" height="142" src={profilePic} />
-                    </div>
-                    <div className="profile-column2">
-                        <br /><br />
-                        <p>Username</p>
-                        <p>Firstname</p>
-                        <p>Following</p>
-                    </div>
-                    <div className="profile-column3">
-                        <br /><br />
-                        <h5>{account.username}</h5>
-                        <h5>{account.firstname}</h5>
-                        <h5>{account.following}</h5>
-
-                    </div>
-                    <div className="profile-column4">
-                        <br /><br />
-                        <p>hidden</p>
-                        <p>Lastname</p>
-                        <p>Followers</p>
-                    </div>
-                    <div className="profile-column5">
-                        <br /><br />
-                        <h5>hidden</h5>
-                        <h5>{account.lastname}</h5>
-                        <h5>{account.followers}</h5>
-                    </div>
-
-                </div>
-            </div> */}
             <div className="container-profile-data">
                 <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
-                    <img width="142" height="142" src={account.profilePic} className="mx-5" style={{borderRadius: '50%', boxShadow: '0 0 20px rgba(0,0,0,0.1)'}}/>
+                    <img width="142" height="142" src={account.profilePic == "" ? "https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" : account.profilePic } className="mx-5" style={{borderRadius: '50%', boxShadow: '0 0 20px rgba(0,0,0,0.1)'}}/>
                     <div>
                         <h3 style={{ color: "#4a5659" }}>{account.firstname} {account.lastname}</h3>
                         <p style={{ color: "#86979c" }}>@{account.username}</p>

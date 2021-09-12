@@ -74,20 +74,80 @@ export default function SignupForm({ pw, setPw }: p) {
     return (
         <>
             <div className="bgColor-white mx-4 mb-5 py-3 round-window">
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col-lg ml-5">
-                        <div className="mb-3">
-                            <p className="mb-1">Firstname</p>
-                            <input
-                                className="input-register"
-                                type="text"
-                                placeholder="Please enter your firstname."
-                                name="firstname"
-                                value={form.firstname || ""}
-                                onChange={handleForm}
+                        <p className="mb-1">Firstname</p>
+                        <input
+                            className="input-register"
+                            type="text"
+                            placeholder="Please enter your firstname."
+                            name="firstname"
+                            value={form.firstname || ""}
+                            onChange={handleForm}
+                        />
+                    </div>
+                    <div className="col-lg ml-5">
+                        <p className="mb-1">Surname</p>
+                        <input
+                            className="input-register"
+                            type="text"
+                            placeholder="Please enter your surname."
+                            name="surname"
+                            value={form.surname || ""}
+                            onChange={handleForm}
                             />
-                        </div>
-                        <div className="mb-3">
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <div className="col-lg ml-5">
+                        <p className="mb-1">Username</p>
+                        <input
+                            className="input-register"
+                            type="text"
+                            placeholder="Please enter your username."
+                            name="username"
+                            value={form.username || ""}
+                            onChange={handleForm}
+                            />
+                    </div>
+                    <div className="col-lg ml-5">
+                        <p className="mb-1">Email</p>
+                        <input
+                            className="input-register"
+                            type="text"
+                            placeholder="Please enter your e-mail."
+                            name="email"
+                            value={form.email || ""}
+                            onChange={handleForm}
+                        />
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <div className="col-lg ml-5">
+                        <p className="mb-1">Password</p>
+                        <input
+                            className="input-register"
+                            type="password"
+                            placeholder="Please enter your password."
+                            name="password"
+                            value={form.password || ""}
+                            onChange={handleForm}
+                        />
+                            {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
+                    </div>
+                    <div className="col-lg ml-5">
+                        <p className="mb-1">Phone number</p>
+                        <input
+                            className="input-register"
+                            type="text"
+                            placeholder="Please enter your phone number."
+                            name="phone"
+                            value={form.phone || ""}
+                            onChange={handleForm}
+                        />
+                    </div>
+                </div>
+                        {/* <div className="mb-3">
                             <p className="mb-1">Username</p>
                             <input
                                 className="input-register"
@@ -109,9 +169,9 @@ export default function SignupForm({ pw, setPw }: p) {
                                 onChange={handleForm}
                             />
                             {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
-                        </div>
-                    </div>
-                    <div className="col-lg p-0">
+                        </div> */}
+                    {/* </div> */}
+                    {/* <div className="col-lg p-0">
                         <div className="mb-3">
                             <p className="mb-1">Surname</p>
                             <input
@@ -145,8 +205,8 @@ export default function SignupForm({ pw, setPw }: p) {
                                 onChange={handleForm}
                             />
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
                 <div className="text-center">
                     <br />
                     <label className="ml-2"><input className="mr-2" type="checkbox" />Accept the Terms of Service.</label>

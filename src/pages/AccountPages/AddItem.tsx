@@ -45,11 +45,11 @@ export default function AddItem() {
     function findMySubCate() {
         switch(mySubCateTag) {
             case "unSelect":
-                return <Select options={SubCategories[0]} name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
+                return <Select options={SubCategories[0]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
             case "Textbook":
-                return <Select options={SubCategories[1]} name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
+                return <Select options={SubCategories[1]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
             case "Electronics":
-                return <Select options={SubCategories[2]} name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
+                return <Select options={SubCategories[2]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
         }
     }
     function selectMySub(selectSubCate:any) { 
@@ -62,11 +62,11 @@ export default function AddItem() {
     function findWantSubCate() {
         switch(wantSubCateTag) {
             case "unSelect":
-                return <Select options={SubCategories[0]} name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย" />;
+                return <Select options={SubCategories[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย" />;
             case "Textbook":
-                return <Select options={SubCategories[1]} name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
+                return <Select options={SubCategories[1]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
             case "Electronics":
-                return <Select options={SubCategories[2]} name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
+                return <Select options={SubCategories[2]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
         }
     }
     function selectWantSub(selectWantSubCate:any) { 
@@ -81,15 +81,18 @@ export default function AddItem() {
             <Navbar />
             <Block height="auto" backgroundColor="#f7fafc">
                 <form action="https://httpbin.org/post" method="POST">
-                    <div className="py-3 px-5 my-3 bg-white">
-                        <h5>Add New Item</h5>
+                    <div className="p-3 my-4 bg-white">
+                        {/* ชื่อ */}
+                        <h5 className="mb-4">Add New Item</h5>
                         <div className="form-group row">
-                            <label className="col-md-2 col-form-label">Item Name</label>
+                            <label className="col-md-2 col-form-label fs-5">Item Name</label>
                             <div className="col-md-10">
-                                <input type="text" className="form-control" name="nameItem" placeholder="Enter your item name" />
+                                <input type="text" className="form-control fs-5" name="nameItem" placeholder="Enter your item name" />
                             </div>
                         </div>
-                        <div className="mb-3" style={{height:"auto",backgroundColor:"#C4C4C4",border:"2px dashed #000",borderRadius:"10px"}}>
+
+                        {/* รูป */}
+                        <div className="mb-4" style={{height:"auto",backgroundColor:"#C4C4C4",border:"2px dashed #000",borderRadius:"10px"}}>
                             <div className="px-3 py-4">
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
@@ -101,41 +104,47 @@ export default function AddItem() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* ประเภทของเรา */}
                         <div className="form-group row">
-                            <label className="col-md-2 col-form-label">Category</label>
+                            <label className="col-md-2 col-form-label fs-5">Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategories} name="myMainCate" onChange={(selectSubCate) => selectMySub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                <Select options={MainCategories} className="fs-5" name="myMainCate" onChange={(selectSubCate) => selectMySub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
                                 {myItemSubCate}
                             </div>
-
                         </div>
                         <div className="form-group row">
-                            <label className="col-md-2 col-form-label">Details</label>
+                            <label className="col-md-2 col-form-label fs-5">Details</label>
                             <div className="col-md-10">
-                                <textarea className="form-control" name="myDetails" rows={5} placeholder="Enter details."></textarea >
+                                <textarea className="form-control fs-5" name="myDetails" rows={5} placeholder="Enter details."></textarea >
                             </div>
                         </div>
+
+                        {/* ประเภทที่ต้องการ */}
                         <p className="mb-0 mt-4 fw-bold">Requirement</p>
                         <div className="form-group row">
-                            <label className="col-md-2 col-form-label">Require Category</label>
+                            <label className="col-md-2 col-form-label fs-5">Require Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategories} name="wantMainCate" onChange={(selectSubCate) => selectWantSub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                <Select options={MainCategories} className="fs-5" name="wantMainCate" onChange={(selectSubCate) => selectWantSub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
                                 {wantItemSubCate}
                             </div>
                         </div>
-                        
                         <div className="form-group row">
-                            <label className="col-md-2 col-form-label">Requirement Details</label>
+                            <label className="col-md-2 col-form-label fs-5">Requirement Details</label>
                             <div className="col-md-10">
-                                <textarea className="form-control" name="wantDetails" rows={5} placeholder="Enter requirement details"></textarea>
+                                <textarea className="form-control fs-5" name="wantDetails" rows={5} placeholder="Enter requirement details"></textarea>
                             </div>
                         </div>
-                        <SolidButton width="100px" buttonColor="limegreen"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
-                        <SolidButton width="100px" buttonColor="red"><a href="/app/manageInventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
+
+                        {/* ปุ่มยืนยัน */}
+                        <div className="d-flex justify-content-center mt-5">
+                            <SolidButton width="100px" buttonColor="limegreen"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
+                            <SolidButton width="100px" buttonColor="red"><a href="/app/manageInventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
+                        </div>
                     </div>
                 </form>
             </Block>
