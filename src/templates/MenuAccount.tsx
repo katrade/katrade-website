@@ -38,12 +38,11 @@ function MenuAccount({ children, data }: propsInterface) {
     }, [])
 
     if (mobile) {
-        return <MobileMenuAccount children={children} />
+        return <MobileMenuAccount children={children} data={data}/>
     }
-
     return (
-        <>
-            <Navbar img={data.profilePic} />
+        <div>
+            <Navbar image={data.profilePic} />
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>
@@ -60,18 +59,18 @@ function MenuAccount({ children, data }: propsInterface) {
                     </div>
                 </Block>
             <Footer/>
-        </>
+        </div>
     );
 }
 
-function MobileMenuAccount({ children }: propsInterface) {
+function MobileMenuAccount({ children , data}: propsInterface) {
     return (
-        <>
-            <Navbar />
+        <div>
+            <Navbar image={data.profilePic}  />
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>
-                            <Accountbar />
+                            <Accountbar data={data} />
                             <div style={{height:"auto"}}>
                                 {children}
                             </div>
@@ -79,7 +78,7 @@ function MobileMenuAccount({ children }: propsInterface) {
                     </div>
                 </Block>
             <Footer/>
-        </>
+        </div>
     );
 }
 

@@ -2,7 +2,6 @@
 import './Following.css'
 
 import MenuAccount from '../../templates/MenuAccount';
-import Block from '../../components/Block';
 
 import FollowingBlock from '../../components/Account/FollowingBlock';
 
@@ -69,7 +68,7 @@ export default function Following() {
 
     return (
         <div>
-            <MenuAccount>
+            <MenuAccount >
                 <div className="container-following">
                     <div>
                         <h4 className="d-inline-block me-3">Following</h4>

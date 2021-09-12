@@ -242,7 +242,7 @@ export default function Market() {
 
     return (
         <div >
-            <Navbar img={account.profilePic}/>
+            <Navbar image={account.profilePic}/>
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
                 <div className="my-4">
