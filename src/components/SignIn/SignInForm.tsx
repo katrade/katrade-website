@@ -41,7 +41,7 @@ const SignInForm = () => {
     
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
         show();
-        let result = await axios.post(`${API}/auth/signin`, {
+        await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
         }, {
@@ -50,16 +50,23 @@ const SignInForm = () => {
             }
         }).then((res) => {
             hide()
-            return res;
-        });
-
-        if (result.data.value === true) {
-            setCookie('DaveTheHornyDuck', result.data.DaveTheHornyDuck, {path: '/' , sameSite: 'none' , secure: true});
-            history.push("/app/market");
-        }
-        else {
+            if (res.data.value === true) {
+                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck, {path: '/' , sameSite: 'none' , secure: true});
+                history.push("/app/market");
+            }
+            else {
+                axios.get(`${API}/auth/resendVerifyEmail`, {
+                    headers: {
+                        'Authorization': `Bearer ${res.data.DaveTheHornyDuck}`
+                    }
+                })
+                alert('We have resend the verification link to your email.')
+            }
+        }).catch(() => {
             alert("You email or password is wrong.");
-        }
+        })
+
+        
     }
 
 

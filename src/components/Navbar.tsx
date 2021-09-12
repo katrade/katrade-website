@@ -41,7 +41,7 @@ function Navbar({ image }: INavbar) {
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
-    console.log("Navbar พูดว่า : " + window.innerWidth);
+    // console.log("Navbar พูดว่า : " + window.innerWidth);
     resize();
     function resize() {
         // console.log(window.innerWidth)
@@ -60,7 +60,7 @@ function Navbar({ image }: INavbar) {
 
 
     if (mobile) {
-        return <MobileNavbar />
+        return <MobileNavbar signout={signout}/>
     }
 
     function dropIcon() {
@@ -154,7 +154,7 @@ const MobileNavbarContainer = styled.div`
     z-index: 50;
 `
 
-function MobileNavbar() {
+function MobileNavbar({signout}: any) {
 
     // const [clickMobile, SetClickMobile] = useState(false);
     // const handleClickMobile = () => SetClickMobile(!clickMobile);
@@ -216,7 +216,7 @@ function MobileNavbar() {
                                 <a href="/app/history">History</a>
                             </li>
                             <li className="text-center">
-                                <a href={google}>Logout</a>
+                                <a onClick={signout}>Logout</a>
                             </li>
                         </div>
                     </ul>

@@ -93,6 +93,12 @@ a {
     min-height: 100vh;
     min-width: 100%;
 }
+.fix-screen-size-min {
+    height: 100vh;
+    width: 100%; 
+    min-height: 100vh;
+    min-width: 100%;
+}
 
 .full-width {
     width: 100% !important;
@@ -202,9 +208,9 @@ a.article-link:hover {
     border-width: 1px;
     border-radius: 4px;
     border-color: rgba(204, 204, 204, 1);
-    width: 85%;
-    padding-left: 14px;
-    padding-right: 14px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .input-container {
@@ -214,6 +220,8 @@ a.article-link:hover {
     border-color: rgba(204, 204, 204, 1);
 }
 .input-none {
+    padding-left: 20px;
+    padding-right: 20px;
     border-style: none;
     width: 92%;
 }

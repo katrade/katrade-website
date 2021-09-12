@@ -25,7 +25,7 @@ export default function SignUp() {
 
     return (
         <>
-            <Block height="200" backgroundImage={wallpaper1} className="fix-screen-size">
+            <Block height="200" backgroundImage={wallpaper1} className="fix-screen-size-min">
                 <>
                     <SignupHead/>
                     <SignupForm pw={pw} setPw={setPw}/>

@@ -223,7 +223,7 @@ export default function Market() {
     const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    const [getUserData] = useAuthorization();    
+    const {getUserData} = useAuthorization();    
     window.addEventListener("resize", resize)
     useEffect(() => {
         resize();
@@ -258,7 +258,7 @@ export default function Market() {
                     <h5 className="mb-3">Match with you</h5>
                     <div className="full-width">
                         <div>
-                            <div className="d-flex justify-content-around flex-wrap">
+                            <div className="d-flex justify-content-start flex-wrap">
                                 {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)}
                             </div>
                             <div className="d-flex justify-content-center align-items-center my-3">
@@ -276,7 +276,7 @@ export default function Market() {
 
                     <h5 className="mb-3">Popular</h5>
                     <div className="full-width">
-                        <div className="d-flex justify-content-around flex-wrap">
+                        <div className="d-flex justify-content-start flex-wrap">
                             {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)}
                         </div>
                     </div>

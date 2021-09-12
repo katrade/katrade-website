@@ -34,7 +34,7 @@ export const TransparentButton = styled.button`
 
     margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
     
-    display: ${(props: ButtonProps) => props.display ? props.display : "block"};
+    display: ${(props: ButtonProps) => props.display ? props.display : "inline-block"};
 
     transition: 300ms ease;
 
