@@ -40,6 +40,8 @@ import ManageInventory from './pages/AccountPages/ManageInventory';
 import AddItem from './pages/AccountPages/AddItem';
 import EditItem from './pages/AccountPages/EditItem';
 
+import ProfileViewer from './pages/ProfileViewer';
+
 import ChangePassword from './pages/AccountPages/ChangePasswordPage';
 import Profile from './pages/AccountPages/Profile';
 
@@ -93,6 +95,8 @@ function App() {
                                 <Route exact path="/app/history" component={History}></Route>
                                 <Route exact path="/app/inventory" component={Inventory}></Route>
                                 <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
+
+                                <Route exact path="/app/profileviewer" component={ProfileViewer}></Route>
 
                                 <Route exact path="/app/additem" component={AddItem}></Route>
                                 <Route exact path="/app/edititem" component={EditItem}></Route>
