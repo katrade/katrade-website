@@ -62,8 +62,7 @@ function Account() {
         }
         init();
     }, [])
-
-    console.log(account);
+    // console.log(account)
 
     return (
 

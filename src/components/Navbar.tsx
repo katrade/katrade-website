@@ -79,14 +79,10 @@ function Navbar({ image }: INavbar) {
     var CategoryData:any;
     if(category){
         CategoryData = category.map((data:any, index:any) => {
-            // console.log("ดึง Category เรียบร้อย")
             return <li>{data.parentCategoryEn}</li>
         });
     }else{
-        console.log("ดึง Category ไม่ได้");
     }
-
-    console.log(CategoryData);
 
     if (mobile) {
         return <MobileNavbar signout={signout}/>
