@@ -44,5 +44,19 @@ export default function useAuthorization() {
         })
     }
 
-    return { getUserData, updateProfilePic }
+    async function getCategory(): Promise<[]> {
+        return await axios.get(`${API}/category/getAll`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch(() => {
+                return null;
+            })
+    }
+
+    return { getUserData, updateProfilePic , getCategory }
 }

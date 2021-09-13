@@ -15,6 +15,8 @@ import { useHistory } from 'react-router';
 import { useCookies } from 'react-cookie';
 import useLoading from '../hooks/useLoading';
 import useAuthorization from '../hooks/useAuthorization';
+import { type } from 'os';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 
 
@@ -40,7 +42,6 @@ async function getRandomWord(): Promise<string> {
 }
 
 export default function Market() {
-    
     const id_item = [
         {
             name_item: "Cats, a weird creature",
@@ -212,7 +213,6 @@ export default function Market() {
     const rec_item = id_item.map((item, index) => {
         return <Recommend item={item} key={index} />;
     });
-
     // สร้างตัวอย่างมาโชว์ Suggestion
     const interest_item = id_item.map((item, index) => {
         return <Interest item={item} key={index} />;
@@ -247,7 +247,6 @@ export default function Market() {
         }
         return setMobile(false)
     }
-    
 
     return (
         <div >

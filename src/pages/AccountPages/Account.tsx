@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 
 import MenuAccount from '../../templates/MenuAccount';
 
-import profilePic from '../../pics/facebook.png';
 import { useHistory } from 'react-router';
 import useAuthorization from '../../hooks/useAuthorization';
 import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 interface IAccount {
     firstname: string
@@ -42,9 +42,10 @@ const defaultEmptyAccount: IAccount = {
 
 function Account() {
 
-    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
-    const { getUserData, updateProfilePic } = useAuthorization();
-    const [pic, setPic] = useState([]);
+    const [ account , setAccount ] = useState<IAccount>(defaultEmptyAccount);
+    // const [ account , setAccount ] = useState<IAccount>(defaultEmptyAccount);
+    const [ pic , setPic ] = useState([]);
+    const {getUserData , updateProfilePic} = useAuthorization();    
     const history = useHistory();
 
     useEffect(() => {
@@ -57,9 +58,12 @@ function Account() {
                 console.clear();
                 history.push('/app/signin');
             }
+
         }
         init();
     }, [])
+
+    console.log(account);
 
     return (
 
