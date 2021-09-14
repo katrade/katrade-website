@@ -69,8 +69,6 @@ function Navbar({ image }: INavbar) {
             var CategoryData = await getCategory();
             if (CategoryData) {
                 setCategory(CategoryData);
-            }else{
-                console.log("category ไม่ได้รับข้อมูล")
             }
         }
         init();
@@ -129,30 +127,31 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-                        {/* <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a> */}
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                <a href="/app/account">Account</a>
-                                <a href="/app/following">Following</a>
-                                <a href="/app/followers">Followers</a>
-                                <a href="/app/inventory">Inventory</a>
+                                <a onClick={() => history.push("/app/account")}>Account</a>
+                                <a onClick={() => history.push("/app/following")}>Following</a>
+                                <a onClick={() => history.push("/app/followers")}>Followers</a>
+                                <a onClick={() => history.push("/app/inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
                         <a href="/app/request"><FaRegListAlt /></a>
-                        <a onClick={signout}><MdChat /></a>
-                        <a href=""><IoIosNotifications /></a>
+                        <a href="#"><MdChat /></a>
+                        <a href="#"><IoIosNotifications /></a>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a href="/app/account">Account</a>
-                            <a href={google}>Chat</a>
-                            <a href="/app/request">Notification</a>
-                            <a href="">Ding Dong</a>
+                            <a onClick={() => history.push("/app/account")}>Account</a>
+                            <a onClick={() => history.push("#")}>Chat</a>
+                            <a onClick={() => history.push("/app/request")}>Notification</a>
+                            <a onClick={() => history.push("/app/following")}>Following</a>
+                            <a onClick={() => history.push("/app/followers")}>Followers</a>
+                            <a onClick={() => history.push("/app/inventory")}>Inventory</a>
+                            <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                         </div>
                     </div>
-
                 </div>
             </Block>
         </div>

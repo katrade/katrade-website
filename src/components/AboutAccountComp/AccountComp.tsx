@@ -5,9 +5,7 @@ import { useState } from 'react';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
-    if(!accountData){
-        console.log("ไม่มีข้อมูล");
-    }
+    
     return (
         <div>
            {/* <p>{accountData.username}</p> */}

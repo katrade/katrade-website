@@ -1,3 +1,5 @@
+import './AboutAccount.css';
+
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import useAuthorization from '../../hooks/useAuthorization';
@@ -50,11 +52,9 @@ const defaultEmptyAccount: IAccount = {
     inventories: [],
 }
 
-export default function AboutAccount() {
-
-    const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
-    const [ componentPage , setComponentPage ] = useState<any>(); 
+function CheckInnerWidth() {
     const { getUserData , updateProfilePic } = useAuthorization();    
+    const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const history = useHistory();
 
     useEffect(() => {
@@ -70,34 +70,44 @@ export default function AboutAccount() {
         }
         init();
     }, [])
+
+    useEffect(():any => {
+        // return <AboutAccount userData={accountData}/>
+    }, [])
+
+    return <AboutAccount userData={accountData}/>
+}
+
+function AboutAccount(userData:any) {
+    const accountData = userData.userData;
+
+    const [ componentPage , setComponentPage ] = useState<any>(<AccountComp data={accountData}/>); 
     const [ destComp , setDestComp ] = useState("Account");
+
     function SelectComp() {
         if(destComp === "Account"){
             setComponentPage(<AccountComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "ChangePassword"){
             setComponentPage(<ChangePassComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "Following"){
             setComponentPage(<FollowingComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "Followers"){
             setComponentPage(<FollowersComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "Favorite"){
             setComponentPage(<FavoriteComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "Inventory"){
             setComponentPage(<InventoryComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }else if(destComp === "History"){
             setComponentPage(<HistoryComp data={accountData}/>);
-            console.log("เปลี่ยนหน้าเรียบร้อย");
         }
     }
     useEffect(() => {
         SelectComp();
     }, [destComp])
+    useEffect(() => {
+        setComponentPage(<AccountComp data={accountData}/>)
+    }, [accountData])
+
 
     return (
         <div>
@@ -107,13 +117,12 @@ export default function AboutAccount() {
                         <div>
                             <Accountbar data={accountData}/>
                             <div className="d-flex">
-                                <div style={{minWidth:"180px"}}>
+                                <div className="MobileMode" style={{minWidth:"180px"}}>
                                     <LSideMenuComp ChangeComponent={(destComp:any) => setDestComp(destComp)}/>
                                 </div>
                                 <div style={{width:"100%"}}>
                                     {componentPage}
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -122,3 +131,5 @@ export default function AboutAccount() {
         </div>
     );
 }
+
+export default CheckInnerWidth;
