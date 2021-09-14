@@ -8,7 +8,6 @@ export default function AccountComp(data: any) {
     
     return (
         <div>
-           {/* <p>{accountData.username}</p> */}
            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
 
                 {/* ส่วนของรูปโปรไฟล์ */}

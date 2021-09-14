@@ -1,4 +1,4 @@
-import { useState , useEffect } from 'react';
+import { useState , useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -28,6 +28,8 @@ import Logo from '../pics/logo_dark_green.png';
 import Block from './Block';
 import { useCookies } from 'react-cookie';
 
+import { DestCompContext } from '../pages/AboutAccount/AboutAccount'
+
 const google = 'https://google.com'
 
 interface INavbar {
@@ -35,6 +37,26 @@ interface INavbar {
 }
 
 function Navbar({ image }: INavbar) {
+    // const { destCompState , destCompDispatch } = useContext(DestCompContext);
+    // function sendDestComp(event:any) {
+    //     // console.log(event);
+    //     if(event === "Account"){
+    //         destCompDispatch({ type: "Account"});
+    //     }else if(event === "ChangePassword"){
+    //         destCompDispatch({ type: "ChangePassword"});
+    //     }else if(event === "Following"){
+    //         destCompDispatch({ type: "Following"});
+    //     }else if(event === "Followers"){
+    //         destCompDispatch({ type: "Followers"});
+    //     }else if(event === "Favorite"){
+    //         destCompDispatch({ type: "Favorite"});
+    //     }else if(event === "Inventory"){
+    //         destCompDispatch({ type: "Inventory"});
+    //     }else if(event === "History"){
+    //         destCompDispatch({ type: "History"});
+    //     }
+    // }
+    // console.log(destCompState + "test rabob");
 
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
@@ -129,9 +151,13 @@ function Navbar({ image }: INavbar) {
                     <div className="desktop-icon">
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
+                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a> */}
                                 <a onClick={() => history.push("/app/account")}>Account</a>
+                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a> */}
                                 <a onClick={() => history.push("/app/following")}>Following</a>
+                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a> */}
                                 <a onClick={() => history.push("/app/followers")}>Followers</a>
+                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a> */}
                                 <a onClick={() => history.push("/app/inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
@@ -211,6 +237,12 @@ function MobileNavbar({signout}: any) {
                         <div className="sidemenu-content d-block">
                             <li className="text-center">
                                 <a href="/app/account">Account</a>
+                            </li>
+                            <li className="text-center">
+                                <a href="#">Chat</a>
+                            </li>
+                            <li className="text-center">
+                                <a href="/app/request">Notification</a>
                             </li>
                             <li className="text-center">
                                 <a href="/app/following">Following</a>

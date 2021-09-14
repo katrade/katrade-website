@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import './Market.css';
 
 import Navbar from '../components/Navbar';
+import NavbarSpare from '../components/NavbarSpare';
 import Footer from '../components/Footer';
 import Recommend from '../components/Recommend';
 import Interest from '../components/Interest';
@@ -251,6 +252,7 @@ export default function Market() {
     return (
         <div >
             <Navbar image={account.profilePic}/>
+            {/* <NavbarSpare image={account.profilePic}/> */}
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
                 <div className="my-4">

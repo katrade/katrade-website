@@ -1,12 +1,13 @@
 import './AboutAccount.css';
 
-import { useState, useEffect } from 'react';
+import React , { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router';
 import useAuthorization from '../../hooks/useAuthorization';
 import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 
-import Navbar from '../../components/Navbar';
+import NavbarSpare from '../../components/NavbarSpare';
+// import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Block from '../../components/Block';
 import Accountbar from "../../components/Account/Accountbar";
@@ -52,6 +53,32 @@ const defaultEmptyAccount: IAccount = {
     inventories: [],
 }
 
+function reducer(state:any, action:any) {
+    if (action.type === "Account") {
+        return { dest: "Account" };
+    }else if (action.type === "ChangePassword") {
+        return { dest: "ChangePassword" };
+    }else if (action.type === "Following") {
+        return { dest: "Following" };
+    }else if (action.type === "Followers") {
+        return { dest: "Followers" };
+    }else if (action.type === "Favorite") {
+        return { dest: "Favorite" };
+    }else if (action.type === "Inventory") {
+        return { dest: "Inventory" };
+    }else if (action.type === "History") {
+        return { dest: "History" };
+    }
+    return state;
+}
+
+type DestCompContextType = {
+    destCompState: any,
+    destCompDispatch: any,
+}
+
+const DestCompContext = React.createContext<DestCompContextType  | any >(null);
+
 function CheckInnerWidth() {
     const { getUserData , updateProfilePic } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
@@ -70,11 +97,7 @@ function CheckInnerWidth() {
         }
         init();
     }, [])
-
-    useEffect(():any => {
-        // return <AboutAccount userData={accountData}/>
-    }, [])
-
+    
     return <AboutAccount userData={accountData}/>
 }
 
@@ -82,43 +105,50 @@ function AboutAccount(userData:any) {
     const accountData = userData.userData;
 
     const [ componentPage , setComponentPage ] = useState<any>(<AccountComp data={accountData}/>); 
-    const [ destComp , setDestComp ] = useState("Account");
-
+    // ตัวที่กำลังเล็งให้เปลี่ยนแปลง 
+    // const [ destComp , setDestComp ] = useState("Account");
+    const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
+    
+    console.log(destCompState);
+    
     function SelectComp() {
-        if(destComp === "Account"){
+        if(destCompState.dest === "Account"){
             setComponentPage(<AccountComp data={accountData}/>);
-        }else if(destComp === "ChangePassword"){
+        }else if(destCompState.dest === "ChangePassword"){
             setComponentPage(<ChangePassComp data={accountData}/>);
-        }else if(destComp === "Following"){
+        }else if(destCompState.dest === "Following"){
             setComponentPage(<FollowingComp data={accountData}/>);
-        }else if(destComp === "Followers"){
+        }else if(destCompState.dest === "Followers"){
             setComponentPage(<FollowersComp data={accountData}/>);
-        }else if(destComp === "Favorite"){
+        }else if(destCompState.dest === "Favorite"){
             setComponentPage(<FavoriteComp data={accountData}/>);
-        }else if(destComp === "Inventory"){
+        }else if(destCompState.dest === "Inventory"){
             setComponentPage(<InventoryComp data={accountData}/>);
-        }else if(destComp === "History"){
+        }else if(destCompState.dest === "History"){
             setComponentPage(<HistoryComp data={accountData}/>);
         }
     }
+    // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
     useEffect(() => {
         SelectComp();
-    }, [destComp])
+    }, [destCompState])
+    // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {
         setComponentPage(<AccountComp data={accountData}/>)
     }, [accountData])
 
 
     return (
+        <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
         <div>
-            <Navbar image={accountData.profilePic} />
+            <NavbarSpare image={accountData.profilePic}/>
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>
                             <Accountbar data={accountData}/>
                             <div className="d-flex">
                                 <div className="MobileMode" style={{minWidth:"180px"}}>
-                                    <LSideMenuComp ChangeComponent={(destComp:any) => setDestComp(destComp)}/>
+                                    <LSideMenuComp/>
                                 </div>
                                 <div style={{width:"100%"}}>
                                     {componentPage}
@@ -129,7 +159,10 @@ function AboutAccount(userData:any) {
                 </Block>
             <Footer/>
         </div>
+        </DestCompContext.Provider>
+
     );
 }
 
+export { DestCompContext };
 export default CheckInnerWidth;

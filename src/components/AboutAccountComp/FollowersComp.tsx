@@ -1,19 +1,39 @@
+import FollowingBlock from "../Account/FollowingBlock";
+
 export default function FollowersComp(data: any) {
     const accountData = data.data;
-    console.log(accountData)
+    const fakeData = [
+        {
+            name:"fakeData"
+        },
+        {
+            name:"fakeData"
+        },
+        {
+            name:"fakeData"
+        },
+        {
+            name:"fakeData"
+        },
+        {
+            name:"fakeData"
+        },
+        {
+            name:"fakeData"
+        },
+    ]
+    const fakeFollowingBlock = fakeData.map((data, index) => {
+        return <FollowingBlock data={data} key={index} relation={"follower"}/>;
+    })
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
-                <div className="p-3">
-                <h4 className="d-inline-block me-3 mb-4">Followers</h4>
-                <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({accountData.followers.length})</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, aperiam.</p>
+            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                <div>
+                    <h4 className="d-inline-block me-3 mb-4">Followers</h4>
+                    <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({accountData.followers.length})</h5>
+                </div>
+                <div className="row mx-auto" style={{width:"100%"}}>
+                    {fakeFollowingBlock}
                 </div>
             </div>
         </div>
