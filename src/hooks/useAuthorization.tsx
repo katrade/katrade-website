@@ -88,8 +88,8 @@ export default function useAuthorization() {
             return history.push('/app/market');
         }
     }
-    return { getUserData, updateProfilePic, setUsername, isUserActive }
-    async function getCategory(): Promise<[]> {
+
+    async function getCategory(): Promise<any> {
         return await axios.get(`${API}/category/getAll`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -103,5 +103,6 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory }
+    return { getUserData, updateProfilePic, setUsername, isUserActive, getCategory }
+    
 }
