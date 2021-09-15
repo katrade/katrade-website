@@ -24,7 +24,6 @@ interface propsInterface {
 
 export const LanguageContext = React.createContext<LanguageContextType>(defaultValue);
 
-
 export function LanguageProvider({ children }: propsInterface) {
 
     const [ lang , setLangCookie ] = useLocalStorage("lang" , "th")
