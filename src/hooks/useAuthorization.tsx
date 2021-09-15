@@ -103,6 +103,5 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic, setUsername, isUserActive, getCategory }
-    
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive  }
 }
