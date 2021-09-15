@@ -83,14 +83,12 @@ export default function useAuthorization() {
         })
     }
 
-<<<<<<< HEAD
     async function isUserActive() {
         if (cookies.DaveTheHornyDuck) {
             return history.push('/app/market');
         }
     }
     return { getUserData, updateProfilePic, setUsername, isUserActive }
-=======
     async function getCategory(): Promise<[]> {
         return await axios.get(`${API}/category/getAll`, {
             headers: {
@@ -106,5 +104,4 @@ export default function useAuthorization() {
     }
 
     return { getUserData, updateProfilePic , getCategory }
->>>>>>> bc2f12b3c89590035e7b72ce93aa69a2da556451
 }

@@ -150,7 +150,6 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-<<<<<<< HEAD
 
                         <a onClick={signout} className="pointer"><FaSignOutAlt /></a>
                         <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a>
@@ -158,7 +157,6 @@ function Navbar({ image }: INavbar) {
                         <a><MdChat /></a>
                         <a href=""><IoIosNotifications /></a>
                         
-=======
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a> */}
@@ -175,7 +173,6 @@ function Navbar({ image }: INavbar) {
                         <a href="/app/request"><FaRegListAlt /></a>
                         <a href="#"><MdChat /></a>
                         <a href="#"><IoIosNotifications /></a>
->>>>>>> bc2f12b3c89590035e7b72ce93aa69a2da556451
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
