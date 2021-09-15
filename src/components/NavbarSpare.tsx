@@ -28,13 +28,17 @@ import Logo from '../pics/logo_dark_green.png';
 import Block from './Block';
 import { useCookies } from 'react-cookie';
 
+// from aboutaccount
 import { DestCompContext } from '../pages/AboutAccount/AboutAccount'
+// from market
+// import { DestCompContext } from '../pages/Market'
 
 const google = 'https://google.com'
 
 interface INavbar {
     image?: string
 }
+
 
 function NavbarSpare({ image }: INavbar) {
     const { destCompState , destCompDispatch } = useContext(DestCompContext);
@@ -54,6 +58,14 @@ function NavbarSpare({ image }: INavbar) {
         }else if(event === "History"){
             destCompDispatch({ type: "History"});
         }
+        // console.log(event);
+        var pathname = window.location.pathname.split('/')[2];
+        function displaySearch() {
+            if (pathname != "aboutaccount") {
+                return history.push(`/app/aboutaccount`)
+            }
+        }
+        displaySearch();
     }
     // console.log(destCompState + "test rabob");
 

@@ -89,11 +89,8 @@ function App() {
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
                                 <Route exact path="/app/product" component={Product}></Route>
 
-<<<<<<< HEAD
                                 <Route exact path="/app/setup" component={SetUsernamePage}></Route>
-=======
                                 <Route exact path="/app/aboutaccount" component={AboutAccount}></Route>
->>>>>>> bc2f12b3c89590035e7b72ce93aa69a2da556451
                                 <Route exact path="/app/account" component={Account}></Route>
                                 <Route exact path="/app/favorite" component={Favorite}></Route>
                                 <Route exact path="/app/following" component={Following}></Route>

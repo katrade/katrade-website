@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React , { useState, useEffect, useReducer } from 'react';
 import styled from 'styled-components'
 
 import './Market.css';
@@ -42,7 +42,37 @@ async function getRandomWord(): Promise<string> {
 
 }
 
-export default function Market() {
+
+// type DestCompContextType = {
+//     destCompState: any,
+//     destCompDispatch: any,
+// }
+
+// const DestCompContext = React.createContext<DestCompContextType  | any >(null);
+
+// function reducer(state:any, action:any) {
+//     if (action.type === "Account") {
+//         return { dest: "Account" };
+//     }else if (action.type === "ChangePassword") {
+//         return { dest: "ChangePassword" };
+//     }else if (action.type === "Following") {
+//         return { dest: "Following" };
+//     }else if (action.type === "Followers") {
+//         return { dest: "Followers" };
+//     }else if (action.type === "Favorite") {
+//         return { dest: "Favorite" };
+//     }else if (action.type === "Inventory") {
+//         return { dest: "Inventory" };
+//     }else if (action.type === "History") {
+//         return { dest: "History" };
+//     }
+//     return state;
+// }
+
+function Market() {
+
+    // const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
+
     const id_item = [
         {
             name_item: "Cats, a weird creature",
@@ -224,7 +254,8 @@ export default function Market() {
     const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    const {getUserData} = useAuthorization();    
+    const {getUserData} = useAuthorization();
+
     window.addEventListener("resize", resize)
     useEffect(() => {
         resize();
@@ -250,6 +281,8 @@ export default function Market() {
     }
 
     return (
+        // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
+
         <div >
             <Navbar image={account.profilePic}/>
             {/* <NavbarSpare image={account.profilePic}/> */}
@@ -288,7 +321,12 @@ export default function Market() {
 
             <Footer />
         </div>
+        // </DestCompContext.Provider>
     )
 }
+
+// export { DestCompContext };
+
+export default Market;
 
 

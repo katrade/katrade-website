@@ -11,7 +11,7 @@ function AccountMenu(props:any) {
         // console.log(event);
         if(event === "Account"){
             destCompDispatch({ type: "Account"});
-        }else if(event === "ChangePassword"){
+        }else if(event === "Change Password"){
             destCompDispatch({ type: "ChangePassword"});
         }else if(event === "Following"){
             destCompDispatch({ type: "Following"});
