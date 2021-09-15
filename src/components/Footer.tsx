@@ -53,7 +53,7 @@ export default function Footer() {
                         <hr />
                         <a href="https://facebook.com" target="_blank"><img src={facebook} width="30" className="m-2" /></a>
                         <a href="https://instagram.com" target="_blank"><img src={instagram} width="30" className="m-2" /></a>
-                        <a href="https://github.com/nutpedteam/katrade" target="_blank"><img src={github} width="30" className="m-2" /></a>
+                        <a href="https://github.com/nutpedteam/" target="_blank"><img src={github} width="30" className="m-2" /></a>
                     </div>
                 </div>
             </Block>

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 export default function useLoading() {
     const element = document.getElementById('portal');
-    function show() {
-        render(<LoadingScreen />,element)
+    function show(str?: string) {
+        render(<LoadingScreen loadingString={str} />, element)
     }
     function hide() {
-        render(<></>,element)
+        render(<></>, element)
     }
     return [show, hide]
 }
@@ -26,10 +26,16 @@ const Container = styled.div`
     z-index: 999;
 `
 
-function LoadingScreen() {
+function LoadingScreen({ loadingString }: any) {
     return (
         <Container>
-            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            <div>
+                <div className="d-flex justify-content-center">
+                    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                </div>
+                <p className="mt-3">{loadingString}</p>
+            </div>
+
         </Container>
     )
 }

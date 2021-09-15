@@ -28,7 +28,7 @@ import Product from './pages/Product';
 import SignIn from './pages/Signin';
 import SignUp from './pages/SignUp';
 
-import { Verify, VerifyEmailSuccess, VerifyEmailPending } from './pages/VerifyPages/VerifyTest';
+import { Verify, VerifyEmailSuccess, VerifyEmailPending, SetUsernamePage } from './pages/VerifyPages/VerifyTest';
 
 import Account from './pages/AccountPages/Account';
 import Favorite from './pages/AccountPages/Favorite';
@@ -86,6 +86,7 @@ function App() {
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
                                 <Route exact path="/app/product" component={Product}></Route>
 
+                                <Route exact path="/app/setup" component={SetUsernamePage}></Route>
                                 <Route exact path="/app/account" component={Account}></Route>
                                 <Route exact path="/app/favorite" component={Favorite}></Route>
                                 <Route exact path="/app/following" component={Following}></Route>

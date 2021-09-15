@@ -48,7 +48,7 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
-        show()
+        show("Creating you account...")
         let result: any = await fetch(`${API}/auth/signup`, {
             method: 'POST',
             mode: 'cors',
@@ -104,17 +104,6 @@ export default function SignupForm({ pw, setPw }: p) {
                 </div>
                 <div className="row">
                     <div className="col-lg mb-3">
-                        <p className="mb-1">Username</p>
-                        <input
-                            className="input-register"
-                            type="text"
-                            placeholder="Please enter your username."
-                            name="username"
-                            value={form.username || ""}
-                            onChange={handleForm}
-                        />
-                    </div>
-                    <div className="col-lg mb-3">
                         <p className="mb-1">Email</p>
                         <input
                             className="input-register"
@@ -125,8 +114,6 @@ export default function SignupForm({ pw, setPw }: p) {
                             onChange={handleForm}
                         />
                     </div>
-                </div>
-                <div className="row">
                     <div className="col-lg mb-3">
                         <p className="mb-1">Password</p>
                         <div className="input-container">
@@ -141,6 +128,9 @@ export default function SignupForm({ pw, setPw }: p) {
                         </div>
                         {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
                     </div>
+                </div>
+                <div className="row">
+                    
                     <div className="col-lg mb-3">
                         <p className="mb-1">Phone number</p>
                         <input
@@ -152,67 +142,11 @@ export default function SignupForm({ pw, setPw }: p) {
                             onChange={handleForm}
                         />
                     </div>
+                    <div className="col-lg mb-3">
+                        
+                    </div>
                 </div>
-                {/* <div className="mb-3">
-                            <p className="mb-1">Username</p>
-                            <input
-                                className="input-register"
-                                type="text"
-                                placeholder="Please enter your username."
-                                name="username"
-                                value={form.username || ""}
-                                onChange={handleForm}
-                            />
-                        </div >
-                        <div className="mb-3">
-                            <p className="mb-1">Password</p>
-                            <input
-                                className="input-register"
-                                type="password"
-                                placeholder="Please enter your password."
-                                name="password"
-                                value={form.password || ""}
-                                onChange={handleForm}
-                            />
-                            {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
-                        </div> */}
-                {/* </div> */}
-                {/* <div className="col-lg mb-3 p-0">
-                        <div className="mb-3">
-                            <p className="mb-1">Surname</p>
-                            <input
-                                className="input-register"
-                                type="text"
-                                placeholder="Please enter your surname."
-                                name="surname"
-                                value={form.surname || ""}
-                                onChange={handleForm}
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <p className="mb-1">Email</p>
-                            <input
-                                className="input-register"
-                                type="text"
-                                placeholder="Please enter your e-mail."
-                                name="email"
-                                value={form.email || ""}
-                                onChange={handleForm}
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <p className="mb-1">Phone number</p>
-                            <input
-                                className="input-register"
-                                type="text"
-                                placeholder="Please enter your phone number."
-                                name="phone"
-                                value={form.phone || ""}
-                                onChange={handleForm}
-                            />
-                        </div>
-                    </div> */}
-                {/* </div> */}
+                
                 <div className="text-center">
                     <br />
                     <label className="mx-2"><input className="mr-2" type="checkbox" />Accept the Terms of Service.</label>

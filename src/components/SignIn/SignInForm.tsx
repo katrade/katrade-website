@@ -20,17 +20,6 @@ import { useCookies } from 'react-cookie';
 //     lang: string
 // }
 
-function ValidateEmail(mail: string) { // Comment by Franky
-    if (mail) {
-        if (mail.length === 0) return true
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
-            // console.log(true)
-            return (true)
-        }
-        // console.log(false)
-        return (false)
-    }
-}
 
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState<number>(1);
@@ -40,7 +29,7 @@ const SignInForm = () => {
     const [cookie, setCookie, removeCookies] = useCookies(['DaveTheHornyDuck']);
     
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
-        show();
+        show("We're bringing you in");
         await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
@@ -50,7 +39,8 @@ const SignInForm = () => {
             }
         }).then((res) => {
             hide()
-            if (res.data.value === true) {
+            console.log(res.data)
+            if (res.data.verifyEmail === true) {
                 setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck, {path: '/' , sameSite: 'none' , secure: true});
                 history.push("/app/market");
             }
@@ -63,6 +53,7 @@ const SignInForm = () => {
                 alert('We have resend the verification link to your email.')
             }
         }).catch(() => {
+            hide()
             alert("You email or password is wrong.");
         })
 
@@ -80,17 +71,16 @@ const SignInForm = () => {
                 <div>
                     <div className="d-flex justify-content-center">
                         <div style={{ width: "90%", maxWidth: "500px" }}>
-                            <p>Email</p>
+                            <p>Email or username</p>
                             <input
-                                className={"input-register w-100 px-2" + (ValidateEmail(form.email) ? "" : " error")}
+                                className={"input-register w-100 px-2"}
                                 value={form.email || ""}
                                 name="email"
                                 onChange={handleForm}
                                 type="text"
-                                placeholder="Enter your KU e-mail."
+                                placeholder="Enter your email or username"
                             />
                             <br />
-                            <p className={"error" + (ValidateEmail(form.email) ? " hidden" : "")}>Your email look weird!</p>
                             <p className="mt-2">Password</p>
                             <div className="input-container">
                                 <input

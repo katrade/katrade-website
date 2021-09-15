@@ -49,7 +49,7 @@ export default function ArticleTemplate({ children }: propsInterface) {
         <>
             <Background>
                 <StaticArticleNav />
-                <Block height="80vh" className="my-5">
+                <Block height="80vh" className="">
                     <div className="full-width maxwidth100">
                         <div className="row my-5 mx-2 full-width">
                             <div className={"col-lg-8 m-0" + ( mobile ? "" : "px-3")}>
@@ -59,7 +59,7 @@ export default function ArticleTemplate({ children }: propsInterface) {
                                 <H5>{content[0]}</H5>
                                 <hr />
                                 <a href="/" className="article-link">{content[1]}</a><br />
-                                <a href="/" className="article-link">{content[2]}</a><br />
+                                <a href="/articles/about/developers" className="article-link">{content[2]}</a><br />
                                 <a href="/" className="article-link">{content[3]}</a><br />
                                 <a href="/" className="article-link">{content[4]}</a><br />
                                 <a href="/" className="article-link">{content[5]}</a><br />

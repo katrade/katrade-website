@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import Block from '../components/Block'
 import SignupForm from '../components/Signup/SignupForm';
 import SignupHead from '../components/Signup/SignupHead';
+import useAuthorization from '../hooks/useAuthorization';
 import wallpaper1 from '../pics/katrade-wallpaper1.png';
 
 interface paramsInterface {
@@ -19,6 +20,14 @@ export default function SignUp() {
     const [pw, setPw] = useState<number>(1);
 
     const history = useHistory();
+
+
+    const { isUserActive } = useAuthorization();
+    useEffect(() => {
+        isUserActive();
+    }, [])
+
+    
     function LinkLogin() {
         history.push(`/${lang}/login`);
     };

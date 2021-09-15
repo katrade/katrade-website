@@ -6,6 +6,7 @@ import { API } from '../app.setting.json';
 import './Navbar.css';
 
 // icon
+import { FaSignOutAlt } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
 import { MdChat } from "react-icons/md";
 import { FaRegListAlt } from "react-icons/fa";
@@ -121,10 +122,13 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
+
+                        <a onClick={signout} className="pointer"><FaSignOutAlt /></a>
                         <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a>
                         <a href="/app/request"><FaRegListAlt /></a>
-                        <a onClick={signout}><MdChat /></a>
+                        <a><MdChat /></a>
                         <a href=""><IoIosNotifications /></a>
+                        
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
