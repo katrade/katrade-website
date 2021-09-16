@@ -75,7 +75,7 @@ function Navbar({ image }: INavbar) {
         init();
     }, []);
 
-    var CategoryData:any;
+    var CategoryData;
     if(category){
         CategoryData = category.map((data:any, index:any) => {
             return <li>{data.parentCategoryEn}</li>
@@ -138,13 +138,17 @@ function Navbar({ image }: INavbar) {
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a> */}
-                                <a onClick={() => history.push("/app/account")}>Account</a>
+                                {/* <a onClick={() => history.push("/app/account")}>Account</a> */}
+                                <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
                                 {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a> */}
-                                <a onClick={() => history.push("/app/following")}>Following</a>
+                                {/* <a onClick={() => history.push("/app/following")}>Following</a> */}
+                                <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
                                 {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a> */}
-                                <a onClick={() => history.push("/app/followers")}>Followers</a>
+                                {/* <a onClick={() => history.push("/app/followers")}>Followers</a> */}
+                                <a onClick={() => history.push("/app/aboutaccount?component=followes")}>Followers</a>
                                 {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a> */}
-                                <a onClick={() => history.push("/app/inventory")}>Inventory</a>
+                                {/* <a onClick={() => history.push("/app/inventory")}>Inventory</a> */}
+                                <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>

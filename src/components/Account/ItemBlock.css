@@ -34,9 +34,9 @@
 }
 
 .column-img > img {
-    width: 100%;
-    height: 130px;
-    border-radius: 10px;
+    min-width: 170px;
+    height: 110px;
+    border-radius: 8px;
 }
 
 .column-tik > h6 {
