@@ -30,127 +30,68 @@ export default function AddItem() {
     var SubCategoriesTh:any = [];
     SubCategoriesEn.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
     SubCategoriesTh.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
+    var indexCat = 0;
     if(category){
         MainCategoriesEn = category.map((data:any, index:any) => {
+            indexCat++;
             var cCatEn = data.childCategoryEn
             SubCategoriesEn.push(cCatEn.map((data:any, index:any) => {
-                return { value: data, label: data }
+                return { value: data, 'label': data }
             }))
             var cCatTh = data.childCategoryTh
             SubCategoriesTh.push(cCatEn.map((data:any, index:any) => {
-                return { value: data, label: data }
+                return { value: data, 'label': data }
             }))
             var pCatEn = data.parentCategoryEn
-            return { value: pCatEn, label: pCatEn}
+            return { value: pCatEn, 'label': pCatEn, indexC: indexCat}
         });
         MainCategoriesTh = category.map((data:any, index:any) => {
             var pCatTh = data.childCategoryTh
-            return { value: pCatTh, label: pCatTh}
+            return { value: pCatTh, 'label': pCatTh, indexC: indexCat}
         });
     }
-
-    // // Sub Category
-    // const SubCategories = [
-    //     [
-    //         { value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},
-    //     ],
-    //     [
-    //         { value: 'วิศวกรรมศาสตร์Faculty of Engineering', label: 'วิศวกรรมศาสตร์Faculty of Engineering' },
-    //         { value: 'ประมงFaculty of Fisheries', label: 'ประมงFaculty of Fisheries' },
-    //         { value: 'เกษตรFaculty of Agriculture', label: 'เกษตรFaculty of Agriculture' },
-    //         { value: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine', label: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine' },
-    //         { value: 'บริหารธุรกิจFaculty of Business Administration', label: 'บริหารธุรกิจFaculty of Business Administration' },
-    //         { value: 'มนุษย์ศาสตร์Faculty of Humanities', label: 'มนุษย์ศาสตร์Faculty of Humanities' },
-    //     ],
-    //     [
-    //         { value: 'Headphone', label: 'Headphone' },
-    //         { value: 'Monitor', label: 'Monitor' },
-    //         { value: 'Keyboard', label: 'Keyboard' },
-    //         { value: 'Speaker', label: 'Speaker' },
-    //         { value: 'Gaming Gear', label: 'Gaming Gear' },
-    //     ],
-    // ]
-
-    const testCat = [{
-        Textbook: [
-            { value: 'วิศวกรรมศาสตร์Faculty of Engineering', label: 'วิศวกรรมศาสตร์Faculty of Engineering' },
-            { value: 'ประมงFaculty of Fisheries', label: 'ประมงFaculty of Fisheries' },
-            { value: 'เกษตรFaculty of Agriculture', label: 'เกษตรFaculty of Agriculture' },
-            { value: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine', label: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine' },
-            { value: 'บริหารธุรกิจFaculty of Business Administration', label: 'บริหารธุรกิจFaculty of Business Administration' },
-            { value: 'มนุษย์ศาสตร์Faculty of Humanities', label: 'มนุษย์ศาสตร์Faculty of Humanities' },
-        ]
-    }]
-    console.log(testCat);
+    console.log(SubCategoriesEn);
+    // ------------------------------------------------------------------
 
     var mySubCateTag = "unSelect";
+    var mySubCateIndex = 0;
     function findMySubCate() {
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + mySubCateTag;
-        var godhelpme = testCat[0].Textbook;
-
-        return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder={placeholderString} />;
-        
-        // switch(mySubCateTag) {
-            
-            // case "unSelect":
-            //     return <Select options={SubCategoriesEn[0]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-            // case "Man Clothes":
-            //     return <Select options={SubCategoriesEn[1]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Man Clothes" />;
-            // case "Woman Clothes":
-            //     return <Select options={SubCategoriesEn[2]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Woman Clothes" />;
-            // case "Beauty":
-            //     return <Select options={SubCategoriesEn[3]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Beauty" />;
-            // case "Textbook":
-            //     return <Select options={SubCategoriesEn[4]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            // case "Electronics":
-            //     return <Select options={SubCategoriesEn[5]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-            // case "Music Instruments":
-            //     return <Select options={SubCategoriesEn[6]} className="fs-5" name="mySubCate" placeholder={placeholderString} />;
-            // case "Textbook":
-            //     return <Select options={SubCategoriesEn[7]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            // case "Electronics":
-            //     return <Select options={SubCategoriesEn[8]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-            // case "unSelect":
-            //     return <Select options={SubCategoriesEn[9]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-            // case "Textbook":
-            //     return <Select options={SubCategoriesEn[10]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            // case "Electronics":
-            //     return <Select options={SubCategoriesEn[11]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-            // case "Textbook":
-            //     return <Select options={SubCategoriesEn[12]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            // case "Electronics":
-            //     return <Select options={SubCategoriesEn[13]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-            // case "unSelect":
-            //     return <Select options={SubCategoriesEn[14]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-            // case "Textbook":
-            //     return <Select options={SubCategoriesEn[15]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            // case "Electronics":
-            //     return <Select options={SubCategoriesEn[16]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-        // }
+        var godhelpme = SubCategoriesEn[mySubCateIndex];
+        console.log(godhelpme);
+        if(mySubCateIndex == 0){
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
+        }else{
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder={placeholderString} />;
+        }
     }
-    function selectMySub(selectSubCate:any) { 
-        mySubCateTag = selectSubCate.value;
+    function selectMySub(selectMySubCate:any) { 
+        mySubCateTag = selectMySubCate.value;
+        mySubCateIndex = selectMySubCate.indexC;
         setMyItemSubCate(findMySubCate);
     }
     const [ myItemSubCate , setMyItemSubCate ] = useState(findMySubCate);
 
-    // var wantSubCateTag = "unSelect";
-    // function findWantSubCate() {
-    //     switch(wantSubCateTag) {
-    //         case "unSelect":
-    //             return <Select options={SubCategories[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-    //         case "Textbook":
-    //             return <Select options={SubCategories[1]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-    //         case "Electronics":
-    //             return <Select options={SubCategories[2]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
-    //     }
-    // }
-    // function selectWantSub(selectWantSubCate:any) { 
-    //     wantSubCateTag = selectWantSubCate.value;
-    //     console.log("เลือก "+wantSubCateTag)
-    //     setWantItemSubCate(findWantSubCate);
-    // }
-    // const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
+    // ------------------------------------------------------------------
+
+    var wantSubCateTag = "unSelect";
+    var wantSubCateIndex = 0;
+    function findWantSubCate() {
+        var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
+        var godhelpme = SubCategoriesEn[wantSubCateIndex];
+        console.log(godhelpme);
+        if(wantSubCateIndex == 0){
+            return <Select options={godhelpme} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
+        }else{
+            return <Select options={godhelpme}  className="fs-5" name="wantSubCate" placeholder={placeholderString} />;
+        }
+    }
+    function selectWantSub(selectWantSubCate:any) { 
+        wantSubCateTag = selectWantSubCate.value;
+        wantSubCateIndex = selectWantSubCate.indexC;
+        setWantItemSubCate(findWantSubCate);
+    }
+    const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
 
     return (
         <div>
@@ -203,10 +144,10 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Require Category</label>
                             <div className="col-md-5">
-                                {/* <Select options={MainCategories} className="fs-5" name="wantMainCate" onChange={(selectSubCate) => selectWantSub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/> */}
+                                <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
-                                {/* {wantItemSubCate} */}
+                                {wantItemSubCate}
                             </div>
                         </div>
                         <div className="form-group row">
