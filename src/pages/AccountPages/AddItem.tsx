@@ -1,80 +1,96 @@
 import { useState , useEffect } from 'react';
 import Select from 'react-select';
+import useAuthorization from '../../hooks/useAuthorization';
 
 import Block from '../../components/Block';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import UploadImg from '../../components/Account/UploadImg';
 import { SolidButton } from '../../components/standard/Button'
-import useAuthorization from '../../hooks/useAuthorization';
 import useLoading from '../../hooks/useLoading';
 import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 export default function AddItem() {
 
-    // Main Category
-    const MainCategories = [
-        { value: 'Textbook', label: 'Textbook' },
-        { value: 'Electronics', label: 'Electronics' },
-        { value: 'Music Instrument', label: 'Music Instrument' },
-        { value: 'Accessories', label: 'Accessories' },
-        { value: 'Cartoon', label: 'Cartoon' },
-        { value: 'Stationery', label: 'Stationery' },
-    ]
+    const [ category , setCategory ] = useState<any>();
+    const { getCategory } = useAuthorization();
 
-    // Sub Category
-    const SubCategories = [
-        [
-            { value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},
-        ],
-        [
-            { value: 'วิศวกรรมศาสตร์Faculty of Engineering', label: 'วิศวกรรมศาสตร์Faculty of Engineering' },
-            { value: 'ประมงFaculty of Fisheries', label: 'ประมงFaculty of Fisheries' },
-            { value: 'เกษตรFaculty of Agriculture', label: 'เกษตรFaculty of Agriculture' },
-            { value: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine', label: 'สัตวแพทยศาสตร์Faculty of Veterinary Medicine' },
-            { value: 'บริหารธุรกิจFaculty of Business Administration', label: 'บริหารธุรกิจFaculty of Business Administration' },
-            { value: 'มนุษย์ศาสตร์Faculty of Humanities', label: 'มนุษย์ศาสตร์Faculty of Humanities' },
-        ],
-        [
-            { value: 'Headphone', label: 'Headphone' },
-            { value: 'Monitor', label: 'Monitor' },
-            { value: 'Keyboard', label: 'Keyboard' },
-            { value: 'Speaker', label: 'Speaker' },
-            { value: 'Gaming Gear', label: 'Gaming Gear' },
-        ],
-    ]
+    useEffect(() => {
+        async function init() {
+            var CategoryData = await getCategory();
+            if (CategoryData) {
+                setCategory(CategoryData);
+            }
+        }
+        init();
+    }, []);
+
+    var MainCategoriesEn;
+    var MainCategoriesTh;
+    var SubCategoriesEn:any = [];
+    var SubCategoriesTh:any = [];
+    SubCategoriesEn.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
+    SubCategoriesTh.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
+    var indexCat = 0;
+    if(category){
+        MainCategoriesEn = category.map((data:any, index:any) => {
+            indexCat++;
+            var cCatEn = data.childCategoryEn
+            SubCategoriesEn.push(cCatEn.map((data:any, index:any) => {
+                return { value: data, 'label': data }
+            }))
+            var cCatTh = data.childCategoryTh
+            SubCategoriesTh.push(cCatEn.map((data:any, index:any) => {
+                return { value: data, 'label': data }
+            }))
+            var pCatEn = data.parentCategoryEn
+            return { value: pCatEn, 'label': pCatEn, indexC: indexCat}
+        });
+        MainCategoriesTh = category.map((data:any, index:any) => {
+            var pCatTh = data.childCategoryTh
+            return { value: pCatTh, 'label': pCatTh, indexC: indexCat}
+        });
+    }
+    console.log(SubCategoriesEn);
+    // ------------------------------------------------------------------
 
     var mySubCateTag = "unSelect";
+    var mySubCateIndex = 0;
     function findMySubCate() {
-        switch(mySubCateTag) {
-            case "unSelect":
-                return <Select options={SubCategories[0]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-            case "Textbook":
-                return <Select options={SubCategories[1]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            case "Electronics":
-                return <Select options={SubCategories[2]} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
+        var placeholderString = "กรุณาเลือก Category ย่อย ของ " + mySubCateTag;
+        var godhelpme = SubCategoriesEn[mySubCateIndex];
+        console.log(godhelpme);
+        if(mySubCateIndex == 0){
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
+        }else{
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder={placeholderString} />;
         }
     }
-    function selectMySub(selectSubCate:any) { 
-        mySubCateTag = selectSubCate.value;
+    function selectMySub(selectMySubCate:any) { 
+        mySubCateTag = selectMySubCate.value;
+        mySubCateIndex = selectMySubCate.indexC;
         setMyItemSubCate(findMySubCate);
     }
     const [ myItemSubCate , setMyItemSubCate ] = useState(findMySubCate);
 
+    // ------------------------------------------------------------------
+
     var wantSubCateTag = "unSelect";
+    var wantSubCateIndex = 0;
     function findWantSubCate() {
-        switch(wantSubCateTag) {
-            case "unSelect":
-                return <Select options={SubCategories[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย" />;
-            case "Textbook":
-                return <Select options={SubCategories[1]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Textbook" />;
-            case "Electronics":
-                return <Select options={SubCategories[2]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category ย่อย ของ Electronics" />;
+        var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
+        var godhelpme = SubCategoriesEn[wantSubCateIndex];
+        console.log(godhelpme);
+        if(wantSubCateIndex == 0){
+            return <Select options={godhelpme} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
+        }else{
+            return <Select options={godhelpme}  className="fs-5" name="wantSubCate" placeholder={placeholderString} />;
         }
     }
     function selectWantSub(selectWantSubCate:any) { 
         wantSubCateTag = selectWantSubCate.value;
-        console.log("เลือก "+wantSubCateTag)
+        wantSubCateIndex = selectWantSubCate.indexC;
         setWantItemSubCate(findWantSubCate);
     }
     const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
@@ -127,7 +143,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategories} className="fs-5" name="myMainCate" onChange={(selectSubCate) => selectMySub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                <Select options={MainCategoriesEn} className="fs-5" name="myMainCate" onChange={(selectSubCate) => selectMySub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
                                 {myItemSubCate}
@@ -145,7 +161,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Require Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategories} className="fs-5" name="wantMainCate" onChange={(selectSubCate) => selectWantSub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
                                 {wantItemSubCate}

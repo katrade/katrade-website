@@ -1,6 +1,8 @@
 import './AboutAccount.css';
 
 import React , { useState, useEffect, useReducer } from 'react';
+import { useLocation } from 'react-router-dom'
+import queryString from 'query-string';
 import { useHistory } from 'react-router';
 import useAuthorization from '../../hooks/useAuthorization';
 import { TransparentButton } from '../../components/standard/Button';
@@ -79,7 +81,38 @@ type DestCompContextType = {
 
 const DestCompContext = React.createContext<DestCompContextType  | any >(null);
 
-function CheckInnerWidth() {
+// function CheckInnerWidth() {
+//     const { getUserData , updateProfilePic } = useAuthorization();    
+//     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
+//     const history = useHistory();
+
+//     useEffect(() => {
+//         async function init() {
+//             var userData = await getUserData();
+//             if (userData) {
+//                 setAccountData(userData);
+//             }
+//             else {
+//                 console.clear();
+//                 history.push('/app/signin');
+//             }
+//         }
+//         init();
+//     }, [])
+    
+//     return <AboutAccount userData={accountData}/>
+// }
+
+function AboutAccount(userData:any) {
+    const { search } = useLocation();
+    const { component } = queryString.parse(search);
+
+    // const accountData = userData.userData;
+
+    // ตัวที่กำลังเล็งให้เปลี่ยนแปลง 
+    // const [ destComp , setDestComp ] = useState("Account");
+    const [ destCompState , destCompDispatch] = useReducer(reducer, "");
+
     const { getUserData , updateProfilePic } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const history = useHistory();
@@ -97,19 +130,8 @@ function CheckInnerWidth() {
         }
         init();
     }, [])
-    
-    return <AboutAccount userData={accountData}/>
-}
-
-function AboutAccount(userData:any) {
-    const accountData = userData.userData;
-
+    console.log(accountData);
     const [ componentPage , setComponentPage ] = useState<any>(<AccountComp data={accountData}/>); 
-    // ตัวที่กำลังเล็งให้เปลี่ยนแปลง 
-    // const [ destComp , setDestComp ] = useState("Account");
-    const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
-    
-    console.log(destCompState);
     
     function SelectComp() {
         if(destCompState.dest === "Account"){
@@ -131,12 +153,29 @@ function AboutAccount(userData:any) {
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
     useEffect(() => {
         SelectComp();
+
     }, [destCompState])
     // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {
-        setComponentPage(<AccountComp data={accountData}/>)
+        console.log(component=="account");
+        if(component == "account" || component == undefined ){
+            console.log("มีข้อมูลเข้ามาแล้ว");
+            setComponentPage(<AccountComp data={accountData}/>);
+        }else if(component == "following"){
+            setComponentPage(<FollowingComp data={accountData}/>);
+        }else if(component == "followers"){
+            setComponentPage(<FollowersComp data={accountData}/>);
+        }else if(component == "favorite"){
+            setComponentPage(<FavoriteComp data={accountData}/>);
+        }else if(component == "inventory"){
+            setComponentPage(<InventoryComp data={accountData}/>);
+        }else if(component == "history"){
+            setComponentPage(<HistoryComp data={accountData}/>);
+        }
+        // setComponentPage(<AccountComp data={accountData}/>);
+        // console.log("มีข้อมูลเข้ามาแล้ว");
     }, [accountData])
-
+    // เปลี่ยนแปลงแบบ queryString
 
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
@@ -175,4 +214,4 @@ function AboutAccount(userData:any) {
 
 
 export { DestCompContext };
-export default CheckInnerWidth;
+export default AboutAccount;

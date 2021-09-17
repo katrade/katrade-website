@@ -39,7 +39,6 @@ interface INavbar {
     image?: string
 }
 
-
 function NavbarSpare({ image }: INavbar) {
     const { destCompState , destCompDispatch } = useContext(DestCompContext);
     function sendDestComp(event:any) {
@@ -58,16 +57,14 @@ function NavbarSpare({ image }: INavbar) {
         }else if(event === "History"){
             destCompDispatch({ type: "History"});
         }
-        // console.log(event);
         var pathname = window.location.pathname.split('/')[2];
-        function displaySearch() {
+        function checkpath() {
             if (pathname != "aboutaccount") {
                 return history.push(`/app/aboutaccount`)
             }
         }
-        displaySearch();
+        checkpath();
     }
-    // console.log(destCompState + "test rabob");
 
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
@@ -77,9 +74,7 @@ function NavbarSpare({ image }: INavbar) {
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
-    // console.log("Navbar พูดว่า : " + window.innerWidth);
     function resize() {
-        // console.log(window.innerWidth)
         if (window.innerWidth < 600) {
             if (mobile) {
                 return
