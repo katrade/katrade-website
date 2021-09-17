@@ -37,7 +37,7 @@ function MenuAccount({ children, data}: propsInterface) {
     if (mobile) {
         return <MobileMenuAccount children={children} data={data}/>
     }
-
+    console.log(data)
     return (
         <div>
             <Navbar image={data.profilePic} />

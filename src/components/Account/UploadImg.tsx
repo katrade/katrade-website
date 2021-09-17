@@ -8,9 +8,11 @@ function UploadImg({positionPic}:any) {
 
     const handleImage = (e:any) => {
         const file = e.target.files;
+        console.log(file)
         const fileURL = URL.createObjectURL(file[0]);
         SetImage(fileURL);
     }
+    console.log(image);
     return (
         <div className="">
             <input type="file" ref={fileInputRef} name={positionPic} accept="image/*" onChange={handleImage} style={{display:"none"}}/>

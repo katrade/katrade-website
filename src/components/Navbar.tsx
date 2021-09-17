@@ -78,7 +78,7 @@ function Navbar({ image }: INavbar) {
     var CategoryData:any;
     if(category){
         CategoryData = category.map((data:any, index:any) => {
-            return <li>{data.parentCategoryEn}</li>
+            return <li key={index}>{data.parentCategoryEn}</li>
         });
     }else{
     }
@@ -105,7 +105,6 @@ function Navbar({ image }: INavbar) {
         setCookies('DaveTheHornyDuck', '', { path: '/' });
         history.push('/app/signin');
     }
-
 
     return (
         <div className="header py-3">

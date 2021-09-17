@@ -1,4 +1,4 @@
-import React , { useState , useEffect } from 'react';
+import { useState , useEffect } from 'react';
 import Select from 'react-select';
 
 import Block from '../../components/Block';
@@ -6,6 +6,9 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import UploadImg from '../../components/Account/UploadImg';
 import { SolidButton } from '../../components/standard/Button'
+import useAuthorization from '../../hooks/useAuthorization';
+import useLoading from '../../hooks/useLoading';
+import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
 
 export default function AddItem() {
 
@@ -75,10 +78,25 @@ export default function AddItem() {
         setWantItemSubCate(findWantSubCate);
     }
     const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const { getUserData } = useAuthorization();
+
+    useEffect(() => {
+        async function init() {
+            const u = await getUserData();
+            if (u) {
+                setAccount(u);
+            }
+            else {
+                alert("Can't get user data.");
+            }
+        }
+        init();
+    }, [])
 
     return (
         <div>
-            <Navbar />
+            <Navbar image={account.profilePic}/>
             <Block height="auto" backgroundColor="#f7fafc">
                 <form action="https://httpbin.org/post" method="POST">
                     <div className="p-3 my-4 bg-white">
