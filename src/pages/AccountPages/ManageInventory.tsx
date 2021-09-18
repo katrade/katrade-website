@@ -7,6 +7,10 @@ import ItemBlock from '../../components/Account/ItemBlock';
 
 import { BiCheck } from 'react-icons/bi';
 import { GrAdd } from 'react-icons/gr';
+import { useEffect, useState } from 'react';
+import useAuthorization from '../../hooks/useAuthorization';
+import { useHistory } from 'react-router';
+import { defaultEmptyAccount, IAccount } from '../../interfaces/IUser';
 
 export default function Account() {
 
@@ -41,10 +45,29 @@ export default function Account() {
     const item_data = listOfItem.map((data, index) => {
         return <ItemBlock data={data} key={index} manage="yes"/>;
     });
+
+    const { getUserData } = useAuthorization();
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const history = useHistory();
+
+    useEffect(() => {
+        async function init() {
+            var a = await getUserData();
+            if (a) {
+                setAccount(a);
+            }
+            else {
+                console.clear();
+                history.push('/app/signin');
+            }
+
+        }
+        init();
+    }, [])
     
     return (
         <>
-            <MenuAccount>
+            <MenuAccount data={account}>
                 <div className="container-manage">
                     <h4>Manage Inventory</h4>
                     <p>save changes<BiCheck /></p>

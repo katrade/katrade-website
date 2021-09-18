@@ -8,6 +8,8 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import UploadImg from '../../components/Account/UploadImg';
 import { SolidButton } from '../../components/standard/Button'
+import useLoading from '../../hooks/useLoading';
+import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
 import { ContactSupportOutlined } from '@material-ui/icons';
 
 export default function AddItem() {
@@ -91,6 +93,21 @@ export default function AddItem() {
         setWantItemSubCate(findWantSubCate);
     }
     const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const { getUserData } = useAuthorization();
+
+    useEffect(() => {
+        async function init() {
+            const u = await getUserData();
+            if (u) {
+                setAccount(u);
+            }
+            else {
+                alert("Can't get user data.");
+            }
+        }
+        init();
+    }, [])
 
     const [dataItem, handleDataItem] = useForm();
 
@@ -123,7 +140,7 @@ export default function AddItem() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar image={account.profilePic}/>
             <Block height="auto" backgroundColor="#f7fafc">
                 <form onSubmit={handleUnload}>
                     <div className="p-3 my-4 bg-white">

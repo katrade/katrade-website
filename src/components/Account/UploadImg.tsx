@@ -9,9 +9,11 @@ function UploadImg({positionPic}:any) {
     const handleImage = (e:any) => {
         console.log(e);
         const file = e.target.files;
+        console.log(file)
         const fileURL = URL.createObjectURL(file[0]);
         SetImage(fileURL);
     }
+    console.log(image);
     return (
         <div className="">
             <input type="file" ref={fileInputRef} name={positionPic == "Cover Picture"? "CoverImage" : "image"} accept="image/*" onChange={handleImage} style={{display:"none"}}/>
