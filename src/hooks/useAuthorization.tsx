@@ -123,7 +123,8 @@ export default function useAuthorization() {
         })
             .then(res => {
                 // เปลี่ยนไปหน้า inventory
-                window.location.reload();
+                // window.location.reload();
+                history.push(`/app/aboutaccount?component=inventory`);
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
@@ -131,5 +132,24 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem }
+    async function getInventory() {
+        return await axios.get(`${API}/inventory/getUserInventory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // if (!res.data.data.username) {
+                //     history.push(`/app/setup`);
+                // }
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory }
 }

@@ -87,8 +87,9 @@ function AboutAccount(userData:any) {
 
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic } = useAuthorization();    
+    const { getUserData , updateProfilePic , getInventory } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
+    const [ inventoryData , setInventoryData ] = useState();
     const history = useHistory();
 
     useEffect(() => {
@@ -101,10 +102,14 @@ function AboutAccount(userData:any) {
                 console.clear();
                 history.push('/app/signin');
             }
+            var inventory = await getInventory();
+            if (inventory) {
+                setInventoryData(inventory);
+            }
         }
         init();
     }, [])
-    console.log(accountData);
+
     const [ componentPage , setComponentPage ] = useState<any>(<AccountComp data={accountData}/>); 
     
     function SelectComp() {
@@ -119,7 +124,7 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "Favorite"){
             setComponentPage(<FavoriteComp data={accountData}/>);
         }else if(destCompState.dest === "Inventory"){
-            setComponentPage(<InventoryComp data={accountData}/>);
+            setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(destCompState.dest === "History"){
             setComponentPage(<HistoryComp data={accountData}/>);
         }
@@ -131,7 +136,6 @@ function AboutAccount(userData:any) {
     }, [destCompState])
     // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {
-        console.log(component=="account");
         if(component == "account" || component == undefined ){
             console.log("มีข้อมูลเข้ามาแล้ว");
             setComponentPage(<AccountComp data={accountData}/>);
@@ -142,14 +146,11 @@ function AboutAccount(userData:any) {
         }else if(component == "favorite"){
             setComponentPage(<FavoriteComp data={accountData}/>);
         }else if(component == "inventory"){
-            setComponentPage(<InventoryComp data={accountData}/>);
+            setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(component == "history"){
             setComponentPage(<HistoryComp data={accountData}/>);
         }
-        // setComponentPage(<AccountComp data={accountData}/>);
-        // console.log("มีข้อมูลเข้ามาแล้ว");
-    }, [accountData])
-    // เปลี่ยนแปลงแบบ queryString
+    }, [accountData,inventoryData])
 
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>

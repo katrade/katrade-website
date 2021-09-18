@@ -9,12 +9,13 @@ export default function ItemBlock(props: any) {
 
 	const { data, index, manage } = props;
 
-	const dataTag = data.tag.map((dataTag: any) =>
-		<p className="tag">{dataTag}</p>
-	);
+	const dataTag = data.require.map((dataTag: any) => {
+		return <p>{dataTag.reqCat.childCategoryEn}</p>
+	});
+
 
 	return (
-		<AccountBlock padding="10px">
+		<AccountBlock>
 			<div className="block-item">
 				<div className="rowling">
 					<div className="column-img">
@@ -23,7 +24,7 @@ export default function ItemBlock(props: any) {
 					<div className="column-data">
 						<h5>{data.name}</h5>
 						<p>require : </p>
-						{dataTag}
+						{/* {dataTag} */}
 					</div>
 					<div className={manage.length == 3 ? "column-tik" : "column-tik-hide"}>
 						<h6 className="pen"><FaPen /></h6>

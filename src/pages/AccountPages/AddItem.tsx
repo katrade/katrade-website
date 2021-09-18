@@ -56,6 +56,8 @@ export default function AddItem() {
 
     // ------------------------------------------------------------------
 
+    const [ finalMyMainCate , setFinalMyMainCate ] = useState();
+    const [ finalMySubCate , setFinalMySubCate ] = useState();
     var mySubCateTag = "unSelect";
     var mySubCateIndex = 0;
     function findMySubCate() {
@@ -64,12 +66,13 @@ export default function AddItem() {
         if(mySubCateIndex == 0){
             return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
-            return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder={placeholderString} />;
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" onChange={(sel:any) => {setFinalMySubCate(sel.value)}} placeholder={placeholderString} />;
         }
     }
     function selectMySub(selectMySubCate:any) { 
         mySubCateTag = selectMySubCate.value;
         mySubCateIndex = selectMySubCate.indexC;
+        setFinalMyMainCate(selectMySubCate.value);
         setMyItemSubCate(findMySubCate);
     }
     const [ myItemSubCate , setMyItemSubCate ] = useState(findMySubCate);
@@ -111,15 +114,15 @@ export default function AddItem() {
 
     const [dataItem, handleDataItem] = useForm();
 
-    function handleUnload(event:any){
+    function handleUnload(event:any){ 
         event.preventDefault();
-        const data = {
+            const data = {
             name: dataItem.name,
             detail: dataItem.myDetail,
             category: {
-                parentCategoryEn: "",
+                parentCategoryEn: finalMyMainCate,
                 parentCategoryTh: "",
-                childCategoryEn: "",
+                childCategoryEn: finalMySubCate,
                 childCategoryTh: ""
             },
             pictures:[],
