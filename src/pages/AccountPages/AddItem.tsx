@@ -1,4 +1,5 @@
 import React , { useState , useEffect } from 'react';
+import { useForm } from '../../utils/useForm';
 import Select from 'react-select';
 import useAuthorization from '../../hooks/useAuthorization';
 
@@ -12,7 +13,7 @@ import { ContactSupportOutlined } from '@material-ui/icons';
 export default function AddItem() {
 
     const [ category , setCategory ] = useState<any>();
-    const { getCategory } = useAuthorization();
+    const { getCategory , addItem } = useAuthorization();
 
     useEffect(() => {
         async function init() {
@@ -50,7 +51,7 @@ export default function AddItem() {
             return { value: pCatTh, 'label': pCatTh, indexC: indexCat}
         });
     }
-    console.log(SubCategoriesEn);
+
     // ------------------------------------------------------------------
 
     var mySubCateTag = "unSelect";
@@ -58,7 +59,6 @@ export default function AddItem() {
     function findMySubCate() {
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + mySubCateTag;
         var godhelpme = SubCategoriesEn[mySubCateIndex];
-        console.log(godhelpme);
         if(mySubCateIndex == 0){
             return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
@@ -79,7 +79,6 @@ export default function AddItem() {
     function findWantSubCate() {
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
         var godhelpme = SubCategoriesEn[wantSubCateIndex];
-        console.log(godhelpme);
         if(wantSubCateIndex == 0){
             return <Select options={godhelpme} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
@@ -93,18 +92,47 @@ export default function AddItem() {
     }
     const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
 
+    const [dataItem, handleDataItem] = useForm();
+
+    function handleUnload(event:any){
+        event.preventDefault();
+        const data = {
+            name: dataItem.name,
+            detail: dataItem.myDetail,
+            category: {
+                parentCategoryEn: "",
+                parentCategoryTh: "",
+                childCategoryEn: "",
+                childCategoryTh: ""
+            },
+            pictures:[],
+            require: [
+                {
+                    reqCat: {
+                        parentCategoryEn: "",
+                        parentCategoryTh: "",
+                        childCategoryEn: "",
+                        childCategoryTh: ""
+                    },
+                    detail: dataItem.wantDetail
+                }
+            ]
+        }
+        addItem(data);
+    }
+
     return (
         <div>
             <Navbar />
             <Block height="auto" backgroundColor="#f7fafc">
-                <form action="https://httpbin.org/post" method="POST">
+                <form onSubmit={handleUnload}>
                     <div className="p-3 my-4 bg-white">
                         {/* ชื่อ */}
                         <h5 className="mb-4">Add New Item</h5>
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Item Name</label>
                             <div className="col-md-10">
-                                <input type="text" className="form-control fs-5" name="nameItem" placeholder="Enter your item name" />
+                                <input type="text" className="form-control fs-5" value={dataItem.name || ""} name="name" onChange={handleDataItem} placeholder="Enter your item name" />
                             </div>
                         </div>
 
@@ -113,11 +141,12 @@ export default function AddItem() {
                             <div className="px-3 py-4">
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
-                                    <UploadImg positionPic={"Cover Picture"}/>
+                                    <h4>รอปรับปรุง</h4>
+                                    {/* <UploadImg positionPic={"Cover Picture"}/>
                                     <UploadImg positionPic={"Picture 1"}/>
                                     <UploadImg positionPic={"Picture 2"}/>
                                     <UploadImg positionPic={"Picture 3"}/>
-                                    <UploadImg positionPic={"Picture 4"}/>
+                                    <UploadImg positionPic={"Picture 4"}/> */}
                                 </div>
                             </div>
                         </div>
@@ -126,7 +155,11 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategoriesEn} className="fs-5" name="myMainCate" onChange={(selectSubCate) => selectMySub(selectSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                <Select options={MainCategoriesEn} 
+                                    className="fs-5" 
+                                    name="category" 
+                                    onChange={(selectSubCate) => {selectMySub(selectSubCate)}} 
+                                    placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
                             <div className="col-md-5">
                                 {myItemSubCate}
@@ -135,7 +168,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Details</label>
                             <div className="col-md-10">
-                                <textarea className="form-control fs-5" name="myDetails" rows={5} placeholder="Enter details."></textarea >
+                                <textarea className="form-control fs-5" value={dataItem.myDetail || ""} name="myDetail" onChange={handleDataItem} rows={5} placeholder="Enter details."></textarea >
                             </div>
                         </div>
 
@@ -153,7 +186,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Requirement Details</label>
                             <div className="col-md-10">
-                                <textarea className="form-control fs-5" name="wantDetails" rows={5} placeholder="Enter requirement details"></textarea>
+                                <textarea className="form-control fs-5" value={dataItem.wantDetail || ""} name="wantDetail" onChange={handleDataItem} rows={5} placeholder="Enter requirement details"></textarea>
                             </div>
                         </div>
 

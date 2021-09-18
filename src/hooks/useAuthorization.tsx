@@ -53,6 +53,7 @@ export default function useAuthorization() {
             return hide();
         })
     }
+
     async function setUsername(newUsername: string) {
         show()
         if (!newUsername) {
@@ -103,5 +104,32 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive  }
+    async function addItem(dataItem: any | undefined) {
+        if (!dataItem) {
+            return false;
+        }
+        const bodyFormData = new FormData();
+        bodyFormData.append('body', JSON.stringify(dataItem));
+        show("Uploading item to your inventory");
+
+        return await axios({
+            method: "post",
+            url: `${API}/inventory`,
+            data: bodyFormData,
+            headers: { 
+                "Content-Type": "multipart/form-data",
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
+            },
+        })
+            .then(res => {
+                // เปลี่ยนไปหน้า inventory
+                window.location.reload();
+            })
+            .catch(err => {
+                alert(`We got some error.\n${err}`)
+                return hide();
+            })
+    }
+
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem }
 }

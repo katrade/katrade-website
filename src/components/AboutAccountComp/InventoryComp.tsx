@@ -2,7 +2,6 @@ import ItemBlock from '../../components/Account/ItemBlock';
 
 export default function InventoryComp(data: any) {
     const inventoryData = data.data.inventories;
-    console.log(inventoryData);
     const fakeData = [
         {
             name: "fakeData",

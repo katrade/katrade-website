@@ -81,36 +81,10 @@ type DestCompContextType = {
 
 const DestCompContext = React.createContext<DestCompContextType  | any >(null);
 
-// function CheckInnerWidth() {
-//     const { getUserData , updateProfilePic } = useAuthorization();    
-//     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
-//     const history = useHistory();
-
-//     useEffect(() => {
-//         async function init() {
-//             var userData = await getUserData();
-//             if (userData) {
-//                 setAccountData(userData);
-//             }
-//             else {
-//                 console.clear();
-//                 history.push('/app/signin');
-//             }
-//         }
-//         init();
-//     }, [])
-    
-//     return <AboutAccount userData={accountData}/>
-// }
-
 function AboutAccount(userData:any) {
     const { search } = useLocation();
     const { component } = queryString.parse(search);
 
-    // const accountData = userData.userData;
-
-    // ตัวที่กำลังเล็งให้เปลี่ยนแปลง 
-    // const [ destComp , setDestComp ] = useState("Account");
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
     const { getUserData , updateProfilePic } = useAuthorization();    
@@ -202,16 +176,6 @@ function AboutAccount(userData:any) {
 
     );
 }
-
-
-// function CheckInnerWidth() {
-//     return (
-//         <div>
-
-//         </div>
-//     );
-// }
-
 
 export { DestCompContext };
 export default AboutAccount;
