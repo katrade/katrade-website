@@ -67,7 +67,7 @@ export default function SignupForm({ pw, setPw }: p) {
 
         hide();
         if (result.message === "Please check your email to verify") {
-            alert("Your account has been created, please check your email inbox and visit the verification link.")
+            // alert("Your account has been created, please check your email inbox and visit the verification link.")
             history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
         }
         else {

@@ -131,5 +131,21 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem }
+    async function changeProfile(profileData: any) {
+        show("Changing your profile")
+        await axios.put(`${API}/user/info`, profileData, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+        .then(res => {
+            window.location.reload();
+            return res.data
+        })
+        .catch(err => {
+            alert(`We got some error.\n${err}`)
+            return hide();
+        })
+    }
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , changeProfile}
 }
