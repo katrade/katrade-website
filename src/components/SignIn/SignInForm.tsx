@@ -56,10 +56,7 @@ const SignInForm = () => {
             hide()
             alert("You email or password is wrong.");
         })
-
-        
     }
-
 
     return (
         <>

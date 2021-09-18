@@ -1,24 +1,37 @@
 import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import useAuthorization from '../../hooks/useAuthorization';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import {API} from '../../app.setting.json';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
-    
+    const [firstname, setFirstname] = useState<string>("");
+    const [lastname, setLastname] = useState<string>(accountData.lastname);
+    const { changeProfile } = useAuthorization();
+    useEffect(()=>{
+        if (data.data.email) {
+            setFirstname(data.data.firstname);
+            setLastname(data.data.lastname);
+        }
+    },[data])
+
     return (
         <div>
-           <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
+            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
 
                 {/* ส่วนของรูปโปรไฟล์ */}
                 <div className="col-md-4 order-md-2 p-3 text-center">
                     <div className="d-flex justify-content-center mt-2 mb-3">
-                        <div style={{ backgroundImage: accountData.profilePic ? `url(${accountData.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)` , backgroundPosition: 'center' , 
-                        backgroundSize: 'cover' , 
-                        backgroundRepeat: 'no-repeat', 
-                        minWidth: '150px' , 
-                        minHeight: '150px' , 
-                        borderRadius: '50%'}}></div>
+                        <div style={{
+                            backgroundImage: accountData.profilePic ? `url(${accountData.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)`, backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            minWidth: '150px',
+                            minHeight: '150px',
+                            borderRadius: '50%'
+                        }}></div>
                     </div>
                     <UploadProfilePic />
                     <p className="m-0 ">file size: Maximum 1 MB</p>
@@ -30,24 +43,41 @@ export default function AccountComp(data: any) {
                     <h4 className="mb-4">Profile</h4>
                     <div className="row" style={{ width: "100%" }}>
                         <p className="col-md-3">Username</p>
-                        <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{accountData.username}</p>
+                        <p className="col-md-8" style={{ color: "black" }}>{accountData.username}</p>
                     </div>
                     <div className="row" style={{ width: "100%" }}>
                         <p className="col-md-3">Firstname</p>
-                        <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{accountData.firstname}</p>
+                        <input
+                            type="text"
+                            className="col-md-8 form-control border border-secondary rounded-3 mx-3"
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={firstname}
+                            onChange={(e) => setFirstname(e.target.value)}
+                        />
                     </div>
                     <div className="row" style={{ width: "100%" }}>
                         <p className="col-md-3">Lastname</p>
-                        <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{accountData.lastname}</p>
+                        <input
+                            type="text"
+                            className="col-md-8 form-control border border-secondary rounded-3 mx-3"
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm"
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}
+                        />
                     </div>
                     <h4 className="mb-3 mt-4">Contact</h4>
                     <div className="row" style={{ width: "100%" }}>
                         <p className="col-md-3">Email</p>
-                        <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{accountData.email}</p>
+                        <p className="col-md-8" style={{ color: "black" }}>{accountData.email}</p>
                     </div>
                     <div className="row" style={{ width: "100%" }}>
                         <p className="col-md-3">Mobile</p>
-                        <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{accountData.phoneNumber}</p>
+                        <div className="col-md-8">
+                            <p style={{ color: "black" }}>{accountData.phoneNumber}</p>
+                            <button type="button" onClick={() => changeProfile({firstname:firstname, lastname: lastname})} className="btn btn-success">Save Changes</button>
+                        </div>
                     </div>
                 </div>
             </div>

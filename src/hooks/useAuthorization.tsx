@@ -131,7 +131,24 @@ export default function useAuthorization() {
                 return hide();
             })
     }
+    
 
+    async function changeProfile(profileData: any) {
+        show("Changing your profile")
+        await axios.put(`${API}/user/info`, profileData, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                alert(`We got some error.\n${err}`)
+                return hide();
+            })
+    }
+        
     async function getInventory() {
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
@@ -140,8 +157,6 @@ export default function useAuthorization() {
         })
             .then(res => {
                 // if (!res.data.data.username) {
-                //     history.push(`/app/setup`);
-                // }
                 hide();
                 return res.data;
             })
@@ -151,5 +166,6 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory }
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory , changeProfile }
 }
+

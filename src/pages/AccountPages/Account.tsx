@@ -98,7 +98,7 @@ function Account() {
                         <h4 className="mb-4">Profile</h4>
                         <div className="row" style={{ width: "100%" }}>
                             <p className="col-md-3">Username</p>
-                            <p className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{account.username}</p>
+                            <input className="col-md-8 border border-secondary rounded-3 mx-3" style={{ color: "black" }}>{account.username}</input>
                         </div>
                         <div className="row" style={{ width: "100%" }}>
                             <p className="col-md-3">Firstname</p>

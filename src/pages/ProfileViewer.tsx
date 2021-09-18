@@ -60,6 +60,7 @@ export default function ProfileViewer() {
         <div>
             <Navbar />
             <Block height="auto" backgroundColor="#f7fafc">
+                {/* ส่วนของข้อมูลผู้ใช้ */}
                 <div className="container-profile">
                     <div className="container-profile-data p-3">
                         <div className="row ">
@@ -91,6 +92,7 @@ export default function ProfileViewer() {
                         </div>
                     </div>
                 </div>
+                {/* Inventory ของผู้ใช้ */}
                 <div className="my-4">
                     <h5 className="mb-3">Inventory</h5>
                     <hr></hr>
