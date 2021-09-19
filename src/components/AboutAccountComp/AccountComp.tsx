@@ -2,18 +2,23 @@ import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import useLoading from '../../hooks/useLoading';
+import axios from 'axios';
+import { API } from '../../app.setting.json'
+import { DynamicSolidButton } from '../standard/Button';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
     const [firstname, setFirstname] = useState<string>("");
     const [lastname, setLastname] = useState<string>(accountData.lastname);
     const { changeProfile } = useAuthorization();
-    useEffect(()=>{
+    useEffect(() => {
         if (data.data.email) {
             setFirstname(data.data.firstname);
             setLastname(data.data.lastname);
         }
-    },[data])
+    }, [data])
 
     return (
         <div>
@@ -34,6 +39,7 @@ export default function AccountComp(data: any) {
                     <UploadProfilePic />
                     <p className="m-0 ">file size: Maximum 1 MB</p>
                     <p className="m-0">supported files: .JPEG, .PNG</p>
+
                 </div>
 
                 {/* ส่วนของข้อมูล */}
@@ -74,7 +80,7 @@ export default function AccountComp(data: any) {
                         <p className="col-md-3">Mobile</p>
                         <div className="col-md-8">
                             <p style={{ color: "black" }}>{accountData.phoneNumber}</p>
-                            <button type="button" onClick={() => changeProfile({firstname:firstname, lastname: lastname})} className="btn btn-success">Save Changes</button>
+                            <button type="button" onClick={() => changeProfile({ firstname: firstname, lastname: lastname })} className="btn btn-success">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -84,62 +90,54 @@ export default function AccountComp(data: any) {
 }
 
 function UploadProfilePic() {
-    const [images, setImages] = useState<ImageListType>([]);
-    const { updateProfilePic } = useAuthorization();
-    const maxNumber = 1;
-    const onChange = (
-        imageList: ImageListType,
-        addUpdateIndex: number[] | undefined
-    ) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList as never[]);
-    };
-    if (images.length === 1) {
-        // console.log(images[0].dataURL);
-        console.log(typeof(images[0].dataURL));
-        // updateProfilePic(images[0].dataURL);
-        setImages([]);
+    const [cookies] = useCookies(['DaveTheHornyDuck']);
+    const [show, hide] = useLoading();
+    function handleFileUpload(e: any) {
+        show("Uploading");
+        const bodyFormData = new FormData();
+        const imagedata = e.target.files[0];
+        bodyFormData.append('file', imagedata);
+        if (!imagedata.type.includes('image/')) {
+            alert("File type not supported");
+            return hide();
+        }
+        axios({
+            method: "post",
+            url: `${API}/user/updateProfilePic`,
+            data: bodyFormData,
+            headers:
+            {
+                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${cookies.DaveTheHornyDuck}`
+            },
+        })
+            .then(function (response) {
+                //handle success
+                // console.log(response);
+                window.location.reload();
+
+            })
+            .catch(function (response) {
+                //handle error
+                // console.log(response);
+                alert('Can not update profile picture.')
+                hide();
+            });
     }
     return (
-        <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={maxNumber}
-        >
-            {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps
-            }) => (
-                // write your building UI
-                <TransparentButton onClick={onImageUpload}>Upload image</TransparentButton>
-                //   <div className="upload__image-wrapper">
-                //     <button
-                //       style={isDragging ? { color: "red" } : undefined}
-                //       onClick={onImageUpload}
-                //       {...dragProps}
-                //     >
-                //       Click or Drop here
-                //     </button>
-                //     &nbsp;
-                //     <button onClick={onImageRemoveAll}>Remove all images</button>
-                //     {imageList.map((image, index) => (
-                //       <div key={index} className="image-item">
-                //         <img src={image.dataURL} alt="" width="100" />
-                //         <div className="image-item__btn-wrapper">
-                //           <button onClick={() => onImageUpdate(index)}>Update</button>
-                //           <button onClick={() => onImageRemove(index)}>Remove</button>
-                //         </div>
-                //       </div>
-                //     ))}
-                //   </div>
-            )}
-        </ImageUploading>
+        <div className="d-flex justify-content-center align-items-center">
+            <input type="file" accept="image/jpg" onChange={handleFileUpload} id="img" style={{ display: "none" }}></input>
+            <label htmlFor="img" className="pointer d-flex justify-content-center align-items-center" style={{
+                backgroundColor: "#3086ff",
+                padding: "0 20px",
+                color: "#fff",
+                margin: "10px 0",
+                borderRadius: "5px",
+                height: "40px",
+                maxWidth: "200px"
+            }}>
+                Upload image
+            </label>
+        </div>
     )
 }
