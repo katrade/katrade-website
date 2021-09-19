@@ -104,12 +104,17 @@ export default function useAuthorization() {
             })
     }
 
-    async function addItem(dataItem: any | undefined) {
+    async function addItem(dataItem:any | undefined , arrayOfPicture:any) {
         if (!dataItem) {
             return false;
         }
         const bodyFormData = new FormData();
         bodyFormData.append('body', JSON.stringify(dataItem));
+        // bodyFormData.append('files', arrayOfPicture);
+        arrayOfPicture.forEach((file:any)=>{
+            bodyFormData.append("files", file);
+        });
+        console.log(arrayOfPicture)
         show("Uploading item to your inventory");
 
         return await axios({
@@ -122,8 +127,6 @@ export default function useAuthorization() {
             },
         })
             .then(res => {
-                // เปลี่ยนไปหน้า inventory
-                // window.location.reload();
                 history.push(`/app/aboutaccount?component=inventory`);
             })
             .catch(err => {
@@ -191,6 +194,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                window.location.reload();
                 hide();
             })
             .catch(() => {

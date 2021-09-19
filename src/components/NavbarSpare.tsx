@@ -158,14 +158,9 @@ function NavbarSpare({ image }: INavbar) {
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a>
-                                {/* <a onClick={(e) => console.log(e.currentTarget.innerHTML)}>Account</a> */}
-                                {/* <a onClick={() => history.push("/app/account")}>Account</a> */}
                                 <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a>
-                                {/* <a onClick={() => history.push("/app/following")}>Following</a> */}
                                 <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a>
-                                {/* <a onClick={() => history.push("/app/followers")}>Followers</a> */}
                                 <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a>
-                                {/* <a onClick={() => history.push("/app/inventory")}>Inventory</a> */}
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
@@ -176,12 +171,12 @@ function NavbarSpare({ image }: INavbar) {
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a onClick={() => history.push("/app/account")}>Account</a>
-                            <a onClick={() => history.push("#")}>Chat</a>
-                            <a onClick={() => history.push("/app/request")}>Notification</a>
-                            <a onClick={() => history.push("/app/following")}>Following</a>
-                            <a onClick={() => history.push("/app/followers")}>Followers</a>
-                            <a onClick={() => history.push("/app/inventory")}>Inventory</a>
+                            <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a>
+                            <a onClick={() => {window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ")}}>Chat</a>
+                            <a onClick={() => {window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ")}}>Notification</a>
+                            <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a>
+                            <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a>
+                            <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a>
                             <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                         </div>
                     </div>

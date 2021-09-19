@@ -18,7 +18,6 @@ export default function InventoryComp(data: any) {
                 </div>
             );
         }else{
-            // console.log(inventoryData)
             const myInventory = inventoryData.reverse().map((data:any, index:any) => {
                 return <ItemBlock data={data} key={index} manage="no"/>;
             });

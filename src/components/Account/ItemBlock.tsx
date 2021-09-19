@@ -9,8 +9,8 @@ import { FaPen } from 'react-icons/fa';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 
 export default function ItemBlock(props: any) {
-
 	const { data, index, manage } = props;
+	console.log(data);
     const history = useHistory();
     const { deleteMyProduct } = useAuthorization();
 	const dataTag = data.require.map((dataTag: any) => {
@@ -59,7 +59,7 @@ export default function ItemBlock(props: any) {
 		<AccountBlock>
 			<div className="d-flex flex-wrap position-relative" style={{width:"auto"}}>
 				<div className="p-0" onClick={detailProduct}>
-					<img src={data.image} style={{width:"170px", height:"110px",borderRadius:"8px"}}/>
+					<img src={data.pictures[0]} style={{width:"170px", height:"110px",borderRadius:"8px"}}/>
 				</div>
 				<div className="ps-3 text-start col-md-6" style={{borderRadius:"8px"}} onClick={detailProduct}>
 					<h5 className="mb-3">{data.name}</h5>
