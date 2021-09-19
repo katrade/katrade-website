@@ -225,7 +225,7 @@ function MobileNavbar({signout}: any) {
                     <ul className={dropMenu ? "sidemenu active-sidemenu" : "sidemenu"}>
                         <div className="sidemenu-content d-block">
                             <li className="text-center">
-                                <a href="/app/account">Account</a>
+                                <a href="/app/aboutaccount?component=account">Account</a>
                             </li>
                             <li className="text-center">
                                 <a href="#">Chat</a>
