@@ -166,6 +166,24 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory , changeProfile }
+    async function getDetailProduct(product_id:any,owner:any) {
+        show("Product Deatail");
+        return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}&owner=${owner}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // if (!res.data.data.username) {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory , changeProfile , getDetailProduct }
 }
 

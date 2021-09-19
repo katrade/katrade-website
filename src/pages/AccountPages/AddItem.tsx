@@ -78,7 +78,9 @@ export default function AddItem() {
     const [ myItemSubCate , setMyItemSubCate ] = useState(findMySubCate);
 
     // ------------------------------------------------------------------
-
+    
+    const [ finalWantMainCate , setFinalWantMainCate ] = useState();
+    const [ finalWantSubCate , setFinalWantSubCate ] = useState();
     var wantSubCateTag = "unSelect";
     var wantSubCateIndex = 0;
     function findWantSubCate() {
@@ -87,16 +89,17 @@ export default function AddItem() {
         if(wantSubCateIndex == 0){
             return <Select options={godhelpme} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
-            return <Select options={godhelpme}  className="fs-5" name="wantSubCate" placeholder={placeholderString} />;
+            return <Select options={godhelpme}  className="fs-5" name="wantSubCate" onChange={(sel:any) => {setFinalWantSubCate(sel.value)}} placeholder={placeholderString} />;
         }
     }
     function selectWantSub(selectWantSubCate:any) { 
         wantSubCateTag = selectWantSubCate.value;
         wantSubCateIndex = selectWantSubCate.indexC;
+        setFinalWantMainCate(selectWantSubCate.value);
         setWantItemSubCate(findWantSubCate);
     }
     const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
-    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const [ account , setAccount] = useState<IAccount>(defaultEmptyAccount);
     const { getUserData } = useAuthorization();
 
     useEffect(() => {
@@ -129,16 +132,17 @@ export default function AddItem() {
             require: [
                 {
                     reqCat: {
-                        parentCategoryEn: "",
+                        parentCategoryEn: finalWantMainCate,
                         parentCategoryTh: "",
-                        childCategoryEn: "",
+                        childCategoryEn: finalWantSubCate,
                         childCategoryTh: ""
                     },
                     detail: dataItem.wantDetail
                 }
             ]
         }
-        addItem(data);
+        console.log(data);
+        // addItem(data);
     }
 
     return (
@@ -162,11 +166,11 @@ export default function AddItem() {
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
                                     <h4>รอปรับปรุง</h4>
-                                    {/* <UploadImg positionPic={"Cover Picture"}/>
+                                    <UploadImg positionPic={"Cover Picture"}/>
                                     <UploadImg positionPic={"Picture 1"}/>
-                                    <UploadImg positionPic={"Picture 2"}/>
-                                    <UploadImg positionPic={"Picture 3"}/>
-                                    <UploadImg positionPic={"Picture 4"}/> */}
+                                    {/* <UploadImg positionPic={"Picture 2"}/> */}
+                                    {/* <UploadImg positionPic={"Picture 3"}/> */}
+                                    {/* <UploadImg positionPic={"Picture 4"}/> */}
                                 </div>
                             </div>
                         </div>
@@ -213,7 +217,7 @@ export default function AddItem() {
                         {/* ปุ่มยืนยัน */}
                         <div className="d-flex justify-content-center mt-5">
                             <SolidButton width="100px" buttonColor="limegreen"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
-                            <SolidButton width="100px" buttonColor="red"><a href="/app/manageInventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
+                            <SolidButton width="100px" buttonColor="red"><a href="/app/aboutaccount?component=inventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
                         </div>
                     </div>
                 </form>

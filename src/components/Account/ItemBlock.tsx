@@ -1,3 +1,5 @@
+import { useHistory } from "react-router";
+
 import './ItemBlock.css'
 
 import { AccountBlock } from './AccountBlock';
@@ -8,28 +10,59 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 export default function ItemBlock(props: any) {
 
 	const { data, index, manage } = props;
-
+    const history = useHistory();
 	const dataTag = data.require.map((dataTag: any) => {
-		return <p>{dataTag.reqCat.childCategoryEn}</p>
+		return (
+			<div className="d-flex mx-2 px-2 " style={{backgroundColor:"rgb(21, 199, 119)", borderRadius:"8px"}}>
+				<p className="m-0 text-white">{dataTag.reqCat.parentCategoryEn} :</p>
+				<p className="m-0 text-white">&nbsp;{dataTag.reqCat.childCategoryEn}</p>
+			</div>
+		);
 	});
 
+	function detailProduct(){
+		console.log("go")
+		// history.push(`/app/product?product_id=${data._id}&owner=yes`);
+	}
 
 	return (
+		// <AccountBlock>
+		// 	<div className="block-item" style={{zIndex:1}}>
+		// 		<div className="rowling">
+		// 			<div className="column-img" onClick={detailProduct}>
+		// 				<img src={data.image} />
+		// 			</div>
+		// 			<div className="column-data" onClick={detailProduct}>
+		// 				<div className="d-flex justify-content-between">
+		// 					<h5 className="mb-3">{data.name}</h5>
+		// 					<p className="m-0" style={{zIndex:5}} onClick={() => {console.log("Delete item")}}>delete</p>
+		// 				</div>
+		// 				<div className="d-flex flex-wrap">
+		// 					<p className="m-0">require : </p>
+		// 					{dataTag}
+		// 				</div>
+		// 			</div>
+		// 			<div className={manage.length == 3 ? "column-tik" : "column-tik-hide"}>
+		// 				<h6 className="pen"><FaPen /></h6>
+		// 				<h6 className="bin"><RiDeleteBin2Fill /></h6>
+		// 			</div>
+		// 		</div>
+		// 	</div>
+		// </AccountBlock>
 		<AccountBlock>
-			<div className="block-item">
-				<div className="rowling">
-					<div className="column-img">
-						<img src={data.image} />
+			<div className="d-flex flex-wrap-reverse" style={{width:"auto"}}>
+				<div className="p-0" onClick={detailProduct}>
+					<img src={data.image} style={{width:"170px", height:"110px",borderRadius:"8px"}}/>
+				</div>
+				<div className="ps-3 text-start" style={{width:"70%" ,height:"110px",borderRadius:"8px"}} onClick={detailProduct}>
+					<h5 className="mb-3">{data.name}</h5>
+					<div className="d-flex flex-wrap">
+						<p className="m-0">require : </p>
+						{dataTag}
 					</div>
-					<div className="column-data">
-						<h5>{data.name}</h5>
-						<p>require : </p>
-						{/* {dataTag} */}
-					</div>
-					<div className={manage.length == 3 ? "column-tik" : "column-tik-hide"}>
-						<h6 className="pen"><FaPen /></h6>
-						<h6 className="bin"><RiDeleteBin2Fill /></h6>
-					</div>
+				</div>
+				<div className="">
+					<p className="m-0" onClick={() => {console.log("Delete item")}}>delete</p>
 				</div>
 			</div>
 		</AccountBlock>

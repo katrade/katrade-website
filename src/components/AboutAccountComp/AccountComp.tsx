@@ -2,8 +2,6 @@ import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import {API} from '../../app.setting.json';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -99,7 +97,8 @@ function UploadProfilePic() {
     };
     if (images.length === 1) {
         // console.log(images[0].dataURL);
-        updateProfilePic(images[0].dataURL);
+        console.log(typeof(images[0].dataURL));
+        // updateProfilePic(images[0].dataURL);
         setImages([]);
     }
     return (

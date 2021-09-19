@@ -7,7 +7,7 @@
 
 .column-data {
     float: left;
-    max-width: 70%;
+    width: 70%;
     text-align: left;
     margin: 0 0 0 10px;
 }
