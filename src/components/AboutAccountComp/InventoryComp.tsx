@@ -24,7 +24,7 @@ export default function InventoryComp(data: any) {
             });
             return (
                 <div>
-                    <div className="bg-white row mx-auto mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
+                    <div className="bg-white mx-auto mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
                         <div className="d-flex justify-content-between">
                             <div>
                                 <h4 className="d-inline-block me-3 mb-4">Inventory</h4>
@@ -43,7 +43,7 @@ export default function InventoryComp(data: any) {
     }else{
         return(
             <div>
-                <h3>ยังไม่ไดข้อมูล</h3>
+                <h3>กำลังโหลดข้อมูล...</h3>
             </div>
         );
     }

@@ -184,6 +184,23 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory, setUsername, isUserActive , addItem , getInventory , changeProfile , getDetailProduct }
+    async function deleteMyProduct(product_id:any) {
+        return await axios.delete(`${API}/inventory/deleteInventoryById?id=${product_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    return { getUserData, updateProfilePic , getCategory,
+        setUsername, isUserActive , addItem , getInventory,
+        changeProfile , getDetailProduct , deleteMyProduct }
 }
 

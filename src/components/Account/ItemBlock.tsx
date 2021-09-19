@@ -1,3 +1,4 @@
+import useAuthorization from '../../hooks/useAuthorization';
 import { useHistory } from "react-router";
 
 import './ItemBlock.css'
@@ -11,6 +12,7 @@ export default function ItemBlock(props: any) {
 
 	const { data, index, manage } = props;
     const history = useHistory();
+    const { deleteMyProduct } = useAuthorization();
 	const dataTag = data.require.map((dataTag: any) => {
 		return (
 			<div className="d-flex mx-2 px-2 " style={{backgroundColor:"rgb(21, 199, 119)", borderRadius:"8px"}}>
@@ -21,8 +23,13 @@ export default function ItemBlock(props: any) {
 	});
 
 	function detailProduct(){
-		console.log("go")
-		// history.push(`/app/product?product_id=${data._id}&owner=yes`);
+		history.push(`/app/product?product_id=${data._id}&owner=yes`);
+	}
+
+	function handleDelete(){
+		if(window.confirm(`ต้องการลบ ${data.name} อีหลีถิ?`)){
+			deleteMyProduct(data._id);
+		}
 	}
 
 	return (
@@ -50,19 +57,19 @@ export default function ItemBlock(props: any) {
 		// 	</div>
 		// </AccountBlock>
 		<AccountBlock>
-			<div className="d-flex flex-wrap-reverse" style={{width:"auto"}}>
+			<div className="d-flex flex-wrap position-relative" style={{width:"auto"}}>
 				<div className="p-0" onClick={detailProduct}>
 					<img src={data.image} style={{width:"170px", height:"110px",borderRadius:"8px"}}/>
 				</div>
-				<div className="ps-3 text-start" style={{width:"70%" ,height:"110px",borderRadius:"8px"}} onClick={detailProduct}>
+				<div className="ps-3 text-start col-md-6" style={{borderRadius:"8px"}} onClick={detailProduct}>
 					<h5 className="mb-3">{data.name}</h5>
 					<div className="d-flex flex-wrap">
 						<p className="m-0">require : </p>
 						{dataTag}
 					</div>
 				</div>
-				<div className="">
-					<p className="m-0" onClick={() => {console.log("Delete item")}}>delete</p>
+				<div className="position-absolute" style={{top:"0",right:"0"}}>
+					<p className="m-0" onClick={handleDelete} style={{cursor:"pointer"}}>delete</p>
 				</div>
 			</div>
 		</AccountBlock>
