@@ -12,6 +12,8 @@ import useLoading from '../../hooks/useLoading';
 import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
 import { ContactSupportOutlined } from '@material-ui/icons';
 
+// export const pictureContext = React.createContext< [] | any >(null);
+
 export default function AddItem() {
 
     const [ category , setCategory ] = useState<any>();
@@ -115,7 +117,11 @@ export default function AddItem() {
         init();
     }, [])
 
+    const [ productPic , setProductPic ] = useState<[]>([]);
     const [dataItem, handleDataItem] = useForm();
+    useEffect(() => {
+        console.log("sadasd");
+    }, [productPic])
 
     function handleUnload(event:any){ 
         event.preventDefault();
@@ -141,8 +147,8 @@ export default function AddItem() {
                 }
             ]
         }
-        console.log(data);
-        // addItem(data);
+        // console.log(data);
+        addItem(data);
     }
 
     return (
@@ -165,7 +171,7 @@ export default function AddItem() {
                             <div className="px-3 py-4">
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
-                                    <h4>รอปรับปรุง</h4>
+                                    {/* <h4>รอปรับปรุง</h4> */}
                                     <UploadImg positionPic={"Cover Picture"}/>
                                     <UploadImg positionPic={"Picture 1"}/>
                                     {/* <UploadImg positionPic={"Picture 2"}/> */}

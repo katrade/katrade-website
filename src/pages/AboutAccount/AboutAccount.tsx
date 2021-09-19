@@ -132,7 +132,6 @@ function AboutAccount(userData:any) {
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
     useEffect(() => {
         SelectComp();
-
     }, [destCompState])
     // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {

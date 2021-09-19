@@ -42,8 +42,8 @@ export default function InventoryComp(data: any) {
         }
     }else{
         return(
-            <div>
-                <h3>กำลังโหลดข้อมูล...</h3>
+            <div className="bg-white mb-4 p-3 text-center" style={{minHeight:"400px"}}>
+                <h4 className="m-0">กำลังโหลดข้อมูล...</h4>
             </div>
         );
     }
