@@ -127,43 +127,29 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-
-                        {/* <a onClick={signout} className="pointer"><FaSignOutAlt /></a>
-                        <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a>
-                        <a href="/app/request"><FaRegListAlt /></a>
-                        <a><MdChat /></a>
-                        <a href=""><IoIosNotifications /></a> */}
-                        
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a> */}
-                                {/* <a onClick={() => history.push("/app/account")}>Account</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a> */}
-                                {/* <a onClick={() => history.push("/app/following")}>Following</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a> */}
-                                {/* <a onClick={() => history.push("/app/followers")}>Followers</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=followes")}>Followers</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a> */}
-                                {/* <a onClick={() => history.push("/app/inventory")}>Inventory</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
                         <a href="/app/request"><FaRegListAlt /></a>
-                        <a href="#"><MdChat /></a>
-                        <a href="#"><IoIosNotifications /></a>
+                        <a onClick={() => {window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ")}}><MdChat /></a>
+                        <a onClick={() => {window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ")}}><IoIosNotifications /></a>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a onClick={() => history.push("/app/account")}>Account</a>
-                            <a onClick={() => history.push("#")}>Chat</a>
-                            <a onClick={() => history.push("/app/request")}>Notification</a>
-                            <a onClick={() => history.push("/app/following")}>Following</a>
-                            <a onClick={() => history.push("/app/followers")}>Followers</a>
-                            <a onClick={() => history.push("/app/inventory")}>Inventory</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
+                            <a onClick={() => {window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ")}}>Chat</a>
+                            <a onClick={() => {window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ")}}>Notification</a>
+                            <a onClick={() => history.push("/app/request")}>Request</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                             <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                         </div>
                     </div>

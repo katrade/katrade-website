@@ -1,4 +1,4 @@
-import React , { useState , useEffect } from 'react';
+import React , { useState , useEffect , useRef } from 'react';
 import { useForm } from '../../utils/useForm';
 import Select from 'react-select';
 import useAuthorization from '../../hooks/useAuthorization';
@@ -11,8 +11,6 @@ import { SolidButton } from '../../components/standard/Button'
 import useLoading from '../../hooks/useLoading';
 import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
 import { ContactSupportOutlined } from '@material-ui/icons';
-
-// export const pictureContext = React.createContext< [] | any >(null);
 
 export default function AddItem() {
 
@@ -118,14 +116,37 @@ export default function AddItem() {
     }, [])
 
     const [ productPic , setProductPic ] = useState<[]>([]);
+    const coverPictureRef = useRef<HTMLInputElement>(null);
+    const picture1Ref = useRef<HTMLInputElement>(null);
+
+    const [ cover, setCover ] = useState("https://via.placeholder.com/120")
+    const [ dataCover, setDataCover ] = useState()
+    const [ picture1, setPicture1 ] = useState("https://via.placeholder.com/120")
+    const [ dataPicture1, setDataPicture1 ] = useState()
+
+    const handleCover = (e:any) => {
+        const file = e.target.files[0];
+        setDataCover(file);
+        const fileURL = URL.createObjectURL(file);
+        setCover(fileURL);
+    }
+    const handlePicture1 = (e:any) => {
+        const file = e.target.files[0];
+        setDataPicture1(file);
+        const fileURL = URL.createObjectURL(file);
+        setPicture1(fileURL);
+    }
+
     const [dataItem, handleDataItem] = useForm();
-    useEffect(() => {
-        console.log("sadasd");
-    }, [productPic])
 
     function handleUnload(event:any){ 
         event.preventDefault();
-            const data = {
+        // จัดการกับรูปภาพ 
+        var arrayOfPicture = [];
+        arrayOfPicture.push(dataCover);
+        arrayOfPicture.push(dataPicture1);
+        
+        const data = {
             name: dataItem.name,
             detail: dataItem.myDetail,
             category: {
@@ -134,7 +155,7 @@ export default function AddItem() {
                 childCategoryEn: finalMySubCate,
                 childCategoryTh: ""
             },
-            pictures:[],
+            pictures: [],
             require: [
                 {
                     reqCat: {
@@ -148,8 +169,9 @@ export default function AddItem() {
             ]
         }
         // console.log(data);
-        addItem(data);
+        addItem(data, arrayOfPicture);
     }
+
 
     return (
         <div>
@@ -172,11 +194,31 @@ export default function AddItem() {
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
                                     {/* <h4>รอปรับปรุง</h4> */}
-                                    <UploadImg positionPic={"Cover Picture"}/>
-                                    <UploadImg positionPic={"Picture 1"}/>
+                                    {/* <UploadImg positionPic={"Cover Picture"}/> */}
+                                    {/* <UploadImg positionPic={"Picture 1"}/> */}
                                     {/* <UploadImg positionPic={"Picture 2"}/> */}
                                     {/* <UploadImg positionPic={"Picture 3"}/> */}
                                     {/* <UploadImg positionPic={"Picture 4"}/> */}
+                                    {/* Cover Picture */}
+                                    <div className="">
+                                        <input type="file" ref={coverPictureRef} name="Cover Picture" accept="image/*" onChange={handleCover} style={{display:"none"}}/>
+                                        <img src={cover} style={{width:"120px",height:"120px",cursor:"pointer"}}
+                                        onClick={() => {
+                                            coverPictureRef.current?.click();
+                                        }}
+                                        ></img>
+                                        <p className="d-flex justify-content-center mb-0 mt-2">Cover Pictue</p>
+                                    </div>
+                                    {/* Picture 1 */}
+                                    <div className="">
+                                        <input type="file" ref={picture1Ref} name="Cover Picture" accept="image/*" onChange={handlePicture1} style={{display:"none"}}/>
+                                        <img src={picture1} style={{width:"120px",height:"120px",cursor:"pointer"}}
+                                        onClick={() => {
+                                            picture1Ref.current?.click();
+                                        }}
+                                        ></img>
+                                        <p className="d-flex justify-content-center mb-0 mt-2">Picture 1</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
