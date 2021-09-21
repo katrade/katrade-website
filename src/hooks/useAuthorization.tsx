@@ -114,7 +114,6 @@ export default function useAuthorization() {
         arrayOfPicture.forEach((file:any)=>{
             bodyFormData.append("files", file);
         });
-        console.log(arrayOfPicture)
         show("Uploading item to your inventory");
 
         return await axios({
