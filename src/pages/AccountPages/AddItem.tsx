@@ -301,7 +301,7 @@ export default function AddItem() {
                         { wantInputFields.map((inputField:any , index:any) => (
                             <div key={index}>
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label fs-5">Require Category {index}</label>
+                                    <label className="col-md-2 col-form-label fs-5">Require Category {index+1}</label>
                                     <div className="col-md-5">
                                         <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(index , selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
                                     </div>
@@ -315,12 +315,15 @@ export default function AddItem() {
                                         <textarea className="form-control fs-5" value={inputField.detail} name="detail" onChange={(event) => handleChangeDynamic(index , event)} rows={5} placeholder="Enter requirement details"></textarea>
                                     </div>
                                 </div>
-                                <div onClick={()=>{
-                                    handleAddItem();
-                                }}>ADD</div>
-                                <div onClick={() => {
-                                    handleRemoveItem(index)
-                                }}>Remove</div>
+                                <div className="d-flex justify-content-center mb-3">
+                                    <div className="bg-info me-4" onClick={()=>{handleAddItem();}}>
+                                        <p className="m-0 px-1">Add requirement</p>
+                                    </div>
+                                    {/* <div className="bg-info" style={{width:"20px"}}/> */}
+                                    <div className="bg-warning " onClick={() => {handleRemoveItem(index)}}>
+                                        <p className="m-0 px-1">Remove requirement</p>
+                                    </div>
+                                </div>
                             </div>
                         ))}
 

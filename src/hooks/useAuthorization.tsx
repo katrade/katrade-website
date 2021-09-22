@@ -168,9 +168,9 @@ export default function useAuthorization() {
             })
     }
 
-    async function getDetailProduct(product_id:any,owner:any) {
+    async function getDetailProduct(product_id:any) {
         show("Product Deatail");
-        return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}&owner=${owner}`, {
+        return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }

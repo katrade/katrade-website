@@ -22,7 +22,7 @@ export default function ItemBlock(props: any) {
 	});
 
 	function detailProduct(){
-		history.push(`/app/product?product_id=${data._id}&owner=yes`);
+		history.push(`/app/product?product_id=${data._id}`);
 	}
 
 	function handleDelete(){

@@ -14,25 +14,37 @@ import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 function Product() {
     const { search } = useLocation();
-    const { product_id , owner } = queryString.parse(search);
+    const { product_id } = queryString.parse(search);
 
-    const { getDetailProduct } = useAuthorization();    
+    const { getDetailProduct , getUserData } = useAuthorization();    
     const [ data , setData] = useState<any>();
-    const [ ownerTag , setOwnerTag ] = useState<any>();
+    const [ owner , setOwner ] = useState<any>();
+    const [ ownerTag , setOwnerTag ] = useState<any>(false);
     const [ mobile , setMobile ] = useState(false);
 
 
     useEffect(() => {
         resize();
         async function init() {
-            var inventory = await getDetailProduct(product_id , owner);
+            var inventory = await getDetailProduct(product_id);
             if (inventory) {
                 setData(inventory);
-                setOwnerTag(owner);
+                console.log(inventory)
+            }
+            var getUser:any = await getUserData();
+            if (getUser) {
+                setOwner(getUser);
             }
         }
         init();
     }, [])
+
+    var forOwner = 0;
+    if (data && owner) {
+        if (data.owner == owner._id) {
+            forOwner = 1;
+        }
+    }
 
     window.addEventListener("resize", resize);
     function resize(){
@@ -127,12 +139,12 @@ function Product() {
                                         <p className="m-0 fs-3 fw-bold" style={{ color: "black" }}>Franky</p>
                                         <p className="m-0" style={{ color: "black" }}>2 Follow</p>
                                     </div>
-                                    <div className={ ownerTag == "yes" ? "d-none" : ""}>
+                                    <div className={ forOwner ? "d-none" : ""}>
                                         <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Chat</TransparentButton>
                                         <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Follow</TransparentButton>
                                     </div>
                                 </div>
-                                <div className={ ownerTag == "yes" ? "d-none" : "d-flex flew-wrap justify-content-around mt-3"}>
+                                <div className={ forOwner ? "d-none" : "d-flex flew-wrap justify-content-around mt-3"}>
                                     <SolidButton width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
                                         Add to Favorite
                                     </SolidButton>
