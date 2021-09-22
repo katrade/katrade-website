@@ -5,6 +5,7 @@ import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
 
+
 export default function useAuthorization() {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
@@ -202,8 +203,17 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory,
-        setUsername, isUserActive , addItem , getInventory,
-        changeProfile , getDetailProduct , deleteMyProduct }
+    return { 
+        getUserData, 
+        updateProfilePic, 
+        getCategory,
+        setUsername, 
+        isUserActive, 
+        addItem, 
+        getInventory,
+        changeProfile,
+        getDetailProduct, 
+        deleteMyProduct,
+    }
 }
 
