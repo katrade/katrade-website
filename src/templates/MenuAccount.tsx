@@ -11,12 +11,11 @@ interface propsInterface {
     data?: any
 }
 
-function MenuAccount({ children, data }: propsInterface) {
+function MenuAccount({ children, data}: propsInterface) {
 
-    const [mobile, setMobile] = useState(false);
+    const [ mobile , setMobile ] = useState(false);
 
     window.addEventListener("resize", resize);
-    // resize();
     function resize() {
 
         if (window.innerWidth < 600) {
@@ -32,14 +31,13 @@ function MenuAccount({ children, data }: propsInterface) {
             return setMobile(false)
         }
     }
-
     useEffect(() => {
         resize();
     }, [])
-
     if (mobile) {
         return <MobileMenuAccount children={children} data={data}/>
     }
+    console.log(data)
     return (
         <div>
             <Navbar image={data.profilePic} />

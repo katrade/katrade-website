@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState , useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API } from '../app.setting.json';
+import useAuthorization from '../hooks/useAuthorization';
+
 import './Navbar.css';
 
 // icon
+import { FaSignOutAlt } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
 import { MdChat } from "react-icons/md";
 import { FaRegListAlt } from "react-icons/fa";
@@ -13,6 +16,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiArrowDropUpLine } from "react-icons/ri";
+import { FiLogOut } from "react-icons/fi";
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -42,7 +46,6 @@ function Navbar({ image }: INavbar) {
 
     window.addEventListener("resize", resize);
     // console.log("Navbar พูดว่า : " + window.innerWidth);
-    resize();
     function resize() {
         // console.log(window.innerWidth)
         if (window.innerWidth < 600) {
@@ -58,6 +61,27 @@ function Navbar({ image }: INavbar) {
         }
     }
 
+    const [ category , setCategory ] = useState<any>();
+    const { getUserData , getCategory} = useAuthorization();
+
+    useEffect(() => {
+        resize();
+        async function init() {
+            var CategoryData = await getCategory();
+            if (CategoryData) {
+                setCategory(CategoryData);
+            }
+        }
+        init();
+    }, []);
+
+    var CategoryData;
+    if(category){
+        CategoryData = category.map((data:any, index:any) => {
+            return <li key={index}>{data.parentCategoryEn}</li>
+        });
+    }else{
+    }
 
     if (mobile) {
         return <MobileNavbar signout={signout}/>
@@ -93,26 +117,8 @@ function Navbar({ image }: INavbar) {
                         <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
                         <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                         <ul className={drop ? "categories active" : "categories"}>
-                            <Block height="50px">
-                                <li>
-                                    <a href={google}>Clothes</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Book</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Sports</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Clothes</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Book</a>
-                                </li>
-                                <li>
-                                    <a href={google}>Sports</a>
-                                </li>
-
+                            <Block height="auto">
+                                {CategoryData}
                             </Block>
                         </ul>
                     </div>
@@ -121,27 +127,37 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-                        <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a>
+                        <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
+                            <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
+                                <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
+                                <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
+                                <a onClick={() => history.push("/app/aboutaccount?component=followes")}>Followers</a>
+                                <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
+                                <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
+                            </div>
+                        </a>
                         <a href="/app/request"><FaRegListAlt /></a>
-                        <a onClick={signout}><MdChat /></a>
-                        <a href=""><IoIosNotifications /></a>
+                        <a onClick={() => {window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ")}}><MdChat /></a>
+                        <a onClick={() => {window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ")}}><IoIosNotifications /></a>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a href="/app/account">Account</a>
-                            <a href={google}>Chat</a>
-                            <a href="/app/request">Notification</a>
-                            <a href="">Ding Dong</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
+                            <a onClick={() => {window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ")}}>Chat</a>
+                            <a onClick={() => {window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ")}}>Notification</a>
+                            <a onClick={() => history.push("/app/request")}>Request</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
+                            <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                         </div>
                     </div>
-
                 </div>
             </Block>
         </div>
     );
 }
-
 
 const MobileNavbarContainer = styled.div`
     width: 100%;
@@ -196,6 +212,12 @@ function MobileNavbar({signout}: any) {
                         <div className="sidemenu-content d-block">
                             <li className="text-center">
                                 <a href="/app/account">Account</a>
+                            </li>
+                            <li className="text-center">
+                                <a href="#">Chat</a>
+                            </li>
+                            <li className="text-center">
+                                <a href="/app/request">Notification</a>
                             </li>
                             <li className="text-center">
                                 <a href="/app/following">Following</a>

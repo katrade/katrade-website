@@ -10,7 +10,8 @@ import {
     EmailResetPass,
     AfterEmailResetPass,
     ResetPass,
-    ResetPassComplete
+    ResetPassComplete,
+    SetUsername
 } from '../../components/Verify/Verify';
 import Block from '../../components/Block';
 import StaticNav from '../../components/StaticNav';
@@ -48,6 +49,19 @@ export function VerifyEmailSuccess() {
                     <AfterEmailResetPass/>
                     <ResetPass/>
                     <ResetPassComplete/> */}
+                </div>
+            </Block>
+            <Footer />
+        </div>
+    );
+}
+export function SetUsernamePage() {
+    return (
+        <div>
+            <StaticNav />
+            <Block height="60vh" backgroundColor="#f7fafc" darkBackgroundColor="#141414">
+                <div className="d-flex" style={{}}>
+                    <SetUsername />
                 </div>
             </Block>
             <Footer />

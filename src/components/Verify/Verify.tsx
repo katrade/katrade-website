@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import { SolidButton } from '../standard/Button';
 import { useHistory } from 'react-router';
@@ -5,6 +6,7 @@ import queryString from 'query-string';
 import { H4, H5 }  from '../standard/H';
 import Div from '../standard/Div';
 import P from '../standard/P';
+import useAuthorization from '../../hooks/useAuthorization'
 
 interface IParams {
     email: string
@@ -99,6 +101,32 @@ export function ResetPassComplete() {
                 <P className="mb-5">ขอบคุณที่ใช้บริหาร</P>
                 <SolidButton width="120px" buttonColor="#2BC986" padding="5px" margin="0">OK</SolidButton>
             </div>
+        </div>
+    );
+}
+
+export function SetUsername() {
+    const { search } = useLocation();
+    const history = useHistory();
+    const { setUsername, getUserData } = useAuthorization();
+    const [u, setU] = useState("")
+    useEffect(() => {
+        async function init() {
+            const u = await getUserData();
+            if (u?.username) {
+                history.push('/app/market');
+            }
+        }
+        init()
+    }, [])
+    return (
+        <div className="" style={{ width: "1000px", minWidth: "500px", height: "auto", margin: "70px auto"}}>
+            <H4>Create your username</H4>
+            <Div className="p-5 mt-3" style={{ height: "314px" }} dynamicPair={["#ffffff","#1c1c1c"]}>
+                <H5>username</H5>
+                <input type="text" className="input-register w-100 px-2" style={{ maxWidth: '500px'}} onChange={(e) => setU(e.target.value)} value={u}/>
+                <SolidButton width="120px" buttonColor="#2BC986" padding="5px" margin="0" className="my-3" onClick={() => setUsername(u)}>Confirm</SolidButton>
+            </Div>
         </div>
     );
 }

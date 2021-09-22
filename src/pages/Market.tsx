@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import React , { useState, useEffect, useReducer } from 'react';
 import styled from 'styled-components'
 
 import './Market.css';
 
 import Navbar from '../components/Navbar';
+import NavbarSpare from '../components/NavbarSpare';
 import Footer from '../components/Footer';
 import Recommend from '../components/Recommend';
 import Interest from '../components/Interest';
@@ -15,6 +16,8 @@ import { useHistory } from 'react-router';
 import { useCookies } from 'react-cookie';
 import useLoading from '../hooks/useLoading';
 import useAuthorization from '../hooks/useAuthorization';
+import { type } from 'os';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 
 
@@ -39,8 +42,37 @@ async function getRandomWord(): Promise<string> {
 
 }
 
-export default function Market() {
-    
+
+// type DestCompContextType = {
+//     destCompState: any,
+//     destCompDispatch: any,
+// }
+
+// const DestCompContext = React.createContext<DestCompContextType  | any >(null);
+
+// function reducer(state:any, action:any) {
+//     if (action.type === "Account") {
+//         return { dest: "Account" };
+//     }else if (action.type === "ChangePassword") {
+//         return { dest: "ChangePassword" };
+//     }else if (action.type === "Following") {
+//         return { dest: "Following" };
+//     }else if (action.type === "Followers") {
+//         return { dest: "Followers" };
+//     }else if (action.type === "Favorite") {
+//         return { dest: "Favorite" };
+//     }else if (action.type === "Inventory") {
+//         return { dest: "Inventory" };
+//     }else if (action.type === "History") {
+//         return { dest: "History" };
+//     }
+//     return state;
+// }
+
+function Market() {
+
+    // const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
+
     const id_item = [
         {
             name_item: "Cats, a weird creature",
@@ -212,7 +244,6 @@ export default function Market() {
     const rec_item = id_item.map((item, index) => {
         return <Recommend item={item} key={index} />;
     });
-
     // สร้างตัวอย่างมาโชว์ Suggestion
     const interest_item = id_item.map((item, index) => {
         return <Interest item={item} key={index} />;
@@ -223,7 +254,8 @@ export default function Market() {
     const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    const {getUserData} = useAuthorization();    
+    const {getUserData} = useAuthorization();
+
     window.addEventListener("resize", resize)
     useEffect(() => {
         resize();
@@ -247,11 +279,13 @@ export default function Market() {
         }
         return setMobile(false)
     }
-    
 
     return (
+        // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
+
         <div >
             <Navbar image={account.profilePic}/>
+            {/* <NavbarSpare image={account.profilePic}/> */}
             {/* <SearchMenu /> */}
             <Block height="700" backgroundColor="#f7fafc">
                 <div className="my-4">
@@ -287,7 +321,12 @@ export default function Market() {
 
             <Footer />
         </div>
+        // </DestCompContext.Provider>
     )
 }
+
+// export { DestCompContext };
+
+export default Market;
 
 

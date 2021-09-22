@@ -86,7 +86,6 @@ export default function StaticArticleNav() {
             </div>
             
         </NavBG>
-        <div style={{height: "80px"}} />
         </>
     )
 }

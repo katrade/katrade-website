@@ -28,8 +28,9 @@ import Product from './pages/Product';
 import SignIn from './pages/Signin';
 import SignUp from './pages/SignUp';
 
-import { Verify, VerifyEmailSuccess, VerifyEmailPending } from './pages/VerifyPages/VerifyTest';
+import { Verify, VerifyEmailSuccess, VerifyEmailPending, SetUsernamePage } from './pages/VerifyPages/VerifyTest';
 
+import AboutAccount from './pages/AboutAccount/AboutAccount';
 import Account from './pages/AccountPages/Account';
 import Favorite from './pages/AccountPages/Favorite';
 import Following from './pages/AccountPages/Following';
@@ -38,7 +39,10 @@ import History from './pages/AccountPages/History';
 import Inventory from './pages/AccountPages/Inventory';
 import ManageInventory from './pages/AccountPages/ManageInventory';
 import AddItem from './pages/AccountPages/AddItem';
+import TestAddItem from './pages/AccountPages/test';
 import EditItem from './pages/AccountPages/EditItem';
+
+import ProfileViewer from './pages/ProfileViewer';
 
 import ChangePassword from './pages/AccountPages/ChangePasswordPage';
 import Profile from './pages/AccountPages/Profile';
@@ -86,6 +90,8 @@ function App() {
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
                                 <Route exact path="/app/product" component={Product}></Route>
 
+                                <Route exact path="/app/setup" component={SetUsernamePage}></Route>
+                                <Route exact path="/app/aboutaccount" component={AboutAccount}></Route>
                                 <Route exact path="/app/account" component={Account}></Route>
                                 <Route exact path="/app/favorite" component={Favorite}></Route>
                                 <Route exact path="/app/following" component={Following}></Route>
@@ -94,7 +100,10 @@ function App() {
                                 <Route exact path="/app/inventory" component={Inventory}></Route>
                                 <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
 
+                                <Route exact path="/app/profileviewer" component={ProfileViewer}></Route>
+
                                 <Route exact path="/app/additem" component={AddItem}></Route>
+                                <Route exact path="/app/testadditem" component={TestAddItem}></Route>
                                 <Route exact path="/app/edititem" component={EditItem}></Route>
 
                                 <Route exact path="/app/request" component={Request}></Route>

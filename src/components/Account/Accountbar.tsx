@@ -5,7 +5,6 @@ import './Accountbar.css'
 // import useLoading from '../../hooks/useLoading';
 
 export default function Profilebar({ data: account }: any) {
-    console.log(account);
     return (
         <div className="container-profile">
             <h5>Prosonal Profile</h5>

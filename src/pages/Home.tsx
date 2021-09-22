@@ -18,11 +18,12 @@ import { H3 } from '../components/standard/H';
 import P from '../components/standard/P';
 
 import { TransparentButton, DynamicSolidButton , DynamicTransparentButton } from '../components/standard/Button'
-import { Button } from '@material-ui/core';
 
 import { LanguageContext } from '../contexts/Language';
 
 import usePopup from '../hooks/popup'
+import { useCookies } from 'react-cookie';
+import useAuthorization from '../hooks/useAuthorization';
 
 
 const popup1Content = (
@@ -56,25 +57,27 @@ export default function Home() {
     const [activeLang, setActiveLang] = useState<string[]>(lang === "en" ? en : th);
 
     // test popup
-    const [ popup1 ] = usePopup(popup1Content)
-    const [ popup2 ] = usePopup(popup2Content)
+    // const [ popup1 ] = usePopup(popup1Content)
+    // const [ popup2 ] = usePopup(popup2Content)
 
+    // for cookies
+    const [cookies] = useCookies(['DaveTheHornyDuck']);
+
+    const { isUserActive } = useAuthorization();
 
     const history = useHistory();
     function LinkMarket() {
-        popup1()
-        //history.push(`/app/market`);
+        history.push(`/app/market`);
     };
     function LinkSignIn() {
-        popup2()
-        //history.push(`/app/signin`);
+        history.push(`/app/signin`);
     }
     function LinkRegister() {
         history.push(`/app/register`);
     }
-
     useEffect(() => {
         setActiveLang(lang === "en" ? en : th);
+        isUserActive();
     }, [lang] )
 
     return (
