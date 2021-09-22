@@ -10,7 +10,6 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 
 export default function ItemBlock(props: any) {
 	const { data, index, manage } = props;
-	console.log(data);
     const history = useHistory();
     const { deleteMyProduct } = useAuthorization();
 	const dataTag = data.require.map((dataTag: any) => {
@@ -31,31 +30,7 @@ export default function ItemBlock(props: any) {
 			deleteMyProduct(data._id);
 		}
 	}
-
 	return (
-		// <AccountBlock>
-		// 	<div className="block-item" style={{zIndex:1}}>
-		// 		<div className="rowling">
-		// 			<div className="column-img" onClick={detailProduct}>
-		// 				<img src={data.image} />
-		// 			</div>
-		// 			<div className="column-data" onClick={detailProduct}>
-		// 				<div className="d-flex justify-content-between">
-		// 					<h5 className="mb-3">{data.name}</h5>
-		// 					<p className="m-0" style={{zIndex:5}} onClick={() => {console.log("Delete item")}}>delete</p>
-		// 				</div>
-		// 				<div className="d-flex flex-wrap">
-		// 					<p className="m-0">require : </p>
-		// 					{dataTag}
-		// 				</div>
-		// 			</div>
-		// 			<div className={manage.length == 3 ? "column-tik" : "column-tik-hide"}>
-		// 				<h6 className="pen"><FaPen /></h6>
-		// 				<h6 className="bin"><RiDeleteBin2Fill /></h6>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </AccountBlock>
 		<AccountBlock>
 			<div className="d-flex flex-wrap position-relative" style={{width:"auto"}}>
 				<div className="p-0" onClick={detailProduct}>

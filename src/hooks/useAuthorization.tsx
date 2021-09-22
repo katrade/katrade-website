@@ -143,7 +143,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
+                history.push("/app/aboutaccount?component=account")
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
