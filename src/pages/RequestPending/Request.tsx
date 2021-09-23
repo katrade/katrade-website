@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './Request.css';
 
 import RequestBlock from '../../components/RequestPending/RequestBlock';
@@ -107,11 +109,36 @@ export default function Request() {
         },
     ]
 
-    const item_data = data.map((data,index) => {
+    const request_data = data.map((data,index) => {
         if (data.status == "0") {
-            return <RequestBlock data={data} key={index} />;
+            return <RequestBlock data={data} status={data.status} key={index} />;
         }
     })
+    const pending_data = data.map((data,index) => {
+        if (data.status == "1") {
+            return <RequestBlock data={data} status={data.status} key={index} />;
+        }
+    })
+    const inprogress_data = data.map((data,index) => {
+        if (data.status == "2") {
+            return <RequestBlock data={data} status={data.status} key={index} />;
+        }else if (data.status == "3") {
+            return <RequestBlock data={data} status={data.status} key={index} />;
+        }
+    })
+
+    const [ component , setComponent ] = useState(1);
+    const [ selectComponent , setSelectComponent ] = useState(request_data);
+    function handleComponent(status:any) {
+        setComponent(status)
+        if(status == 1){
+            setSelectComponent(request_data);
+        }else if(status == 2){
+            setSelectComponent(pending_data)
+        }else if(status == 3){
+            setSelectComponent(inprogress_data)
+        }
+    }
 
     return(
         <div>
@@ -119,13 +146,13 @@ export default function Request() {
                 <Block height="50px" backgroundColor="#f7fafc">
                     <div className="my-4 py-3 px-4 background">
                         <div className="mb-3 d-flex flex-row topic-request">
-                            {/* <a href="" className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</a> */}
-                            <p className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</p>
-                            <a href="/app/pending" className="p-1 fs-4 me-3 font-weight-bold">Your Pending</a>
-                            <a href="/app/inprogress" className="p-1 fs-4 font-weight-bold">Inprogress</a>
+                            <p className={component == 1? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(1)}>Request To You</p>
+                            {/* <p className="p-1 fs-4 me-3 font-weight-bold currenttap" onClick={() => handleComponent(1)}>Request To You</p> */}
+                            <p className={component == 2? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(2)}>Your Pending</p>
+                            <p className={component == 3? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(3)}>Inprogress</p>
                         </div>
                         <div>
-                            {item_data}
+                            {selectComponent}
                         </div>
                     </div>
                 </Block>
