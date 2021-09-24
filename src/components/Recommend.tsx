@@ -3,13 +3,8 @@ import './Recommend.css';
 
 function Recommend(props: any) {
     const { item, index } = props;
-
     const history = useHistory();
     function LinkItemData() {
-        // โหมดเปลี่ยนภาษา ให้เปลี่ยนเป็น function ตัวนี้
-        // history.push(`/${lang}/market`);
-
-        // history.push(`/app/market/${index}`);
         history.push(`/app/product`);
     }
 

@@ -29,7 +29,6 @@ function Product() {
             var inventory = await getDetailProduct(product_id);
             if (inventory) {
                 setData(inventory);
-                console.log(inventory)
             }
             var getUser:any = await getUserData();
             if (getUser) {
@@ -92,7 +91,6 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-
         return (
             <div>
                 {photoPost}
@@ -112,7 +110,7 @@ function Product() {
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "gray" }}>
                                     { data.pictures.map((data:any , index:any) => (
                                         <div key={index}>
-                                            <img className="my-auto" src={data} style={{ width: "150px", height: "80%", cursor: "zoom-in" }} onClick={() => clickPhoto(index)} />
+                                            <img className="my-auto" src={data} style={{ width: "100px", height: "100px", cursor: "zoom-in" }} onClick={() => clickPhoto(index)} />
                                         </div>
                                     ))}
                                 </div>

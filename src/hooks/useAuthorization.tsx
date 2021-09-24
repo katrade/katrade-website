@@ -152,7 +152,7 @@ export default function useAuthorization() {
             })
     }
         
-    async function getInventory() {
+    async function getMyInventory() {
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -203,6 +203,23 @@ export default function useAuthorization() {
             })
     }
 
+    async function getAllInventory(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getAllInventory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
     return { 
         getUserData, 
         updateProfilePic, 
@@ -210,10 +227,11 @@ export default function useAuthorization() {
         setUsername, 
         isUserActive, 
         addItem, 
-        getInventory,
+        getMyInventory,
         changeProfile,
         getDetailProduct, 
         deleteMyProduct,
+        getAllInventory,
     }
 }
 

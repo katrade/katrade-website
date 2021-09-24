@@ -3,24 +3,20 @@ import './Interest.css';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 
 export default function Interest(props:any) {
-    const { item, index } = props;
-
+    const { item , index } = props;
     const history = useHistory();
-    function LinkItemData() {
-        // โหมดเปลี่ยนภาษา ให้เปลี่ยนเป็น function ตัวนี้
-        // history.push(`/${lang}/market`);
 
-        // history.push(`/app/market/${index}`);
-        history.push(`/app/product`);
+    function LinkItemData() {
+        history.push(`/app/product?product_id=${item._id}`);
     }
 
     return (
         <div className="interest-card" onClick={LinkItemData}>
-            <div className="interest-photo-card" style={{ backgroundImage: `url(${item.photo_src})`}}>
+            <div className="interest-photo-card" style={{ backgroundImage: `url(${item.pictures[0]})`}}>
                 <StarRoundedIcon className="star"/>
             </div>
                 <div className="interest-text-card py-3">
-                    <p>{item.name_item}</p>
+                    <p>{item.name}</p>
                     <p className="desc item-desc">Some quick example</p>
                 </div>  
         </div>
