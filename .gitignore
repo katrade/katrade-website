@@ -28,6 +28,7 @@ yarn-error.log*
 .firebase
 .firebaserc
 firebase.json
+storage.rules
 
 # Firebase (dev)
 src/firebase/firebase/config.ts

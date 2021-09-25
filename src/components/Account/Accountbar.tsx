@@ -1,17 +1,20 @@
-// import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // import axios from 'axios'
 // import { API } from '../../app.setting.json'
 import './Accountbar.css'
 // import useLoading from '../../hooks/useLoading';
 
 export default function Profilebar({ data: account }: any) {
+    console.log(account)
+    
     return (
         <div className="container-profile">
             <h5>Prosonal Profile</h5>
             <div className="container-profile-data">
                 <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
                 <div className="d-flex justify-content-center mt-2 mb-3">
-                            <div style={{ backgroundImage: account.profilePic ? `url(${account.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)` , backgroundPosition: 'center' , 
+                            <div style={{ backgroundImage: `url()`,
+                            backgroundPosition: 'center' , 
                             backgroundSize: 'cover' , 
                             backgroundRepeat: 'no-repeat', 
                             minWidth: '130px' , 

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { API } from '../../app.setting.json'
 import { useHistory } from "react-router";
 import { DynamicSolidButton } from '../standard/Button';
+import { upload } from "../../utils/profile";
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -29,7 +30,8 @@ export default function AccountComp(data: any) {
                 <div className="col-md-4 order-md-2 p-3 text-center">
                     <div className="d-flex justify-content-center mt-2 mb-3">
                         <div style={{
-                            backgroundImage: accountData.profilePic ? `url(${accountData.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)`, backgroundPosition: 'center',
+                            backgroundImage: `url()`, 
+                            backgroundPosition: 'center',
                             backgroundSize: 'cover',
                             backgroundRepeat: 'no-repeat',
                             minWidth: '150px',
@@ -37,7 +39,7 @@ export default function AccountComp(data: any) {
                             borderRadius: '50%'
                         }}></div>
                     </div>
-                    <UploadProfilePic />
+                    <UploadProfilePic account={accountData}/>
                     <p className="m-0 ">file size: Maximum 1 MB</p>
                     <p className="m-0">supported files: .JPEG, .PNG</p>
 
@@ -89,48 +91,63 @@ export default function AccountComp(data: any) {
         </div>
     );
 }
-
-function UploadProfilePic() {
-    const [cookies] = useCookies(['DaveTheHornyDuck']);
-    const [show, hide] = useLoading();
-    const history = useHistory();
-    function handleFileUpload(e: any) {
-        show("Uploading");
-        const bodyFormData = new FormData();
-        const imagedata = e.target.files[0];
-        bodyFormData.append('file', imagedata);
-        if (!imagedata.type.includes('image/')) {
-            alert("File type not supported");
-            return hide();
-        }
-        axios({
-            method: "post",
-            url: `${API}/user/updateProfilePic`,
-            data: bodyFormData,
-            headers:
-            {
-                "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer ${cookies.DaveTheHornyDuck}`
-            },
-        })
-            .then(function (response) {
-                //handle success
-                // console.log(response);
-                history.push('/app/market');
+interface IUpload {
+    account: any
+}
+function UploadProfilePic({ account }: IUpload) {
+    // const [cookies] = useCookies(['DaveTheHornyDuck']);
+    // const [show, hide] = useLoading();
+    // const history = useHistory();
+    // function handleFileUpload(e: any) {
+    //     show("Uploading");
+    //     const bodyFormData = new FormData();
+    //     const imagedata = e.target.files[0];
+    //     bodyFormData.append('file', imagedata);
+    //     if (!imagedata.type.includes('image/')) {
+    //         alert("File type not supported");
+    //         return hide();
+    //     }
+    //     axios({
+    //         method: "post",
+    //         url: `${API}/user/updateProfilePic`,
+    //         data: bodyFormData,
+    //         headers:
+    //         {
+    //             "Content-Type": "multipart/form-data",
+    //             "Authorization": `Bearer ${cookies.DaveTheHornyDuck}`
+    //         },
+    //     })
+    //         .then(function (response) {
+    //             //handle success
+    //             // console.log(response);
+    //             history.push('/app/market');
                 
-                // window.location.reload();
+    //             // window.location.reload();
 
-            })
-            .catch(function (response) {
-                //handle error
-                // console.log(response);
-                alert('Can not update profile picture.')
-                hide();
-            });
+    //         })
+    //         .catch(function (response) {
+    //             //handle error
+    //             // console.log(response);
+    //             alert('Can not update profile picture.')
+    //             hide();
+    //         });
+    // }
+    function onUpload(e: any) {
+        if (account._id) {
+            e.preventDefault();
+            upload(e.target.files, account._id)
+                .then((url) => {
+                    // send url back to backend here vvv
+                
+                })
+                .catch((err) => {
+                    alert(err);
+                })
+        }
     }
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <input type="file" accept="image/jpg" onChange={handleFileUpload} id="img" style={{ display: "none" }}></input>
+            <input type="file" accept="image/jpg" onChange={onUpload} id="img" style={{ display: "none" }}></input>
             <label htmlFor="img" className="pointer d-flex justify-content-center align-items-center" style={{
                 backgroundColor: "#3086ff",
                 padding: "0 20px",

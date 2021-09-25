@@ -55,6 +55,8 @@ import ProfileCanvas from './components/ProfileCanvas';
 
 import Test01 from './components/TestFrontend/Test01';
 
+import Upload from "./components/Upload";
+
 
 require('dotenv').config({ path: ".env" })
 console.log(process.env)
@@ -69,7 +71,7 @@ function App() {
                         <Router>
                             <Switch>
 
-                                {/* <Route exact path="/test" component={}></Route> */}
+                                <Route exact path="/test" component={Upload}></Route>
 
                                 {/* Add path here!!  */}
 
