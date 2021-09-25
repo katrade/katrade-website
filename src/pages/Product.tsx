@@ -16,7 +16,7 @@ function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
 
-    const { getDetailProduct , getUserData } = useAuthorization();    
+    const { getDetailProduct , getUserData , postMyReqeust } = useAuthorization();    
     const [ data , setData] = useState<any>();
     const [ owner , setOwner ] = useState<any>();
     const [ ownerTag , setOwnerTag ] = useState<any>(false);
@@ -36,6 +36,7 @@ function Product() {
             }
         }
         init();
+        console.log(data)
     }, [])
 
     var forOwner = 0;
@@ -77,6 +78,15 @@ function Product() {
     function changeRequireDetail(index:any) {
         SetRequireDetail(data.require[index].detail);
         setTmpRequireDetailShow("d-none")
+    }
+
+    function handleRequest(){
+        const dataArray = {
+            userId2: data.owner ,
+            inventoryId1: data._id ,
+            inventoryId2: "owner._iditem" ,
+        }
+        postMyReqeust(dataArray);
     }
 
     if(data){
@@ -146,7 +156,7 @@ function Product() {
                                     <SolidButton width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
                                         Add to Favorite
                                     </SolidButton>
-                                    <SolidButton width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">Request Trading</SolidButton>
+                                    <SolidButton onClick={handleRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">Request Trading</SolidButton>
                                 </div>
                             </div>
                         </div>

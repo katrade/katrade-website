@@ -4,6 +4,8 @@ import { API } from '../app.setting.json'
 import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
+import { resourceUsage } from "process";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 
 export default function useAuthorization() {
@@ -153,6 +155,7 @@ export default function useAuthorization() {
     }
         
     async function getMyInventory() {
+        show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -220,6 +223,63 @@ export default function useAuthorization() {
             })
     }
 
+    // ของจะโผล่หน้า request to you ของเรา
+    async function getRequest(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserRequest`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    // ของจะโผล่หน้า pending ของเรา
+    async function getPending(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserPending`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    async function postMyReqeust(dataArray: any | undefined) {
+        // show("โหลดดิ้ง..");
+        console.log(dataArray)
+        // return await axios({
+        //     method: "post",
+        //     url: `${API}/user/newRequest`,
+        //     // data: bodyFormData,
+        //     headers: { 
+        //         "Content-Type": "multipart/form-data",
+        //         'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
+        //     },
+        // })
+        // .then(res => {
+        //     window.location.reload();
+        // })
+        // .catch(err => {
+        //     alert(`We got some error.\n${err}`)
+        //     return hide();
+        // })
+    }
+
     return { 
         getUserData, 
         updateProfilePic, 
@@ -232,6 +292,9 @@ export default function useAuthorization() {
         getDetailProduct, 
         deleteMyProduct,
         getAllInventory,
+        getRequest,
+        getPending,
+        postMyReqeust,
     }
 }
 
