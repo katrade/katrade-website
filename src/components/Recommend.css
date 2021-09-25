@@ -1,0 +1,40 @@
+.recommend-card {
+    margin: 5px;
+    min-width: 157px;
+    width: 19%;
+    max-width: 226px;
+    height: 250px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    transition: 400ms ease;
+    border: solid rgb(218, 224, 231) 1px;
+
+}
+.recommend-card:hover {   
+    transform: scale(1.05);
+    cursor: pointer ;
+}
+
+.recommend-photo-card {
+    height: 155px;
+    width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-size: cover !important;   
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+.recommend-text-card {
+    padding: 0 10px;
+}
+
+.recommend-text-card h5, .recommend-text-card p {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.recommend-text-card a:hover {
+    text-decoration: none;
+}

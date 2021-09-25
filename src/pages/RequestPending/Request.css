@@ -1,0 +1,30 @@
+.background {
+    background-color: white;
+}
+
+.topic-request > a {
+    width: 150px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #212529;
+}
+
+.topic-request > p {
+    width: 150px;
+    margin: 0 16px 0 0;
+    text-align: center;
+    border-radius: 8px;
+    cursor: default;
+    text-decoration: none;
+    color: #212529;
+}
+
+.topic-request > p:hover {
+    background-color: rgba(107, 106, 106, 0.2);
+}
+
+.currenttap {
+    background-color: #C4C4C4;
+}
