@@ -31,4 +31,5 @@ firebase.json
 storage.rules
 
 # Firebase (dev)
-src/firebase/firebase/config.ts
+src/firebase/firebase.config.ts
+
