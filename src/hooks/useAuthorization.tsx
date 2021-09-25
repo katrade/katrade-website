@@ -180,12 +180,12 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                // if (!res.data.data.username) {
                 hide();
                 return res.data;
             })
-            .catch(() => {
+            .catch((err) => {
                 hide();
+                console.log(err)
                 return null;
             })
     }
@@ -260,8 +260,8 @@ export default function useAuthorization() {
     }
 
     async function postMyReqeust(dataArray: any | undefined) {
-        // show("โหลดดิ้ง..");
-        console.log(dataArray)
+        show("ติดต่อขอแลกเปลี่ยน..");
+        // console.log(dataArray)
         // return await axios({
         //     method: "post",
         //     url: `${API}/user/newRequest`,
@@ -278,6 +278,22 @@ export default function useAuthorization() {
         //     alert(`We got some error.\n${err}`)
         //     return hide();
         // })
+        return await axios.post(`${API}/user/newRequest`,dataArray ,
+        {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        }
+        )
+        .then(res => {
+            hide();
+            window.location.reload();
+        })
+        .catch(err => {
+            alert(`We got some error.\n${err}`)
+            return hide();
+        })
     }
 
     return { 

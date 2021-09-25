@@ -124,12 +124,12 @@ export default function Request() {
                 setDataPending(data2);
             }
             
-            // console.log(dataRequest);
+            // console.log(dataPending);
         }
         init();
     }, [])
 
-    var request_data:any;
+    var request_data:any = null;
     var pending_data:any;
     var inprogress_data:any;
 
@@ -158,7 +158,7 @@ export default function Request() {
     // })
 
     const [ component , setComponent ] = useState(1);
-    const [ selectComponent , setSelectComponent ] = useState(request_data);
+    const [ selectComponent , setSelectComponent ] = useState(null);
     function handleComponent(status:any) {
         setComponent(status)
         if(status == 1){
@@ -170,7 +170,7 @@ export default function Request() {
         }
     }
 
-    if(request_data){
+    if(request_data && pending_data){
         return(
             <div>
                 <Navbar/>
@@ -178,12 +178,16 @@ export default function Request() {
                         <div className="my-4 py-3 px-4 background">
                             <div className="mb-3 d-flex flex-row topic-request">
                                 <p className={component == 1? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(1)}>Request To You</p>
-                                {/* <p className="p-1 fs-4 me-3 font-weight-bold currenttap" onClick={() => handleComponent(1)}>Request To You</p> */}
                                 <p className={component == 2? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(2)}>Your Pending</p>
                                 <p className={component == 3? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(3)}>Inprogress</p>
                             </div>
-                            <div>
-                                {selectComponent}
+                            <div style={{minHeight:"350px"}}>
+                                {/* <div className={request_data.length != 0 ? "" : "d-none"}> */}
+                                    {selectComponent}
+                                {/* </div> */}
+                                {/* <div className={request_data.length == 0 ? "d-flex justify-content-center align-items-center" : "d-none"} style={{height:"300px",border:"1px solid #333",borderRadius:"8px"}}>
+                                    <h4>ยังไม่มีรายการ</h4>
+                                </div> */}
                             </div>
                         </div>
                     </Block>
