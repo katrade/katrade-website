@@ -30,7 +30,7 @@ export default function AccountComp(data: any) {
                 <div className="col-md-4 order-md-2 p-3 text-center">
                     <div className="d-flex justify-content-center mt-2 mb-3">
                         <div style={{
-                            backgroundImage: `url()`, 
+                            backgroundImage: accountData.profilePic ? `url(${accountData.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)`, 
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
                             backgroundRepeat: 'no-repeat',
