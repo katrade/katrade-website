@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import useLoading from '../../hooks/useLoading';
 import axios from 'axios';
 import { API } from '../../app.setting.json'
+import { useHistory } from "react-router";
 import { DynamicSolidButton } from '../standard/Button';
 
 export default function AccountComp(data: any) {
@@ -92,6 +93,7 @@ export default function AccountComp(data: any) {
 function UploadProfilePic() {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
+    const history = useHistory();
     function handleFileUpload(e: any) {
         show("Uploading");
         const bodyFormData = new FormData();
@@ -114,7 +116,9 @@ function UploadProfilePic() {
             .then(function (response) {
                 //handle success
                 // console.log(response);
-                window.location.reload();
+                history.push('/app/market');
+                
+                // window.location.reload();
 
             })
             .catch(function (response) {

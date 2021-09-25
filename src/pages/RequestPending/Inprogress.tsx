@@ -107,9 +107,6 @@ export default function Request() {
         },
     ]
 
-    // const item_data = data.map((data,index) => {
-    //     return <RequestBlock data={data} index={index} />;
-    // })
     const item_data = data.map((data,index) => {
         if (data.status == "2") {
             return <RequestBlock data={data} key={index} />;

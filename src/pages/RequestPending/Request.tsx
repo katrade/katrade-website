@@ -1,3 +1,6 @@
+import { useState , useEffect } from 'react';
+import useAuthorization from '../../hooks/useAuthorization';
+
 import './Request.css';
 
 import RequestBlock from '../../components/RequestPending/RequestBlock';
@@ -107,31 +110,91 @@ export default function Request() {
         },
     ]
 
-    const item_data = data.map((data,index) => {
-        if (data.status == "0") {
-            return <RequestBlock data={data} key={index} />;
+    const { getRequest , getPending } = useAuthorization();
+    const [ dataRequest , setDataRequest ] = useState<any>();
+    const [ dataPending , setDataPending ] = useState<any>();
+    useEffect(() => {
+        async function init() {
+            var data1 = await getRequest();
+            if (data1) {
+                setDataRequest(data1);
+            }
+            var data2 = await getPending();
+            if (data2) {
+                setDataPending(data2);
+            }
+            
+            // console.log(dataRequest);
         }
-    })
+        init();
+    }, [])
 
-    return(
-        <div>
-            <Navbar/>
-                <Block height="50px" backgroundColor="#f7fafc">
-                    <div className="my-4 py-3 px-4 background">
-                        <div className="mb-3 d-flex flex-row topic-request">
-                            {/* <a href="" className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</a> */}
-                            <p className="p-1 fs-4 me-3 font-weight-bold currenttap">Request To You</p>
-                            <a href="/app/pending" className="p-1 fs-4 me-3 font-weight-bold">Your Pending</a>
-                            <a href="/app/inprogress" className="p-1 fs-4 font-weight-bold">Inprogress</a>
+    var request_data:any;
+    var pending_data:any;
+    var inprogress_data:any;
+
+    if(dataRequest) {
+        request_data = dataRequest.map((data:any,index:any) => {
+            return <RequestBlock data={data} status={0} key={index} />;
+        })
+    }
+
+    if(dataPending) {
+        pending_data = dataPending.map((data:any,index:any) => {
+            return <RequestBlock data={data} status={1} key={index} />;
+        })
+    }
+    // const request_data = data.map((data,index) => {
+    //     if (data.status == "0") {
+    //         return <RequestBlock data={data} status={data.status} key={index} />;
+    //     }
+    // })
+    // const inprogress_data = data.map((data,index) => {
+    //     if (data.status == "2") {
+    //         return <RequestBlock data={data} status={data.status} key={index} />;
+    //     }else if (data.status == "3") {
+    //         return <RequestBlock data={data} status={data.status} key={index} />;
+    //     }
+    // })
+
+    const [ component , setComponent ] = useState(1);
+    const [ selectComponent , setSelectComponent ] = useState(request_data);
+    function handleComponent(status:any) {
+        setComponent(status)
+        if(status == 1){
+            setSelectComponent(request_data);
+        }else if(status == 2){
+            setSelectComponent(pending_data)
+        }else if(status == 3){
+            setSelectComponent(inprogress_data)
+        }
+    }
+
+    if(request_data){
+        return(
+            <div>
+                <Navbar/>
+                    <Block height="50px" backgroundColor="#f7fafc">
+                        <div className="my-4 py-3 px-4 background">
+                            <div className="mb-3 d-flex flex-row topic-request">
+                                <p className={component == 1? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(1)}>Request To You</p>
+                                {/* <p className="p-1 fs-4 me-3 font-weight-bold currenttap" onClick={() => handleComponent(1)}>Request To You</p> */}
+                                <p className={component == 2? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(2)}>Your Pending</p>
+                                <p className={component == 3? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(3)}>Inprogress</p>
+                            </div>
+                            <div>
+                                {selectComponent}
+                            </div>
                         </div>
-                        <div>
-                            {item_data}
-                        </div>
-                    </div>
-                </Block>
-            <Footer/>
-        </div>
-    );
+                    </Block>
+                <Footer/>
+            </div>
+        );
+    }else{
+        return (
+            <div>
+                <p>แสดงหน้าโหลดดิ้ง</p>
+            </div>
+        );
+    }
 }
-
-// export default Request();

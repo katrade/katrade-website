@@ -28,6 +28,7 @@ import Logo from '../pics/logo_dark_green.png';
 
 import Block from './Block';
 import { useCookies } from 'react-cookie';
+import { CgNpm } from 'react-icons/cg';
 
 const google = 'https://google.com'
 
@@ -45,9 +46,7 @@ function Navbar({ image }: INavbar) {
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
-    // console.log("Navbar พูดว่า : " + window.innerWidth);
     function resize() {
-        // console.log(window.innerWidth)
         if (window.innerWidth < 600) {
             if (mobile) {
                 return
@@ -76,11 +75,21 @@ function Navbar({ image }: INavbar) {
     }, []);
 
     var CategoryData;
+    var SubCategoryArrayEn:any=[];
+    var SubCategoryArrayTh:any=[];
+    const [ selectIndex , setSelectIndex ] = useState<any>(0);
     if(category){
         CategoryData = category.map((data:any, index:any) => {
-            return <li key={index}>{data.parentCategoryEn}</li>
+            SubCategoryArrayEn.push(data.childCategoryEn.map((subdata:any) => {
+                return subdata;
+            }));
+            SubCategoryArrayTh.push(data.childCategoryTh.map((subdata:any) => {
+                return subdata;
+            }));
+
+            return <li className="text-white" onClick={() => setSelectIndex(index)} key={index}>{data.parentCategoryEn}</li>;
         });
-    }else{
+
     }
 
     if (mobile) {
@@ -118,7 +127,17 @@ function Navbar({ image }: INavbar) {
                         <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                         <ul className={drop ? "categories active" : "categories"}>
                             <Block height="auto">
-                                {CategoryData}
+                                <div className="row" style={{width:"100%"}}>
+                                    <div className="col-2" style={{width:"150px"}}>                                
+                                        {CategoryData}
+                                    </div>
+                                    <div className="col-1" />
+                                    <div className="col-8 bg-info">
+                                        {SubCategoryArrayEn[selectIndex]}
+                                    </div>
+
+
+                                </div>
                             </Block>
                         </ul>
                     </div>
@@ -278,3 +297,7 @@ function MobileNavbar({signout}: any) {
 }
 
 export default Navbar;
+
+function subdata(subdata: any, any: any): any {
+    throw new Error('Function not implemented.');
+}

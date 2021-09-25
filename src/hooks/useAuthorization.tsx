@@ -4,6 +4,9 @@ import { API } from '../app.setting.json'
 import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
+import { resourceUsage } from "process";
+import { ContactSupportOutlined } from "@material-ui/icons";
+
 
 export default function useAuthorization() {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
@@ -114,7 +117,6 @@ export default function useAuthorization() {
         arrayOfPicture.forEach((file:any)=>{
             bodyFormData.append("files", file);
         });
-        console.log(arrayOfPicture)
         show("Uploading item to your inventory");
 
         return await axios({
@@ -144,7 +146,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
+                history.push("/app/aboutaccount?component=account")
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
@@ -152,7 +154,8 @@ export default function useAuthorization() {
             })
     }
         
-    async function getInventory() {
+    async function getMyInventory() {
+        show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -169,9 +172,9 @@ export default function useAuthorization() {
             })
     }
 
-    async function getDetailProduct(product_id:any,owner:any) {
+    async function getDetailProduct(product_id:any) {
         show("Product Deatail");
-        return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}&owner=${owner}`, {
+        return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -203,8 +206,95 @@ export default function useAuthorization() {
             })
     }
 
-    return { getUserData, updateProfilePic , getCategory,
-        setUsername, isUserActive , addItem , getInventory,
-        changeProfile , getDetailProduct , deleteMyProduct }
+    async function getAllInventory(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getAllInventory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    // ของจะโผล่หน้า request to you ของเรา
+    async function getRequest(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserRequest`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    // ของจะโผล่หน้า pending ของเรา
+    async function getPending(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserPending`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    async function postMyReqeust(dataArray: any | undefined) {
+        // show("โหลดดิ้ง..");
+        console.log(dataArray)
+        // return await axios({
+        //     method: "post",
+        //     url: `${API}/user/newRequest`,
+        //     // data: bodyFormData,
+        //     headers: { 
+        //         "Content-Type": "multipart/form-data",
+        //         'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
+        //     },
+        // })
+        // .then(res => {
+        //     window.location.reload();
+        // })
+        // .catch(err => {
+        //     alert(`We got some error.\n${err}`)
+        //     return hide();
+        // })
+    }
+
+    return { 
+        getUserData, 
+        updateProfilePic, 
+        getCategory,
+        setUsername, 
+        isUserActive, 
+        addItem, 
+        getMyInventory,
+        changeProfile,
+        getDetailProduct, 
+        deleteMyProduct,
+        getAllInventory,
+        getRequest,
+        getPending,
+        postMyReqeust,
+    }
 }
 

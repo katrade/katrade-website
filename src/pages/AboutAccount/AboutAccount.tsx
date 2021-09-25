@@ -87,7 +87,7 @@ function AboutAccount(userData:any) {
 
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getInventory } = useAuthorization();    
+    const { getUserData , updateProfilePic , getMyInventory } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const [ inventoryData , setInventoryData ] = useState();
     const history = useHistory();
@@ -102,7 +102,7 @@ function AboutAccount(userData:any) {
                 console.clear();
                 history.push('/app/signin');
             }
-            var inventory = await getInventory();
+            var inventory = await getMyInventory();
             if (inventory) {
                 setInventoryData(inventory);
             }

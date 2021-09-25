@@ -39,6 +39,7 @@ import History from './pages/AccountPages/History';
 import Inventory from './pages/AccountPages/Inventory';
 import ManageInventory from './pages/AccountPages/ManageInventory';
 import AddItem from './pages/AccountPages/AddItem';
+import TestAddItem from './pages/AccountPages/test';
 import EditItem from './pages/AccountPages/EditItem';
 
 import ProfileViewer from './pages/ProfileViewer';
@@ -102,6 +103,7 @@ function App() {
                                 <Route exact path="/app/profileviewer" component={ProfileViewer}></Route>
 
                                 <Route exact path="/app/additem" component={AddItem}></Route>
+                                <Route exact path="/app/testadditem" component={TestAddItem}></Route>
                                 <Route exact path="/app/edititem" component={EditItem}></Route>
 
                                 <Route exact path="/app/request" component={Request}></Route>
