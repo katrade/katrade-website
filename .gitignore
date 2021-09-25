@@ -24,7 +24,10 @@ yarn-error.log*
 
 .vercel
 
-# Firebase
+# Firebase (Hosting)
 .firebase
 .firebaserc
 firebase.json
+
+# Firebase (dev)
+src/firebase/firebase/config.ts
