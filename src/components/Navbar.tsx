@@ -150,7 +150,7 @@ function Navbar({ image }: INavbar) {
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
                                 <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
-                                <a onClick={() => history.push("/app/aboutaccount?component=followes")}>Followers</a>
+                                <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
                                 <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>

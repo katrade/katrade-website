@@ -17,13 +17,13 @@ function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
 
-    const { getMyInventory , getDetailProduct , getUserData , postMyReqeust , addFavourite } = useAuthorization();    
-    const [ data , setData] = useState<any>();
-    const [ owner , setOwner ] = useState<any>();
+    const { getMyInventory , getDetailProduct , getUserData , postMyReqeust , addFavourite , deleteFavourite } = useAuthorization();    
+    const [ data , setData] = useState<any>(null);
+    const [ owner , setOwner ] = useState<any>(null);
     const [ inventory , setInventory ] = useState<any>();
     const [ mobile , setMobile ] = useState(false);
 
-
+    // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
         resize();
         async function init() {
@@ -42,6 +42,13 @@ function Product() {
         }
         init();
     }, [])
+
+    const [ checkFavoritetmp , setCheckFavoritetmp ] = useState<boolean>();
+    useEffect(() => {
+        if(owner != null && data != null){
+            setCheckFavoritetmp(owner.favourite.includes(data._id))
+        }
+    } , [data,owner])
 
     var forOwner = 0;
     if (data && owner) {
@@ -76,7 +83,11 @@ function Product() {
 
     const [ selectTrade , setSelectTrade ] = useState<any>(null);
     function clickRequest() {
-        setSelectTrade("Click")
+        if(owner.inventories.length == 0){
+            window.alert("คุณยังไม่มีสิ่งของเลย ไปเพิ่มก่อนสิ")
+        }else{
+            setSelectTrade("Click")
+        }
     }
     function closeRequest() {
         setSelectTrade(null)
@@ -103,7 +114,30 @@ function Product() {
         postMyReqeust(dataArray);
     }
 
-    if(data){
+    // const [ favorite , setFavorite] = useState(true);
+    const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
+    function favorite_btn() {
+        if(!checkFavoritetmp){
+            return (
+                <SolidButton onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
+                    Add to Favorite
+                </SolidButton>
+            );
+        }else{
+            return (
+                <SolidButton onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
+                    Reomve to Favorite
+                </SolidButton>
+            );
+        }
+    }
+
+    if(data && owner){
+        // console.log(data._id , owner.favourite)
+        // console.log(owner.favourite.includes(data._id))
+        var checkFavorite:any = owner.favourite.includes(data._id);
+        var checkpath = window.location.pathname;
+
         const wantCate = data.require.map((data:any , index:any) => {
             return (
                 <div key={index} 
@@ -115,6 +149,9 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
+
+
+
         return (
             <div>
                 {photoPost}
@@ -168,9 +205,13 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className={ forOwner ? "d-none" : "d-flex flew-wrap justify-content-around mt-3"}>
-                                    <SolidButton onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
+                                    {/* <SolidButton className={checkFavorite? "d-none" : ""} onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
                                         Add to Favorite
                                     </SolidButton>
+                                    <SolidButton className={checkFavorite? "" : "d-none"} onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
+                                        Reomve to Favorite
+                                    </SolidButton> */}
+                                    <div onClick={handleClickFavorite}>{favorite_btn()}</div>
                                     <SolidButton onClick={clickRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">
                                         Request Trading
                                     </SolidButton>

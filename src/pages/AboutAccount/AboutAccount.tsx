@@ -111,7 +111,6 @@ function AboutAccount(userData:any) {
             var favourite = await getFavourite();
             if (favourite) {
                 setFavoriteData(favourite);
-                console.log(favourite)
             }
         }
         init();
@@ -155,7 +154,7 @@ function AboutAccount(userData:any) {
         }else if(component == "history"){
             setComponentPage(<HistoryComp data={accountData}/>);
         }
-    }, [accountData,inventoryData])
+    }, [accountData,favoriteData,inventoryData])
 
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
