@@ -22,6 +22,7 @@ import FollowersComp from '../../components/AboutAccountComp/FollowersComp';
 import FavoriteComp from '../../components/AboutAccountComp/FavoriteComp';
 import InventoryComp from '../../components/AboutAccountComp/InventoryComp';
 import HistoryComp from '../../components/AboutAccountComp/HistoryComp';
+import { getAllJSDocTagsOfKind } from 'typescript';
 
 interface IAccount {
     firstname: string
@@ -87,9 +88,10 @@ function AboutAccount(userData:any) {
 
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getMyInventory } = useAuthorization();    
+    const { getUserData , updateProfilePic , getMyInventory , getFavourite } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
-    const [ inventoryData , setInventoryData ] = useState();
+    const [ favoriteData, setFavoriteData ] = useState<any>();
+    const [ inventoryData , setInventoryData ] = useState<any>();
     const history = useHistory();
 
     useEffect(() => {
@@ -105,6 +107,11 @@ function AboutAccount(userData:any) {
             var inventory = await getMyInventory();
             if (inventory) {
                 setInventoryData(inventory);
+            }
+            var favourite = await getFavourite();
+            if (favourite) {
+                setFavoriteData(favourite);
+                console.log(favourite)
             }
         }
         init();
@@ -122,7 +129,7 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "Followers"){
             setComponentPage(<FollowersComp data={accountData}/>);
         }else if(destCompState.dest === "Favorite"){
-            setComponentPage(<FavoriteComp data={accountData}/>);
+            setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(destCompState.dest === "Inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(destCompState.dest === "History"){
@@ -136,14 +143,13 @@ function AboutAccount(userData:any) {
     // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {
         if(component == "account" || component == undefined ){
-            console.log("มีข้อมูลเข้ามาแล้ว");
             setComponentPage(<AccountComp data={accountData}/>);
         }else if(component == "following"){
             setComponentPage(<FollowingComp data={accountData}/>);
         }else if(component == "followers"){
             setComponentPage(<FollowersComp data={accountData}/>);
         }else if(component == "favorite"){
-            setComponentPage(<FavoriteComp data={accountData}/>);
+            setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(component == "inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(component == "history"){

@@ -1,7 +1,8 @@
 import FavoriteBlock from '../../components/Account/FavoriteBlock';
 
 export default function FavoriteComp(data: any) {
-    const accountData = data.data;
+    console.log(data);
+    const favouriteData = data.data;
     const fakeData = [
         {
             name: "fakeData",
@@ -30,19 +31,19 @@ export default function FavoriteComp(data: any) {
         },
     ]
 
-    const fakeFavouriteBlock = fakeData.map((data, index) => {
-        return <FavoriteBlock data={data} key={index} manage="no" />;
-    });
+    // const fakeFavouriteBlock = fakeData.map((data, index) => {
+    //     return <FavoriteBlock data={data} key={index} manage="no" />;
+    // });
 
     return (
         <div>
             <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
                 <div>  
-                    <h4 className="d-inline-block me-3 mb-4">Favourite</h4>
-                    <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({accountData.favourite.length})</h5>
+                    {/* <h4 className="d-inline-block me-3 mb-4">Favourite</h4> */}
+                    {/* <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteData.length})</h5> */}
                 </div>
                 <div>
-                    {fakeFavouriteBlock}
+                    {/* {fakeFavouriteBlock} */}
                 </div>
             </div>
         </div>

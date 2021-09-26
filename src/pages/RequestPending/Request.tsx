@@ -123,32 +123,24 @@ export default function Request() {
             if (data2) {
                 setDataPending(data2);
             }
-            
-            // console.log(dataPending);
         }
         init();
     }, [])
 
-    var request_data:any = null;
+    var request_data:any;
     var pending_data:any;
     var inprogress_data:any;
-
     if(dataRequest) {
         request_data = dataRequest.map((data:any,index:any) => {
             return <RequestBlock data={data} status={0} key={index} />;
         })
     }
-
     if(dataPending) {
         pending_data = dataPending.map((data:any,index:any) => {
             return <RequestBlock data={data} status={1} key={index} />;
         })
     }
-    // const request_data = data.map((data,index) => {
-    //     if (data.status == "0") {
-    //         return <RequestBlock data={data} status={data.status} key={index} />;
-    //     }
-    // })
+
     // const inprogress_data = data.map((data,index) => {
     //     if (data.status == "2") {
     //         return <RequestBlock data={data} status={data.status} key={index} />;
@@ -158,19 +150,28 @@ export default function Request() {
     // })
 
     const [ component , setComponent ] = useState(1);
-    const [ selectComponent , setSelectComponent ] = useState(null);
+    const [ count , setCount ] = useState(0);
+    const [ selectComponent , setSelectComponent ] = useState(request_data);
     function handleComponent(status:any) {
         setComponent(status)
         if(status == 1){
             setSelectComponent(request_data);
+            setCount(request_data.length);
         }else if(status == 2){
             setSelectComponent(pending_data)
+            setCount(pending_data.length);
         }else if(status == 3){
             setSelectComponent(inprogress_data)
+            // setCount(inprogress_data.length);
         }
     }
 
-    if(request_data && pending_data){
+    useEffect(() => {
+        setSelectComponent(request_data);
+    }, [dataRequest])
+
+    if(dataRequest && dataPending){
+
         return(
             <div>
                 <Navbar/>
@@ -182,12 +183,7 @@ export default function Request() {
                                 <p className={component == 3? "p-1 fs-4 me-3 font-weight-bold currenttap" : "p-1 fs-4 me-3 font-weight-bold"} onClick={() => handleComponent(3)}>Inprogress</p>
                             </div>
                             <div style={{minHeight:"350px"}}>
-                                {/* <div className={request_data.length != 0 ? "" : "d-none"}> */}
-                                    {selectComponent}
-                                {/* </div> */}
-                                {/* <div className={request_data.length == 0 ? "d-flex justify-content-center align-items-center" : "d-none"} style={{height:"300px",border:"1px solid #333",borderRadius:"8px"}}>
-                                    <h4>ยังไม่มีรายการ</h4>
-                                </div> */}
+                                {selectComponent}
                             </div>
                         </div>
                     </Block>

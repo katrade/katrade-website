@@ -17,7 +17,7 @@ function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
 
-    const { getMyInventory , getDetailProduct , getUserData , postMyReqeust } = useAuthorization();    
+    const { getMyInventory , getDetailProduct , getUserData , postMyReqeust , addFavourite } = useAuthorization();    
     const [ data , setData] = useState<any>();
     const [ owner , setOwner ] = useState<any>();
     const [ inventory , setInventory ] = useState<any>();
@@ -168,10 +168,12 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className={ forOwner ? "d-none" : "d-flex flew-wrap justify-content-around mt-3"}>
-                                    <SolidButton width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
+                                    <SolidButton onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
                                         Add to Favorite
                                     </SolidButton>
-                                    <SolidButton onClick={clickRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">Request Trading</SolidButton>
+                                    <SolidButton onClick={clickRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">
+                                        Request Trading
+                                    </SolidButton>
                                 </div>
                             </div>
                         </div>
@@ -200,11 +202,7 @@ function Product() {
                 <h4>กำลังโหลดข้อมูล</h4>
             </div>
         );
-    }
-
-
-
-    
+    }    
 }
 
 export default Product;

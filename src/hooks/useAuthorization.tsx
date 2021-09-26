@@ -261,23 +261,6 @@ export default function useAuthorization() {
 
     async function postMyReqeust(dataArray: any | undefined) {
         show("ติดต่อขอแลกเปลี่ยน..");
-        // console.log(dataArray)
-        // return await axios({
-        //     method: "post",
-        //     url: `${API}/user/newRequest`,
-        //     // data: bodyFormData,
-        //     headers: { 
-        //         "Content-Type": "multipart/form-data",
-        //         'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
-        //     },
-        // })
-        // .then(res => {
-        //     window.location.reload();
-        // })
-        // .catch(err => {
-        //     alert(`We got some error.\n${err}`)
-        //     return hide();
-        // })
         return await axios.post(`${API}/user/newRequest`,dataArray ,
         {
             headers: {
@@ -296,6 +279,42 @@ export default function useAuthorization() {
         })
     }
 
+    async function getFavourite(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/favourite`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                console.log("Hello")
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    async function addFavourite(product_id:any) {
+        return await axios.patch(`${API}/user/pushFavourite?id=${product_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                console.log(res)
+                console.log("เรียบร้อย")
+                // window.location.reload();
+                // hide();
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
     return { 
         getUserData, 
         updateProfilePic, 
@@ -311,6 +330,8 @@ export default function useAuthorization() {
         getRequest,
         getPending,
         postMyReqeust,
+        getFavourite,
+        addFavourite,
     }
 }
 
