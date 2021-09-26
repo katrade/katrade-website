@@ -9,17 +9,17 @@ import { IoMdSwap } from 'react-icons/io';
 export default function RequestBlock({data, status, index}:any) {
 
     const history = useHistory();
-    const { getDetailProduct } = useAuthorization();
+    const { getDetailProduct , deleteMyRequestPending } = useAuthorization();
     function btnRPI(){
         if(status == 0){
             return (
                 <div>
                     <TransparentButton buttonColor="limegreen">Accept Request</TransparentButton>
-                    <TransparentButton buttonColor="red">Cancel Request</TransparentButton>
+                    <TransparentButton onClick={() => deleteMyRequestPending(data.requestId)} buttonColor="red">Cancel Request</TransparentButton>
                 </div>
             );
         }else if(status == 1){
-            return <TransparentButton buttonColor="red">Cancel Request</TransparentButton>;
+            return <TransparentButton onClick={() => deleteMyRequestPending(data.requestId)} buttonColor="red">Cancel Request</TransparentButton>;
         }else if(status == 2){
             return <p className="fs-5 m-0">Please deal and confirm for trading in your personal chat</p>;
         }else if(status == 3){

@@ -279,7 +279,7 @@ export default function useAuthorization() {
         })
     }
 
-    async function getFavourite(): Promise<any> {
+    async function getFavourite() {
         show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/favourite`, {
             headers: {
@@ -288,7 +288,6 @@ export default function useAuthorization() {
         })
             .then(res => {
                 hide();
-                console.log("Hello")
                 return res.data;
             })
             .catch((err) => {
@@ -298,16 +297,49 @@ export default function useAuthorization() {
     }
 
     async function addFavourite(product_id:any) {
-        return await axios.patch(`${API}/user/pushFavourite?id=${product_id}`, {
+        return await axios.patch(`${API}/user/pushFavourite`, {id:product_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                // window.location.reload();
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function deleteFavourite(product_id:any, checkpath:any) {
+        return await axios.patch(`${API}/user/pullFavourite`, {id:product_id},{
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                console.log(res)
-                console.log("เรียบร้อย")
-                // window.location.reload();
-                // hide();
+                if(checkpath != "/app/product"){
+                    history.push("/app/aboutaccount?component=favorite")
+                }else{
+                    // window.location.reload();
+                }
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function deleteMyRequestPending(requestpending_id:any) {
+        return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                window.location.reload();
+                hide();
             })
             .catch(() => {
                 hide();
@@ -332,6 +364,8 @@ export default function useAuthorization() {
         postMyReqeust,
         getFavourite,
         addFavourite,
+        deleteFavourite,
+        deleteMyRequestPending,
     }
 }
 
