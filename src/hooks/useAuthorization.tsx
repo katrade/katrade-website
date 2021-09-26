@@ -9,9 +9,13 @@ import { ContactSupportOutlined } from "@material-ui/icons";
 
 
 export default function useAuthorization() {
-    const [cookies] = useCookies(['DaveTheHornyDuck']);
+    const [cookies, setCookie] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const history = useHistory();
+
+    function clearAuthCookie() {
+        setCookie("DaveTheHornyDuck", "");
+    }
 
     async function getUserData(): Promise<IAccount | null> {
         show("Preparing your page")
@@ -21,13 +25,15 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                console.log(res)
                 if (!res.data.data.username) {
                     history.push(`/app/setup`);
                 }
                 hide();
                 return res.data.data;
             })
-            .catch(() => {
+            .catch((err) => {
+                clearAuthCookie();
                 hide();
                 return null;
             })
@@ -52,7 +58,8 @@ export default function useAuthorization() {
             window.location.reload();
         })
         .catch(err => {
-            alert(`We got some error.\n${err}`)
+            alert(`We got some error.\n${err}`);
+            clearAuthCookie();
             return hide();
         })
     }
@@ -82,7 +89,8 @@ export default function useAuthorization() {
             }
         })
         .catch(err => {
-            alert(`We got some error.\n${err}`) 
+            alert(`We got some error.\n${err}`);
+            clearAuthCookie();
             hide();
         })
     }
@@ -90,6 +98,9 @@ export default function useAuthorization() {
     async function isUserActive() {
         if (cookies.DaveTheHornyDuck) {
             return history.push('/app/market');
+        }
+        else {
+            return history.push("/app/signin");
         }
     }
 
@@ -173,7 +184,7 @@ export default function useAuthorization() {
     }
 
     async function getDetailProduct(product_id:any) {
-        show("Product Deatail");
+        show("Product Detail");
         return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
