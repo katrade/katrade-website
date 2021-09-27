@@ -12,7 +12,7 @@ export default function FavoriteComp(data: any) {
             return (
                 <div className="bg-white row mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
                     <div>
-                        <h4 className="d-inline-block me-3 mb-4">Inventory</h4>
+                        <h4 className="d-inline-block me-3 mb-4">Favorite</h4>
                         <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteData.length})</h5>
                     </div>
                     <div>

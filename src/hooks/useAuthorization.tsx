@@ -306,8 +306,9 @@ export default function useAuthorization() {
             .then(res => {
                 // window.location.reload();
             })
-            .catch(() => {
+            .catch((err) => {
                 hide();
+                console.log(err)
                 return null;
             })
     }
@@ -319,14 +320,16 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                console.log("ลบเรียบร้อย")
+                console.log(checkpath)
                 if(checkpath != "/app/product"){
-                    history.push("/app/aboutaccount?component=favorite")
-                }else{
-                    // window.location.reload();
+                    window.location.reload();
+                    // history.push("/app/aboutaccount?component=favorite")
                 }
             })
-            .catch(() => {
+            .catch((err) => {
                 hide();
+                console.log(err)
                 return null;
             })
     }
@@ -342,6 +345,23 @@ export default function useAuthorization() {
                 hide();
             })
             .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function getAnotherUser(user_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/searchID?id=${user_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
                 hide();
                 return null;
             })
@@ -366,6 +386,7 @@ export default function useAuthorization() {
         addFavourite,
         deleteFavourite,
         deleteMyRequestPending,
+        getAnotherUser,
     }
 }
 

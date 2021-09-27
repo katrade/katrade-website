@@ -1,6 +1,7 @@
 import { useState , useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string';
+import { useHistory } from "react-router";
 import useAuthorization from '../hooks/useAuthorization';
 
 import Navbar from '../components/Navbar';
@@ -17,11 +18,19 @@ function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
 
-    const { getMyInventory , getDetailProduct , getUserData , postMyReqeust , addFavourite , deleteFavourite } = useAuthorization();    
+    const { getMyInventory , 
+        getDetailProduct , 
+        getUserData , 
+        postMyReqeust , 
+        addFavourite , 
+        deleteFavourite , 
+        getAnotherUser} = useAuthorization();    
     const [ data , setData] = useState<any>(null);
     const [ owner , setOwner ] = useState<any>(null);
     const [ inventory , setInventory ] = useState<any>();
     const [ mobile , setMobile ] = useState(false);
+
+    const history = useHistory();
 
     // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
@@ -191,11 +200,11 @@ function Product() {
                                 </div>
                                 <div className="mt-2 px-3 py-1 border border-secondary rounded-3" style={{height:"150px", overflow:"auto"}}>
                                     <p className="mb-1 fw-bold" style={{ color: "black" }}>Requirement Detail</p>
-                                    <p className="m-0">{data.detail} lo</p>
+                                    <p className="m-0">{data.detail}</p>
                                 </div>
                                 <div className="d-flex align-s-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F1" }}>
                                     <img className="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style={{ width: "70px", height: "70px" }} />
-                                    <div>
+                                    <div onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{cursor:"pointer"}}>
                                         <p className="m-0 fs-3 fw-bold" style={{ color: "black" }}>{data.username}</p>
                                         <p className="m-0" style={{ color: "black" }}>2 Follow</p>
                                     </div>
