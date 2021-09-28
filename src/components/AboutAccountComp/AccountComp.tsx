@@ -6,7 +6,10 @@ import { useCookies } from 'react-cookie';
 import useLoading from '../../hooks/useLoading';
 import axios from 'axios';
 import { API } from '../../app.setting.json'
+import { useHistory } from "react-router";
 import { DynamicSolidButton } from '../standard/Button';
+import { uploadProfilePic } from "../../utils/storage";
+import { profile } from 'console';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -36,7 +39,7 @@ export default function AccountComp(data: any) {
                             borderRadius: '50%'
                         }}></div>
                     </div>
-                    <UploadProfilePic />
+                    <UploadProfilePic id={accountData._id}/>
                     <p className="m-0 ">file size: Maximum 1 MB</p>
                     <p className="m-0">supported files: .JPEG, .PNG</p>
 
@@ -89,32 +92,40 @@ export default function AccountComp(data: any) {
     );
 }
 
-function UploadProfilePic() {
+
+interface IUpload {
+    id: any
+}
+function UploadProfilePic({ id }: IUpload) {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    function handleFileUpload(e: any) {
+    const history = useHistory();
+
+    async function handleFileUpload(e: any) {
         show("Uploading");
-        const bodyFormData = new FormData();
-        const imagedata = e.target.files[0];
-        bodyFormData.append('file', imagedata);
-        if (!imagedata.type.includes('image/')) {
-            alert("File type not supported");
-            return hide();
+        const profileUrl = await uploadProfilePic(e.target.files, id).catch((err) => {
+            alert(err);
+        });
+        if (!profileUrl) {
+            window.location.reload();
+        }
+        const body = {
+            profilePic: profileUrl
         }
         axios({
             method: "post",
             url: `${API}/user/updateProfilePic`,
-            data: bodyFormData,
+            data: body,
             headers:
             {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
                 "Authorization": `Bearer ${cookies.DaveTheHornyDuck}`
             },
         })
             .then(function (response) {
-                //handle success
-                // console.log(response);
+                //handle success            
                 window.location.reload();
+                
 
             })
             .catch(function (response) {

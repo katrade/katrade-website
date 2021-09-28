@@ -34,15 +34,6 @@ const SeeMore = styled.button`
     font-size: 18px;
 `
 
-async function getRandomWord(): Promise<string> {
-    return new Promise(async (resolve,reject) => {
-        const a = await axios.get('https://random-word-api.herokuapp.com/word?number=1')
-        resolve(a.data)
-    })
-
-}
-
-
 // type DestCompContextType = {
 //     destCompState: any,
 //     destCompDispatch: any,
@@ -150,94 +141,6 @@ function Market() {
             name_item: "Cats, a weird creature",
             photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
         },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
-        {
-            name_item: "Cats, a weird creature",
-            photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-        },
     ]
 
     // สร้างตัวอย่างมาโชว์ Just For You
@@ -245,16 +148,17 @@ function Market() {
         return <Recommend item={item} key={index} />;
     });
     // สร้างตัวอย่างมาโชว์ Suggestion
-    const interest_item = id_item.map((item, index) => {
-        return <Interest item={item} key={index} />;
-    });
+    // const interest_item = id_item.map((item, index) => {
+    //     return <Interest item={item} key={index} />;
+    // });
 
-    const [mobile, setMobile] = useState(false);
-    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const [ mobile , setMobile ] = useState(false);
+    const [ account , setAccount ] = useState<IAccount>(defaultEmptyAccount);
+    const [ allInventory , setAllInventory ] = useState<any>();
     const history = useHistory();
-    const [cookies] = useCookies(['DaveTheHornyDuck']);
-    const [show, hide] = useLoading();
-    const {getUserData} = useAuthorization();
+    const [ cookies ] = useCookies(['DaveTheHornyDuck']);
+    const [ show , hide ] = useLoading();
+    const { getUserData , getAllInventory } = useAuthorization();
 
     window.addEventListener("resize", resize)
     useEffect(() => {
@@ -268,9 +172,10 @@ function Market() {
                 console.clear();
                 history.push('/app/signin');
             }
+            var allInventoryData = await getAllInventory();
+            setAllInventory(allInventoryData);
         }
         init();
-        
     }, []);
 
     function resize() {
@@ -280,53 +185,62 @@ function Market() {
         return setMobile(false)
     }
 
-    return (
-        // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
+    if(allInventory){
+        const tmpInventory = allInventory.map((item:any, index:any) => {
+            if( item.owner != account._id){
+            return <Interest item={item} key={index} />;
+            }
+        });
 
-        <div >
-            <Navbar image={account.profilePic}/>
-            {/* <NavbarSpare image={account.profilePic}/> */}
-            {/* <SearchMenu /> */}
-            <Block height="700" backgroundColor="#f7fafc">
-                <div className="my-4">
-                    <h5 className="mb-3">Match with you</h5>
-                    <div className="full-width">
-                        <div>
+        return (
+            // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
+            <div >
+                <Navbar image={account.profilePic}/>
+                <Block height="700" backgroundColor="#f7fafc">
+                    <div className="my-4">
+                        <h5 className="mb-3">Match with you</h5>
+                        <div className="full-width">
+                            <div>
+                                <div className="d-flex justify-content-start flex-wrap">
+                                    {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)}
+                                </div>
+                                <div className="d-flex justify-content-center align-items-center my-3">
+                                    <SeeMore className="mx-1">Page number or see more? </SeeMore>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div className="category">
+                            <h5>Category</h5>
+                            <div className="category-box">
+                            </div>
+                        </div>
+
+                        <h5 className="mb-3">Popular</h5>
+                        <div className="full-width">
                             <div className="d-flex justify-content-start flex-wrap">
-                                {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)}
+                                {/* {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)} */}
+                                {tmpInventory}
                             </div>
-                            <div className="d-flex justify-content-center align-items-center my-3">
-                                <SeeMore className="mx-1">Page number or see more? </SeeMore>
-                            </div>
-                            
                         </div>
                     </div>
-
-                    <div className="category">
-                        <h5>Category</h5>
-                        <div className="category-box">
-                        </div>
-                    </div>
-
-                    <h5 className="mb-3">Popular</h5>
-                    <div className="full-width">
-                        <div className="d-flex justify-content-start flex-wrap">
-                            {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)}
-                        </div>
-                    </div>
-                </div>
-            </Block>
-
-            <br /><br />
-
-            <Footer />
-        </div>
+                </Block>
+                <br /><br />
+                <Footer />
+            </div>
+        );
         // </DestCompContext.Provider>
-    )
+    }else{
+        return (
+            <div>
+                <p>แสดงหน้าโหลดดิ้ง</p>
+            </div>
+        );
+    }
 }
 
 // export { DestCompContext };
-
 export default Market;
 
 

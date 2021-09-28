@@ -1,10 +1,10 @@
-import { useState , useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API } from '../app.setting.json';
 import useAuthorization from '../hooks/useAuthorization';
-
+import { Label } from './Label';
 import './Navbar.css';
 
 // icon
@@ -28,9 +28,47 @@ import Logo from '../pics/logo_dark_green.png';
 
 import Block from './Block';
 import { useCookies } from 'react-cookie';
+import { CgNpm } from 'react-icons/cg';
 
 const google = 'https://google.com'
 
+const wallpapers = [
+    "https://cutewallpaper.org/21/men-fashion-wallpapers/Mens-Fall-Fashion-Wallpapers-High-Quality-Download-Free.jpg",
+    "https://i.pinimg.com/originals/c6/23/60/c623608e991cb9d3e106b3ee1227dc2f.jpg",
+    "https://wallpaperaccess.com/full/1191051.jpg",
+    "https://i2.wp.com/the-avocado.org/wp-content/uploads/2020/08/background-book-bookcase-books.jpg?fit=910%2C607&ssl=1",
+    "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGVzayUyMHNldHVwfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    "https://www.santabanta.com/images/wallpapers/babes/black-guitar-musical-instrument-wallpaper-1024-768-0.jpg",
+    "https://st2.depositphotos.com/4055463/7397/i/600/depositphotos_73971209-stock-photo-young-gorgeous-caucasian-woman-wearing.jpg",
+    "https://i0.wp.com/avante.biz/wp-content/uploads/Doraemon-wallpaper-HD-iphone/Doraemon-wallpaper-HD-iphone2.jpg",
+    "https://rosesimstore.com/wp-content/uploads/2019/06/Summers-Men-Shoes-Men-Sneakers-Flat-Male-Casual-Shoes-Comfortable-Men-Footwear-Breathable-Mesh-Sport-Tzapatos-4.jpg",
+    "https://ae01.alicdn.com/kf/HTB1l1iStBmWBuNkSndVq6AsApXa9/Women-High-Heels-Office-Shoes-Women-Sandals-Women-Cross-Strap-Brown-Black-Shoes-Pu-Leather-Boots.jpg_Q90.jpg_.webp",
+    "https://img1.exportersindia.com/product_images/bc-full/dir_109/3247300/sports-accessories-1482641.jpg",
+    "https://joburg.co.za/wp-content/uploads/2016/01/stationery2.jpg",
+    "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/snacks-in-america.jpg?quality=82&strip=1&resize=640%2C360",
+    "https://wallpaperaccess.com/full/1804560.jpg",
+    "https://s.isanook.com/ca/0/ui/281/1405996/oatmealpopcat_234623206_147287474156656_3695665365715248797_n.jpg",
+    "https://i.redd.it/wsqdveakw8l41.jpg",
+    "https://www.matichon.co.th/wp-content/uploads/2018/05/%E0%B8%AD.%E0%B9%80%E0%B8%89%E0%B8%A5%E0%B8%B4%E0%B8%A1%E0%B8%8A%E0%B8%B1%E0%B8%A2OA120360_%E0%B9%91%E0%B9%97%E0%B9%90%E0%B9%93%E0%B9%90%E0%B9%97_0023.jpg"
+
+]
+const backgroundImageStyles = {
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    opacity: "0.9",
+    filter: "brightness(0.2)",
+    borderRadius: "18px",
+    whitSpace: "normal",
+    textWrap: "normal",
+}
+const subStyles = {
+    fontWeight: 500,
+    color: "#fff",
+    fontSize: "35px",
+    display: "inline-block",
+    margin: "0 20px",
+}
 interface INavbar {
     image?: string
 }
@@ -45,9 +83,7 @@ function Navbar({ image }: INavbar) {
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
-    // console.log("Navbar พูดว่า : " + window.innerWidth);
     function resize() {
-        // console.log(window.innerWidth)
         if (window.innerWidth < 600) {
             if (mobile) {
                 return
@@ -61,8 +97,8 @@ function Navbar({ image }: INavbar) {
         }
     }
 
-    const [ category , setCategory ] = useState<any>();
-    const { getUserData , getCategory} = useAuthorization();
+    const [category, setCategory] = useState<any>();
+    const { getUserData, getCategory } = useAuthorization();
 
     useEffect(() => {
         resize();
@@ -76,15 +112,25 @@ function Navbar({ image }: INavbar) {
     }, []);
 
     var CategoryData;
-    if(category){
-        CategoryData = category.map((data:any, index:any) => {
-            return <li key={index}>{data.parentCategoryEn}</li>
+    var SubCategoryArrayEn: any = [];
+    var SubCategoryArrayTh: any = [];
+    const [selectIndex, setSelectIndex] = useState<any>(0);
+    if (category) {
+        CategoryData = category.map((data: any, index: any) => {
+            SubCategoryArrayEn.push(data.childCategoryEn.map((subdata: any) => {
+                return <span style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
+            }));
+            SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
+                return <span style={subStyles}>{subdata}</span>;
+            }));
+
+            return <li className="" onClick={() => setSelectIndex(index)} key={index}>{data.parentCategoryEn}</li>;
         });
-    }else{
+
     }
 
     if (mobile) {
-        return <MobileNavbar signout={signout}/>
+        return <MobileNavbar signout={signout} />
     }
 
     function dropIcon() {
@@ -105,7 +151,6 @@ function Navbar({ image }: INavbar) {
         setCookies('DaveTheHornyDuck', '', { path: '/' });
         history.push('/app/signin');
     }
-
     return (
         <div className="header py-3">
             <Block height="90px">
@@ -117,9 +162,58 @@ function Navbar({ image }: INavbar) {
                         <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
                         <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                         <ul className={drop ? "categories active" : "categories"}>
+                            { category ?
                             <Block height="auto">
-                                {CategoryData}
+                                <div className="row" style={{ width: "100%"}}>
+                                    <div className="col-2" style={{ width: "150px" }}>
+                                        {CategoryData}
+                                    </div>
+                                    <div className="col-1" />
+                                    <div 
+                                        className="col-8"
+                                        style={{
+                                            position: "relative"
+                                        }}                                  
+                                    >
+                                        <div style={{
+                                            position: "absolute",
+                                            top: "0",
+                                            left: "0",
+                                            right: "0",
+                                            bottom: "0",
+                                            zIndex: 59,
+                                            margin: "70px 20px",
+                                            textAlign: "center",
+                                        }}>
+                                            {/* <h1 className="text-white">{category[selectIndex].parentCategoryEn}</h1>
+                                            <hr style={{
+                                                backgroundColor: "#fff",
+                                                border: "1px #fff solid",
+                                                opacity: 0.3,
+                                                borderRadius: "1px",
+                                            }}/> */}
+                                            {SubCategoryArrayEn[selectIndex]}
+                                        </div>
+                                        <div
+                                            style={{ 
+                                                backgroundImage: `url(${wallpapers[selectIndex]})`,
+                                                position: "absolute",
+                                                top: "0",
+                                                left: "0",
+                                                right: "0",
+                                                bottom: "0",
+                                                ...backgroundImageStyles,
+                                                zIndex: 30,
+                                                }}
+                                        ></div>
+                                        
+                                    </div>
+
+
+                                </div>
                             </Block>
+                            : null
+                            }
                         </ul>
                     </div>
                     <form className="search">
@@ -127,43 +221,36 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-
-                        {/* <a onClick={signout} className="pointer"><FaSignOutAlt /></a>
-                        <a href="/app/account" style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}</a>
-                        <a href="/app/request"><FaRegListAlt /></a>
-                        <a><MdChat /></a>
-                        <a href=""><IoIosNotifications /></a> */}
                         
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Account</a> */}
-                                {/* <a onClick={() => history.push("/app/account")}>Account</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Following</a> */}
-                                {/* <a onClick={() => history.push("/app/following")}>Following</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Followers</a> */}
-                                {/* <a onClick={() => history.push("/app/followers")}>Followers</a> */}
-                                <a onClick={() => history.push("/app/aboutaccount?component=followes")}>Followers</a>
-                                {/* <a onClick={(e) => sendDestComp(e.currentTarget.innerHTML)}>Inventory</a> */}
-                                {/* <a onClick={() => history.push("/app/inventory")}>Inventory</a> */}
+                                <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
                                 <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
-                        <a href="/app/request"><FaRegListAlt /></a>
-                        <a href="#"><MdChat /></a>
-                        <a href="#"><IoIosNotifications /></a>
+                        <Label content="Requests" className="icon pointer">
+                            <a href="/app/request"><FaRegListAlt /></a>
+                        </Label>
+                        <Label content="Chat" className="icon pointer">
+                            <a onClick={() => { window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ") }}><MdChat /></a>
+                        </Label>
+                        <Label content="Notification" className="icon pointer">
+                            <a onClick={() => { window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ") }}><IoIosNotifications /></a>
+                        </Label>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a onClick={() => history.push("/app/account")}>Account</a>
-                            <a onClick={() => history.push("#")}>Chat</a>
-                            <a onClick={() => history.push("/app/request")}>Notification</a>
-                            <a onClick={() => history.push("/app/following")}>Following</a>
-                            <a onClick={() => history.push("/app/followers")}>Followers</a>
-                            <a onClick={() => history.push("/app/inventory")}>Inventory</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
+                            <a onClick={() => { window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ") }}>Chat</a>
+                            <a onClick={() => { window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ") }}>Notification</a>
+                            <a onClick={() => history.push("/app/request")}>Request</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
+                            <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                             <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                         </div>
                     </div>
@@ -184,7 +271,7 @@ const MobileNavbarContainer = styled.div`
     z-index: 50;
 `
 
-function MobileNavbar({signout}: any) {
+function MobileNavbar({ signout }: any) {
 
     // const [clickMobile, SetClickMobile] = useState(false);
     // const handleClickMobile = () => SetClickMobile(!clickMobile);
@@ -225,7 +312,7 @@ function MobileNavbar({signout}: any) {
                     <ul className={dropMenu ? "sidemenu active-sidemenu" : "sidemenu"}>
                         <div className="sidemenu-content d-block">
                             <li className="text-center">
-                                <a href="/app/account">Account</a>
+                                <a href="/app/aboutaccount?component=account">Account</a>
                             </li>
                             <li className="text-center">
                                 <a href="#">Chat</a>
@@ -292,3 +379,7 @@ function MobileNavbar({signout}: any) {
 }
 
 export default Navbar;
+
+function subdata(subdata: any, any: any): any {
+    throw new Error('Function not implemented.');
+}

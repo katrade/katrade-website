@@ -5,6 +5,7 @@ export interface IAccount {
     password: string
 	address: string
 	email: string
+	_id: string
 	phoneNumber: string
 	profilePic: string
 	verifyEmail: number
@@ -21,6 +22,7 @@ export const defaultEmptyAccount: IAccount = {
     password: "",
 	address: "",
 	email: "",
+	_id: "",
 	phoneNumber: "",
 	profilePic: "",
 	verifyEmail: 0,

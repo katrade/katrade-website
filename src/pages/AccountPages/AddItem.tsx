@@ -1,4 +1,4 @@
-import React , { useState , useEffect } from 'react';
+import React , { useState , useEffect , useRef } from 'react';
 import { useForm } from '../../utils/useForm';
 import Select from 'react-select';
 import useAuthorization from '../../hooks/useAuthorization';
@@ -10,9 +10,8 @@ import UploadImg from '../../components/Account/UploadImg';
 import { SolidButton } from '../../components/standard/Button'
 import useLoading from '../../hooks/useLoading';
 import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
-import { ContactSupportOutlined } from '@material-ui/icons';
-
-// export const pictureContext = React.createContext< [] | any >(null);
+import { ContactSupportOutlined, LocalConvenienceStoreOutlined } from '@material-ui/icons';
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 export default function AddItem() {
 
@@ -29,78 +28,141 @@ export default function AddItem() {
         init();
     }, []);
 
-    var MainCategoriesEn;
-    var MainCategoriesTh;
+    // ยังไม่พร้อมใช้งานในโหมดภาษาไทย ขี้เกียจงับ
+    // ยังไม่พร้อมใช้งานในโหมดภาษาไทย ขี้เกียจงับ
+    // ยังไม่พร้อมใช้งานในโหมดภาษาไทย ขี้เกียจงับ
+
+    var MainCategoriesEn:any;
+    var MainCategoriesTh:any;
     var SubCategoriesEn:any = [];
     var SubCategoriesTh:any = [];
+    var MainCateLangTh:any = [];
+    var SubCateLangTh:any = [];
     SubCategoriesEn.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
     SubCategoriesTh.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
-    var indexCat = 0;
     if(category){
         MainCategoriesEn = category.map((data:any, index:any) => {
-            indexCat++;
             var cCatEn = data.childCategoryEn
             SubCategoriesEn.push(cCatEn.map((data:any, index:any) => {
-                return { value: data, 'label': data }
+                return { value: data, 'label': data, indexC: index }
             }))
             var cCatTh = data.childCategoryTh
-            SubCategoriesTh.push(cCatEn.map((data:any, index:any) => {
-                return { value: data, 'label': data }
+            SubCategoriesTh.push(cCatTh.map((data:any, index:any) => {
+                return { value: data, 'label': data, indexC: index }
             }))
             var pCatEn = data.parentCategoryEn
-            return { value: pCatEn, 'label': pCatEn, indexC: indexCat}
+            return { value: pCatEn, 'label': pCatEn, indexC: index}
         });
+
         MainCategoriesTh = category.map((data:any, index:any) => {
             var pCatTh = data.childCategoryTh
-            return { value: pCatTh, 'label': pCatTh, indexC: indexCat}
+            var pCatEn = data.parentCategoryEn
+            MainCateLangTh.push(data.parentCategoryTh);
+            return { value: pCatEn, 'label': pCatTh, indexC: index}
         });
+
+        SubCateLangTh.push(category.map((data:any, index:any) => {
+            var tmp:any = [];
+            (data.childCategoryTh.map((subdata:any, index:any) => {
+                tmp.push(subdata);
+            }));
+            return tmp;
+        }))
     }
 
     // ------------------------------------------------------------------
 
     const [ finalMyMainCate , setFinalMyMainCate ] = useState();
     const [ finalMySubCate , setFinalMySubCate ] = useState();
+    const [ finalMyMainCateTh , setFinalMyMainCateTh ] = useState();
+    const [ finalMySubCateTh , setFinalMyMSubCateTh ] = useState();
+
     var mySubCateTag = "unSelect";
     var mySubCateIndex = 0;
     function findMySubCate() {
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + mySubCateTag;
-        var godhelpme = SubCategoriesEn[mySubCateIndex];
+        var godhelpme = SubCategoriesEn[mySubCateIndex+1];
         if(mySubCateIndex == 0){
             return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
-            return <Select options={godhelpme} className="fs-5" name="mySubCate" onChange={(sel:any) => {setFinalMySubCate(sel.value)}} placeholder={placeholderString} />;
+            return <Select options={godhelpme} className="fs-5" name="mySubCate" onChange={(sel:any) => {selectMySubTh(sel)}} placeholder={placeholderString} />;
         }
     }
+
     function selectMySub(selectMySubCate:any) { 
         mySubCateTag = selectMySubCate.value;
         mySubCateIndex = selectMySubCate.indexC;
         setFinalMyMainCate(selectMySubCate.value);
+        setFinalMyMainCateTh(MainCateLangTh[mySubCateIndex]);
         setMyItemSubCate(findMySubCate);
+    }
+    function selectMySubTh(event:any) {
+        setFinalMySubCate(event.value)
+        setFinalMyMSubCateTh(SubCateLangTh[0][mySubCateIndex][event.indexC])
     }
     const [ myItemSubCate , setMyItemSubCate ] = useState(findMySubCate);
 
     // ------------------------------------------------------------------
     
-    const [ finalWantMainCate , setFinalWantMainCate ] = useState();
-    const [ finalWantSubCate , setFinalWantSubCate ] = useState();
+    const [ wantInputFields , SetWantInputFields ] = useState<any>([
+        {
+            reqCat: { 
+                parentCategoryEn: "",
+                parentCategoryTh: "",
+                childCategoryEn: "",
+                childCategoryTh: ""
+            },
+            detail: ""
+        },
+    ]);
+
+    const handleChangeDynamic = (index:any , event:any) => {
+        const values = [...wantInputFields];
+        values[index][event.target.name] = event.target.value;
+        SetWantInputFields(values);
+    }
+
+    const handleAddItem = () => {
+        SetWantInputFields([...wantInputFields , {
+            reqCat: { 
+                parentCategoryEn: "",
+                parentCategoryTh: "",
+                childCategoryEn: "",
+                childCategoryTh: ""
+            },
+            detail: ""
+        }])
+    }
+
+    const handleRemoveItem = (index:any) => {
+        // const values = [...wantInputFields];
+        // values.splice(index , 1);
+        // SetWantInputFields(values);
+        window.alert("ยังไม่พร้อมใช้งาน")
+    }
+
     var wantSubCateTag = "unSelect";
     var wantSubCateIndex = 0;
-    function findWantSubCate() {
-        var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
-        var godhelpme = SubCategoriesEn[wantSubCateIndex];
-        if(wantSubCateIndex == 0){
-            return <Select options={godhelpme} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
-        }else{
-            return <Select options={godhelpme}  className="fs-5" name="wantSubCate" onChange={(sel:any) => {setFinalWantSubCate(sel.value)}} placeholder={placeholderString} />;
-        }
+    var [ godHelpMe , setGodHelpMe ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+
+    function selectWantSub(index:any , event:any) { 
+        const values = [...wantInputFields];
+        values[index]["reqCat"]["parentCategoryEn"] = event.value;
+        SetWantInputFields(values);
+
+        wantSubCateTag = event.value;
+        wantSubCateIndex = event.indexC;
+        values[index]["reqCat"]["parentCategoryTh"] = MainCateLangTh[wantSubCateIndex];
+
+        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} placeholder="กรุณาเลือก Category หลักก่อน" />);
     }
-    function selectWantSub(selectWantSubCate:any) { 
-        wantSubCateTag = selectWantSubCate.value;
-        wantSubCateIndex = selectWantSubCate.indexC;
-        setFinalWantMainCate(selectWantSubCate.value);
-        setWantItemSubCate(findWantSubCate);
+    function selectedSub(index:any , event:any) {
+        const values = [...wantInputFields];
+        values[index]["reqCat"]["childCategoryEn"] = event.value;
+        values[index]["reqCat"]["childCategoryTh"] = SubCateLangTh[0][wantSubCateIndex][event.indexC];
+        SetWantInputFields(values);
     }
-    const [ wantItemSubCate , setWantItemSubCate ] = useState(findWantSubCate);
+
     const [ account , setAccount] = useState<IAccount>(defaultEmptyAccount);
     const { getUserData } = useAuthorization();
 
@@ -117,38 +179,49 @@ export default function AddItem() {
         init();
     }, [])
 
-    const [ productPic , setProductPic ] = useState<[]>([]);
+    const coverPictureRef = useRef<HTMLInputElement>(null);
+    const picture1Ref = useRef<HTMLInputElement>(null);
+
+    const [ cover, setCover ] = useState("https://via.placeholder.com/120")
+    const [ dataCover, setDataCover ] = useState()
+    const [ picture1, setPicture1 ] = useState("https://via.placeholder.com/120")
+    const [ dataPicture1, setDataPicture1 ] = useState()
+
+    const handleCover = (e:any) => {
+        const file = e.target.files[0];
+        setDataCover(file);
+        const fileURL = URL.createObjectURL(file);
+        setCover(fileURL);
+    }
+    const handlePicture1 = (e:any) => {
+        const file = e.target.files[0];
+        setDataPicture1(file);
+        const fileURL = URL.createObjectURL(file);
+        setPicture1(fileURL);
+    }
+
     const [dataItem, handleDataItem] = useForm();
-    useEffect(() => {
-        console.log("sadasd");
-    }, [productPic])
 
     function handleUnload(event:any){ 
         event.preventDefault();
-            const data = {
+        var arrayOfPicture = [];
+        arrayOfPicture.push(dataCover);
+        arrayOfPicture.push(dataPicture1);
+        
+        const data = {
             name: dataItem.name,
             detail: dataItem.myDetail,
             category: {
                 parentCategoryEn: finalMyMainCate,
-                parentCategoryTh: "",
+                parentCategoryTh: finalMyMainCateTh,
                 childCategoryEn: finalMySubCate,
-                childCategoryTh: ""
+                childCategoryTh: finalMySubCateTh
             },
-            pictures:[],
-            require: [
-                {
-                    reqCat: {
-                        parentCategoryEn: finalWantMainCate,
-                        parentCategoryTh: "",
-                        childCategoryEn: finalWantSubCate,
-                        childCategoryTh: ""
-                    },
-                    detail: dataItem.wantDetail
-                }
-            ]
+            pictures: [],
+            require: wantInputFields
         }
         // console.log(data);
-        addItem(data);
+        addItem(data, arrayOfPicture);
     }
 
     return (
@@ -166,20 +239,38 @@ export default function AddItem() {
                             </div>
                         </div>
 
+
+
                         {/* รูป */}
                         <div className="mb-4" style={{height:"auto",backgroundColor:"#C4C4C4",border:"2px dashed #000",borderRadius:"10px"}}>
                             <div className="px-3 py-4">
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
-                                    {/* <h4>รอปรับปรุง</h4> */}
-                                    <UploadImg positionPic={"Cover Picture"}/>
-                                    <UploadImg positionPic={"Picture 1"}/>
-                                    {/* <UploadImg positionPic={"Picture 2"}/> */}
-                                    {/* <UploadImg positionPic={"Picture 3"}/> */}
-                                    {/* <UploadImg positionPic={"Picture 4"}/> */}
+                                    {/* Cover Picture */}
+                                    <div className="">
+                                        <input type="file" ref={coverPictureRef} name="Cover Picture" accept="image/*" onChange={handleCover} style={{display:"none"}}/>
+                                        <img src={cover} style={{width:"120px",height:"120px",cursor:"pointer"}}
+                                        onClick={() => {
+                                            coverPictureRef.current?.click();
+                                        }}
+                                        ></img>
+                                        <p className="d-flex justify-content-center mb-0 mt-2">Cover Pictue</p>
+                                    </div>
+                                    {/* Picture 1 */}
+                                    <div className="">
+                                        <input type="file" ref={picture1Ref} name="Cover Picture" accept="image/*" onChange={handlePicture1} style={{display:"none"}}/>
+                                        <img src={picture1} style={{width:"120px",height:"120px",cursor:"pointer"}}
+                                        onClick={() => {
+                                            picture1Ref.current?.click();
+                                        }}
+                                        ></img>
+                                        <p className="d-flex justify-content-center mb-0 mt-2">Picture 1</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
 
                         {/* ประเภทของเรา */}
                         <div className="form-group row">
@@ -202,26 +293,45 @@ export default function AddItem() {
                             </div>
                         </div>
 
+
+
+                        <hr className="my-4"/>
                         {/* ประเภทที่ต้องการ */}
                         <p className="mb-0 mt-4 fw-bold">Requirement</p>
-                        <div className="form-group row">
-                            <label className="col-md-2 col-form-label fs-5">Require Category</label>
-                            <div className="col-md-5">
-                                <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                        { wantInputFields.map((inputField:any , index:any) => (
+                            <div key={index}>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label fs-5">Require Category {index+1}</label>
+                                    <div className="col-md-5">
+                                        <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(index , selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                    </div>
+                                    <div className="col-md-5">
+                                        {godHelpMe}
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label fs-5">Requirement Details</label>
+                                    <div className="col-md-10">
+                                        <textarea className="form-control fs-5" value={inputField.detail} name="detail" onChange={(event) => handleChangeDynamic(index , event)} rows={5} placeholder="Enter requirement details"></textarea>
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-center mb-3">
+                                    <div className="bg-info me-4" onClick={()=>{handleAddItem();}}>
+                                        <p className="m-0 px-1">Add requirement</p>
+                                    </div>
+                                    {/* <div className="bg-info" style={{width:"20px"}}/> */}
+                                    <div className="bg-warning " onClick={() => {handleRemoveItem(index)}}>
+                                        <p className="m-0 px-1">Remove requirement</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="col-md-5">
-                                {wantItemSubCate}
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-md-2 col-form-label fs-5">Requirement Details</label>
-                            <div className="col-md-10">
-                                <textarea className="form-control fs-5" value={dataItem.wantDetail || ""} name="wantDetail" onChange={handleDataItem} rows={5} placeholder="Enter requirement details"></textarea>
-                            </div>
-                        </div>
+                        ))}
+
+
 
                         {/* ปุ่มยืนยัน */}
-                        <div className="d-flex justify-content-center mt-5">
+                        <hr className="my-4"/>
+                        <div className="d-flex justify-content-center">
                             <SolidButton width="100px" buttonColor="limegreen"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
                             <SolidButton width="100px" buttonColor="red"><a href="/app/aboutaccount?component=inventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
                         </div>

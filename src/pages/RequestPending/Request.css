@@ -21,8 +21,8 @@
     color: #212529;
 }
 
-.topic-request > a:hover {
-    background-color: rgba(107, 106, 106, 1);
+.topic-request > p:hover {
+    background-color: rgba(107, 106, 106, 0.2);
 }
 
 .currenttap {
