@@ -135,7 +135,7 @@ function Product() {
         }else{
             return (
                 <SolidButton onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
-                    Reomve to Favorite
+                    Remove from Favorite
                 </SolidButton>
             );
         }

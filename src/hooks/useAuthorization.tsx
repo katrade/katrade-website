@@ -4,12 +4,11 @@ import { API } from '../app.setting.json'
 import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
-import { resourceUsage } from "process";
-import { ContactSupportOutlined } from "@material-ui/icons";
+
 // test pushing changes
 
 export default function useAuthorization() {
-    const [cookies] = useCookies(['DaveTheHornyDuck']);
+    const [cookies, setCookie] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const history = useHistory();
 
@@ -28,6 +27,7 @@ export default function useAuthorization() {
                 return res.data.data;
             })
             .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
                 hide();
                 return null;
             })
