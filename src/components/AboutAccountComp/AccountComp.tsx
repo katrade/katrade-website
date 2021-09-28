@@ -52,7 +52,7 @@ export default function AccountComp(data: any) {
                         <label className="col-md-3">Username</label>
                         <p className="col-md-8" style={{ color: "black" }}>{accountData.username}</p>
                     </div>
-                    <div className="row" style={{ width: "100%" }}>
+                    <div className="row mb-2" style={{ width: "100%" }}>
                         <label className="col-md-3">Firstname</label>
                         <input
                             type="text"
@@ -63,7 +63,7 @@ export default function AccountComp(data: any) {
                             onChange={(e) => setFirstname(e.target.value)}
                         />
                     </div>
-                    <div className="row" style={{ width: "100%" }}>
+                    <div className="row mb-2" style={{ width: "100%" }}>
                         <label className="col-md-3">Lastname</label>
                         <input
                             type="text"
