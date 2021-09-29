@@ -9,22 +9,24 @@
     cursor: pointer;
     text-decoration: none;
     color: #212529;
+    background-color: transparent;
 }
 
 .topic-request > p {
-    width: 150px;
-    margin: 0 16px 0 0;
+    min-width: 150px;
+    padding: 0 20px;
+    margin: 0;
     text-align: center;
-    border-radius: 8px;
-    cursor: default;
+    cursor: pointer;
     text-decoration: none;
     color: #212529;
 }
 
 .topic-request > p:hover {
-    background-color: rgba(107, 106, 106, 0.2);
+    /* background-color: rgba(218, 218, 218, 0.2); */
 }
 
 .currenttap {
-    background-color: #C4C4C4;
+    border: solid 2px #04d66d;
+    border-width: 0 0 3px 0;
 }
