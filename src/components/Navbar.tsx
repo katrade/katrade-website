@@ -58,7 +58,7 @@ const backgroundImageStyles = {
     backgroundSize: "cover",
     opacity: "0.9",
     filter: "brightness(0.2)",
-    borderRadius: "18px",
+    borderRadius: "2px",
     whitSpace: "normal",
     textWrap: "normal",
 }
