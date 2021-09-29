@@ -30,13 +30,13 @@ const SignInForm = () => {
     
     document.addEventListener("keydown", function(event) {
         if (event.keyCode === 13) {
-            onFormSubmit();
+            document.getElementById("signin")?.click();
         }
     });
 
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
         show("We're bringing you in");
-        // console.log(form.email, form.password);
+        console.log(form.email, form.password);
         await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
@@ -108,7 +108,7 @@ const SignInForm = () => {
                                 </div>
                             </div>
                             <div className="text-center mb-5">
-                                <input type="submit" onClick={onFormSubmit} className="mybutton-grey pl-5 pr-5 mt-3" value="Sign in" />
+                                <input id="signin" type="submit" onClick={onFormSubmit} className="mybutton-grey pl-5 pr-5 mt-3" value="Sign in" />
                             </div>
                         </div>
                     </div>
