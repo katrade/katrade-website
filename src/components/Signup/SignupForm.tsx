@@ -27,6 +27,12 @@ export default function SignupForm({ pw, setPw }: p) {
     //     }  
     // }
 
+    document.addEventListener("keydown", function(event) {
+        if (event.keyCode === 13) {
+            onFormSubmit();
+        }
+    });
+
     useEffect(() => {
         // console.log('render');
         // let timeoutid:any = setTimeout(() => {
@@ -34,6 +40,7 @@ export default function SignupForm({ pw, setPw }: p) {
         // },2000)
         // return () => clearTimeout(timeoutid);
     }, [form.username]);
+
 
 
     const onFormSubmit = async () => {
