@@ -4,12 +4,18 @@ import { API } from '../app.setting.json'
 import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
+import { resourceUsage } from "process";
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 
 export default function useAuthorization() {
-    const [cookies] = useCookies(['DaveTheHornyDuck']);
+    const [cookies, setCookie] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const history = useHistory();
+
+    function clearAuthCookie() {
+        setCookie("DaveTheHornyDuck", "");
+    }
 
     async function getUserData(): Promise<IAccount | null> {
         show("Preparing your page")
@@ -19,13 +25,15 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                console.log(res)
                 if (!res.data.data.username) {
                     history.push(`/app/setup`);
                 }
                 hide();
                 return res.data.data;
             })
-            .catch(() => {
+            .catch((err) => {
+                clearAuthCookie();
                 hide();
                 return null;
             })
@@ -50,7 +58,8 @@ export default function useAuthorization() {
             window.location.reload();
         })
         .catch(err => {
-            alert(`We got some error.\n${err}`)
+            alert(`We got some error.\n${err}`);
+            clearAuthCookie();
             return hide();
         })
     }
@@ -80,7 +89,8 @@ export default function useAuthorization() {
             }
         })
         .catch(err => {
-            alert(`We got some error.\n${err}`) 
+            alert(`We got some error.\n${err}`);
+            clearAuthCookie();
             hide();
         })
     }
@@ -88,6 +98,9 @@ export default function useAuthorization() {
     async function isUserActive() {
         if (cookies.DaveTheHornyDuck) {
             return history.push('/app/market');
+        }
+        else {
+            return history.push("/app/signin");
         }
     }
 
@@ -153,6 +166,7 @@ export default function useAuthorization() {
     }
         
     async function getMyInventory() {
+        show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -170,7 +184,7 @@ export default function useAuthorization() {
     }
 
     async function getDetailProduct(product_id:any) {
-        show("Product Deatail");
+        show("Product Detail");
         return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -220,6 +234,63 @@ export default function useAuthorization() {
             })
     }
 
+    // ของจะโผล่หน้า request to you ของเรา
+    async function getRequest(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserRequest`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    // ของจะโผล่หน้า pending ของเรา
+    async function getPending(): Promise<any> {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserPending`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    async function postMyReqeust(dataArray: any | undefined) {
+        // show("โหลดดิ้ง..");
+        console.log(dataArray)
+        // return await axios({
+        //     method: "post",
+        //     url: `${API}/user/newRequest`,
+        //     // data: bodyFormData,
+        //     headers: { 
+        //         "Content-Type": "multipart/form-data",
+        //         'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
+        //     },
+        // })
+        // .then(res => {
+        //     window.location.reload();
+        // })
+        // .catch(err => {
+        //     alert(`We got some error.\n${err}`)
+        //     return hide();
+        // })
+    }
+
     return { 
         getUserData, 
         updateProfilePic, 
@@ -232,6 +303,9 @@ export default function useAuthorization() {
         getDetailProduct, 
         deleteMyProduct,
         getAllInventory,
+        getRequest,
+        getPending,
+        postMyReqeust,
     }
 }
 
