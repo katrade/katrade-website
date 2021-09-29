@@ -8,6 +8,8 @@ import axios from 'axios';
 import { API } from '../../app.setting.json'
 import { useHistory } from "react-router";
 import { DynamicSolidButton } from '../standard/Button';
+import { uploadProfilePic } from "../../utils/storage";
+import { profile } from 'console';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -37,7 +39,7 @@ export default function AccountComp(data: any) {
                             borderRadius: '50%'
                         }}></div>
                     </div>
-                    <UploadProfilePic />
+                    <UploadProfilePic id={accountData._id}/>
                     <p className="m-0 ">file size: Maximum 1 MB</p>
                     <p className="m-0">supported files: .JPEG, .PNG</p>
 
@@ -45,13 +47,13 @@ export default function AccountComp(data: any) {
 
                 {/* ส่วนของข้อมูล */}
                 <div className="col-md-8 order-md-1 p-3">
-                    <h4 className="mb-4">Profile</h4>
+                    <label><h4 className="mb-4">Profile</h4></label>
                     <div className="row" style={{ width: "100%" }}>
-                        <p className="col-md-3">Username</p>
+                        <label className="col-md-3">Username</label>
                         <p className="col-md-8" style={{ color: "black" }}>{accountData.username}</p>
                     </div>
-                    <div className="row" style={{ width: "100%" }}>
-                        <p className="col-md-3">Firstname</p>
+                    <div className="row mb-2" style={{ width: "100%" }}>
+                        <label className="col-md-3">Firstname</label>
                         <input
                             type="text"
                             className="col-md-8 form-control border border-secondary rounded-3 mx-3"
@@ -61,8 +63,8 @@ export default function AccountComp(data: any) {
                             onChange={(e) => setFirstname(e.target.value)}
                         />
                     </div>
-                    <div className="row" style={{ width: "100%" }}>
-                        <p className="col-md-3">Lastname</p>
+                    <div className="row mb-2" style={{ width: "100%" }}>
+                        <label className="col-md-3">Lastname</label>
                         <input
                             type="text"
                             className="col-md-8 form-control border border-secondary rounded-3 mx-3"
@@ -72,16 +74,20 @@ export default function AccountComp(data: any) {
                             onChange={(e) => setLastname(e.target.value)}
                         />
                     </div>
-                    <h4 className="mb-3 mt-4">Contact</h4>
+                     <label><h4 className="mb-3 mt-4">Contact</h4></label>
                     <div className="row" style={{ width: "100%" }}>
-                        <p className="col-md-3">Email</p>
+                        <label className="col-md-3">Email</label>
                         <p className="col-md-8" style={{ color: "black" }}>{accountData.email}</p>
                     </div>
-                    <div className="row" style={{ width: "100%" }}>
-                        <p className="col-md-3">Mobile</p>
+                    <div className="row mb-4" style={{ width: "100%" }}>
+                        <label className="col-md-3">Mobile</label>
                         <div className="col-md-8">
                             <p style={{ color: "black" }}>{accountData.phoneNumber}</p>
-                            <button type="button" onClick={() => changeProfile({ firstname: firstname, lastname: lastname })} className="btn btn-success">Save Changes</button>
+                        </div>
+                    </div>
+                    <div className="row mb-3"  style={{width:"100%"}}>
+                        <div className="offset-lg-3">
+                            <button type="button" onClick={() => changeProfile({ firstname: firstname, lastname: lastname })} className="btn btn-success px-2 mx-1">Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -90,35 +96,40 @@ export default function AccountComp(data: any) {
     );
 }
 
-function UploadProfilePic() {
+
+interface IUpload {
+    id: any
+}
+function UploadProfilePic({ id }: IUpload) {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const history = useHistory();
-    function handleFileUpload(e: any) {
+
+    async function handleFileUpload(e: any) {
         show("Uploading");
-        const bodyFormData = new FormData();
-        const imagedata = e.target.files[0];
-        bodyFormData.append('file', imagedata);
-        if (!imagedata.type.includes('image/')) {
-            alert("File type not supported");
-            return hide();
+        const profileUrl = await uploadProfilePic(e.target.files, id).catch((err) => {
+            alert(err);
+        });
+        if (!profileUrl) {
+            window.location.reload();
+        }
+        const body = {
+            profilePic: profileUrl
         }
         axios({
             method: "post",
             url: `${API}/user/updateProfilePic`,
-            data: bodyFormData,
+            data: body,
             headers:
             {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
                 "Authorization": `Bearer ${cookies.DaveTheHornyDuck}`
             },
         })
             .then(function (response) {
-                //handle success
-                // console.log(response);
-                history.push('/app/market');
+                //handle success            
+                window.location.reload();
                 
-                // window.location.reload();
 
             })
             .catch(function (response) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import { SolidButton } from '../standard/Button';
 import { useHistory } from 'react-router';
-import queryString from 'query-string';
+
 import { H4, H5 }  from '../standard/H';
 import Div from '../standard/Div';
 import P from '../standard/P';
@@ -11,6 +11,8 @@ import useAuthorization from '../../hooks/useAuthorization'
 interface IParams {
     email: string
 }
+
+const queryString = require("query-string");
 
 export function AfterSignUp() {
     const { search } = useLocation();

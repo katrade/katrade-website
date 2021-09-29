@@ -54,7 +54,7 @@ import Inprogress from './pages/RequestPending/Inprogress'
 import ProfileCanvas from './components/ProfileCanvas';
 
 import Test01 from './components/TestFrontend/Test01';
-
+import Test from "./components/Test";
 
 require('dotenv').config({ path: ".env" })
 console.log(process.env)
@@ -69,7 +69,7 @@ function App() {
                         <Router>
                             <Switch>
 
-                                {/* <Route exact path="/test" component={}></Route> */}
+                                <Route exact path="/test" component={Test}></Route>
 
                                 {/* Add path here!!  */}
 

@@ -5,7 +5,7 @@ import "./ChangePassword.css";
 export default function ChangePassword() {
     return (
         <div className="container-changepassword">
-            <h4>Change Password</h4>
+            {/* <h4>Change Password</h4> */}
             <div className="changepassword-current">
                 <h6 >Current Password</h6>
                 <input type="text" placeholder="Enter your current password."></input>

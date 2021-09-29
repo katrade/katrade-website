@@ -2,6 +2,8 @@ import ItemBlock from '../../components/Account/ItemBlock';
 
 export default function InventoryComp(data: any) {
     const inventoryData = data.data;
+    console.log(inventoryData);
+    console.log(inventoryData);
 
     if(inventoryData){
         if(inventoryData.length == 0){
@@ -17,6 +19,7 @@ export default function InventoryComp(data: any) {
                 </div>
             );
         }else{
+            // console.log(inventoryData)
             const myInventory = inventoryData.reverse().map((data:any, index:any) => {
                 return <ItemBlock data={data} key={index} manage="no"/>;
             });

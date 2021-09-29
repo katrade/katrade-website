@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import { resourceUsage } from "process";
 import { ContactSupportOutlined } from "@material-ui/icons";
 
+// test pushing changes
 
 export default function useAuthorization() {
     const [cookies, setCookie] = useCookies(['DaveTheHornyDuck']);
@@ -32,8 +33,8 @@ export default function useAuthorization() {
                 hide();
                 return res.data.data;
             })
-            .catch((err) => {
-                clearAuthCookie();
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
                 hide();
                 return null;
             })
@@ -157,7 +158,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                history.push("/app/aboutaccount?component=account")
+                window.location.reload();
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
@@ -191,12 +192,12 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                // if (!res.data.data.username) {
                 hide();
                 return res.data;
             })
-            .catch(() => {
+            .catch((err) => {
                 hide();
+                console.log(err)
                 return null;
             })
     }
@@ -271,24 +272,111 @@ export default function useAuthorization() {
     }
 
     async function postMyReqeust(dataArray: any | undefined) {
-        // show("โหลดดิ้ง..");
-        console.log(dataArray)
-        // return await axios({
-        //     method: "post",
-        //     url: `${API}/user/newRequest`,
-        //     // data: bodyFormData,
-        //     headers: { 
-        //         "Content-Type": "multipart/form-data",
-        //         'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
-        //     },
-        // })
-        // .then(res => {
-        //     window.location.reload();
-        // })
-        // .catch(err => {
-        //     alert(`We got some error.\n${err}`)
-        //     return hide();
-        // })
+        show("ติดต่อขอแลกเปลี่ยน..");
+        return await axios.post(`${API}/user/newRequest`,dataArray ,
+        {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        }
+        )
+        .then(res => {
+            hide();
+            window.location.reload();
+        })
+        .catch(err => {
+            alert(`We got some error.\n${err}`)
+            return hide();
+        })
+    }
+
+    async function getFavourite() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/favourite`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
+    async function addFavourite(product_id:any) {
+        return await axios.patch(`${API}/user/pushFavourite`, {id:product_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                // window.location.reload();
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
+    async function deleteFavourite(product_id:any, checkpath:any) {
+        return await axios.patch(`${API}/user/pullFavourite`, {id:product_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                console.log("ลบเรียบร้อย")
+                console.log(checkpath)
+                if(checkpath != "/app/product"){
+                    window.location.reload();
+                    // history.push("/app/aboutaccount?component=favorite")
+                }
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
+    async function deleteMyRequestPending(requestpending_id:any) {
+        return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                window.location.reload();
+                hide();
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function getAnotherUser(user_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/searchID?id=${user_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
     }
 
     return { 
@@ -306,6 +394,11 @@ export default function useAuthorization() {
         getRequest,
         getPending,
         postMyReqeust,
+        getFavourite,
+        addFavourite,
+        deleteFavourite,
+        deleteMyRequestPending,
+        getAnotherUser,
     }
 }
 

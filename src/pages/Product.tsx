@@ -1,43 +1,66 @@
 import { useState , useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
-import queryString from 'query-string';
+
+import { useHistory } from "react-router";
 import useAuthorization from '../hooks/useAuthorization';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Block from '../components/Block';
 import ProductPost from '../components/ProductPost';
+import SelectTrade from '../components/SelectTrade';
 
 import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from '../components/standard/Button';
 import { AiOutlineConsoleSql } from 'react-icons/ai';
 
+const queryString = require("query-string");
+
 function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
 
-    const { getDetailProduct , getUserData , postMyReqeust } = useAuthorization();    
-    const [ data , setData] = useState<any>();
-    const [ owner , setOwner ] = useState<any>();
-    const [ ownerTag , setOwnerTag ] = useState<any>(false);
+    const { getMyInventory , 
+        getDetailProduct , 
+        getUserData , 
+        postMyReqeust , 
+        addFavourite , 
+        deleteFavourite , 
+        getAnotherUser } = useAuthorization();    
+    const [ data , setData] = useState<any>(null);
+    const [ owner , setOwner ] = useState<any>(null);
+    const [ inventory , setInventory ] = useState<any>();
     const [ mobile , setMobile ] = useState(false);
 
+    const history = useHistory();
 
+    // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
         resize();
         async function init() {
-            var inventory = await getDetailProduct(product_id);
-            if (inventory) {
-                setData(inventory);
+            var dataDetail = await getDetailProduct(product_id);
+            if (dataDetail) {
+                setData(dataDetail);
             }
             var getUser:any = await getUserData();
             if (getUser) {
                 setOwner(getUser);
             }
+            var getInventory = await getMyInventory();
+            if (getInventory) {
+                setInventory(getInventory);
+            }
         }
         init();
         console.log(data)
     }, [])
+
+    const [ checkFavoritetmp , setCheckFavoritetmp ] = useState<boolean>();
+    useEffect(() => {
+        if(owner != null && data != null){
+            setCheckFavoritetmp(owner.favourite.includes(data._id))
+        }
+    } , [data,owner])
 
     var forOwner = 0;
     if (data && owner) {
@@ -55,23 +78,37 @@ function Product() {
         }
     }
 
-    const [selectPhoto, setSelectPhoto] = useState<any>(null);
-    const [posiitonPhoto, setPositionPhoto] = useState<any>(null);
-
+    const [ selectPhoto , setSelectPhoto ] = useState<any>(null);
+    const [ posiitonPhoto , setPositionPhoto ] = useState<any>(null);
     function clickPhoto(position:any) {
         setSelectPhoto("click");
         setPositionPhoto(position);
     }
-
     function closePhoto() {
         setSelectPhoto(null);
         setPositionPhoto(null);
     }
-
     let photoPost = null;
     if (!!selectPhoto) {
         photoPost = <ProductPost onBgClick={closePhoto} photoLink={data.pictures[posiitonPhoto]} />
     }
+
+    const [ selectTrade , setSelectTrade ] = useState<any>(null);
+    function clickRequest() {
+        if(owner.inventories.length == 0){
+            window.alert("คุณยังไม่มีสิ่งของเลย ไปเพิ่มก่อนสิ")
+        }else{
+            setSelectTrade("Click")
+        }
+    }
+    function closeRequest() {
+        setSelectTrade(null)
+    }
+    let requestTrade = null;
+    if (!!selectTrade) {
+        requestTrade = <SelectTrade onClose={closeRequest} array={inventory} detailItem={data} />
+    }
+
 
     const [ requireDetail , SetRequireDetail ] = useState<any>();
     const [ tmpRequireDetailShow , setTmpRequireDetailShow ] = useState<any>("m-0");
@@ -89,7 +126,30 @@ function Product() {
         postMyReqeust(dataArray);
     }
 
-    if(data){
+    // const [ favorite , setFavorite] = useState(true);
+    const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
+    function favorite_btn() {
+        if(!checkFavoritetmp){
+            return (
+                <SolidButton onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
+                    Add to Favorite
+                </SolidButton>
+            );
+        }else{
+            return (
+                <SolidButton onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
+                    Remove from Favorite
+                </SolidButton>
+            );
+        }
+    }
+
+    if(data && owner){
+        // console.log(data._id , owner.favourite)
+        // console.log(owner.favourite.includes(data._id))
+        var checkFavorite:any = owner.favourite.includes(data._id);
+        var checkpath = window.location.pathname;
+
         const wantCate = data.require.map((data:any , index:any) => {
             return (
                 <div key={index} 
@@ -101,9 +161,13 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
+
+
+
         return (
             <div>
                 {photoPost}
+                {requestTrade}
                 <Navbar />
                 <Block height="auto" backgroundColor="#f7fafc">
                     {/* <div className="py-3 px-5 my-3 bg-white"> */}
@@ -139,12 +203,12 @@ function Product() {
                                 </div>
                                 <div className="mt-2 px-3 py-1 border border-secondary rounded-3" style={{height:"150px", overflow:"auto"}}>
                                     <p className="mb-1 fw-bold" style={{ color: "black" }}>Requirement Detail</p>
-                                    <p className="m-0">{data.detail} lo</p>
+                                    <p className="m-0">{data.detail}</p>
                                 </div>
                                 <div className="d-flex align-s-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F1" }}>
                                     <img className="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style={{ width: "70px", height: "70px" }} />
-                                    <div>
-                                        <p className="m-0 fs-3 fw-bold" style={{ color: "black" }}>Franky</p>
+                                    <div onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{cursor:"pointer"}}>
+                                        <p className="m-0 fs-3 fw-bold" style={{ color: "black" }}>{data.username}</p>
                                         <p className="m-0" style={{ color: "black" }}>2 Follow</p>
                                     </div>
                                     <div className={ forOwner ? "d-none" : ""}>
@@ -153,10 +217,16 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className={ forOwner ? "d-none" : "d-flex flew-wrap justify-content-around mt-3"}>
-                                    <SolidButton width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
+                                    {/* <SolidButton className={checkFavorite? "d-none" : ""} onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
                                         Add to Favorite
                                     </SolidButton>
-                                    <SolidButton onClick={handleRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">Request Trading</SolidButton>
+                                    <SolidButton className={checkFavorite? "" : "d-none"} onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
+                                        Reomve to Favorite
+                                    </SolidButton> */}
+                                    <div onClick={handleClickFavorite}>{favorite_btn()}</div>
+                                    <SolidButton onClick={clickRequest} width="132px" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0">
+                                        Request Trading
+                                    </SolidButton>
                                 </div>
                             </div>
                         </div>
@@ -185,11 +255,7 @@ function Product() {
                 <h4>กำลังโหลดข้อมูล</h4>
             </div>
         );
-    }
-
-
-
-    
+    }    
 }
 
 export default Product;

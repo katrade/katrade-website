@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { API } from '../../app.setting.json'
 import axios from 'axios';
-import queryString from 'query-string';
+
 import { useLocation } from 'react-router';
 import {
     AfterSignUp,
@@ -17,6 +17,8 @@ import Block from '../../components/Block';
 import StaticNav from '../../components/StaticNav';
 import Footer from '../../components/Footer';
 import { verify } from 'crypto';
+
+const queryString = require('query-string');
 
 export function VerifyEmailPending() {
     return (
