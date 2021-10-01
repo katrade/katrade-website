@@ -12,9 +12,10 @@ interface ButtonProps {
     display?: string
     buttonColor?: string
     color?: string
-    children?: string | JSX.Element | JSX.Element[] | null 
+    children?: any
     darkButtonColor?: string
     onClick?: any
+    className?: string
 }
 
 export const TransparentButton = styled.button`

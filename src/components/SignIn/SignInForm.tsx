@@ -36,7 +36,7 @@ const SignInForm = () => {
 
     const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
         show("We're bringing you in");
-        console.log(form.email, form.password);
+        console.log(form.email, form.password)
         await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
@@ -46,9 +46,9 @@ const SignInForm = () => {
             }
         }).then((res) => {
             hide()
-            // console.log(res.data)
+            console.log(res.data)
             if (res.data.verifyEmail === true) {
-                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck, {path: '/' , sameSite: 'none' , secure: true});
+                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck);
                 history.push("/app/market");
             }
             else {

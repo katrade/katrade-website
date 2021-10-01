@@ -24,9 +24,15 @@
 
 .topic-request > p:hover {
     /* background-color: rgba(218, 218, 218, 0.2); */
+    border: solid 2px rgba(200,200,200,0.6);
+    border-width: 0 0 3px 0;
 }
 
 .currenttap {
     border: solid 2px #04d66d;
     border-width: 0 0 3px 0;
+}
+.currenttap:hover {
+    border: solid 2px #04d66d !important;
+    border-width: 0 0 3px 0 !important;
 }

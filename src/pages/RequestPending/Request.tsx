@@ -82,9 +82,9 @@ export default function Request() {
                 <Block height="50px" backgroundColor="#f7fafc">
                     <div className="my-4 py-3 px-4 background">
                         <div className="mb-3 d-flex flex-row topic-request">
-                            <p className={component == 1 ? "p-1 fs-4 font-weight-bold currenttap" : "p-1 fs-4 font-weight-bold"} onClick={() => handleComponent(1)}>Requested to you</p>
-                            <p className={component == 2 ? "p-1 fs-4 font-weight-bold currenttap" : "p-1 fs-4 font-weight-bold"} onClick={() => handleComponent(2)}>Pending</p>
-                            <p className={component == 3 ? "p-1 fs-4 font-weight-bold currenttap" : "p-1 fs-4 font-weight-bold"} onClick={() => handleComponent(3)}>In progress</p>
+                            <p className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</p>
+                            <p className={component == 2 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(2)}>Pending</p>
+                            <p className={component == 3 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(3)}>In progress</p>
                         </div>
                         <div style={{ minHeight: "350px" }}>
                             {selectComponent}

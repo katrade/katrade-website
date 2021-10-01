@@ -219,6 +219,9 @@ export default function useAuthorization() {
 
     async function getAllInventory(): Promise<any> {
         show("โหลดดิ้ง..");
+        if (!cookies.DaveTheHornyDuck) {
+            return alert("No cookie???")
+        }
         return await axios.get(`${API}/inventory/getAllInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
