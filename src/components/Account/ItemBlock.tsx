@@ -8,6 +8,16 @@ import { AccountBlock } from './AccountBlock';
 import { FaPen } from 'react-icons/fa';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 
+
+const backgroundImageStyles = {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+}
+
+
+
+
 export default function ItemBlock(props: any) {
 	const { data, index, manage } = props;
     const history = useHistory();
@@ -33,8 +43,8 @@ export default function ItemBlock(props: any) {
 	return (
 		<AccountBlock>
 			<div className="d-flex flex-wrap position-relative" style={{width:"auto"}}>
-				<div className="p-0" onClick={detailProduct} style={{cursor:"pointer"}}>
-					<img src={data.pictures[0]} style={{width:"170px", height:"110px",borderRadius:"8px"}}/>
+				<div className="p-0" onClick={detailProduct} style={{width:"170px", height:"110px", cursor:"pointer", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})`}}>
+					{/* <img src={data.pictures[0]} style={{width:"170px", height:"110px",borderRadius:"8px"}}/> */}
 				</div>
 				<div className="ps-3 text-start col-md-6" style={{borderRadius:"8px",cursor:"pointer"}} onClick={detailProduct}>
 					<h5 className="mb-3">{data.name}</h5>
