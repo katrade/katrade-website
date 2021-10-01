@@ -183,9 +183,9 @@ export default function AddItem() {
     const picture1Ref = useRef<HTMLInputElement>(null);
 
     const [ cover, setCover ] = useState("https://via.placeholder.com/120")
-    const [ dataCover, setDataCover ] = useState()
+    const [ dataCover, setDataCover ] = useState<File>()
     const [ picture1, setPicture1 ] = useState("https://via.placeholder.com/120")
-    const [ dataPicture1, setDataPicture1 ] = useState()
+    const [ dataPicture1, setDataPicture1 ] = useState<File>()
 
     const handleCover = (e:any) => {
         const file = e.target.files[0];
@@ -204,9 +204,10 @@ export default function AddItem() {
 
     function handleUnload(event:any){ 
         event.preventDefault();
-        var arrayOfPicture = [];
-        arrayOfPicture.push(dataCover);
-        arrayOfPicture.push(dataPicture1);
+        var arrayOfPicture:File[] = [];
+        dataCover ? arrayOfPicture.push(dataCover) : alert("Need cover photo");
+        dataPicture1 ? arrayOfPicture.push(dataPicture1) : alert("Need picture(s)");
+    
         
         const data = {
             name: dataItem.name,

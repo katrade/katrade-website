@@ -8,10 +8,11 @@ import RequestBlock from '../../components/RequestPending/RequestBlock';
 import Block from '../../components/Block'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { CgNpm } from 'react-icons/cg';
 
 export default function Request() {
 
-    const { getRequest, getPending , getUserProgess} = useAuthorization();
+    const { getRequest, getPending , getInprogress } = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
     const [dataInprogess, setDataProfressn] = useState<any>();
@@ -25,10 +26,10 @@ export default function Request() {
             if (data2) {
                 setDataPending(data2);
             }
-            // var data3 = await getUserProgess();
-            // if (data3) {
-            //     setDataProfressn(data3);
-            // }
+            var data3 = await getInprogress();
+            if (data3) {
+                setDataProfressn(data3);
+            }
         }
         init();
     }, [])
@@ -53,19 +54,15 @@ export default function Request() {
     }
 
     const [component, setComponent] = useState(1);
-    const [count, setCount] = useState(0);
     const [selectComponent, setSelectComponent] = useState(request_data);
     function handleComponent(status: any) {
         setComponent(status)
         if (status == 1) {
             setSelectComponent(request_data);
-            setCount(request_data.length);
         } else if (status == 2) {
             setSelectComponent(pending_data)
-            setCount(pending_data.length);
         } else if (status == 3) {
             setSelectComponent(inprogress_data)
-            // setCount(inprogress_data.length);
         }
     }
 
