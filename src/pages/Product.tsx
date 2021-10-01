@@ -17,6 +17,16 @@ import { FcLike, CgArrowsExchangeAlt } from 'react-icons/all';
 
 const queryString = require("query-string");
 
+const backgroundImageStyles = {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+}
+
+
+
+
+
 function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
@@ -178,8 +188,8 @@ function Product() {
                         <div className="row mx-auto" style={{ width: "100%" }}>
                             <div className="col-lg py-3">
                                 <div className="mb-3 full-width" style={{ height: "auto" }}>
-                                    <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0" }}>
-                                        <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }} onClick={() => clickPhoto(0)} />
+                                    <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles , backgroundImage: `url(${data.pictures[0]})`}} onClick={() => clickPhoto(0)}>
+                                        {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
@@ -231,7 +241,7 @@ function Product() {
                                     </SolidButton> */}
                                     <div className="me-3" onClick={handleClickFavorite}>{favorite_btn()}</div>
                                     <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{boxShadow: "0 0 8px rgba(10,10,10,0.1)"}}>
-                                        <CgArrowsExchangeAlt className="me-1" style={{filter: "brightness(10)"}}/>Trade
+                                        Trade
                                     </SolidButton>
                                 </div>
                             </div>

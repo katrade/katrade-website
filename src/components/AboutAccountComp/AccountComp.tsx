@@ -129,7 +129,7 @@ function UploadProfilePic({ id }: IUpload) {
             .then(function (response) {
                 //handle success            
                 window.location.reload();
-                
+
 
             })
             .catch(function (response) {

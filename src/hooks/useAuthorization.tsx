@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useHistory } from "react-router";
 import { resourceUsage } from "process";
 import { ContactSupportOutlined } from "@material-ui/icons";
+import { uploadItemPicture } from "..//utils/storage";
 
 // test pushing changes
 
@@ -48,21 +49,21 @@ export default function useAuthorization() {
         return await axios.post(`${API}/user/updateProfilePic`, {
             profilePic: dataUrl
         },
-        {
-            headers: {
-                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
-                'Content-Type': 'application/json'
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                    'Content-Type': 'application/json'
+                }
             }
-        }
         )
-        .then(res => {
-            window.location.reload();
-        })
-        .catch(err => {
-            alert(`We got some error.\n${err}`);
-            clearAuthCookie();
-            return hide();
-        })
+            .then(res => {
+                // window.location.reload();
+            })
+            .catch(err => {
+                alert(`We got some error.\n${err}`);
+                clearAuthCookie();
+                return hide();
+            })
     }
 
     async function setUsername(newUsername: string) {
@@ -71,29 +72,29 @@ export default function useAuthorization() {
             alert("Username is empty.");
             return hide();
         }
-        axios.put(`${API}/user/setUsername?newUsername=${newUsername}` , 
-        
-        {},
-        {
-            headers: {
-                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => {        
-            if (res.data.value) {
-                hide()
-                return history.push('/app/market');
-            }
-            else {
-                return alert(`${res.data.message}`);
-            }
-        })
-        .catch(err => {
-            alert(`We got some error.\n${err}`);
-            clearAuthCookie();
-            hide();
-        })
+        axios.put(`${API}/user/setUsername?newUsername=${newUsername}`,
+
+            {},
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (res.data.value) {
+                    hide()
+                    return history.push('/app/market');
+                }
+                else {
+                    return alert(`${res.data.message}`);
+                }
+            })
+            .catch(err => {
+                alert(`We got some error.\n${err}`);
+                clearAuthCookie();
+                hide();
+            })
     }
 
     async function isUserActive() {
@@ -119,36 +120,72 @@ export default function useAuthorization() {
             })
     }
 
-    async function addItem(dataItem:any | undefined , arrayOfPicture:any) {
+    async function addItem(dataItem: any | undefined, arrayOfPicture: File[]) {
         if (!dataItem) {
             return false;
         }
-        const bodyFormData = new FormData();
-        bodyFormData.append('body', JSON.stringify(dataItem));
+        // const bodyFormData = new FormData();
+        // bodyFormData.append('body', JSON.stringify(dataItem));
         // bodyFormData.append('files', arrayOfPicture);
-        arrayOfPicture.forEach((file:any)=>{
-            bodyFormData.append("files", file);
-        });
+        // arrayOfPicture.forEach((file:any)=>{
+        //     bodyFormData.append("files", file);
+        // });
         show("Uploading item to your inventory");
 
-        return await axios({
+        if (!dataItem.name) {
+            alert("No nameee");
+            return hide();
+        }
+        // fetch1 (create and return an id)
+        axios({
             method: "post",
             url: `${API}/inventory`,
-            data: bodyFormData,
-            headers: { 
-                "Content-Type": "multipart/form-data",
-                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`, 
+            data: dataItem,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
             },
         })
             .then(res => {
-                history.push(`/app/aboutaccount?component=inventory`);
+                console.log("create item done!!")
+                const itemId = res.data.id;
+                // upload pictures to firebase storage
+                uploadItemPicture(itemId, arrayOfPicture).then(output => {
+
+                    // send array of pictures to backend here vvv
+                    axios.put(`${API}/inventory/changePic`, {
+                        id: itemId,
+                        pictures: output
+                    },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                            }
+                        })
+                        .then(res => {
+                            console.log("upload item's pictures done!!");
+                            console.log(res.data);
+                            if (res.data.value) {
+                                if (output.length !== arrayOfPicture.length) {
+                                    alert("Pictures upload may failed. Please check them again");
+                                    return history.push(`/app/product?product_id=${itemId}`);
+                                }
+                                else {
+                                    return history.push(`/app/product?product_id=${itemId}`);
+                                }
+                            }
+                        })
+
+                    
+                })
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
                 return hide();
             })
     }
-    
+
 
     async function changeProfile(profileData: any) {
         show("Changing your profile")
@@ -165,7 +202,7 @@ export default function useAuthorization() {
                 return hide();
             })
     }
-        
+
     async function getMyInventory() {
         show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getUserInventory`, {
@@ -184,7 +221,7 @@ export default function useAuthorization() {
             })
     }
 
-    async function getDetailProduct(product_id:any) {
+    async function getDetailProduct(product_id: any) {
         show("Product Detail");
         return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
@@ -202,7 +239,7 @@ export default function useAuthorization() {
             })
     }
 
-    async function deleteMyProduct(product_id:any) {
+    async function deleteMyProduct(product_id: any) {
         return await axios.delete(`${API}/inventory/deleteInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -276,22 +313,22 @@ export default function useAuthorization() {
 
     async function postMyReqeust(dataArray: any | undefined) {
         show("ติดต่อขอแลกเปลี่ยน..");
-        return await axios.post(`${API}/user/newRequest`,dataArray ,
-        {
-            headers: {
-                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
-                'Content-Type': 'application/json'
+        return await axios.post(`${API}/user/newRequest`, dataArray,
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                    'Content-Type': 'application/json'
+                }
             }
-        }
         )
-        .then(res => {
-            hide();
-            window.location.reload();
-        })
-        .catch(err => {
-            alert(`We got some error.\n${err}`)
-            return hide();
-        })
+            .then(res => {
+                hide();
+                window.location.reload();
+            })
+            .catch(err => {
+                alert(`We got some error.\n${err}`)
+                return hide();
+            })
     }
 
     async function getFavourite() {
@@ -311,8 +348,8 @@ export default function useAuthorization() {
             })
     }
 
-    async function addFavourite(product_id:any) {
-        return await axios.patch(`${API}/user/pushFavourite`, {id:product_id},{
+    async function addFavourite(product_id: any) {
+        return await axios.patch(`${API}/user/pushFavourite`, { id: product_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -328,8 +365,8 @@ export default function useAuthorization() {
             })
     }
 
-    async function deleteFavourite(product_id:any, checkpath:any) {
-        return await axios.patch(`${API}/user/pullFavourite`, {id:product_id},{
+    async function deleteFavourite(product_id: any, checkpath: any) {
+        return await axios.patch(`${API}/user/pullFavourite`, { id: product_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -337,7 +374,7 @@ export default function useAuthorization() {
             .then(res => {
                 console.log("ลบเรียบร้อย")
                 console.log(checkpath)
-                if(checkpath != "/app/product"){
+                if (checkpath != "/app/product") {
                     window.location.reload();
                     // history.push("/app/aboutaccount?component=favorite")
                 }
@@ -349,7 +386,7 @@ export default function useAuthorization() {
             })
     }
 
-    async function deleteMyRequestPending(requestpending_id:any) {
+    async function deleteMyRequestPending(requestpending_id: any) {
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -365,7 +402,7 @@ export default function useAuthorization() {
             })
     }
 
-    async function getAnotherUser(user_id:any) {
+    async function getAnotherUser(user_id: any) {
         show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/searchID?id=${user_id}`, {
             headers: {
@@ -382,16 +419,16 @@ export default function useAuthorization() {
             })
     }
 
-    return { 
-        getUserData, 
-        updateProfilePic, 
+    return {
+        getUserData,
+        updateProfilePic,
         getCategory,
-        setUsername, 
-        isUserActive, 
-        addItem, 
+        setUsername,
+        isUserActive,
+        addItem,
         getMyInventory,
         changeProfile,
-        getDetailProduct, 
+        getDetailProduct,
         deleteMyProduct,
         getAllInventory,
         getRequest,
