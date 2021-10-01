@@ -134,23 +134,28 @@ function Product() {
         }
         postMyReqeust(dataArray);
     }
-    
+
     // const [ favorite , setFavorite] = useState(true);
     const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
     function favorite_btn() {
         if (!checkFavoritetmp) {
             return (
-                <SolidButton onClick={() => addFavourite(data._id)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e"}}>
+                <SolidButton onClick={() => addFavourite(data._id)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e" }}>
                     <FcLike />
                 </SolidButton>
             );
         } else {
             return (
-                <SolidButton onClick={() => deleteFavourite(data._id, checkpath)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff"}}>
-                    <FcLike style={{ filter: "brightness(10)"}}/>
+                <SolidButton onClick={() => deleteFavourite(data._id, checkpath)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff" }}>
+                    <FcLike style={{ filter: "brightness(10)" }} />
                 </SolidButton>
             );
         }
+    }
+    if (!data) {
+        <div style={{ width: "100vw", height: "100vh", }}>
+            <h5>ROR pap</h5>
+        </div>
     }
 
     if (data && owner) {
@@ -170,14 +175,12 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-
-
-
+        console.log(data.pictures)
         return (
             <div>
                 {photoPost}
                 {requestTrade}
-                <Navbar image={owner.profilePic}/>
+                <Navbar image={owner.profilePic} />
                 <Block height="auto" backgroundColor="#f7fafc">
                     {/* <div className="py-3 px-5 my-3 bg-white"> */}
                     <div className={mobile ? "py-2 px-2 my-3 bg-white" : "py-3 px-5 my-3 bg-white"}>
@@ -186,16 +189,21 @@ function Product() {
                         <div className="row mx-auto" style={{ width: "100%" }}>
                             <div className="col-lg py-3">
                                 <div className="mb-3 full-width" style={{ height: "auto" }}>
-                                    <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles , backgroundImage: `url(${data.pictures[0]})`}} onClick={() => clickPhoto(0)}>
+                                    <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})` }} onClick={() => clickPhoto(0)}>
                                         {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
-                                    {data.pictures.map((data: any, index: any) => (
-                                        <div key={index}>
-                                            <img className="my-auto" src={data} style={{ width: "100px", height: "100px", cursor: "zoom-in" }} onClick={() => clickPhoto(index)} />
-                                        </div>
-                                    ))}
+                                    {data.pictures.map((data: any, index: any) => {
+
+                                        console.log(data);
+                                        return (
+                                            <div key={index} style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%"}} onClick={() => clickPhoto(0)}>
+                                                {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
+                                            </div>
+                                        )
+                                    })
+                                    }
                                 </div>
                             </div>
 
@@ -214,7 +222,7 @@ function Product() {
                                     <p className="mb-1 fw-bold" style={{ color: "black" }}>Detail</p>
                                     <p className="m-0">{data.detail}</p>
                                 </div>
-                                <div className="d-flex align-items-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F170", padding: "10px 0", borderRadius: "7px", boxShadow: "0 0 8px rgba(10,10,10,0.1)"}}>
+                                <div className="d-flex align-items-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F170", padding: "10px 0", borderRadius: "7px", boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                     <div className="d-flex">
                                         <img className="rounded-circle me-3" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style={{ width: "40x", height: "40px" }} />
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
@@ -238,7 +246,7 @@ function Product() {
                                         Reomve to Favorite
                                     </SolidButton> */}
                                     <div className="me-3" onClick={handleClickFavorite}>{favorite_btn()}</div>
-                                    <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{boxShadow: "0 0 8px rgba(10,10,10,0.1)"}}>
+                                    <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                         Trade
                                     </SolidButton>
                                 </div>
