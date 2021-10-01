@@ -1,0 +1,12 @@
+.select-items-menu {
+    border: solid transparent;
+    border-width: 0 0 3px 0;
+    transition: 300ms ease;
+    cursor: pointer;
+}
+.select-items-menu:hover {
+    border: solid rgba(200,200,200,0.4);
+    border-width: 0 0 3px 0;
+    cursor: pointer;
+    
+}
