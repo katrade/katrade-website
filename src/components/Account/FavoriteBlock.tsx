@@ -31,7 +31,7 @@ export default function FavoriteBlock(data:any , key:any) {
                 <div className="d-flex align-items-center me-3">
                     <div className="d-flex justify-content-center align-items-center fs-3"
                         onClick={() => deleteFavourite(favoriteData._id,checkpath)} 
-                        style={{width:"40px",height:"40px",color:"red",border:"2px solid red",borderRadius:"8px"}}>
+                        style={{width:"40px",height:"40px",color:"red",border:"2px solid red",borderRadius:"8px",cursor:"pointer"}}>
                         <AiOutlineCloseCircle />
                     </div>
                 </div>

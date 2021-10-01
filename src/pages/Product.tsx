@@ -52,7 +52,6 @@ function Product() {
             }
         }
         init();
-        console.log(data)
     }, [])
 
     const [ checkFavoritetmp , setCheckFavoritetmp ] = useState<boolean>();

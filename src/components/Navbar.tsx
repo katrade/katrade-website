@@ -98,7 +98,7 @@ function Navbar({ image }: INavbar) {
     }
 
     const [category, setCategory] = useState<any>();
-    const { getUserData, getCategory } = useAuthorization();
+    const { getCategory } = useAuthorization();
 
     useEffect(() => {
         resize();

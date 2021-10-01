@@ -9,12 +9,12 @@ import { IoMdSwap } from 'react-icons/io';
 export default function RequestBlock({data, status, index}:any) {
 
     const history = useHistory();
-    const { getDetailProduct , deleteMyRequestPending } = useAuthorization();
+    const { deleteMyRequestPending , acceptRequest} = useAuthorization();
     function btnRPI(){
         if(status == 0){
             return (
                 <div>
-                    <TransparentButton buttonColor="limegreen">Accept Request</TransparentButton>
+                    <TransparentButton onClick={() => acceptRequest(data.requestId)} buttonColor="limegreen">Accept Request</TransparentButton>
                     <TransparentButton onClick={() => deleteMyRequestPending(data.requestId)} buttonColor="red">Cancel Request</TransparentButton>
                 </div>
             );

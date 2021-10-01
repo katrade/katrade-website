@@ -26,7 +26,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                console.log(res)
                 if (!res.data.data.username) {
                     history.push(`/app/setup`);
                 }
@@ -332,8 +331,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                console.log("ลบเรียบร้อย")
-                console.log(checkpath)
                 if(checkpath != "/app/product"){
                     window.location.reload();
                     // history.push("/app/aboutaccount?component=favorite")
@@ -379,6 +376,40 @@ export default function useAuthorization() {
             })
     }
 
+    async function acceptRequest(requestpending_id:any) {
+        return await axios.patch(`${API}/user/acceptRequest`, {id:requestpending_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                window.location.reload();
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+    
+    async function getUserProgess() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserProgess`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                return null;
+            })
+    }
+
     return { 
         getUserData, 
         updateProfilePic, 
@@ -399,6 +430,8 @@ export default function useAuthorization() {
         deleteFavourite,
         deleteMyRequestPending,
         getAnotherUser,
+        acceptRequest,
+        getUserProgess,
     }
 }
 

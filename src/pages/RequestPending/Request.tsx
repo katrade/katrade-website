@@ -11,9 +11,10 @@ import Footer from '../../components/Footer';
 
 export default function Request() {
 
-    const { getRequest, getPending } = useAuthorization();
+    const { getRequest, getPending , getUserProgess} = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
+    const [dataInprogess, setDataProfressn] = useState<any>();
     useEffect(() => {
         async function init() {
             var data1 = await getRequest();
@@ -24,6 +25,10 @@ export default function Request() {
             if (data2) {
                 setDataPending(data2);
             }
+            // var data3 = await getUserProgess();
+            // if (data3) {
+            //     setDataProfressn(data3);
+            // }
         }
         init();
     }, [])
@@ -41,13 +46,11 @@ export default function Request() {
             return <RequestBlock data={data} status={1} key={index} />;
         })
     }
-    // const inprogress_data = data.map((data,index) => {
-    //     if (data.status == "2") {
-    //         return <RequestBlock data={data} status={data.status} key={index} />;
-    //     }else if (data.status == "3") {
-    //         return <RequestBlock data={data} status={data.status} key={index} />;
-    //     }
-    // })
+    if (dataInprogess) {
+        inprogress_data = dataInprogess.map((data: any, index: any) => {
+            return <RequestBlock data={data} status={2} key={index} />;
+        })
+    }
 
     const [component, setComponent] = useState(1);
     const [count, setCount] = useState(0);
@@ -65,7 +68,6 @@ export default function Request() {
             // setCount(inprogress_data.length);
         }
     }
-
 
     useEffect(() => {
         if (request_data) {

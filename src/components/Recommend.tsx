@@ -3,7 +3,6 @@ import './Recommend.css';
 
 function Recommend(props: any) {
     const { item, index } = props;
-    console.log(item)
     const history = useHistory();
     function LinkItemData() {
         history.push(`/app/product?product_id=${item}`);
