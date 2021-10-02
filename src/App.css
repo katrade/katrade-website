@@ -56,6 +56,7 @@ p,ul,li,b,span,label,input {
     font-size: 22px;
     font-weight: normal;
     color: rgb(94, 103, 119);
+    margin: 0;
 }
 
 p.dark,ul.dark,li.dark,b.dark {

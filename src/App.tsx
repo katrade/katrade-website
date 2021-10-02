@@ -41,7 +41,7 @@ import ManageInventory from './pages/AccountPages/ManageInventory';
 import AddItem from './pages/AccountPages/AddItem';
 import TestAddItem from './pages/AccountPages/test';
 import EditItem from './pages/AccountPages/EditItem';
-
+import Settings from "./pages/settings/Settings";
 import ProfileViewer from './pages/ProfileViewer';
 
 import ChangePassword from './pages/AccountPages/ChangePasswordPage';
@@ -98,6 +98,7 @@ function App() {
                                 <Route exact path="/app/followers" component={Follower}></Route>
                                 <Route exact path="/app/history" component={History}></Route>
                                 <Route exact path="/app/inventory" component={Inventory}></Route>
+                                <Route exact path="/app/settings" component={Settings}></Route>
                                 <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
 
                                 <Route exact path="/app/profileviewer" component={ProfileViewer}></Route>

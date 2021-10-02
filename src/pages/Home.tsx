@@ -77,7 +77,7 @@ export default function Home() {
     }
     useEffect(() => {
         setActiveLang(lang === "en" ? en : th);
-        isUserActive();
+        isUserActive(true,false);
     }, [lang] )
 
     return (

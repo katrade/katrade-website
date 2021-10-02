@@ -96,12 +96,23 @@ export default function useAuthorization() {
             })
     }
 
-    async function isUserActive() {
-        if (cookies.DaveTheHornyDuck) {
+    async function isUserActive(market?: boolean, signin?: boolean) {
+        if (!market && ! signin) {
+            if (cookies.DaveTheHornyDuck) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        if (cookies.DaveTheHornyDuck && market) {
             return history.push('/app/market');
         }
-        else {
+        else if (!cookies.DaveTheHornyDuck && signin) {
             return history.push("/app/signin");
+        }
+        else {
+            console.log("function isUserActive ERROR: Condition doesn't match");
         }
     }
 
