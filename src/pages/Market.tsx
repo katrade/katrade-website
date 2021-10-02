@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 import styled from 'styled-components'
 
 import './Market.css';
@@ -21,6 +21,7 @@ import { ContactSupportOutlined } from '@material-ui/icons';
 import Background from '../components/Background';
 import { H5 } from "../components/standard/H";
 import P from '../components/standard/P';
+import { ThemeContext } from '../contexts/Theme';
 
 
 
@@ -63,6 +64,22 @@ const SeeMore = styled.button`
 //     return state;
 // }
 
+const th: string[] = [
+    "ตรงกับคุณ",
+    "เศร้าจัง, ไม่มีของที่ึความต้องการตรงกับคุณเลย",
+    "หมวดหมู่",
+    "ยอดนิยม"
+]
+const en: string[] = [
+    "Match with you",
+    "Sadly, no item is matched",
+    "Category",
+    "Popular",
+]
+const meow: string[] = [
+
+]
+
 function Market() {
 
     // const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
@@ -81,7 +98,9 @@ function Market() {
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const { getUserData, getAllInventory } = useAuthorization();
-
+    const [displayContent, setDisplayContent] = useState<string[]>(th);
+    const { lang } = useContext(ThemeContext);
+    
     window.addEventListener("resize", resize)
     useEffect(() => {
         resize();
@@ -106,7 +125,17 @@ function Market() {
         }
         return setMobile(false)
     }
-
+    useEffect(() => {
+        if (lang === "th") {
+            setDisplayContent(th);
+        }
+        else if (lang === "en") {
+            setDisplayContent(en);
+        }
+        else if (lang === "mw") {
+            setDisplayContent(meow);
+        }
+    }, [lang])
     if (allInventory) {
         const tmpInventory = allInventory.map((item: any, index: any) => {
             if (item.owner != account._id) {
@@ -121,11 +150,11 @@ function Market() {
                     <Navbar image={account.profilePic} />
                     <Block height="700" backgroundColor="#f7fafc" darkBackgroundColor="#1c1c1f">
                         <div className="my-4">
-                            <H5 className="mb-3">Match with you</H5>
+                            <H5 className="mb-3">{displayContent[0]}</H5>
                             <div className="full-width">
                                 <div>
                                     <div className="d-flex justify-content-start flex-wrap">
-                                        <P>No items was matched.</P>
+                                        <P>{displayContent[1]}</P>
                                         {/* {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)} */}
                                     </div>
                                     <div className="d-flex justify-content-center align-items-center my-3">
@@ -136,12 +165,12 @@ function Market() {
                             </div>
 
                             <div className="category">
-                                <H5>Category</H5>
+                                <H5>{displayContent[2]}</H5>
                                 <div className="category-box">
                                 </div>
                             </div>
 
-                            <H5 className="mb-3">Popular</H5>
+                            <H5 className="mb-3">{displayContent[3]}</H5>
                             <div className="full-width">
                                 <div className="d-flex justify-content-start flex-wrap">
                                     {/* {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)} */}
