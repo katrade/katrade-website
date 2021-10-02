@@ -44,7 +44,6 @@ function Product() {
 
     const history = useHistory();
 
-    // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
         resize();
         async function init() {
@@ -118,7 +117,6 @@ function Product() {
         requestTrade = <SelectTrade onClose={closeRequest} array={inventory} detailItem={data} />
     }
 
-
     const [requireDetail, SetRequireDetail] = useState<any>();
     const [tmpRequireDetailShow, setTmpRequireDetailShow] = useState<any>("m-0");
     function changeRequireDetail(index: any) {
@@ -126,16 +124,6 @@ function Product() {
         setTmpRequireDetailShow("d-none")
     }
 
-    function handleRequest() {
-        const dataArray = {
-            userId2: data.owner,
-            inventoryId1: data._id,
-            inventoryId2: "owner._iditem",
-        }
-        postMyReqeust(dataArray);
-    }
-
-    // const [ favorite , setFavorite] = useState(true);
     const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
     function favorite_btn() {
         if (!checkFavoritetmp) {
@@ -159,9 +147,6 @@ function Product() {
     }
 
     if (data && owner) {
-        // console.log(data._id , owner.favourite)
-        // console.log(owner.favourite.includes(data._id))
-        var checkFavorite: any = owner.favourite.includes(data._id);
         var checkpath = window.location.pathname;
 
         const wantCate = data.require.map((data: any, index: any) => {
@@ -175,7 +160,6 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-        console.log(data.pictures)
         return (
             <div>
                 {photoPost}
@@ -195,8 +179,6 @@ function Product() {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
                                     {data.pictures.map((data: any, index: any) => {
-
-                                        console.log(data);
                                         return (
                                             <div key={index} style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%"}} onClick={() => clickPhoto(0)}>
                                                 {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
@@ -239,12 +221,6 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-end mt-3"}>
-                                    {/* <SolidButton className={checkFavorite? "d-none" : ""} onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
-                                        Add to Favorite
-                                    </SolidButton>
-                                    <SolidButton className={checkFavorite? "" : "d-none"} onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
-                                        Reomve to Favorite
-                                    </SolidButton> */}
                                     <div className="me-3" onClick={handleClickFavorite}>{favorite_btn()}</div>
                                     <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                         Trade

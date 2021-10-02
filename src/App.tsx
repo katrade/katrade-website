@@ -51,6 +51,8 @@ import Request from './pages/RequestPending/Request'
 import Pending from './pages/RequestPending/Pending'
 import Inprogress from './pages/RequestPending/Inprogress'
 
+import Chat from './pages/Chat'
+
 import ProfileCanvas from './components/ProfileCanvas';
 
 import Test01 from './components/TestFrontend/Test01';
@@ -110,6 +112,8 @@ function App() {
                                 <Route exact path="/app/request" component={Request}></Route>
                                 <Route exact path="/app/pending" component={Pending}></Route>
                                 <Route exact path="/app/inprogress" component={Inprogress}></Route>
+
+                                <Route exact path="/app/heydude" component={Chat}></Route>
 
                                 <Route exact path="/app/testFrontend" component={Test01}></Route>
 

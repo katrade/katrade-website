@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from "react-router";
 import useAuthorization from '../../hooks/useAuthorization';
 
 import './Request.css';
@@ -9,9 +10,11 @@ import Block from '../../components/Block'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { CgNpm } from 'react-icons/cg';
+import { TransparentButton } from '../../components/standard/Button'
 
 export default function Request() {
 
+    const history = useHistory();
     const { getRequest, getPending , getInprogress } = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();

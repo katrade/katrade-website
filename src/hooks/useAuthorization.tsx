@@ -312,6 +312,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                console.log(res)
                 hide();
                 return res.data;
             })
@@ -333,7 +334,11 @@ export default function useAuthorization() {
         )
             .then(res => {
                 hide();
-                window.location.reload();
+                if(res.data.value == false){
+                    alert("ส่งคำขอ ล้มเหลว");
+                }else{
+                    alert("ส่งคำขอ สำเร็จ");
+                }
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
@@ -382,11 +387,8 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                console.log("ลบเรียบร้อย")
-                console.log(checkpath)
                 if (checkpath != "/app/product") {
                     window.location.reload();
-                    // history.push("/app/aboutaccount?component=favorite")
                 }
             })
             .catch((err) => {
@@ -397,6 +399,7 @@ export default function useAuthorization() {
     }
 
     async function deleteMyRequestPending(requestpending_id: any) {
+        show("โหลดดิ้ง..");
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -454,7 +457,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                console.log(res)
                 hide();
                 return res.data;
             })
