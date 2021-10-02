@@ -6,6 +6,7 @@ import Block from "../../components/Block";
 import Footer from "../../components/Footer";
 import { H4 } from "../../components/standard/H";
 import P from "../../components/standard/P";
+import Background from "../../components/Background";
 
 const PStyle = {
     fontWeight: 500,
@@ -17,9 +18,9 @@ export default function Settings() {
     const [selected, setSelected] = useState(0);
     const { getUserData } = useAuthorization();
     return (
-        <div>
+        <Background>
             <Navbar />
-            <Block height="500px" className="my-5">
+            <Block height="100vh" className="my-5">
                 <H4>Settings</H4>
                 <div className="row my-4 m-0 p-0" style={{ minHeight: "500px",boxShadow: "0 0 7px rgba(30,30,30,0.1)" }}>
                     <div className="col-lg-3 p-0">
@@ -50,7 +51,7 @@ export default function Settings() {
                     </div>
                 </div>
             </Block>
-        </div>
+        </Background>
     )
 }
 

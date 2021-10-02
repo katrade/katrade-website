@@ -4,9 +4,11 @@
     right: 0;
     left: 0;
     height: 90px;
-    background-color: rgb(255, 255, 255);
+    /* backgtound color calculated from theme context */
+    /* background-color: rgb(255, 255, 255); */
     z-index: 21;
     box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    transition: 300ms ease;
 }
 
 .logo {
@@ -25,10 +27,8 @@
 
 .cate {
     margin: 0;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.5s ease;
-    color: rgb(44, 44, 44);
+    transition: 0.5s ease;;
 }
 
 .cate:hover {

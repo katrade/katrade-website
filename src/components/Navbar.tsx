@@ -5,6 +5,8 @@ import axios from 'axios';
 import { API } from '../app.setting.json';
 import useAuthorization from '../hooks/useAuthorization';
 import { Label } from './Label';
+import { ThemeContext } from '../contexts/Theme'
+
 import './Navbar.css';
 
 // icon
@@ -25,6 +27,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 // pics
 import Logo from '../pics/logo_dark_green.png';
+import LogoWhite from "../pics/logo_white_green.png";
 
 import Block from './Block';
 import { useCookies } from 'react-cookie';
@@ -80,6 +83,7 @@ function Navbar({ image }: INavbar) {
     const [dropMenu, setDropMenu] = useState(false);
     const [searchText, setSearchText] = useState('');
     const history = useHistory();
+    const { theme } = useContext(ThemeContext);
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
     window.addEventListener("resize", resize);
@@ -152,14 +156,14 @@ function Navbar({ image }: INavbar) {
         history.push('/app/signin');
     }
     return (
-        <div className="header py-3">
+        <div className="header py-3" style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414"}}>
             <Block height="90px">
                 <div className="header-con">
                     <a href="/app/Market">
-                        <img className="logo" src={Logo} />
+                        <img className="logo" src={theme === "light" ? Logo : LogoWhite} />
                     </a>
                     <div>
-                        <p className="cate" onClick={() => setDrop(!drop)}>Categories{dropIcon()}</p>
+                        <p className="cate" onClick={() => setDrop(!drop)} style={{color: theme === "light" ? "rgb(44, 44, 44)" : "#fff"}}>Categories{dropIcon()}</p>
                         <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                         <ul className={drop ? "categories active" : "categories"}>
                             { category ?
@@ -264,7 +268,6 @@ function Navbar({ image }: INavbar) {
 const MobileNavbarContainer = styled.div`
     width: 100%;
     max-width: 100%;
-    background-color: white;
     min-height: 60px;
     height: auto;
     position: sticky;
@@ -279,6 +282,7 @@ function MobileNavbar({ signout }: any) {
 
     const [drop, setDrop] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
+    const { theme } = useContext(ThemeContext);
 
     var pathname = window.location.pathname.split('/')[2];
     function displaySearch() {
@@ -290,7 +294,7 @@ function MobileNavbar({ signout }: any) {
     }
 
     return (
-        <MobileNavbarContainer>
+        <MobileNavbarContainer style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414"}}>
             <Block height="60px">
                 <div className="header-con float-right">
                     <a href="/app/Market">

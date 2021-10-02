@@ -45,7 +45,7 @@ export default function Block({ height , children , backgroundColor , darkBackgr
     return (
         <BlockDiv height={height} style={
             {
-                backgroundColor: theme === "light" ? backgroundColor : (darkBackgroundColor ? darkBackgroundColor : backgroundColor) , 
+                backgroundColor: theme === "light" ? (backgroundColor ? backgroundColor : "transparent") : (darkBackgroundColor ? darkBackgroundColor : (backgroundColor ? backgroundColor : "transparent")) , 
                 paddingLeft: mobile ? "20px" : "30px",
                 paddingRight: mobile ? "20px" : "30px",
                 backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
