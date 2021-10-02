@@ -48,7 +48,7 @@ const SignInForm = () => {
             hide()
             console.log(res.data)
             if (res.data.verifyEmail === true) {
-                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck);
+                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck, { path: "/"});
                 history.push("/app/market");
             }
             else {

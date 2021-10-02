@@ -191,7 +191,7 @@ function Market() {
             return <Interest item={item} key={index} />;
             }
         });
-
+        hide();
         return (
             // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
             <div >
@@ -232,11 +232,8 @@ function Market() {
         );
         // </DestCompContext.Provider>
     }else{
-        return (
-            <div>
-                <p>แสดงหน้าโหลดดิ้ง</p>
-            </div>
-        );
+        show()
+        return null;
     }
 }
 

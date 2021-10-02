@@ -31,7 +31,7 @@ function LoadingScreen({ loadingString }: any) {
         <Container>
             <div>
                 <div className="d-flex justify-content-center">
-                    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>
                 <p className="mt-3">{loadingString}</p>
             </div>
