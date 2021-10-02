@@ -76,6 +76,21 @@ interface INavbar {
     image?: string
 }
 
+
+const NavbarContainer = styled.div`
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    max-height: 80px;
+    z-index: 97;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    transition: 300ms ease;
+    margin: 0;
+    padding: 0;
+
+`
+
 function Navbar({ image }: INavbar) {
 
     const [drop, setDrop] = useState(false);
@@ -156,67 +171,67 @@ function Navbar({ image }: INavbar) {
         history.push('/app/signin');
     }
     return (
-        <div className="header py-3" style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414"}}>
-            <Block height="90px">
+        <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff": "#0f0f0f"}}>
+            <Block height="80px" className="d-flex align-items-center">
                 <div className="header-con">
                     <a href="/app/Market">
                         <img className="logo" src={theme === "light" ? Logo : LogoWhite} />
                     </a>
                     <div>
-                        <p className="cate" onClick={() => setDrop(!drop)} style={{color: theme === "light" ? "rgb(44, 44, 44)" : "#fff"}}>Categories{dropIcon()}</p>
+                        <p className="cate" onClick={() => setDrop(!drop)} style={{ color: theme === "light" ? "rgb(44, 44, 44)" : "#fff" }}>Categories{dropIcon()}</p>
                         <p className="cate-hidden" onClick={() => setDrop(!drop)}><WidgetsIcon /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}</p>
                         <ul className={drop ? "categories active" : "categories"}>
-                            { category ?
-                            <Block height="auto">
-                                <div className="row" style={{ width: "100%"}}>
-                                    <div className="col-2" style={{ width: "150px" }}>
-                                        {CategoryData}
-                                    </div>
-                                    <div className="col-1" />
-                                    <div 
-                                        className="col-8"
-                                        style={{
-                                            position: "relative"
-                                        }}                                  
-                                    >
-                                        <div style={{
-                                            position: "absolute",
-                                            top: "0",
-                                            left: "0",
-                                            right: "0",
-                                            bottom: "0",
-                                            zIndex: 59,
-                                            margin: "70px 20px",
-                                            textAlign: "center",
-                                        }}>
-                                            {/* <h1 className="text-white">{category[selectIndex].parentCategoryEn}</h1>
+                            {category ?
+                                <Block height="auto">
+                                    <div className="row" style={{ width: "100%" }}>
+                                        <div className="col-2" style={{ width: "150px" }}>
+                                            {CategoryData}
+                                        </div>
+                                        <div className="col-1" />
+                                        <div
+                                            className="col-8"
+                                            style={{
+                                                position: "relative"
+                                            }}
+                                        >
+                                            <div style={{
+                                                position: "absolute",
+                                                top: "0",
+                                                left: "0",
+                                                right: "0",
+                                                bottom: "0",
+                                                zIndex: 59,
+                                                margin: "70px 20px",
+                                                textAlign: "center",
+                                            }}>
+                                                {/* <h1 className="text-white">{category[selectIndex].parentCategoryEn}</h1>
                                             <hr style={{
                                                 backgroundColor: "#fff",
                                                 border: "1px #fff solid",
                                                 opacity: 0.3,
                                                 borderRadius: "1px",
                                             }}/> */}
-                                            {SubCategoryArrayEn[selectIndex]}
-                                        </div>
-                                        <div
-                                            style={{ 
-                                                backgroundImage: `url(${wallpapers[selectIndex]})`,
-                                                position: "absolute",
-                                                top: "0",
-                                                left: "0",
-                                                right: "0",
-                                                bottom: "0",
-                                                ...backgroundImageStyles,
-                                                zIndex: 30,
+                                                {SubCategoryArrayEn[selectIndex]}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    backgroundImage: `url(${wallpapers[selectIndex]})`,
+                                                    position: "absolute",
+                                                    top: "0",
+                                                    left: "0",
+                                                    right: "0",
+                                                    bottom: "0",
+                                                    ...backgroundImageStyles,
+                                                    zIndex: 30,
                                                 }}
-                                        ></div>
-                                        
+                                            ></div>
+
+                                        </div>
+
+
                                     </div>
-
-
-                                </div>
-                            </Block>
-                            : null
+                                </Block>
+                                : null
                             }
                         </ul>
                     </div>
@@ -225,7 +240,7 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
-                        
+
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
@@ -236,13 +251,13 @@ function Navbar({ image }: INavbar) {
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
-                        <Label content="Requests" className="icon pointer">
+                        <Label content="Requests" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
                             <a href="/app/request"><FaRegListAlt /></a>
                         </Label>
-                        <Label content="Chat" className="icon pointer">
+                        <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
                             <a onClick={() => { window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ") }}><MdChat /></a>
                         </Label>
-                        <Label content="Notification" className="icon pointer">
+                        <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
                             <a onClick={() => { window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ") }}><IoIosNotifications /></a>
                         </Label>
                     </div>
@@ -261,7 +276,7 @@ function Navbar({ image }: INavbar) {
                     </div>
                 </div>
             </Block>
-        </div>
+        </NavbarContainer>
     );
 }
 
@@ -294,7 +309,7 @@ function MobileNavbar({ signout }: any) {
     }
 
     return (
-        <MobileNavbarContainer style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414"}}>
+        <MobileNavbarContainer style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414" }}>
             <Block height="60px">
                 <div className="header-con float-right">
                     <a href="/app/Market">

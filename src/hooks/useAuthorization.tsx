@@ -20,7 +20,7 @@ export default function useAuthorization() {
     }
 
     async function getUserData(): Promise<IAccount | null> {
-        show("Preparing your page")
+        show()
         return await axios.get(`${API}/auth/getUserData`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`

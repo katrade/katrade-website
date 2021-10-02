@@ -15,6 +15,23 @@
     cursor: pointer ;
 }
 
+.interest-card-dark {
+    margin: 5px;
+    min-width: 157px;
+    width: 19%;
+    max-width: 226px;
+    height: 250px;
+    border-radius: 3px;
+    background-color: #1a1a1a;
+    transition: 400ms ease;
+    /* z-index: 0; */
+    border: solid rgb(71, 72, 73) 1px;
+}
+.interest-card-dark:hover {   
+    transform: scale(1.05);
+    cursor: pointer ;
+}
+
 .interest-photo-card {
     height: 130px;
     width: 100%;

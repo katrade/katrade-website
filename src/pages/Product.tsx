@@ -44,6 +44,8 @@ function Product() {
 
     const history = useHistory();
 
+    
+
     // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
         resize();
@@ -135,6 +137,12 @@ function Product() {
         postMyReqeust(dataArray);
     }
 
+    // Listening for Escape key
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closePhoto();
+        }
+    });
     // const [ favorite , setFavorite] = useState(true);
     const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
     function favorite_btn() {
@@ -175,7 +183,7 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-        console.log(data.pictures)
+        // console.log(data.pictures)
         return (
             <div>
                 {photoPost}
@@ -196,9 +204,9 @@ function Product() {
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
                                     {data.pictures.map((data: any, index: any) => {
 
-                                        console.log(data);
+                                        // console.log(data);
                                         return (
-                                            <div key={index} style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%"}} onClick={() => clickPhoto(0)}>
+                                            <div key={index} className="pointer" style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%"}} onClick={() => clickPhoto(index)}>
                                                 {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
                                             </div>
                                         )
