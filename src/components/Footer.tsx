@@ -38,7 +38,7 @@ export default function Footer() {
                         <h6 className="white">{activeLang[5]}</h6>
                         <hr />
                         <a href={`/articles/trading-policies`} className="no-underline"><p className="footer-desc">{activeLang[6]}</p></a>
-                        <a href={`/articles/terms`} className="no-underline"><p className="footer-desc">{activeLang[7]}</p></a>
+                        <a href={`/articles/termsofservice`} target="_blank" className="no-underline"><p className="footer-desc">{activeLang[7]}</p></a>
                         <a href={`/articles/privacy`} className="no-underline"><p className="footer-desc">{activeLang[8]}</p></a>
                     </div>
                     <div className="col-sm">

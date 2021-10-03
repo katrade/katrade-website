@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { useForm } from '../../utils/useForm';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useLoading from '../../hooks/useLoading';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
+    const [form, handleForm] = useForm();
     const [show, hide] = useLoading();
     const [showPassword, setShowPassword] = useState(1);
+
+    const onFormSubmit  = async () =>  {
+        alert("ยังไม่เสร็จ!!!")
+    }
 
     return (
         <div>
@@ -16,28 +22,35 @@ export default function AccountComp(data: any) {
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">Current Password</label>
                             <input 
+                                //value={form.password || ""}
+                                onChange={handleForm}
+                                name="currentPassword"
                                 className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
-                                placeholder="current password"
+                                placeholder="Enter your current password"
                             />
                             <label className="blue-font-link col-auto text-end px-4" >Forgot Password?</label>
                         </div>
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">New Password</label>
-                            <input 
+                            <input
+                                onChange={handleForm}
+                                name="newPassword" 
                                 className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
-                                placeholder="new password"
+                                placeholder="Enter your new password"
                             />
                         </div>
                         <div className="row mb-4" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">Confirm New Password</label>
-                            <input 
+                            <input
+                                onChange={handleForm}
+                                name="confirmNewPassword" 
                                 className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
-                                placeholder="confirm new password"
+                                placeholder="Confirm your new password"
                             />
                         </div>
                         <div className="row mb-3"  style={{width:"100%"}}>
                             <div className="offset-lg-3">
-                                <button type="button" className="btn btn-success px-2 mx-1">Save Changes</button>
+                                <button type="button" className="btn btn-success px-2 mx-1" onClick={onFormSubmit}>Save Changes</button>
                             </div>
                         </div>
                 </div>

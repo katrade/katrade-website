@@ -17,6 +17,7 @@ import { UserProvider } from './contexts/User'
 
 import NotFound from './pages/NotFound'
 import WhyKatrade from './pages/Why-Katrade';
+import TermsOfService from './pages/TermsOfService';
 
 import Home from './pages/Home';
 import Market from './pages/Market';
@@ -78,6 +79,7 @@ function App() {
                                 {/* Articles and static pages */}
                                 <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
                                 <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
+                                <Route exact path="/articles/termsofservice" component={TermsOfService}></Route>
 
                                 <Route exact path="/app/signin" component={SignIn}></Route>
                                 <Route exact path="/app/profile" component={Profile}></Route>
