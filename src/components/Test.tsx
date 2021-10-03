@@ -1,15 +1,19 @@
-import { Label } from "./Label"
-export default function Test() {
-    return (
-        <>
-        <Label style={{ width: "300px", height: "300px", backgroundColor: "#03b1fc"}} content="This is label">
-            <div className="full-width full-height" style={{ backgroundColor: "yellow" }}>
-                Hello World
-            </div>
-        </Label>
-        <div style={{ width: "700px", height: "700px", backgroundColor: "#fc0352"}}>
+import io from "socket.io-client";
 
+
+const socket = io("http://localhost:5000");
+
+socket.on("connect", () => {
+    console.log("Connected to WS server");
+
+    console.log(socket.connected); 
+})
+
+export default function Test() {
+    console.log(socket)
+    return (
+        <div>   
+            socket
         </div>
-        </>
     )
 }
