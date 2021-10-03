@@ -2,27 +2,10 @@ import FollowingBlock from "../Account/FollowingBlock";
 
 export default function FollowingComp(data: any) {
     const accountData = data.data;
-    const fakeData = [
-        {
-            name:"fakeData"
-        },
-        {
-            name:"fakeData"
-        },
-        {
-            name:"fakeData"
-        },
-        {
-            name:"fakeData"
-        },
-        {
-            name:"fakeData"
-        },
-        {
-            name:"fakeData"
-        },
-    ]
-    const fakeFollowingBlock = fakeData.map((data, index) => {
+
+    const fakeData:any = []
+
+    const fakeFollowingBlock = fakeData.map((data:any, index:any) => {
         return <FollowingBlock data={data} key={index} relation={"following"} />;
     })
     return (

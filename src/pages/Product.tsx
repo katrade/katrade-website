@@ -36,11 +36,15 @@ function Product() {
         getUserData,
         postMyReqeust,
         addFavourite,
-        deleteFavourite,} = useAuthorization();
+        deleteFavourite,
+        onFollow,
+        unFollow,
+        getFollowCheck, } = useAuthorization();
     const [data, setData] = useState<any>(null);
     const [owner, setOwner] = useState<any>(null);
     const [inventory, setInventory] = useState<any>();
     const [mobile, setMobile] = useState(false);
+    const [followChk , setFollowChk] = useState<boolean>();
 
     const history = useHistory();
 
@@ -53,7 +57,13 @@ function Product() {
             var dataDetail = await getDetailProduct(product_id);
             if (dataDetail) {
                 setData(dataDetail);
+                var getFollowChk = await getFollowCheck(dataDetail.owner);
+                if (getFollowChk) {
+                    setFollowChk(getFollowChk.value);
+                    console.log(getFollowChk)
+                }
             }
+            
             var getUser: any = await getUserData();
             if (getUser) {
                 setOwner(getUser);
@@ -127,15 +137,6 @@ function Product() {
         setTmpRequireDetailShow("d-none")
     }
 
-    function handleRequest() {
-        const dataArray = {
-            userId2: data.owner,
-            inventoryId1: data._id,
-            inventoryId2: "owner._iditem",
-        }
-        postMyReqeust(dataArray);
-    }
-
     // Listening for Escape key
     document.addEventListener("keydown", function(event) {
         if (event.key === "Escape") {
@@ -156,6 +157,25 @@ function Product() {
                 <SolidButton onClick={() => deleteFavourite(data._id, checkpath)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff" }}>
                     <FcLike style={{ filter: "brightness(10)" }} />
                 </SolidButton>
+            );
+        }
+    }
+
+
+
+    const handleClickFollow = () => setFollowChk(!followChk);
+    function follow_btn() {
+        if(!followChk){
+            return (
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0" onClick={() => onFollow(data.owner)}>
+                    Follow
+                </TransparentButton>
+            );
+        }else{
+            return (
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0" onClick={() => unFollow(data.owner)}>
+                    unFollow
+                </TransparentButton>
             );
         }
     }
@@ -239,7 +259,8 @@ function Product() {
 
                                     <div className={forOwner ? "d-none" : ""}>
                                         <TransparentButton className="ms-2" width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Chat</TransparentButton>
-                                        <TransparentButton className="ms-2" width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Follow</TransparentButton>
+                                        {/* <TransparentButton className="ms-2" width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Follow</TransparentButton> */}
+                                        <div onClick={handleClickFollow}>{follow_btn()}</div>
                                     </div>
                                 </div>
                                 <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-end mt-3"}>

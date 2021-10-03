@@ -466,6 +466,72 @@ export default function useAuthorization() {
             })
     }
 
+    async function getFollow() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/follow` , {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
+    async function getFollowCheck(user_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/checkFollow?id=${user_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
+    async function onFollow(user_id:any) {
+        return await axios.post(`${API}/user/follow` , {id:user_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+    async function unFollow(user_id:any) {
+        return await axios.post(`${API}/user/unFollow`, {id:user_id},{
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
     return {
         getUserData,
         updateProfilePic,
@@ -488,5 +554,9 @@ export default function useAuthorization() {
         getAnotherUser,
         acceptRequest,
         getInprogress,
+        getFollow,
+        getFollowCheck,
+        onFollow,
+        unFollow,
     }
 }
