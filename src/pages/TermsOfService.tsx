@@ -184,7 +184,7 @@ export default function TermsOfService() {
         <>
             <Background>
                 <StaticNav />
-                    <BackToTop showBelow={250} />
+                <BackToTop showBelow={250} />
                 <div className="row justify-content-center m-0 py-3 full-width">
                     <div className="center-content-screen col-8 mb-5 px-5">
                         <div className="text-center mb-5">

@@ -1,10 +1,8 @@
 import { useState , useContext , useEffect } from "react"
 import iconPic from '..\src\pics\backToTop.png'
 
-const BackToTop = ({
-    showBelow
-}) => {
-
+const BackToTop = ({showBelow} : {showBelow:any}) => {
+    
     const [show, setShow] = useState(showBelow ? false : true)
 
     const handleScroll = () => {
