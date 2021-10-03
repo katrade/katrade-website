@@ -57,6 +57,7 @@ import ProfileCanvas from './components/ProfileCanvas';
 
 import Test01 from './components/TestFrontend/Test01';
 import Test from "./components/Test";
+import ChatDashboard from './pages/ChatDashboard'
 
 require('dotenv').config({ path: ".env" })
 console.log(process.env)
@@ -114,6 +115,7 @@ function App() {
                                 <Route exact path="/app/inprogress" component={Inprogress}></Route>
 
                                 <Route exact path="/app/heydude" component={Chat}></Route>
+                                <Route exact path="/app/chatDashboard" component={ChatDashboard}></Route>
 
                                 <Route exact path="/app/testFrontend" component={Test01}></Route>
 
