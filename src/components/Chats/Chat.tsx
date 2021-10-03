@@ -79,35 +79,38 @@ export default function Chat() {
                 </div>
             ) : (
                 <div className="chatContainer">
-                    <div className="headerChat d-flex align-items-center px-5">
+                    <div className="chatContainer-Header d-flex align-items-center px-5">
                         <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: 47 }} />
                         <span className="ms-3 text-white">FranKydeSU</span>
                     </div>
-                    <div className="messages">
+                    <div className="messages" style={{ height: "500px", overflow: "auto" }}>
                         {messageList.map((val, key) => {
                             return (
                                 <div
                                     className="messageContainer"
                                     id={val.author == userName ? "You" : "Other"}
                                 >
-                                    <div className="messageIndividual">
-                                        {val.author}: {val.message}
-                                    </div>
+                                    {/* <div className="messageIndividual">*/}
+                                        <div className={val.author == userName ? "messageIndividual text-right" : "messageIndividual"}>
+                                            {val.message}
+                                        </div>
                                 </div>
                             );
                         })}
                     </div>
 
-                    <div className="messageInputs">
+                    <div className="messageInputs row p-0 m-0" style={{ width: "100%" }}>
                         <input
+                            className="col-9"
                             type="text"
                             placeholder="Message..."
                             onChange={(e) => {
                                 setMessage(e.target.value);
                             }}
                             value={message}
+                            style={{ borderBottomLeftRadius: "10px" }}
                         />
-                        <button onClick={sendMessage}>Send</button>
+                        <button className="col-3" onClick={sendMessage} style={{ borderBottomRightRadius: "10px" }}>Send</button>
                     </div>
                 </div>
             )}
