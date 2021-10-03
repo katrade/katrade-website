@@ -157,7 +157,6 @@ export default function useAuthorization() {
             },
         })
             .then(res => {
-                console.log("create item done!!")
                 const itemId = res.data.id;
                 // upload pictures to firebase storage
                 uploadItemPicture(itemId, arrayOfPicture).then(output => {
@@ -174,8 +173,6 @@ export default function useAuthorization() {
                             }
                         })
                         .then(res => {
-                            console.log("upload item's pictures done!!");
-                            console.log(res.data);
                             if (res.data.value) {
                                 if (output.length !== arrayOfPicture.length) {
                                     alert("Pictures upload may failed. Please check them again");
@@ -221,7 +218,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                // if (!res.data.data.username) {
                 hide();
                 return res.data;
             })
@@ -312,7 +308,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                console.log(res)
                 hide();
                 return res.data;
             })
@@ -532,6 +527,57 @@ export default function useAuthorization() {
             })
     }
 
+    async function LockRequest(request_id: any, product_id:any) {
+        return await axios.patch(`${API}/user/lockRequest`, { id: request_id , inventoryId: product_id}, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+
+    async function deleteMyLockRequestPending(requestpending_id: any) {
+        show("โหลดดิ้ง..");
+        return await axios.patch(`${API}/user/cancelLockRequest`, {id: requestpending_id} , {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                window.location.reload();
+                hide();
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function getSearch(searchword:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/search?query=${searchword}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
     return {
         getUserData,
         updateProfilePic,
@@ -558,5 +604,8 @@ export default function useAuthorization() {
         getFollowCheck,
         onFollow,
         unFollow,
+        LockRequest,
+        deleteMyLockRequestPending,
+        getSearch,
     }
 }
