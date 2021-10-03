@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/Theme';
+import { useHistory } from "react-router";
 import styled from 'styled-components';
 import Background from './Background';
 import { H6 } from './standard/H';
@@ -43,7 +44,7 @@ export default function ProfileCanvas() {
 
                             <Profile name="Chalanthorn Aengaguga" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU" label="Developer"/>
                             <Profile name="Chonchanat Tubtiang" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NIFM8QiRrDJqNRJ9xj-_b09MQwQK0Io5xg3Ge9z2wnmdglim2PCOzHdWsjq0qT_Y8v4&usqp=CAU" label="Head Chef"/>
-                            <Profile name="Jirat Wangslae" img="https://scontent.fbkk5-4.fna.fbcdn.net/v/t1.6435-9/43496547_1368894573246121_5877372052599472128_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=ad2b24&_nc_ohc=izqcS2N0VFAAX8dWzoZ&tn=LphZq6e4Pmg6vDRb&_nc_ht=scontent.fbkk5-4.fna&oh=4e5d7fee5a9cf0aa19e676593e81cedc&oe=617CC03C" label="Developer"/>
+                            <Profile name="Jirat Wangsalee" img="https://scontent.fbkk5-4.fna.fbcdn.net/v/t1.6435-9/43496547_1368894573246121_5877372052599472128_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=ad2b24&_nc_ohc=izqcS2N0VFAAX8dWzoZ&tn=LphZq6e4Pmg6vDRb&_nc_ht=scontent.fbkk5-4.fna&oh=4e5d7fee5a9cf0aa19e676593e81cedc&oe=617CC03C" label="Developer"/>
                             <Profile name="Napasin Saengthong" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuiaJ3au5xztqR3mOekUEnNHdnI1l_BxfiDQ7M4CX1QRKz59NFFWPNkfRY2tmRHlzUyUk&usqp=CAU" label="Developer"/>
                             <Profile name="Nattawat Mmmm" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBlT6tWFRvqh1_3Y59fCt0Ml7kQaCECCCHt7IvZRfy3wWwqFW3_EP2qF_nkcKfYgD-rnU&usqp=CAU" label="Developer"/>
                             <Profile name="Nik Watchporn" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNeNr1-vSeAA27f-UXwXKfkNy-7QoGz4QmjPCabheZURu4j8_qoySTOKzIJr7RP4oPx2I&usqp=CAU" label="UX/UI Designer"/>
@@ -102,15 +103,16 @@ const Embed = styled.div`
 function Profile({ name , img , label }: boxPropsInterface) {
 
     const { theme } = useContext(ThemeContext);
+    const history = useHistory();
 
     return (
         <>
             <div className="col-lg m-0 p-4">
                 <Embed style={{ backgroundColor: theme === "light" ? "#f2f4f7" : "#2a2c2e"}}>
-                    <img className="round" src={img} width="66%"/>
+                    <img className="round" src={img} width="66%" height="131px"/>
                     <H6 className="mt-3">{name}</H6>
                     <P>{label}</P>
-                    <Icon src={facebookForDark} width="30px"/>
+                    <Icon src={facebookForDark} onClick={() => window.location.href = "https://www.facebook.com/jirat.wangman"} width="30px"/>
                     <Icon src={instagramForDark} width="30px"/>
                     <Icon src={theme === "light" ? github : githubForDark} width="30px"/>
                 </Embed>

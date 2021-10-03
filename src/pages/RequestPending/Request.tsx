@@ -75,7 +75,7 @@ export default function Request() {
         }
     }, [dataRequest])
 
-    if (dataRequest && dataPending) {
+    if (dataRequest && dataPending && dataInprogess) {
         return (
             <div>
                 <Navbar />

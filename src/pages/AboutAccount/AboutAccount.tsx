@@ -90,10 +90,11 @@ function AboutAccount(userData:any) {
 
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getMyInventory , getFavourite } = useAuthorization();    
+    const { getUserData , updateProfilePic , getMyInventory , getFavourite , getFollow } = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const [ favoriteData, setFavoriteData ] = useState<any>();
     const [ inventoryData , setInventoryData ] = useState<any>();
+    const [ followData , setFollowData ] = useState<any>();
     const history = useHistory();
 
     useEffect(() => {
@@ -114,6 +115,10 @@ function AboutAccount(userData:any) {
             if (favourite) {
                 setFavoriteData(favourite);
             }
+            var follow = await getFollow();
+            if (follow) {
+                setFollowData(follow);
+            }
         }
         init();
     }, [])
@@ -126,9 +131,9 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "ChangePassword"){
             setComponentPage(<ChangePassComp data={accountData}/>);
         }else if(destCompState.dest === "Following"){
-            setComponentPage(<FollowingComp data={accountData}/>);
+            setComponentPage(<FollowingComp data={followData}/>);
         }else if(destCompState.dest === "Followers"){
-            setComponentPage(<FollowersComp data={accountData}/>);
+            setComponentPage(<FollowersComp data={followData}/>);
         }else if(destCompState.dest === "Favorite"){
             setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(destCompState.dest === "Inventory"){
@@ -146,9 +151,9 @@ function AboutAccount(userData:any) {
         if(component == "account" || component == undefined ){
             setComponentPage(<AccountComp data={accountData}/>);
         }else if(component == "following"){
-            setComponentPage(<FollowingComp data={accountData}/>);
+            setComponentPage(<FollowingComp data={followData}/>);
         }else if(component == "followers"){
-            setComponentPage(<FollowersComp data={accountData}/>);
+            setComponentPage(<FollowersComp data={followData}/>);
         }else if(component == "favorite"){
             setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(component == "inventory"){
