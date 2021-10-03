@@ -90,11 +90,13 @@ function AboutAccount(userData:any) {
 
     const [ destCompState , destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getMyInventory , getFavourite , getFollow } = useAuthorization();    
+    const { getUserData , updateProfilePic , getMyInventory , getFavourite , getFollow , getUserIdArray} = useAuthorization();    
     const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const [ favoriteData, setFavoriteData ] = useState<any>();
     const [ inventoryData , setInventoryData ] = useState<any>();
     const [ followData , setFollowData ] = useState<any>();
+    const [ followingUserArrayData, setFollowingUserArrayData ] = useState<any>();
+    const [ followerUserArrayData, setFollowerUserArrayData ] = useState<any>();
     const history = useHistory();
 
     useEffect(() => {
@@ -118,7 +120,17 @@ function AboutAccount(userData:any) {
             var follow = await getFollow();
             if (follow) {
                 setFollowData(follow);
+                var followingUserDataArray = await getUserIdArray(follow.following) 
+                if (followingUserDataArray){
+                    setFollowingUserArrayData(followingUserDataArray)
+                }     
+                var followerUserDataArray = await getUserIdArray(follow.follower)
+                if (followerUserDataArray) {
+                    setFollowerUserArrayData(followerUserDataArray)
+                }
+
             }
+ 
         }
         init();
     }, [])
@@ -131,9 +143,9 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "ChangePassword"){
             setComponentPage(<ChangePassComp data={accountData}/>);
         }else if(destCompState.dest === "Following"){
-            setComponentPage(<FollowingComp data={followData}/>);
+            setComponentPage(<FollowingComp data={followingUserArrayData}/>);
         }else if(destCompState.dest === "Followers"){
-            setComponentPage(<FollowersComp data={followData}/>);
+            setComponentPage(<FollowersComp data={followerUserArrayData}/>);
         }else if(destCompState.dest === "Favorite"){
             setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(destCompState.dest === "Inventory"){
@@ -151,9 +163,9 @@ function AboutAccount(userData:any) {
         if(component == "account" || component == undefined ){
             setComponentPage(<AccountComp data={accountData}/>);
         }else if(component == "following"){
-            setComponentPage(<FollowingComp data={followData}/>);
+            setComponentPage(<FollowingComp data={followingUserArrayData}/>);
         }else if(component == "followers"){
-            setComponentPage(<FollowersComp data={followData}/>);
+            setComponentPage(<FollowersComp data={followerUserArrayData}/>);
         }else if(component == "favorite"){
             setComponentPage(<FavoriteComp data={favoriteData}/>);
         }else if(component == "inventory"){
@@ -170,7 +182,7 @@ function AboutAccount(userData:any) {
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>
-                            <Accountbar data={accountData}/>
+                            <Accountbar accountData={accountData} followData={followData}/>
                             <div className="d-flex">
                                 <div className="MobileMode" style={{minWidth:"180px"}}>
                                     <LSideMenuComp/>

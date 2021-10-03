@@ -503,7 +503,7 @@ export default function useAuthorization() {
     }
 
     async function onFollow(user_id:any) {
-        return await axios.post(`${API}/user/follow` , {id:user_id},{
+        return await axios.post(`${API}/user/follow` , {id:user_id}, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -517,7 +517,7 @@ export default function useAuthorization() {
             })
     }
     async function unFollow(user_id:any) {
-        return await axios.post(`${API}/user/unFollow`, {id:user_id},{
+        return await axios.post(`${API}/user/unFollow`, {id:user_id}, { 
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -530,6 +530,38 @@ export default function useAuthorization() {
                 console.log(err)
                 return null;
             })
+    }
+    async function getUserFollowData(user_id:any) {
+        return await axios.get(`${API}/user/getFollowById?id=${user_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    } 
+    async function getUserIdArray(user_id:any) {
+        return await axios.post(`${API}/user/getUserFromIdArray`, {data:user_id}, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })            
     }
 
     return {
@@ -558,5 +590,7 @@ export default function useAuthorization() {
         getFollowCheck,
         onFollow,
         unFollow,
+        getUserFollowData,
+        getUserIdArray,
     }
 }

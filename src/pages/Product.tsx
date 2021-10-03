@@ -23,10 +23,6 @@ const backgroundImageStyles = {
     backgroundRepeat: "no-repeat",
 }
 
-
-
-
-
 function Product() {
     const { search } = useLocation();
     const { product_id } = queryString.parse(search);
@@ -39,16 +35,17 @@ function Product() {
         deleteFavourite,
         onFollow,
         unFollow,
-        getFollowCheck, } = useAuthorization();
+        getFollowCheck,
+        getUserFollowData } = useAuthorization();
     const [data, setData] = useState<any>(null);
     const [owner, setOwner] = useState<any>(null);
     const [inventory, setInventory] = useState<any>();
     const [mobile, setMobile] = useState(false);
     const [followChk , setFollowChk] = useState<boolean>();
+    const [followerData, setFollowerData] = useState<any>();
 
     const history = useHistory();
 
-    
 
     // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
@@ -60,10 +57,12 @@ function Product() {
                 var getFollowChk = await getFollowCheck(dataDetail.owner);
                 if (getFollowChk) {
                     setFollowChk(getFollowChk.value);
-                    console.log(getFollowChk)
+                }
+                var getFollowerData = await getUserFollowData(dataDetail.owner);
+                if (getFollowerData) {
+                    setFollowerData(getFollowerData.follower.length);
                 }
             }
-            
             var getUser: any = await getUserData();
             if (getUser) {
                 setOwner(getUser);
@@ -72,6 +71,7 @@ function Product() {
             if (getInventory) {
                 setInventory(getInventory);
             }
+            
         }
         init();
     }, [])
@@ -161,24 +161,24 @@ function Product() {
         }
     }
 
-
-
     const handleClickFollow = () => setFollowChk(!followChk);
     function follow_btn() {
         if(!followChk){
             return (
-                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0" onClick={() => onFollow(data.owner)}>
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => onFollow(data.owner)}>
                     Follow
                 </TransparentButton>
             );
         }else{
             return (
-                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0" onClick={() => unFollow(data.owner)}>
-                    unFollow
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => unFollow(data.owner)}>
+                    unfollow
                 </TransparentButton>
             );
         }
     }
+
+
     if (!data) {
         <div style={{ width: "100vw", height: "100vh", }}>
             <h5>ROR pap</h5>
@@ -199,7 +199,6 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-        // console.log(data.pictures)
         return (
             <div>
                 {photoPost}
@@ -214,29 +213,26 @@ function Product() {
                             <div className="col-lg py-3">
                                 <div className="mb-3 full-width" style={{ height: "auto" }}>
                                     <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})` }} onClick={() => clickPhoto(0)}>
-                                        {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
                                     {data.pictures.map((data: any, index: any) => {
 
-                                        // console.log(data);
                                         return (
                                             <div key={index} className="pointer" style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%"}} onClick={() => clickPhoto(index)}>
-                                                {/* <img className="my-auto" src={data.pictures[0]} style={{ width: "100%", height: "100%", cursor: "zoom-in" }}  /> */}
                                             </div>
                                         )
                                     })
                                     }
                                 </div>
                             </div>
-
                             <div className="col-lg" style={{ width: "100%" }}>
                                 <h4 className="m-0">{data.name}</h4>
                                 <div className="d-flex align-items-center">
                                     <BsStarFill />
                                     <p className="m-0 mx-2">0</p>
                                     <p className="m-0">Favorites</p>
+
                                 </div>
                                 <div className="d-flex mt-3 border border-secondary rounded-3">
                                     <p className="m-0 rounded-left px-4 fw-bold p-1 d-flex justify-content-center align-items-center" style={{ color: "white", backgroundColor: "#F66464" }}>Category</p>
@@ -252,14 +248,13 @@ function Product() {
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
-                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>N/A Followers</span>
+                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{followerData+" Followers"}</span>
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className={forOwner ? "d-none" : ""}>
-                                        <TransparentButton className="ms-2" width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Chat</TransparentButton>
-                                        {/* <TransparentButton className="ms-2" width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 0">Follow</TransparentButton> */}
+                                    <div className={forOwner ? "d-none" : "d-flex flex-wrap" }>
+                                        <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px">Chat</TransparentButton>
                                         <div onClick={handleClickFollow}>{follow_btn()}</div>
                                     </div>
                                 </div>

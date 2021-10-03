@@ -19,16 +19,22 @@ export default function ProfileViewer() {
     const { search } = useLocation();
     const { user_id } = queryString.parse(search);
 
-    const { getAnotherUser} = useAuthorization(); 
+    const { getAnotherUser, getUserFollowData} = useAuthorization(); 
     
     const [ anotherUserData , setAnotherUserData ] = useState<any>(null);
+    const [ followData , setFollowData ] = useState<any>();
 
     useEffect(() => {
         async function init() {
             var data = await getAnotherUser(user_id);
             if (data) {
                 setAnotherUserData(data);
-            }            
+                var getFollowerData = await getUserFollowData(user_id)  
+                if (getFollowerData) {
+                    setFollowData(getFollowerData)
+                    console.log(followData)
+                }
+            }
         }
         init();
     }, [])
@@ -76,8 +82,9 @@ export default function ProfileViewer() {
     //     },
     // ]
 
-    if(anotherUserData) {
+    if(anotherUserData && followData) {
         console.log(anotherUserData)
+        console.log(followData)
 
         const inventory_item = anotherUserData.inventories.map((item:any, index:any) => {
             return <Recommend item={item} key={index} />;
@@ -109,10 +116,10 @@ export default function ProfileViewer() {
                             </div>
                             <div className="full-width d-flex justify-content-center align-items-center px-5 mb-3 flex-wrap">
                                 <div className="d-flex justify-content-center align-items-center followers mx-2 px-5 py-3 my-2">
-                                    <b className="mx-2 number">{anotherUserData.followers.length} </b> followers
+                                    <b className="mx-2 number">{followData.follower.length} </b> followers
                                 </div>
                                 <div className="d-flex justify-content-center align-items-center following mx-2 px-5 py-3 my-2">
-                                    <b className="mx-2 number">{anotherUserData.following.length} </b> following
+                                    <b className="mx-2 number">{followData.following.length} </b> following
                                 </div>
                             </div>
                         </div>
