@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components';
 import axios from 'axios';
 import { API } from '../app.setting.json';
@@ -240,6 +241,7 @@ function Navbar({ image }: INavbar) {
                         <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
                     </form>
                     <div className="desktop-icon">
+
 
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>

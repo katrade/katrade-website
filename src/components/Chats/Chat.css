@@ -1,0 +1,38 @@
+.tab {
+    border-radius: 10px 10px 0px 0px;
+    background-color: black;
+    color: white;
+    width: 160px;
+    height: 70px;
+    font-size: 150%;
+}
+
+.tabchat {
+    height: 90px;
+    border-radius: 10px;
+}
+
+.lineBar {
+    border: 1px solid #C4C4C4;
+    width: 100%;
+}
+
+.tabchat:hover {
+    background-color: rgba(158, 158, 158, 0.5);
+}
+
+.chatContainer {
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+
+.chatContainer-Header {
+    height: 70px;
+    background-color: black;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.dealHover:hover {
+    background-color: rgba(158, 158, 158, 0.07);
+}

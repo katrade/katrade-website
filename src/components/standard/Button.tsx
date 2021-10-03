@@ -16,6 +16,7 @@ interface ButtonProps {
     darkButtonColor?: string
     onClick?: any
     className?: string
+    buttonWidth?: string
 }
 
 export const TransparentButton = styled.button`
@@ -27,7 +28,7 @@ export const TransparentButton = styled.button`
     border-style: solid;
     border-radius: 5px;
     border-color: ${(props: ButtonProps) => props.buttonColor ? props.buttonColor : "black"};
-    border-width: 1px;
+    border-width: ${(props: ButtonProps) => props.buttonWidth ? props.buttonWidth : "1px"};
 
     font-size: ${(props: ButtonProps) => props.fontSize ? props.fontSize : "20px"};
 

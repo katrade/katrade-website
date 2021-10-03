@@ -205,10 +205,7 @@ export default function AddItem() {
     function handleUnload(event:any){ 
         event.preventDefault();
         var arrayOfPicture:File[] = [];
-        dataCover ? arrayOfPicture.push(dataCover) : alert("Need cover photo");
-        dataPicture1 ? arrayOfPicture.push(dataPicture1) : alert("Need picture(s)");
     
-        
         const data = {
             name: dataItem.name,
             detail: dataItem.myDetail,
@@ -221,8 +218,16 @@ export default function AddItem() {
             pictures: [],
             require: wantInputFields
         }
-        // console.log(data);
-        addItem(data, arrayOfPicture);
+
+        if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name){
+            arrayOfPicture.push(dataCover)
+            if(dataPicture1){
+                arrayOfPicture.push(dataPicture1)
+            }
+            addItem(data, arrayOfPicture);
+        }else{
+            alert("ยังใส่ข้อมูลไม่ครบ (ไม่สมบูรณ์)")
+        }
     }
 
     return (
