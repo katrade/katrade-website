@@ -57,7 +57,7 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
-        if(data.firstname != "" && data.lastname != "" && data.email != "" && data.password != "" && data.phoneNumber != "") {
+        if(data.firstname != null && data.lastname != null && data.email != null && data.password != null && data.phoneNumber != null) {
             if (read.checked == false) {
                 alert("please confirm terms of service.") 
             }
