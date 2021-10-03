@@ -120,7 +120,6 @@ function Product() {
         requestTrade = <SelectTrade onClose={closeRequest} array={inventory} detailItem={data} />
     }
 
-
     const [requireDetail, SetRequireDetail] = useState<any>();
     const [tmpRequireDetailShow, setTmpRequireDetailShow] = useState<any>("m-0");
     function changeRequireDetail(index: any) {
@@ -167,9 +166,6 @@ function Product() {
     }
 
     if (data && owner) {
-        // console.log(data._id , owner.favourite)
-        // console.log(owner.favourite.includes(data._id))
-        var checkFavorite: any = owner.favourite.includes(data._id);
         var checkpath = window.location.pathname;
 
         const wantCate = data.require.map((data: any, index: any) => {
@@ -247,12 +243,6 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-end mt-3"}>
-                                    {/* <SolidButton className={checkFavorite? "d-none" : ""} onClick={() => addFavourite(data._id)} width="132px" fontSize="24px" buttonColor="red" padding="5px" margin="0">
-                                        Add to Favorite
-                                    </SolidButton>
-                                    <SolidButton className={checkFavorite? "" : "d-none"} onClick={() => deleteFavourite(data._id , checkpath)} width="132px" fontSize="24px" buttonColor="orange" padding="5px" margin="0">
-                                        Reomve to Favorite
-                                    </SolidButton> */}
                                     <div className="me-3" onClick={handleClickFavorite}>{favorite_btn()}</div>
                                     <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                         Trade

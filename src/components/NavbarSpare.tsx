@@ -135,7 +135,7 @@ function NavbarSpare({ image }: INavbar) {
 
 
     return (
-        <div className="header py-3">
+        <div className="header py-3 bg-white">
             <Block height="90px">
                 <div className="header-con">
                     <a href="/app/Market">

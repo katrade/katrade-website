@@ -7,16 +7,14 @@ export default function SelectTrade({ onClose, array, detailItem }: any) {
     const { postMyReqeust } = useAuthorization();
     function handleRequest(myIdItem: any) {
         const dataArray = {
-            userId2: detailItem.owner,
-            inventoryId1: myIdItem,
-            inventoryId2: detailItem._id,
+            targetUserId: detailItem.owner,
+            sourceInventoryId: myIdItem,
+            targetInventoryId: detailItem._id,
         }
-        // console.log(dataArray);
         postMyReqeust(dataArray);
     }
 
     const listMyInventory = array.map((data: any, index: any) => {
-        console.log(data);
         return (
             <div onClick={() => {
                 handleRequest(data._id);
