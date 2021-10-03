@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/Theme';
+import { useHistory } from "react-router";
 import styled from 'styled-components';
 import Background from './Background';
 import { H6 } from './standard/H';
@@ -102,15 +103,16 @@ const Embed = styled.div`
 function Profile({ name , img , label }: boxPropsInterface) {
 
     const { theme } = useContext(ThemeContext);
+    const history = useHistory();
 
     return (
         <>
             <div className="col-lg m-0 p-4">
                 <Embed style={{ backgroundColor: theme === "light" ? "#f2f4f7" : "#2a2c2e"}}>
-                    <img className="round" src={img} width="66%"/>
+                    <img className="round" src={img} width="66%" height="131px"/>
                     <H6 className="mt-3">{name}</H6>
                     <P>{label}</P>
-                    <Icon src={facebookForDark} width="30px"/>
+                    <Icon src={facebookForDark} onClick={() => window.location.href = "https://www.facebook.com/jirat.wangman"} width="30px"/>
                     <Icon src={instagramForDark} width="30px"/>
                     <Icon src={theme === "light" ? github : githubForDark} width="30px"/>
                 </Embed>
