@@ -14,7 +14,7 @@
 
 .lineBar {
     border: 1px solid #C4C4C4;
-
+    width: 100%;
 }
 
 .tabchat:hover {
@@ -22,13 +22,17 @@
 }
 
 .chatContainer {
-    height: 750px;
+    height: auto;
     border-radius: 10px;
     border: 1px solid grey;
 }
 
-.headerChat {
+.chatContainer-Header {
     height: 70px;
     background-color: black;
     border-radius: 10px 10px 0px 0px;
+}
+
+.dealHover:hover {
+    background-color: rgba(158, 158, 158, 0.07);
 }

@@ -27,6 +27,8 @@ export default function SignupForm({ pw, setPw }: p) {
     //     }  
     // }
 
+    var read: any = document.getElementById("readTerms");
+
     document.addEventListener("keydown", function(event) {
         if (event.keyCode === 13) {
             onFormSubmit();
@@ -55,30 +57,40 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
-        show("Creating you account...")
-        let result: any = await fetch(`${API}/auth/signup`, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data)
-        }).then(res => res.json());
+        if(data.firstname != null && data.lastname != null && data.email != null && data.password != null && data.phoneNumber != null) {
+            if (read.checked == false) {
+                alert("please confirm terms of service.") 
+            }
+            else {
+                show("Creating you account...")
+                let result: any = await fetch(`${API}/auth/signup`, {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(data)
+                }).then(res => res.json());
 
-        console.clear();
-        console.log(result);
+                console.clear();
+                console.log(result);
 
-        hide();
-        if (result.message === "Please check your email to verify") {
-            // alert("Your account has been created, please check your email inbox and visit the verification link.")
-            history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
+                hide();
+                if (result.message === "Please check your email to verify") {
+                    // alert("Your account has been created, please check your email inbox and visit the verification link.")
+                    history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
+                }
+                else {
+                    alert("Error");
+                }
+            }
         }
         else {
-            alert("Error");
+            alert("please confirm all of your information.") 
         }
     }
 
@@ -156,8 +168,8 @@ export default function SignupForm({ pw, setPw }: p) {
                 
                 <div className="text-center">
                     <br />
-                    <label className="mx-2"><input className="mr-2" type="checkbox" />Accept the Terms of Service.</label>
-                    <a href="https://scontent.fbkk2-4.fna.fbcdn.net/v/t1.6435-9/66231507_109603010346815_7721927349360394240_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=8bfeb9&_nc_eui2=AeGWdC-Ytxlk9-gLJKhLseQIaVrAoqfB6ExpWsCip8HoTInKoJ9RqqEYFzRwvTTX0PdkTqHbQQ2TXOqhR4K2vMBU&_nc_ohc=gpZM0V1ED7MAX_f7NWz&_nc_ht=scontent.fbkk2-4.fna&oh=5ed8b35053a8e690a2c31251063ebf02&oe=612692BE" className="blue-font-link mx-1">learn more</a>
+                    <label className="mx-2"><input id="readTerms" value="confirmTerms" className="mr-2" type="checkbox" />Accept the Terms of Service.</label>
+                    <a href="/articles/termsofservice" target="_blank" className="blue-font-link mx-1">learn more</a>
                     <br />
                     <SolidButton type="button" className="mybutton-grey pl-5 pr-5 mt-3" margin="0 auto" onClick={onFormSubmit}>Sign up</SolidButton>
                 </div>

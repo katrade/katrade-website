@@ -10,9 +10,9 @@ export default function ChatDashboard() {
     return (
         <Background>
             <Navbar />
-            <Block height="85vh" backgroundColor="#f7f7f7" darkBackgroundColor="#3d3d3d">
+            <Block height="90vh" backgroundColor="#f7f7f7" darkBackgroundColor="#3d3d3d">
                 <div className="row bg-white p-2 mt-4 pt-3">
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 pe-0">
                         <SideBar />
                     </div>
                     <div className="col-lg-8">
