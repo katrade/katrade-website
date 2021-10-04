@@ -394,6 +394,7 @@ export default function useAuthorization() {
     }
 
     async function deleteMyRequestPending(requestpending_id: any) {
+        console.log(requestpending_id);
         show("โหลดดิ้ง..");
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {

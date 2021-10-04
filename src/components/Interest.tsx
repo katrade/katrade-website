@@ -20,7 +20,7 @@ export default function Interest(props: any) {
                 <StarRoundedIcon className="star" />
             </div>
             <div className="interest-text-card pt-3">
-                <P>{item.name}</P>
+                <P className="text-truncate">{item.name}</P>
                 <P className="desc item-desc text-truncate">{item.detail}</P>
             </div>
             <div className="text-end px-2">

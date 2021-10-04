@@ -15,7 +15,7 @@ function Chat() {
 
     function askingDeleteRequest(data:any) {
         if(window.confirm(`ต้องการลบคำขออีหลีถิ?`)){
-            deleteMyRequestPending(data.requestId)
+            deleteMyRequestPending(request_id)
 		}
     }
 
