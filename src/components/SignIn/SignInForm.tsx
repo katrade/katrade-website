@@ -26,17 +26,25 @@ const SignInForm = () => {
     const history = useHistory();
     const [form, handleForm] = useForm();
     const [show, hide] = useLoading();
-    const [cookie, setCookie, removeCookies] = useCookies(['DaveTheHornyDuck']);
+    const [cookies, setCookie, removeCookies] = useCookies(['DaveTheHornyDuck']);
     
-    document.addEventListener("keydown", function(event) {
-        if (event.keyCode === 13) {
-            document.getElementById("signin")?.click();
-        }
-    });
+    // document.addEventListener("keydown", function(event) {
+    //     if (event.keyCode === 13) {
+    //         document.getElementById("signin")?.click();
+    //     }
+    // });
 
-    const onFormSubmit = async () => { // แก้ submit ให้เป็น tag form
-        show("We're bringing you in");
-        console.log(form.email, form.password)
+    const onFormSubmit = async (e: any) => { // แก้ submit ให้เป็น tag form       
+        e.preventDefault();  
+        console.log("??")
+        const _email = form.email;
+        const _password = form.password;
+        signIn(_email, _password);
+        // console.log(form.email, form.password)
+    }
+
+    async function signIn(_email: string, _password: string) {
+        show();
         await axios.post(`${API}/auth/signin`, {
             email: form.email,
             password: form.password
@@ -46,9 +54,9 @@ const SignInForm = () => {
             }
         }).then((res) => {
             hide()
-            console.log(res.data)
+            // console.log(res.data)
             if (res.data.verifyEmail === true) {
-                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck, { path: "/"});
+                setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck);
                 history.push("/app/market");
             }
             else {
@@ -62,6 +70,7 @@ const SignInForm = () => {
         }).catch(() => {
             hide()
             alert("You email or password is wrong.");
+            // window.location.reload();
         })
     }
 
@@ -72,7 +81,7 @@ const SignInForm = () => {
                     <Icon src={logo} width="200px" onClick={() => history.push(`/`)} />
                 </div>
                 <br />
-                <div>
+                <form onSubmit={onFormSubmit}>
                     <div className="d-flex justify-content-center">
                         <div style={{ width: "90%", maxWidth: "500px" }}>
                             <p>Email or username</p>
@@ -108,11 +117,11 @@ const SignInForm = () => {
                                 </div>
                             </div>
                             <div className="text-center mb-5">
-                                <input id="signin" type="submit" onClick={onFormSubmit} className="mybutton-grey pl-5 pr-5 mt-3" value="Sign in" />
+                                <input id="signin" type="submit" className="mybutton-grey pl-5 pr-5 mt-3" value="Sign in" />
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );

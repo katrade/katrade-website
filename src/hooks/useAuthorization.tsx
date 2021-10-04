@@ -20,7 +20,7 @@ export default function useAuthorization() {
     }
 
     async function getUserData(): Promise<IAccount | null> {
-        show()
+        // show()
         return await axios.get(`${API}/auth/getUserData`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -30,12 +30,12 @@ export default function useAuthorization() {
                 if (!res.data.data.username) {
                     history.push(`/app/setup`);
                 }
-                hide();
+            ;
                 return res.data.data;
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
-                hide();
+            ;
                 return null;
             })
     }
@@ -61,7 +61,7 @@ export default function useAuthorization() {
             .catch(err => {
                 alert(`We got some error.\n${err}`);
                 clearAuthCookie();
-                return hide();
+                return;
             })
     }
 
@@ -69,7 +69,7 @@ export default function useAuthorization() {
         show()
         if (!newUsername) {
             alert("Username is empty.");
-            return hide();
+            return;
         }
         axios.put(`${API}/user/setUsername?newUsername=${newUsername}`,
 
@@ -82,7 +82,7 @@ export default function useAuthorization() {
             })
             .then(res => {
                 if (res.data.value) {
-                    hide()
+                
                     return history.push('/app/market');
                 }
                 else {
@@ -92,7 +92,7 @@ export default function useAuthorization() {
             .catch(err => {
                 alert(`We got some error.\n${err}`);
                 clearAuthCookie();
-                hide();
+            ;
             })
     }
 
@@ -143,8 +143,8 @@ export default function useAuthorization() {
         show("Uploading item to your inventory");
 
         if (!dataItem.name) {
-            alert("No nameee");
-            return hide();
+            alert("Please name the item");
+            return;
         }
         // fetch1 (create and return an id)
         axios({
@@ -189,7 +189,7 @@ export default function useAuthorization() {
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
-                return hide();
+                return;
             })
     }
 
@@ -206,40 +206,40 @@ export default function useAuthorization() {
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
-                return hide();
+                return;
             })
     }
 
     async function getMyInventory() {
-        show("โหลดดิ้ง..");
+
         return await axios.get(`${API}/inventory/getUserInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }
 
     async function getDetailProduct(product_id: any) {
-        show("Product Detail");
+
         return await axios.get(`${API}/inventory/getInventoryById?id=${product_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -253,18 +253,18 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-                hide();
+            ;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }
 
     async function getAllInventory(): Promise<any> {
-        show("โหลดดิ้ง..");
         if (!cookies.DaveTheHornyDuck) {
-            return alert("No cookie???")
+            alert("Please sign in again");
+            window.location.reload();
         }
         return await axios.get(`${API}/inventory/getAllInventory`, {
             headers: {
@@ -272,47 +272,47 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }
 
     // ของจะโผล่หน้า request to you ของเรา
     async function getRequest(): Promise<any> {
-        show("โหลดดิ้ง..");
+
         return await axios.get(`${API}/user/getUserRequest`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 return null;
             })
     }
 
     // ของจะโผล่หน้า pending ของเรา
     async function getPending(): Promise<any> {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/getUserPending`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 return null;
             })
     }
@@ -328,32 +328,34 @@ export default function useAuthorization() {
             }
         )
             .then(res => {
-                hide();
+            ;
                 if(res.data.value == false){
                     alert("ส่งคำขอ ล้มเหลว");
+                    window.location.reload();
                 }else{
-                    alert("ส่งคำขอ สำเร็จ");
+                    alert("ส่งคำขอ สำเร็จ, คำขอจะอยู่ใน pending");
+                    history.push("/app/request")
                 }
             })
             .catch(err => {
                 alert(`We got some error.\n${err}`)
-                return hide();
+                return;
             })
     }
 
     async function getFavourite() {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/favourite`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 return null;
             })
     }
@@ -369,7 +371,7 @@ export default function useAuthorization() {
                 // window.location.reload();
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -387,14 +389,14 @@ export default function useAuthorization() {
                 }
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
     }
 
     async function deleteMyRequestPending(requestpending_id: any) {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -402,27 +404,27 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-                hide();
+            ;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }
 
     async function getAnotherUser(user_id: any) {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/searchID?id=${user_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 return null;
             })
     }
@@ -438,60 +440,60 @@ export default function useAuthorization() {
                 window.location.reload();
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
     }
 
     async function getInprogress() {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/getUserProgess`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 return null;
             })
     }
 
     async function getFollow() {
-        show("โหลดดิ้ง..");
+        // show();
         return await axios.get(`${API}/user/follow` , {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
     }
 
     async function getFollowCheck(user_id:any) {
-        show("โหลดดิ้ง..");
+        // show();
         return await axios.get(`${API}/user/checkFollow?id=${user_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -506,7 +508,7 @@ export default function useAuthorization() {
             .then(res => {
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -521,7 +523,7 @@ export default function useAuthorization() {
             .then(res => {
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -533,11 +535,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
@@ -549,11 +551,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })            
@@ -567,16 +569,17 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                console.log(res);
             })
             .catch((err) => {
-                hide();
+            ;
                 console.log(err)
                 return null;
             })
     }
 
     async function deleteMyLockRequestPending(requestpending_id: any) {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.patch(`${API}/user/cancelLockRequest`, {id: requestpending_id} , {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -585,27 +588,26 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-                hide();
+            ;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }
 
     async function getSearch(searchword:any) {
-        show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/search?query=${searchword}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-                hide();
+            ;
                 return res.data;
             })
             .catch(() => {
-                hide();
+            ;
                 return null;
             })
     }

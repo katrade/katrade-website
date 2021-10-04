@@ -9,7 +9,7 @@ export default function Profilebar({accountData, followData}:any) {
     if (followData){
         return (
             <div className="container-profile">
-                <h5>Prosonal Profile</h5>
+                <h5>Personal Profile</h5>
                 <div className="container-profile-data">
                     <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
                     <div className="d-flex justify-content-center mt-2 mb-3">

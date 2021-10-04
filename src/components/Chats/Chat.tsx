@@ -3,15 +3,10 @@ import io from "socket.io-client";
 import "./Chat.css";
 
 // const socket = io("http://localhost:5000");
-const socket = io("https://socketkatrade.herokuapp.com");
-
-socket.on("connect", () => {
-    console.log("Connected to WS server");
-    console.log(socket.connected);
-})
 
 export default function Chat() {
     // Before Login
+    const socket = io("https://socketkatrade.herokuapp.com");
     const [loggedIn, setLoggedIn] = useState(false);
     const [room, setRoom] = useState("");
     const [userName, setUserName] = useState("");
@@ -23,6 +18,13 @@ export default function Chat() {
     const [chk, setChk] = useState(false);
 
     useEffect(() => {
+        
+
+        socket.on("connect", () => {
+            console.log("Connected to WS server");
+            console.log(socket.connected);
+        })
+
         socket.on("message", (data) => {
             let a = messageList
             a.push(data.content)
@@ -91,9 +93,9 @@ export default function Chat() {
                                     id={val.author == userName ? "You" : "Other"}
                                 >
                                     {/* <div className="messageIndividual">*/}
-                                        <div className={val.author == userName ? "messageIndividual text-right" : "messageIndividual"}>
-                                            {val.message}
-                                        </div>
+                                    <div className={val.author == userName ? "messageIndividual text-right" : "messageIndividual"}>
+                                        {val.message}
+                                    </div>
                                 </div>
                             );
                         })}
