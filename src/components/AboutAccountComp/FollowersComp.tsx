@@ -1,8 +1,13 @@
+import { useState } from "react";
+
 import FollowingBlock from "../Account/FollowingBlock";
 
-export default function FollowersComp(data: any) {
+export default function FollowersComp(data:any) {
     const accountData = data.data;
+
     if (accountData){
+
+
         const followingBlock = accountData.map((data:any, index:any) => {
             return <FollowingBlock data={data} key={index} relation={"follower"}/>;
         })

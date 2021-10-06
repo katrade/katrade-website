@@ -25,15 +25,6 @@ export default function FollowingBlock(props:any) {
                     <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => onFollow(data._id)}>follow</TransparentButton>
                 )       
             }
-            // if(follow){
-            //     return (
-            //         <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0">{relation == "following" ? "unfollow" : "remove"}</TransparentButton>
-            //     );
-            // }else{
-            //     return (
-            //         <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0">{relation == "following" ? "follow" : "รอรับการปรับปรุง"}</TransparentButton>
-            //     );
-            // }
         }
         else{
             if (checkFollower){
@@ -41,14 +32,13 @@ export default function FollowingBlock(props:any) {
                     <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
                         if (window.confirm("ต้องการยกเลิกการติดตามหรือไม่")){
                             alert("ยกเลิกเรียบร้อย")
-                        }
-                    }}>remove</TransparentButton>
+                        }}}>remove
+                    </TransparentButton>
                 )                
             }
         }
-
     }
-
+    
     return (
         <div className="col-lg-6">
             <AccountBlock padding="10px">

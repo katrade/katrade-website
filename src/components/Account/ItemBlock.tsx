@@ -16,8 +16,6 @@ const backgroundImageStyles = {
 }
 
 
-
-
 export default function ItemBlock(props: any) {
 	const { data, index, manage } = props;
     const history = useHistory();
@@ -41,12 +39,10 @@ export default function ItemBlock(props: any) {
 		}
 	}
 	return (
-		<AccountBlock>
-			<div className="d-flex flex-wrap position-relative" style={{width:"auto"}}>
-				<div className="p-0" onClick={detailProduct} style={{width:"170px", height:"110px", cursor:"pointer", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})`}}>
-					{/* <img src={data.pictures[0]} style={{width:"170px", height:"110px",borderRadius:"8px"}}/> */}
-				</div>
-				<div className="ps-3 text-start col-md-6" style={{borderRadius:"8px",cursor:"pointer"}} onClick={detailProduct}>
+		<AccountBlock padding="15px">
+			<div className="d-flex flex-wrap position-relative">
+				<div className="p-0" onClick={detailProduct} style={{width:"170px", height:"110px", cursor:"pointer", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})`}} />
+				<div className="ps-3 text-start col-md-9" style={{borderRadius:"8px",cursor:"pointer"}} onClick={detailProduct}>
 					<h5 className="mb-3">{data.name}</h5>
 					<div className="d-flex flex-wrap">
 						<p className="m-0">require : </p>

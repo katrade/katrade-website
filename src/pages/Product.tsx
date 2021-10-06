@@ -43,6 +43,7 @@ function Product() {
     const [mobile, setMobile] = useState(false);
     const [followChk , setFollowChk] = useState<boolean>();
     const [followerData, setFollowerData] = useState<any>();
+    const [handleFollow , setHandleFollow] = useState<any>();
 
     const history = useHistory();
 
@@ -61,6 +62,7 @@ function Product() {
                 var getFollowerData = await getUserFollowData(dataDetail.owner);
                 if (getFollowerData) {
                     setFollowerData(getFollowerData.follower.length);
+                    setHandleFollow(getFollowerData.follower.length);
                 }
             }
             var getUser: any = await getUserData();
@@ -143,50 +145,60 @@ function Product() {
             closePhoto();
         }
     });
+
     // const [ favorite , setFavorite] = useState(true);
+    var fakeFollow = 10;
+    const [handleFavorite , setHandleFavorite] = useState<any>(fakeFollow);
     const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
     function favorite_btn() {
         if (!checkFavoritetmp) {
             return (
-                <SolidButton onClick={() => addFavourite(data._id)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e" }}>
+                <SolidButton onClick={() => {
+                    addFavourite(data._id);
+                    setHandleFavorite(handleFavorite + 1);
+                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e" }}>
                     <FcLike />
                 </SolidButton>
             );
         } else {
             return (
-                <SolidButton onClick={() => deleteFavourite(data._id, checkpath)} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff" }}>
+                <SolidButton onClick={() => {
+                    deleteFavourite(data._id, checkpath);
+                    setHandleFavorite(handleFavorite - 1);
+                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff" }}>
                     <FcLike style={{ filter: "brightness(10)" }} />
                 </SolidButton>
             );
         }
     }
 
+    // const [handleFollow , setHandleFollow] = useState<any>(10);
     const handleClickFollow = () => setFollowChk(!followChk);
     function follow_btn() {
         if(!followChk){
             return (
-                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => onFollow(data.owner)}>
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => {
+                    onFollow(data.owner);
+                    setHandleFollow(handleFollow + 1);
+                    }}>
                     Follow
                 </TransparentButton>
             );
         }else{
             return (
-                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => unFollow(data.owner)}>
+                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={() => {
+                    unFollow(data.owner);
+                    setHandleFollow(handleFollow - 1);
+                    }}>
                     unfollow
                 </TransparentButton>
             );
         }
     }
 
-
-    if (!data) {
-        <div style={{ width: "100vw", height: "100vh", }}>
-            <h5>ROR pap</h5>
-        </div>
-    }
-
     if (data && owner) {
         var checkpath = window.location.pathname;
+        var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
 
         const wantCate = data.require.map((data: any, index: any) => {
             return (
@@ -199,6 +211,7 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
+
         return (
             <div>
                 {photoPost}
@@ -230,9 +243,11 @@ function Product() {
                                 <h4 className="m-0">{data.name}</h4>
                                 <div className="d-flex align-items-center">
                                     <BsStarFill />
-                                    <p className="m-0 mx-2">0</p>
+                                    <p className="m-0 mx-2">{handleFavorite}</p>
                                     <p className="m-0">Favorites</p>
-
+                                </div>
+                                <div>
+                                    <p className="m-0 text-mute">วันที่ลง : {dateOfProduct}</p>
                                 </div>
                                 <div className="d-flex mt-3 border border-secondary rounded-3">
                                     <p className="m-0 rounded-left px-4 fw-bold p-1 d-flex justify-content-center align-items-center" style={{ color: "white", backgroundColor: "#F66464" }}>Category</p>
@@ -248,7 +263,7 @@ function Product() {
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
-                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{followerData+" Followers"}</span>
+                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{ handleFollow +" Followers"}</span>
                                             </p>
                                         </div>
                                     </div>
