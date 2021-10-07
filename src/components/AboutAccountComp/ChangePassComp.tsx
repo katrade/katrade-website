@@ -16,8 +16,8 @@ export default function AccountComp(data: any) {
 
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
-                <div className="p-3">
+            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                <div className="">
                     <h4 className="mb-4">Change Password</h4>
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">Current Password</label>
@@ -28,7 +28,7 @@ export default function AccountComp(data: any) {
                                 className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
                                 placeholder="Enter your current password"
                             />
-                            <label className="blue-font-link col-auto text-end px-4" >Forgot Password?</label>
+                            <p className="blue-font-link pointer col-auto text-end px-4">Forgot Password?</p>
                         </div>
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">New Password</label>

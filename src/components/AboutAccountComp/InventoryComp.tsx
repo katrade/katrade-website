@@ -24,13 +24,12 @@ export default function InventoryComp(data: any) {
             });
             return (
                 <div>
-                    <div className="bg-white mx-auto mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
+                    <div className="bg-white row mx-auto mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
                         <div className="d-flex justify-content-between">
                             <div>
                                 <h4 className="d-inline-block me-3 mb-4">Inventory</h4>
                                 <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({inventoryData.length})</h5>
                             </div>
-                            {/* <h5 className="d-flex" onClick={}>add item +</h5> */}
                             <a href="/app/additem" className="d-flex align-items-center"><h6>add item +</h6></a>
                         </div>
                         <div>
