@@ -3,7 +3,11 @@ import io from "socket.io-client";
 import "./Chat.css";
 
 // const socket = io("http://localhost:5000");
-const socket = io("https://socketkatrade.herokuapp.com", { 'forceNew': true });
+console.log("sus")
+const socket = io("https://socketkatrade.herokuapp.com", {
+    transports: ["polling"],
+    reconnection: false,
+});
 
 socket.on("connect", () => {
     console.log("Connected to WS server");
@@ -87,7 +91,7 @@ export default function Chat() {
                         {messageList.map((val, key) => {
                             return (
                                 <div className="messageContainer"
-                                  // id={val.author == userName ? "You" : "Other"}
+                                // id={val.author == userName ? "You" : "Other"}
                                 >
                                     <div className={val.author == userName ? "yourMsg text-right" : "otherMsg"}>
                                         {val.message} ({val.author})

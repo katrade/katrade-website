@@ -105,6 +105,7 @@ function Market() {
     useEffect(() => {
         resize();
         async function init() {
+            show()
             var userData = await getUserData();
             if (userData) {
                 setAccount(userData);
@@ -115,6 +116,7 @@ function Market() {
             }
             var allInventoryData = await getAllInventory();
             setAllInventory(allInventoryData);
+            hide()
         }
         init();
     }, []);

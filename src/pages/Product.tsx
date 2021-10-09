@@ -14,6 +14,7 @@ import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from '../components/standard/Button';
 import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { FcLike, CgArrowsExchangeAlt } from 'react-icons/all';
+import useLoading from '../hooks/useLoading';
 
 const queryString = require("query-string");
 
@@ -45,6 +46,7 @@ function Product() {
     const [followChk , setFollowChk] = useState<boolean>();
     const [followerData, setFollowerData] = useState<any>();
     const [ anotherUserData , setAnotherUserData ] = useState<any>();
+    const [show, hide] = useLoading();
 
     // แสดงผลตัวเลขบนหน้าจอ
     const [handleFollow , setHandleFollow] = useState<any>();
@@ -218,7 +220,6 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-
         return (
             <div>
                 {photoPost}
@@ -308,10 +309,9 @@ function Product() {
             </div>
         );
     } else {
+        show();
         return (
-            <div>
-                <h4>กำลังโหลดข้อมูล</h4>
-            </div>
+            <></>
         );
     }
 }

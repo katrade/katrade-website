@@ -229,6 +229,7 @@ export default function AddItem() {
             pictures: [],
             require: wantInputFields
         }
+        console.log(dataCover, finalMyMainCate, finalMySubCate, dataItem.name);
         
         if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name){
             arrayOfPicture.push(dataCover)
