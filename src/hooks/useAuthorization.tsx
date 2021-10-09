@@ -576,9 +576,9 @@ export default function useAuthorization() {
             })
     }
 
-    async function deleteMyLockRequestPending(requestpending_id: any) {
+    async function deleteMyLockRequestPending(request_id: any) {
         show("โหลดดิ้ง..");
-        return await axios.patch(`${API}/user/cancelLockRequest`, {id: requestpending_id} , {
+        return await axios.patch(`${API}/user/cancelLockRequest`, {id: request_id} , {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -597,6 +597,58 @@ export default function useAuthorization() {
     async function getSearch(searchword:any) {
         show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/search?query=${searchword}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
+    async function finishTrade(request_id:any) {
+        return await axios.post(`${API}/user/finishTrade`, { requestId: request_id }, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                window.location.reload();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })            
+    }
+
+    async function getHistory() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserHistory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+    
+    async function getAnotherInventory(user_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getInventoryByUserId?id=${user_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -642,5 +694,8 @@ export default function useAuthorization() {
         LockRequest,
         deleteMyLockRequestPending,
         getSearch,
+        finishTrade,
+        getHistory,
+        getAnotherInventory,
     }
 }

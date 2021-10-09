@@ -8,17 +8,17 @@ import { IoMdSwap } from 'react-icons/io';
 
 export default function RequestBlock({data, status, index}:any) {
     const history = useHistory();
-    const { deleteMyRequestPending , acceptRequest , deleteMyLockRequestPending} = useAuthorization();
+    const { deleteMyRequestPending , acceptRequest , deleteMyLockRequestPending, finishTrade } = useAuthorization();
     function btnRPI(){
         if(status == 0){
             return (
                 <div>
                     <TransparentButton onClick={() => acceptRequest(data.requestId)} buttonColor="limegreen">Accept Request</TransparentButton>
-                    <TransparentButton onClick={() => askingDeleteRequest(data)} buttonColor="red">Cancel Request</TransparentButton>
+                    <TransparentButton onClick={() => askingDeleteRequest()} buttonColor="red">Cancel Request</TransparentButton>
                 </div>
             );
         }else if(status == 1){
-            return <TransparentButton onClick={() => askingDeleteRequest(data)} buttonColor="red">Cancel Request</TransparentButton>;
+            return <TransparentButton onClick={() => askingDeleteRequest()} buttonColor="red">Cancel Request</TransparentButton>;
         }else if(data.state == 1){
             return (
                 <div>
@@ -29,8 +29,8 @@ export default function RequestBlock({data, status, index}:any) {
         }else if(data.state == 2){
             return (
                 <div>
-                    <TransparentButton buttonColor="limegreen">สำเร็จ</TransparentButton>
-                    <TransparentButton onClick={askingDeleteLockRequest} buttonColor="red">ล้มเหลว</TransparentButton>
+                    <TransparentButton onClick={() => finishTrade(data.requestId)} buttonColor="limegreen">สำเร็จ</TransparentButton>
+                    <TransparentButton onClick={() => askingDeleteLockRequest()} buttonColor="red">ล้มเหลว</TransparentButton>
                 </div>
             );
         }else {
@@ -38,7 +38,7 @@ export default function RequestBlock({data, status, index}:any) {
         }
     }
 
-    function askingDeleteRequest(data:any) {
+    function askingDeleteRequest() {
         if(window.confirm("ต้องการลบคำขออีหลีถิ?")){
             deleteMyRequestPending(data.requestId);
 		}

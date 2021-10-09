@@ -19,11 +19,11 @@ export default function ProfileViewer() {
     const { search } = useLocation();
     const { user_id } = queryString.parse(search);
 
-    const { getAnotherUser, getUserFollowData, getDetailProduct } = useAuthorization(); 
+    const { getAnotherUser, getUserFollowData, getAnotherInventory } = useAuthorization(); 
     
     const [ anotherUserData , setAnotherUserData ] = useState<any>(null);
     const [ followData , setFollowData ] = useState<any>();
-
+    const [ anotherInventoryData , setAnotherInventoryData ] = useState<any>();
 
     useEffect(() => {
         async function init() {
@@ -34,13 +34,18 @@ export default function ProfileViewer() {
                 if (getFollowerData) {
                     setFollowData(getFollowerData)
                 }
+                var getInventoryById = await getAnotherInventory(user_id)  
+                if (getInventoryById) {
+                    setAnotherInventoryData(getInventoryById)
+                }
             }
         }
         init();
     }, [])
 
-    if(anotherUserData && followData) {
-        const inventory_item = anotherUserData.inventories.map((item:any, index:any) => {
+    if(anotherUserData && followData && anotherInventoryData) {
+        console.log(anotherInventoryData)
+        const inventory_item = anotherInventoryData.map((item:any, index:any) => {
             return <Recommend item={item} key={index} />;
         });
 

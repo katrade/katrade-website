@@ -88,13 +88,20 @@ function AboutAccount(userData:any) {
     const { search } = useLocation();
     const { component } = queryString.parse(search);
 
-    const [ destCompState , destCompDispatch] = useReducer(reducer, "");
+    const [ destCompState, destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getMyInventory , getFavourite , getFollow , getUserIdArray} = useAuthorization();    
-    const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
+    const { getUserData, 
+        updateProfilePic, 
+        getMyInventory, 
+        getFavourite, 
+        getFollow, 
+        getUserIdArray, 
+        getHistory } = useAuthorization();    
+    const [ accountData, setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const [ favoriteData, setFavoriteData ] = useState<any>();
-    const [ inventoryData , setInventoryData ] = useState<any>();
-    const [ followData , setFollowData ] = useState<any>();
+    const [ inventoryData, setInventoryData ] = useState<any>();
+    const [ followData, setFollowData ] = useState<any>();
+    const [ historyData, setHistoryData ] = useState<any>();
     const [ followingUserArrayData, setFollowingUserArrayData ] = useState<any>();
     const [ followerUserArrayData, setFollowerUserArrayData ] = useState<any>();
     const history = useHistory();
@@ -128,9 +135,11 @@ function AboutAccount(userData:any) {
                 if (followerUserDataArray) {
                     setFollowerUserArrayData(followerUserDataArray)
                 }
-
             }
- 
+            var history = await getHistory();
+            if (history) {
+                setHistoryData(history);
+            }
         }
         init();
     }, [])
@@ -151,7 +160,7 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "Inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(destCompState.dest === "History"){
-            setComponentPage(<HistoryComp data={accountData}/>);
+            setComponentPage(<HistoryComp data={historyData}/>);
         }
     }
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
@@ -171,7 +180,7 @@ function AboutAccount(userData:any) {
         }else if(component == "inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(component == "history"){
-            setComponentPage(<HistoryComp data={accountData}/>);
+            setComponentPage(<HistoryComp data={historyData}/>);
         }
     }, [accountData,favoriteData,inventoryData])
 

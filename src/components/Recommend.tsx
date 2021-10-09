@@ -1,23 +1,24 @@
 import { useHistory } from 'react-router-dom';
 import './Recommend.css';
 
-function Recommend(props: any) {
-    const { item, index } = props;
+function Recommend(itemData:any) {
+    
+    const item = itemData.item;
     const history = useHistory();
     function LinkItemData() {
-        history.push(`/app/product?product_id=${item}`);
+        history.push(`/app/product?product_id=${item._id}`);
     }
 
     return (
         <div className="recommend-card" onClick={LinkItemData}>
             <div 
                 className="recommend-photo-card" 
-                style={{ backgroundImage: `url(${item.photo_src})` }}
+                style={{ backgroundImage: `url(${item.pictures[0]})` }}
             >
             </div>
             <div className="recommend-text-card py-3">
-                <p>{item.name_item}</p>
-                <p className="desc item-desc text-truncate">Cat is weird when they are with human.</p>
+                <p>{item.name}</p>
+                <p className="desc item-desc text-truncate">{item.detail}</p>
             </div>
         </div>
     );
