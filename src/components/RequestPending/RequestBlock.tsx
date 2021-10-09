@@ -1,5 +1,6 @@
 import './RequestBlock.css';
 import useAuthorization from '../../hooks/useAuthorization';
+import { useState } from 'react';
 import { useHistory } from "react-router";
 
 import { TransparentButton } from '../standard/Button'
@@ -9,6 +10,11 @@ import { IoMdSwap } from 'react-icons/io';
 export default function RequestBlock({data, status, index}:any) {
     const history = useHistory();
     const { deleteMyRequestPending , acceptRequest , deleteMyLockRequestPending, finishTrade } = useAuthorization();
+    const handleFinishBtn = () => {
+        if(window.confirm("ต้องการกด finish ใช่มั้ย")){
+            finishTrade(data.requestId)
+        }
+    };
     function btnRPI(){
         if(status == 0){
             return (
@@ -29,7 +35,7 @@ export default function RequestBlock({data, status, index}:any) {
         }else if(data.state == 2){
             return (
                 <div>
-                    <TransparentButton onClick={() => finishTrade(data.requestId)} buttonColor="limegreen">สำเร็จ</TransparentButton>
+                    <TransparentButton className={data.userFinish ? `d-none` : ``} onClick={() => {handleFinishBtn()}} buttonColor="limegreen">สำเร็จ</TransparentButton>
                     <TransparentButton onClick={() => askingDeleteLockRequest()} buttonColor="red">ล้มเหลว</TransparentButton>
                 </div>
             );
@@ -62,7 +68,7 @@ export default function RequestBlock({data, status, index}:any) {
                         <img src="https://www.ishida.com/images/popcorn-640x480.gif" style={{width:"45px",height:"45px",borderRadius:"50%"}}/>
                         <span style={{fontSize:"24px",margin:"0 20px",color:"Black"}}>{data.targetInventory.username}</span>
                     </div>
-                    <p>รอดำเนินการแลกเปลี่ยน</p>
+                    <p>{data.userFinish ? "รออีกฝ่ายกดดำเนินการ" : "รอดำเนินการแลกเปลี่ยน"}</p>
                 </div>
                 
 

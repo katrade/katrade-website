@@ -131,15 +131,10 @@ export default function useAuthorization() {
     }
 
     async function addItem(dataItem: any | undefined, arrayOfPicture: File[]) {
+        // console.log(dataItem)
         if (!dataItem) {
             return false;
         }
-        // const bodyFormData = new FormData();
-        // bodyFormData.append('body', JSON.stringify(dataItem));
-        // bodyFormData.append('files', arrayOfPicture);
-        // arrayOfPicture.forEach((file:any)=>{
-        //     bodyFormData.append("files", file);
-        // });
         show("Uploading item to your inventory");
 
         if (!dataItem.name) {
@@ -179,7 +174,7 @@ export default function useAuthorization() {
                                     return history.push(`/app/product?product_id=${itemId}`);
                                 }
                                 else {
-                                    return history.push(`/app/product?product_id=${itemId}`);
+                                    return history.push(`/app/aboutaccount?component=inventory`);
                                 }
                             }
                         })
