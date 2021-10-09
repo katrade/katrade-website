@@ -136,7 +136,7 @@ function NavbarSpare({ image }: INavbar) {
 
     return (
         <div className="header py-3 bg-white">
-            <Block height="90px">
+            <Block height="auto">
                 <div className="header-con">
                     <a href="/app/Market">
                         <img className="logo" src={Logo} />
@@ -190,7 +190,8 @@ const MobileNavbarContainer = styled.div`
     width: 100%;
     max-width: 100%;
     background-color: white;
-    min-height: 60px;
+    min-height: auto;
+    padding: 16px;
     height: auto;
     position: sticky;
     top: 0;
@@ -216,7 +217,7 @@ function MobileNavbar({signout}: any) {
 
     return (
         <MobileNavbarContainer>
-            <Block height="60px">
+            <Block height="auto">
                 <div className="header-con float-right">
                     <a href="/app/Market">
                         <img className="logo" src={Logo} height="60px" />

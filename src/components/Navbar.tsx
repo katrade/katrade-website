@@ -37,7 +37,7 @@ import { CgNpm } from 'react-icons/cg';
 const google = 'https://google.com'
 
 const wallpapers = [
-    "https://cutewallpaper.org/21/men-fashion-wallpapers/Mens-Fall-Fashion-Wallpapers-High-Quality-Download-Free.jpg",
+    "https://c0.wallpaperflare.com/preview/645/468/885/male-tie-dye-rj-paraty.jpg",
     "https://i.pinimg.com/originals/c6/23/60/c623608e991cb9d3e106b3ee1227dc2f.jpg",
     "https://wallpaperaccess.com/full/1191051.jpg",
     "https://i2.wp.com/the-avocado.org/wp-content/uploads/2020/08/background-book-bookcase-books.jpg?fit=910%2C607&ssl=1",
@@ -72,6 +72,7 @@ const subStyles = {
     fontSize: "35px",
     display: "inline-block",
     margin: "0 20px",
+    cursor: "pointer",
 }
 interface INavbar {
     image?: string
@@ -138,15 +139,14 @@ function Navbar({ image }: INavbar) {
     if (category) {
         CategoryData = category.map((data: any, index: any) => {
             SubCategoryArrayEn.push(data.childCategoryEn.map((subdata: any) => {
-                return <span style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
+                return <span onClick={() => {searchByNav(subdata) ; setDrop(!drop)}} style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
             }));
             SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
-                return <span style={subStyles}>{subdata}</span>;
+                return <span onClick={() => {searchByNav(subdata) ; setDrop(!drop)}} style={subStyles}>{subdata}</span>;
             }));
 
             return <li className="" onClick={() => setSelectIndex(index)} key={index}>{data.parentCategoryEn}</li>;
         });
-
     }
 
     if (mobile) {
@@ -165,6 +165,9 @@ function Navbar({ image }: INavbar) {
             return alert('Search for nothing????')
         }
         history.push(`/app/search/${searchText}`)
+    }
+    function searchByNav(searchNav:any) {
+        history.push(`/app/search/${searchNav}`);
     }
 
     function signout() {
@@ -246,8 +249,6 @@ function Navbar({ image }: INavbar) {
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                                {/* <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
-                                <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a> */}
                                 <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
                                 <a onClick={() => history.push("/app/settings")}>Settings</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>

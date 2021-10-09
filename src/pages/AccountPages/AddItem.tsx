@@ -135,10 +135,10 @@ export default function AddItem() {
     }
 
     const handleRemoveItem = (index:any) => {
-        // const values = [...wantInputFields];
-        // values.splice(index , 1);
-        // SetWantInputFields(values);
-        window.alert("ยังไม่พร้อมใช้งาน")
+        const values = [...wantInputFields];
+        values.splice(index , 1);
+        SetWantInputFields(values);
+        // window.alert("ยังไม่พร้อมใช้งาน")
     }
 
     var wantSubCateTag = "unSelect";
@@ -154,7 +154,9 @@ export default function AddItem() {
         wantSubCateIndex = event.indexC;
         values[index]["reqCat"]["parentCategoryTh"] = MainCateLangTh[wantSubCateIndex];
 
-        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} placeholder="กรุณาเลือก Category หลักก่อน" />);
+        var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
+        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} placeholder={placeholderString} />);
+        // setGodHelpMe("kuy");
     }
     function selectedSub(index:any , event:any) {
         const values = [...wantInputFields];
@@ -201,6 +203,15 @@ export default function AddItem() {
     }
 
     const [dataItem, handleDataItem] = useForm();
+    const nameFocus = useRef<HTMLInputElement>(null);
+    // const myCateFocus = useRef<HTMLInputElement>(null);
+    // const mySubCateFocus = useRef<HTMLInputElement>(null);
+    // const myDetailFocus = useRef<HTMLInputElement>(null);
+    // const nameFocus = useRef<HTMLInputElement>(null);
+    // const nameFocus = useRef<HTMLInputElement>(null);
+    // const nameFocus = useRef<HTMLInputElement>(null);
+    // const [ checkMainSubCate, setCheckMainSubCate ] = useState<boolean>(false);
+    // const [ checkDetail, setCheckDetail ] = useState<boolean>(false);
 
     function handleUnload(event:any){ 
         event.preventDefault();
@@ -219,15 +230,28 @@ export default function AddItem() {
             require: wantInputFields
         }
         console.log(dataCover, finalMyMainCate, finalMySubCate, dataItem.name);
+        
         if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name){
             arrayOfPicture.push(dataCover)
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
-            addItem(data, arrayOfPicture);
-        }else{
-            alert("ยังใส่ข้อมูลไม่ครบ (ไม่สมบูรณ์)")
+            // addItem(data, arrayOfPicture);
+        }else if(!dataItem.name){
+            nameFocus.current?.focus();
+            alert("กรุณาเพิ่มชื่อสิ่งของ")
+        }else if(!finalMyMainCate || ! finalMySubCate || !dataItem.myDetail){
+            alert("คุณใส่ Category ของตัวเองไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
+        }else if(!dataCover){
+            alert("กรุณาเพิ่มรูปหน้าปก");
         }
+        // else if(!checkMainSubCate){
+        //     alert("คุณใส่ Category ที่ต้องการไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
+        // }else if(!checkDetail){
+        //     alert("คุณใส่ Detail Category ที่ต้องการไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
+        // }else{
+        //     alert("บางสิ่งไม่ถูกต้อง");
+        // }
     }
 
     return (
@@ -241,7 +265,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Item Name</label>
                             <div className="col-md-10">
-                                <input type="text" className="form-control fs-5" value={dataItem.name || ""} name="name" onChange={handleDataItem} placeholder="Enter your item name" />
+                                <input type="text" ref={nameFocus} className="form-control fs-5" value={dataItem.name || ""} name="name" onChange={handleDataItem} placeholder="Enter your item name" />
                             </div>
                         </div>
 
@@ -282,9 +306,9 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Category</label>
                             <div className="col-md-5">
-                                <Select options={MainCategoriesEn} 
+                                <Select options={MainCategoriesEn}
                                     className="fs-5" 
-                                    name="category" 
+                                    name="category"
                                     onChange={(selectSubCate) => {selectMySub(selectSubCate)}} 
                                     placeholder="กรุณาเลือก Category หลัก"/>
                             </div>
@@ -309,7 +333,11 @@ export default function AddItem() {
                                 <div className="form-group row">
                                     <label className="col-md-2 col-form-label fs-5">Require Category {index+1}</label>
                                     <div className="col-md-5">
-                                        <Select options={MainCategoriesEn} className="fs-5" name="wantMainCate" onChange={(selectWantSubCate) => selectWantSub(index , selectWantSubCate)} placeholder="กรุณาเลือก Category หลัก"/>
+                                        <Select options={MainCategoriesEn} 
+                                            className="fs-5" name="wantMainCate" 
+                                            onChange={(selectWantSubCate) => {selectWantSub(index , selectWantSubCate); 
+                                                selectedSub(index, {value:undefined})}} 
+                                            placeholder="กรุณาเลือก Category หลัก"/>
                                     </div>
                                     <div className="col-md-5">
                                         {godHelpMe}

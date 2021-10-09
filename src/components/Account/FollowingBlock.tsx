@@ -6,7 +6,7 @@ import { TransparentButton } from '../standard/Button';
 
 export default function FollowingBlock(props:any) {
     
-    const { data, index, relation } = props;
+    const { data, relation , Noti } = props;
     const {unFollow, onFollow} = useAuthorization();
     const [ follow , setFollow] = useState(true);
     const [ checkFollower, setCheckFollower ] = useState(true);
@@ -17,38 +17,34 @@ export default function FollowingBlock(props:any) {
         if (relation == "following"){
             if (follow){
                 return (
-                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => unFollow(data._id)}>unfollow</TransparentButton>
+                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
+                        unFollow(data._id);
+                        Noti("unfollow");
+                    }}>unfollow</TransparentButton>
                 )
             }
             else{
                 return (
-                    <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => onFollow(data._id)}>follow</TransparentButton>
+                    <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => {
+                        onFollow(data._id);
+                        Noti("follow");
+                    }}>follow</TransparentButton>
                 )       
             }
-            // if(follow){
-            //     return (
-            //         <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0">{relation == "following" ? "unfollow" : "remove"}</TransparentButton>
-            //     );
-            // }else{
-            //     return (
-            //         <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0">{relation == "following" ? "follow" : "รอรับการปรับปรุง"}</TransparentButton>
-            //     );
-            // }
         }
         else{
             if (checkFollower){
                 return (
                     <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
                         if (window.confirm("ต้องการยกเลิกการติดตามหรือไม่")){
-                            alert("ยกเลิกเรียบร้อย")
-                        }
-                    }}>remove</TransparentButton>
+                            Noti(data._id);
+                        }}}>remove
+                    </TransparentButton>
                 )                
             }
         }
-
     }
-
+    
     return (
         <div className="col-lg-6">
             <AccountBlock padding="10px">

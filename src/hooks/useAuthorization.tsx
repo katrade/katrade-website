@@ -131,15 +131,10 @@ export default function useAuthorization() {
     }
 
     async function addItem(dataItem: any | undefined, arrayOfPicture: File[]) {
+        // console.log(dataItem)
         if (!dataItem) {
             return false;
         }
-        // const bodyFormData = new FormData();
-        // bodyFormData.append('body', JSON.stringify(dataItem));
-        // bodyFormData.append('files', arrayOfPicture);
-        // arrayOfPicture.forEach((file:any)=>{
-        //     bodyFormData.append("files", file);
-        // });
         show("Uploading item to your inventory");
 
         if (!dataItem.name) {
@@ -179,7 +174,7 @@ export default function useAuthorization() {
                                     return history.push(`/app/product?product_id=${itemId}`);
                                 }
                                 else {
-                                    return history.push(`/app/product?product_id=${itemId}`);
+                                    return history.push(`/app/aboutaccount?component=inventory`);
                                 }
                             }
                         })
@@ -396,7 +391,8 @@ export default function useAuthorization() {
     }
 
     async function deleteMyRequestPending(requestpending_id: any) {
-        // show("โหลดดิ้ง..");
+        console.log(requestpending_id);
+        show("โหลดดิ้ง..");
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -612,6 +608,58 @@ export default function useAuthorization() {
             })
     }
 
+    async function finishTrade(request_id:any) {
+        return await axios.post(`${API}/user/finishTrade`, { requestId: request_id }, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                window.location.reload();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })            
+    }
+
+    async function getHistory() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/user/getUserHistory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
+    
+    async function getAnotherInventory(user_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getInventoryByUserId?id=${user_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
+
     return {
         getUserData,
         updateProfilePic,
@@ -643,5 +691,8 @@ export default function useAuthorization() {
         LockRequest,
         deleteMyLockRequestPending,
         getSearch,
+        finishTrade,
+        getHistory,
+        getAnotherInventory,
     }
 }

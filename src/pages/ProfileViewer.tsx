@@ -19,74 +19,33 @@ export default function ProfileViewer() {
     const { search } = useLocation();
     const { user_id } = queryString.parse(search);
 
-    const { getAnotherUser, getUserFollowData} = useAuthorization(); 
+    const { getAnotherUser, getUserFollowData, getAnotherInventory } = useAuthorization(); 
     
     const [ anotherUserData , setAnotherUserData ] = useState<any>(null);
     const [ followData , setFollowData ] = useState<any>();
+    const [ anotherInventoryData , setAnotherInventoryData ] = useState<any>();
 
     useEffect(() => {
         async function init() {
-            var data = await getAnotherUser(user_id);
-            if (data) {
-                setAnotherUserData(data);
+            var dataOwner = await getAnotherUser(user_id);
+            if (dataOwner) {
+                setAnotherUserData(dataOwner);
                 var getFollowerData = await getUserFollowData(user_id)  
                 if (getFollowerData) {
                     setFollowData(getFollowerData)
-                    console.log(followData)
+                }
+                var getInventoryById = await getAnotherInventory(user_id)  
+                if (getInventoryById) {
+                    setAnotherInventoryData(getInventoryById)
                 }
             }
         }
         init();
     }, [])
 
-    // const id_item = [
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    //     {
-    //         name_item: "Cats, a weird creature",
-    //         photo_src: `https://source.unsplash.com/random?sig=${getRandomInt(700)}`,
-    //     },
-    // ]
-
-    if(anotherUserData && followData) {
-        console.log(anotherUserData)
-        console.log(followData)
-
-        const inventory_item = anotherUserData.inventories.map((item:any, index:any) => {
+    if(anotherUserData && followData && anotherInventoryData) {
+        console.log(anotherInventoryData)
+        const inventory_item = anotherInventoryData.map((item:any, index:any) => {
             return <Recommend item={item} key={index} />;
         });
 
@@ -99,15 +58,16 @@ export default function ProfileViewer() {
                         <div className="container-profile-data">
                             <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
                                 <div className="d-flex justify-content-center mt-2 mb-3">
-                                    <div style={{
-                                        backgroundImage: `url(https://asset.vg247.com/genshin-impact-yoimiya-build.jpg/BROK/thumbnail/1200x1200/quality/100/genshin-impact-yoimiya-build.jpg)`, backgroundPosition: 'center',
+                                    <img className="rounded-circle" src={anotherUserData.profilePic} style={{ width: "130x", height: "130px", borderRadius:"50%", margin:"0 50px" }} />
+                                    {/* <div style={{
+                                        backgroundImage: `${anotherUserData.profilePic}`, backgroundPosition: 'center',
                                         backgroundSize: 'cover',
                                         backgroundRepeat: 'no-repeat',
                                         minWidth: '130px',
                                         minHeight: '130px',
                                         borderRadius: '50%',
                                         margin: '0px 50px',
-                                    }}></div>
+                                    }}></div> */}
                                 </div>
                                 <div>
                                     <h3 style={{ color: "#4a5659" }}>{anotherUserData.firstname} {anotherUserData.lastname}</h3>
