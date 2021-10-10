@@ -120,17 +120,16 @@ export default function Chat() {
                         })}
                     </div>
 
-                    <div className="messageInputs p-0 m-0" style={{ width: "100%" }}>
+                    <div className="messageInputs p-0 m-0" style={{ width: "100%"}}>
                         <img
                             src="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
                             style={{
                                 maxWidth: "35px",
                                 maxHeight: "35px",
-                                margin: "5px 30px 5px"
+                                margin: "20px 20px"
                             }}
-                            className="border"
                         />
-                        <div className="d-inline-block typingContainer">
+                        <div className="typingContainer">
                             <input
                                 type="text"
                                 placeholder="Message..."
@@ -139,13 +138,13 @@ export default function Chat() {
                                 }}
                                 value={message}
                                 style={{
-                                    width: "700px",
+                                    width: "95%",
                                     border:"none",
-                                    margin:"0 10px"
+                                    margin:"0px"
                                 }}
                             />
                             <div className="d-inline-block">
-                                <button className="btn btn-outline-secondary" onClick={sendMessage}
+                                <button onClick={sendMessage}
                                     style={{
                                         width: "30px",
                                     }}
