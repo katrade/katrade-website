@@ -154,6 +154,7 @@ export default function Chat() {
                                 <button onClick={sendMessage}
                                     style={{
                                         width: "30px",
+                                        cursor:"pointer"
                                     }}
                                 >
                                     Send
