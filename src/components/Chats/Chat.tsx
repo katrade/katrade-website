@@ -82,13 +82,15 @@ export default function Chat() {
     // }, 1000);
 
     const sendMessage = async () => {
+        const content: any = document.getElementById("messageBox")
+
         let messageContent = {
             room: 123,
             content: {
                 sender: account.username,
                 senderID: account._id,
                 content_type: "Text",
-                content: message,
+                content: content.value,
                 timeStamp: new Date()
             },
         };
@@ -180,10 +182,11 @@ export default function Chat() {
                             <input
                                 type="text"
                                 placeholder="Message..."
-                                onChange={(e) => {
-                                    setMessage(e.target.value);
-                                }}
-                                value={message}
+                                // onChange={(e) => {
+                                //     setMessage(e.target.value);
+                                // }}
+                                // value={message}
+                                id="messageBox"
                                 style={{
                                     width: "95%",
                                     border:"none",
