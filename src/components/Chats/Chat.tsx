@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
 import "./Chat.css";
 
@@ -95,17 +96,17 @@ export default function Chat() {
                                 >
                                     <div className={val.author === userName ? "yourMsg" : "otherMsg"}>
                                         {val.author === userName ? "" :
-                                            <div style={{ 
-                                                    minWidth: "47px", 
-                                                    minHeight: "47px",
-                                                    maxWidth: "47px", 
-                                                    maxHeight: "47px",
-                                                    backgroundImage:"url(https://lordsofgaming.net/wp-content/uploads/2020/10/Screen-Shot-2020-10-19-at-11.15.33-PM.png)",
-                                                    backgroundSize: 'cover' , 
-                                                    backgroundRepeat: 'no-repeat',
-                                                    borderRadius:"50%",
-                                                    backgroundPosition:"center"
-                                                }}>
+                                            <div style={{
+                                                minWidth: "47px",
+                                                minHeight: "47px",
+                                                maxWidth: "47px",
+                                                maxHeight: "47px",
+                                                backgroundImage: "url(https://lordsofgaming.net/wp-content/uploads/2020/10/Screen-Shot-2020-10-19-at-11.15.33-PM.png)",
+                                                backgroundSize: 'cover',
+                                                backgroundRepeat: 'no-repeat',
+                                                borderRadius: "50%",
+                                                backgroundPosition: "center"
+                                            }}>
                                             </div>
                                         }
                                         <div className={val.author === userName ? "owntextBox" : "othertextBox"}>
@@ -117,18 +118,40 @@ export default function Chat() {
                         })}
                     </div>
 
-                    <div className="messageInputs row p-0 m-0" style={{ width: "100%" }}>
-                        <input
-                            className="col-9"
-                            type="text"
-                            placeholder="Message..."
-                            onChange={(e) => {
-                                setMessage(e.target.value);
+                    <div className="messageInputs p-0 m-0" style={{ width: "100%" }}>
+                        <img
+                            src="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
+                            style={{
+                                maxWidth: "35px",
+                                maxHeight: "35px",
+                                margin: "5px 30px 5px"
                             }}
-                            value={message}
-                            style={{ borderBottomLeftRadius: "10px" }}
+                            className="border"
                         />
-                        <button className="col-3" onClick={sendMessage} style={{ borderBottomRightRadius: "10px" }}>Send</button>
+                        <div className="d-inline-block typingContainer">
+                            <input
+                                type="text"
+                                placeholder="Message..."
+                                onChange={(e) => {
+                                    setMessage(e.target.value);
+                                }}
+                                value={message}
+                                style={{
+                                    width: "700px",
+                                    border:"none",
+                                    margin:"0 10px"
+                                }}
+                            />
+                            <div className="d-inline-block">
+                                <button className="btn btn-outline-secondary" onClick={sendMessage}
+                                    style={{
+                                        width: "30px",
+                                    }}
+                                >
+                                    Send
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

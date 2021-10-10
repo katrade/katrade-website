@@ -70,3 +70,13 @@
 	border-radius: 16px;
 	border: 1px solid black;
 }
+
+.messageInputs {
+    border: 1px solid black;
+}
+
+.typingContainer {
+    width: 760px;
+    border:1px solid #C4C4C4;
+    border-radius: 30px;
+}
