@@ -3,18 +3,19 @@ import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
 import "./Chat.css";
 
-export default function Chat() {
-    //connect socket
-    console.log("sus")
-    const socket = io("https://socketkatrade.herokuapp.com", {
-        transports: ["polling"],
-        reconnection: false,
-    });
+//connect socket
+// console.log("sus")
+const socket = io("https://socketkatrade.herokuapp.com", {
+    transports: ["polling"],
+    reconnection: false,
+});
 
-    socket.on("connect", () => {
-        console.log("Connected to WS server");
-        console.log(socket.connected);
-    })
+socket.on("connect", () => {
+    // console.log("Connected to WS server");
+    // console.log(socket.connected);
+})
+
+export default function Chat() {
 
     // Before Login
     const [loggedIn, setLoggedIn] = useState(false);
