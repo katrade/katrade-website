@@ -3,19 +3,19 @@ import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
 import "./Chat.css";
 
-// const socket = io("http://localhost:5000");
-console.log("sus")
-const socket = io("https://socketkatrade.herokuapp.com", {
-    transports: ["polling"],
-    reconnection: false,
-});
-
-socket.on("connect", () => {
-    console.log("Connected to WS server");
-    console.log(socket.connected);
-})
-
 export default function Chat() {
+    //connect socket
+    console.log("sus")
+    const socket = io("https://socketkatrade.herokuapp.com", {
+        transports: ["polling"],
+        reconnection: false,
+    });
+
+    socket.on("connect", () => {
+        console.log("Connected to WS server");
+        console.log(socket.connected);
+    })
+
     // Before Login
     const [loggedIn, setLoggedIn] = useState(false);
     const [room, setRoom] = useState("");
@@ -127,7 +127,7 @@ export default function Chat() {
                         })}
                     </div>
 
-                    <div className="messageInputs p-0 m-0" style={{ width: "100%"}}>
+                    <div className="messageInputs p-0 m-0" style={{ width: "100%" }}>
                         <img
                             src="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
                             style={{
@@ -146,15 +146,15 @@ export default function Chat() {
                                 value={message}
                                 style={{
                                     width: "95%",
-                                    border:"none",
-                                    margin:"0px"
+                                    border: "none",
+                                    margin: "0px"
                                 }}
                             />
                             <div className="d-inline-block">
                                 <button onClick={sendMessage}
                                     style={{
                                         width: "30px",
-                                        cursor:"pointer"
+                                        cursor: "pointer"
                                     }}
                                 >
                                     Send
