@@ -25,17 +25,17 @@ export default function AccountComp(data: any) {
                                 //value={form.password || ""}
                                 onChange={handleForm}
                                 name="currentPassword"
-                                className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
+                                className={"input-register w-100 px-3 col-lg-6 mx-3"} type={showPassword === 1 ? "password" : "text"} 
                                 placeholder="Enter your current password"
                             />
-                            <label className="blue-font-link col-auto text-end px-4" >Forgot Password?</label>
+                            <a className="blue-font-link col-auto text-end px-4" href={`/app/forgotpassword`} target="_blank">Forgot Password?</a>
                         </div>
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">New Password</label>
                             <input
                                 onChange={handleForm}
                                 name="newPassword" 
-                                className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
+                                className={"input-register w-100 px-3 col-lg-6 mx-3"} type={showPassword === 1 ? "password" : "text"} 
                                 placeholder="Enter your new password"
                             />
                         </div>
@@ -44,7 +44,7 @@ export default function AccountComp(data: any) {
                             <input
                                 onChange={handleForm}
                                 name="confirmNewPassword" 
-                                className="input-none form-control border border-secondary px-2 col-lg-6 mx-3"  type={showPassword === 1 ? "password" : "text"} 
+                                className={"input-register w-100 px-3 col-lg-6 mx-3"}  type={showPassword === 1 ? "password" : "text"} 
                                 placeholder="Confirm your new password"
                             />
                         </div>

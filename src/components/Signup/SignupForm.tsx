@@ -90,7 +90,7 @@ export default function SignupForm({ pw, setPw }: p) {
             }
         }
         else {
-            alert("please confirm all of your information.") 
+            alert("please confirm all of your information.")
         }
     }
 

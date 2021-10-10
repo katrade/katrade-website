@@ -57,6 +57,7 @@ export function VerifyEmailSuccess() {
         </div>
     );
 }
+
 export function SetUsernamePage() {
     return (
         <div>
