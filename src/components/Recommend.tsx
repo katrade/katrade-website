@@ -17,7 +17,7 @@ function Recommend(itemData:any) {
             >
             </div>
             <div className="recommend-text-card py-3">
-                <p>{item.name}</p>
+                <p className="text-truncate">{item.name}</p>
                 <p className="desc item-desc text-truncate">{item.detail}</p>
             </div>
         </div>

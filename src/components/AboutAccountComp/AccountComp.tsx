@@ -48,9 +48,9 @@ export default function AccountComp(data: any) {
                 {/* ส่วนของข้อมูล */}
                 <div className="col-md-8 order-md-1">
                     <label><h4 className="mb-4">Profile</h4></label>
-                    <div className="row" style={{ width: "100%" }}>
-                        <label className="col-md-3">Username</label>
-                        <p className="col-md-8" style={{ color: "black" }}>{accountData.username}</p>
+                    <div className="row" style={{ width: "100%",height:"38px",margin:"0 0 8px 0" }}>
+                        <label className="col-md-3 ps-0">Username</label>
+                        <p className="col-md-8 ps-0" style={{ color: "black" }}>{accountData.username}</p>
                     </div>
                     <div className="row mb-2" style={{ width: "100%" }}>
                         <label className="col-md-3">Firstname</label>

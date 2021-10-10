@@ -31,12 +31,12 @@ export default function useAuthorization() {
                 if (!res.data.data.username) {
                     history.push(`/app/setup`);
                 }
-            ;
+                ;
                 return res.data.data;
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
-            ;
+                ;
                 return null;
             })
     }
@@ -83,7 +83,7 @@ export default function useAuthorization() {
             })
             .then(res => {
                 if (res.data.value) {
-                
+
                     return history.push('/app/market');
                 }
                 else {
@@ -93,12 +93,12 @@ export default function useAuthorization() {
             .catch(err => {
                 alert(`We got some error.\n${err}`);
                 clearAuthCookie();
-            ;
+                ;
             })
     }
 
     async function isUserActive(market?: boolean, signin?: boolean) {
-        if (!market && ! signin) {
+        if (!market && !signin) {
             if (cookies.DaveTheHornyDuck) {
                 return true;
             }
@@ -180,7 +180,7 @@ export default function useAuthorization() {
                             }
                         })
 
-                    
+
                 })
             })
             .catch(err => {
@@ -214,11 +214,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
@@ -231,11 +231,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
@@ -249,10 +249,10 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-            ;
+                ;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
@@ -268,11 +268,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
@@ -286,11 +286,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 return null;
             })
     }
@@ -304,11 +304,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 return null;
             })
     }
@@ -324,13 +324,14 @@ export default function useAuthorization() {
             }
         )
             .then(res => {
-            ;
-                if(res.data.value == false){
+                ;
+                if (res.data.value == false) {
                     alert("ส่งคำขอ ล้มเหลว");
                     window.location.reload();
-                }else{
+                } else {
                     alert("ส่งคำขอ สำเร็จ, คำขอจะอยู่ใน pending");
-                    history.push("/app/request")
+                    window.location.reload();
+                    // history.push("/app/request")
                 }
             })
             .catch(err => {
@@ -347,11 +348,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 return null;
             })
     }
@@ -367,7 +368,7 @@ export default function useAuthorization() {
                 // window.location.reload();
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
@@ -385,7 +386,7 @@ export default function useAuthorization() {
                 }
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
@@ -401,10 +402,10 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-            ;
+                ;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
@@ -417,11 +418,11 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 return null;
             })
     }
@@ -437,7 +438,7 @@ export default function useAuthorization() {
                 window.location.reload();
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
@@ -451,34 +452,34 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 return null;
             })
     }
 
     async function getFollow() {
         // show();
-        return await axios.get(`${API}/user/follow` , {
+        return await axios.get(`${API}/user/follow`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
     }
 
-    async function getFollowCheck(user_id:any) {
+    async function getFollowCheck(user_id: any) {
         // show();
         return await axios.get(`${API}/user/checkFollow?id=${user_id}`, {
             headers: {
@@ -486,18 +487,18 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
     }
 
-    async function onFollow(user_id:any) {
-        return await axios.post(`${API}/user/follow` , {id:user_id}, {
+    async function onFollow(user_id: any) {
+        return await axios.post(`${API}/user/follow`, { id: user_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -505,13 +506,13 @@ export default function useAuthorization() {
             .then(res => {
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
     }
-    async function unFollow(user_id:any) {
-        return await axios.post(`${API}/user/unFollow`, {id:user_id}, { 
+    async function unFollow(user_id: any) {
+        return await axios.post(`${API}/user/unFollow`, { id: user_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -520,46 +521,46 @@ export default function useAuthorization() {
             .then(res => {
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
     }
-    async function getUserFollowData(user_id:any) {
+    async function getUserFollowData(user_id: any) {
         return await axios.get(`${API}/user/getFollowById?id=${user_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
-    } 
-    async function getUserIdArray(user_id:any) {
-        return await axios.post(`${API}/user/getUserFromIdArray`, {data:user_id}, {
+    }
+    async function getUserIdArray(user_id: any) {
+        return await axios.post(`${API}/user/getUserFromIdArray`, { data: user_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
-            })            
+            })
     }
 
-    async function LockRequest(request_id: any, product_id:any) {
-        return await axios.patch(`${API}/user/lockRequest`, { id: request_id , inventoryId: product_id}, {
+    async function LockRequest(request_id: any, product_id: any) {
+        return await axios.patch(`${API}/user/lockRequest`, { id: request_id, inventoryId: product_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -569,7 +570,7 @@ export default function useAuthorization() {
                 console.log(res);
             })
             .catch((err) => {
-            ;
+                ;
                 console.log(err)
                 return null;
             })
@@ -577,7 +578,7 @@ export default function useAuthorization() {
 
     async function deleteMyLockRequestPending(requestpending_id: any) {
         // show("โหลดดิ้ง..");
-        return await axios.patch(`${API}/user/cancelLockRequest`, {id: requestpending_id} , {
+        return await axios.patch(`${API}/user/cancelLockRequest`, { id: requestpending_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
                 'Content-Type': 'application/json'
@@ -585,31 +586,31 @@ export default function useAuthorization() {
         })
             .then(res => {
                 window.location.reload();
-            ;
+                ;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
 
-    async function getSearch(searchword:any) {
+    async function getSearch(searchword: any) {
         return await axios.get(`${API}/inventory/search?query=${searchword}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
         })
             .then(res => {
-            ;
+                ;
                 return res.data;
             })
             .catch(() => {
-            ;
+                ;
                 return null;
             })
     }
 
-    async function finishTrade(request_id:any) {
+    async function finishTrade(request_id: any) {
         return await axios.post(`${API}/user/finishTrade`, { requestId: request_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -623,7 +624,7 @@ export default function useAuthorization() {
                 hide();
                 console.log(err)
                 return null;
-            })            
+            })
     }
 
     async function getHistory() {
@@ -643,8 +644,8 @@ export default function useAuthorization() {
                 return null;
             })
     }
-    
-    async function getAnotherInventory(user_id:any) {
+
+    async function getAnotherInventory(user_id: any) {
         show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getInventoryByUserId?id=${user_id}`, {
             headers: {
@@ -674,11 +675,28 @@ export default function useAuthorization() {
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
-            ;
+                ;
                 return null;
             })
     }
 
+    async function getMatchProduct(product_id: any) {
+        // show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getMatchInventory?id=${product_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // hide();
+                return res.data;
+            })
+            .catch(() => {
+                // hide();
+                return null;
+            })
+    }
+    
     return {
         getUserData,
         updateProfilePic,
@@ -713,6 +731,7 @@ export default function useAuthorization() {
         finishTrade,
         getHistory,
         getAnotherInventory,
-        getChatData
+        getChatData,
+        getMatchProduct,
     }
 }

@@ -38,15 +38,17 @@ function Product() {
         unFollow,
         getFollowCheck,
         getUserFollowData,
-        getAnotherUser } = useAuthorization();
-    const [data, setData] = useState<any>(null);
-    const [myAccout, setMyAccout] = useState<any>(null);
-    const [inventory, setInventory] = useState<any>();
-    const [mobile, setMobile] = useState(false);
-    const [followChk , setFollowChk] = useState<boolean>();
-    const [followerData, setFollowerData] = useState<any>();
+        getAnotherUser,
+        getMatchProduct } = useAuthorization();
+    const [ data, setData ] = useState<any>(null);
+    const [ myAccout, setMyAccout ] = useState<any>(null);
+    const [ inventory, setInventory ] = useState<any>();
+    const [ matchInventory, setMatchInventory ] = useState<any>();
+    const [ mobile, setMobile ] = useState(false);
+    const [ followChk , setFollowChk ] = useState<boolean>();
+    const [ followerData, setFollowerData ] = useState<any>();
     const [ anotherUserData , setAnotherUserData ] = useState<any>();
-    const [show, hide] = useLoading();
+    const [ show, hide ] = useLoading();
 
     // แสดงผลตัวเลขบนหน้าจอ
     const [handleFollow , setHandleFollow] = useState<any>();
@@ -59,7 +61,10 @@ function Product() {
             var dataDetail = await getDetailProduct(product_id);
             if (dataDetail) {
                 setData(dataDetail);
-
+                var getMatch = await getMatchProduct(dataDetail._id);
+                if (getMatch) {
+                    setMatchInventory(getMatch);
+                }
                 var dataOwner = await getAnotherUser(dataDetail.owner);
                 if (dataOwner) {
                     setAnotherUserData(dataOwner);
@@ -82,7 +87,7 @@ function Product() {
             if (getInventory) {
                 setInventory(getInventory);
             }
-            hide(); 
+            hide();
         }
         init();
     }, [])
@@ -138,7 +143,7 @@ function Product() {
     }
     let requestTrade = null;
     if (!!selectTrade) {
-        requestTrade = <SelectTrade onClose={closeRequest} array={inventory} detailItem={data} />
+        requestTrade = <SelectTrade onClose={closeRequest} arrayAll={inventory} arrayMatch={matchInventory} detailItem={data} />
     }
 
     const [requireDetail, SetRequireDetail] = useState<any>();
