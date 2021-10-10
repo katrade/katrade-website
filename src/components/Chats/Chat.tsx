@@ -62,6 +62,13 @@ export default function Chat() {
         setMessage("");
     };
 
+    // function onKeyDown(event) {
+    //     const title = event.target.value;
+
+    //     if (event.key === 'Enter' && title) {
+    //     }
+    // }
+
     return (
         <div>
             {!loggedIn ? (
