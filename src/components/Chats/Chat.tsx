@@ -24,7 +24,7 @@ export default function Chat() {
     // After Login
     const [message, setMessage] = useState("");
     const [messageList, setMessageList] = useState<any[]>([]);
-
+    // const [authorName, setAuthorName] = useState<string>("Other");
     const [chk, setChk] = useState(false);
 
     useEffect(() => {
@@ -51,7 +51,9 @@ export default function Chat() {
             room: 123,
             content: {
                 author: userName,
+                type: "Text",
                 message: message,
+                timeStamp: new Date()
             },
         };
 
@@ -109,8 +111,8 @@ export default function Chat() {
                                             }}>
                                             </div>
                                         }
-                                        <div className={val.author === userName ? "owntextBox" : "othertextBox"}>
-                                            {val.message} ({val.author})
+                                        <div className={val.author === userName ? "yourtextBox" : "othertextBox"}>
+                                            {val.message} FROM:{val.author} ({val.timeStamp})
                                         </div>
                                     </div>
                                 </div>
