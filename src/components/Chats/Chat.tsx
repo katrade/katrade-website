@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { borderRadius } from "react-select/src/theme";
+import { useHistory } from "react-router";
+// import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
+import useAuthorization from "../../hooks/useAuthorization";
+import { defaultEmptyAccount, IAccount } from "../../interfaces/IUser";
 import "./Chat.css";
 
 // const socket = io("http://localhost:5000");
@@ -11,14 +14,15 @@ const socket = io("https://socketkatrade.herokuapp.com", {
 });
 
 socket.on("connect", () => {
-    console.log("Connected to WS server");
-    console.log(socket.connected);
+    console.log("SOCKET is already connected");
+    // console.log(socket.connected);
 })
 
 export default function Chat() {
+    console.log("Reload")
     // Before Login
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [room, setRoom] = useState("");
+    const [loggedIn, setLoggedIn] = useState(true);
+    // const [room, setRoom] = useState("");
     const [userName, setUserName] = useState("");
 
     // After Login
@@ -26,33 +30,65 @@ export default function Chat() {
     const [messageList, setMessageList] = useState<any[]>([]);
     // const [authorName, setAuthorName] = useState<string>("Other");
     const [chk, setChk] = useState(false);
+    const {getUserData, getChatData} = useAuthorization();
+    const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
+    const history = useHistory();
+
+    console.log(messageList)
 
     useEffect(() => {
-        socket.on("message", (data) => {
-            let a = messageList
-            a.push(data.content)
-            setMessageList(a);
-            console.log(messageList);
-            setMessage("");
-        });
+
+        async function init() {
+            var userData = await getUserData();
+            if (userData) {
+                setAccount(userData);
+            }
+            else {
+                console.clear();
+                history.push('/app/signin');
+            }
+
+            var chatData = await getChatData('123');
+            // console.log(chatData)
+            if (chatData){
+                setMessageList(chatData.messages)
+            }
+            else {
+                console.log("mai meee naaa ไอบอง")
+            }
+        }
+
+        socket.emit("joinroom", 123);
+        
+        init();
     }, []);
 
-    setInterval(() => {
+    socket.on("message", (data) => {
+        let a = [...messageList]
+        // console.log(a)
+        a.push(data.content)
+        setMessageList(a);
+        // setMessageList([...messageList, messageContent.content]);
+        // console.log(messageList);
         setChk(!chk);
-    }, 1000);
-
-    const connectToRoom = () => {
-        setLoggedIn(true);
-        socket.emit("joinroom", 123);
-    };
+    });
+   
+    // const connectToRoom = () => {
+    //     setLoggedIn(true);
+    //     socket.emit("joinroom", 123);
+    // };
+    // setInterval(() => {
+    //     setChk(!chk);
+    // }, 1000);
 
     const sendMessage = async () => {
         let messageContent = {
             room: 123,
             content: {
-                author: userName,
-                type: "Text",
-                message: message,
+                sender: account.username,
+                senderID: account._id,
+                content_type: "Text",
+                content: message,
                 timeStamp: new Date()
             },
         };
@@ -89,7 +125,7 @@ export default function Chat() {
                             }}
                         /> */}
                     </div>
-                    <button onClick={connectToRoom}>Enter Chat</button>
+                    {/* <button onClick={connectToRoom}>Enter Chat</button> */}
                 </div>
             ) : (
                 <div className="chatContainer">
@@ -103,8 +139,8 @@ export default function Chat() {
                                 <div className="messageContainer"
                                 // id={val.author == userName ? "You" : "Other"}
                                 >
-                                    <div className={val.author === userName ? "yourMsg" : "otherMsg"}>
-                                        {val.author === userName ? "" :
+                                    <div className={val.sender === account.username ? "yourMsg" : "otherMsg"}>
+                                        {val.sender === account.username ? "" :
                                             <div style={{
                                                 minWidth: "47px",
                                                 minHeight: "47px",
@@ -118,9 +154,12 @@ export default function Chat() {
                                             }}>
                                             </div>
                                         }
-                                        <div className={val.author === userName ? "yourtextBox" : "othertextBox"}>
-                                            {val.message} FROM:{val.author} ({val.timeStamp})
+                                        <div className={val.sender === account.username ? "yourtextBox" : "othertextBox"}>
+                                            {val.content} FROM:{val.sender}
                                         </div>
+                                        {/* <div>
+                                            {val.timeStamp}
+                                        </div> */}
                                     </div>
                                 </div>
                             );

@@ -21,28 +21,28 @@ import { TransparentButton, DynamicSolidButton , DynamicTransparentButton } from
 
 import { LanguageContext } from '../contexts/Language';
 
-import usePopup from '../hooks/popup'
+// import usePopup from '../hooks/popup'
 import { useCookies } from 'react-cookie';
 import useAuthorization from '../hooks/useAuthorization';
 
 
-const popup1Content = (
-    <div className="text-center">
-        <h5>Seriously? This page is nmnnnbkjbot ready.</h5>
-        <TransparentButton buttonColor="#1f6ab5" margin="50px auto" onClick={() => window.location.href = "/app/market"}>Yeah, I know. Just take me there !!</TransparentButton>
-    </div>
-)
-const popup2Content = (
-    <div className="text-center">
-        <h5>Seriously? This page is not ready.</h5>
-        <TransparentButton buttonColor="#1f6ab5" margin="50px auto" onClick={() => window.location.href = "/app/signin"}>Yeah, I know. Just take me there !!</TransparentButton>
-    </div>
-)
+// const popup1Content = (
+//     <div className="text-center">
+//         <h5>Seriously? This page is nmnnnbkjbot ready.</h5>
+//         <TransparentButton buttonColor="#1f6ab5" margin="50px auto" onClick={() => window.location.href = "/app/market"}>Yeah, I know. Just take me there !!</TransparentButton>
+//     </div>
+// )
+// const popup2Content = (
+//     <div className="text-center">
+//         <h5>Seriously? This page is not ready.</h5>
+//         <TransparentButton buttonColor="#1f6ab5" margin="50px auto" onClick={() => window.location.href = "/app/signin"}>Yeah, I know. Just take me there !!</TransparentButton>
+//     </div>
+// )
 
 
-interface paramsInterface {
-    lang?: string
-}
+// interface paramsInterface {
+//     lang?: string
+// }
 
 const en = ["Trade your items with others", "Exchange your items to whatever you want, to whoever need your things.", "Market >", "Sign in", "Start Katrade", "Create an account and join our KU community.",
     "Sign up", "Live chat with your duo", "Stay connect with your trade duo and make the conversation easier.", "Make KU community better", "New way to interact with other KU students. Make new friends, and let our KU community larger.",

@@ -1,10 +1,10 @@
 import { SolidButton } from '../standard/Button';
 import { useHistory } from 'react-router-dom';
-import { useForm } from '../../utils/useForm';
+// import { useForm } from '../../utils/useForm';
 import { useEffect, useState } from 'react';
 import useLoading from '../../hooks/useLoading';
-import { API } from '../../app.setting.json'
-import { useLocation } from 'react-router-dom'
+import { API } from '../../app.setting.json';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { H4, H5 }  from '../standard/H';
@@ -98,7 +98,6 @@ export function ResetPasswordForm() {
         headers: {
             'Authorization': `Bearer ${token}`
         }
-
     }
     const [password , setPassword] = useState<string>("");
     const [confirmPassword , setConfirmPassword] = useState<string>("");

@@ -1,23 +1,23 @@
-import { useState, useEffect, useReducer, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components'
 
 import './Market.css';
 
 import Navbar from '../components/Navbar';
-import NavbarSpare from '../components/NavbarSpare';
+// import NavbarSpare from '../components/NavbarSpare';
 import Footer from '../components/Footer';
-import Recommend from '../components/Recommend';
+// import Recommend from '../components/Recommend';
 import Interest from '../components/Interest';
 import Block from '../components/Block';
-import axios from 'axios';
-import { API } from '../app.setting.json';
+// import axios from 'axios';
+// import { API } from '../app.setting.json';
 import { IAccount, defaultEmptyAccount } from '../interfaces/IUser';
 import { useHistory } from 'react-router';
 import { useCookies } from 'react-cookie';
 import useLoading from '../hooks/useLoading';
 import useAuthorization from '../hooks/useAuthorization';
-import { type } from 'os';
-import { ContactSupportOutlined } from '@material-ui/icons';
+// import { type } from 'os';
+// import { ContactSupportOutlined } from '@material-ui/icons';
 import Background from '../components/Background';
 import { H5 } from "../components/standard/H";
 import P from '../components/standard/P';
@@ -25,18 +25,18 @@ import { ThemeContext } from '../contexts/Theme';
 
 
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-}
+// function getRandomInt(max: number) {
+//     return Math.floor(Math.random() * max);
+// }
 
-const SeeMore = styled.button`
-    width: auto;
-    height: 40px;
-    border: 1px solid grey;
-    background-color: white;
-    padding: 0px 20px;
-    font-size: 18px;
-`
+// const SeeMore = styled.button`
+//     width: auto;
+//     height: 40px;
+//     border: 1px solid grey;
+//     background-color: white;
+//     padding: 0px 20px;
+//     font-size: 18px;
+// `
 
 // type DestCompContextType = {
 //     destCompState: any,
@@ -85,7 +85,7 @@ function Market() {
     // const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
 
     // สร้างตัวอย่างมาโชว์ Just For You
-    const rec_item = null;
+    // const rec_item = null;
     // สร้างตัวอย่างมาโชว์ Suggestion
     // const interest_item = id_item.map((item, index) => {
     //     return <Interest item={item} key={index} />;

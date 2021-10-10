@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import useAuthorization from '../hooks/useAuthorization';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -9,11 +9,11 @@ import Block from '../components/Block';
 import useLoading from '../hooks/useLoading';
 import Background from '../components/Background';
 import { H4, H5 } from '../components/standard/H';
-const queryString = require("query-string");
+// const queryString = require("query-string");
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-}
+// function getRandomInt(max: number) {
+//     return Math.floor(Math.random() * max);
+// }
 interface IParams {
     quote: string;
 }

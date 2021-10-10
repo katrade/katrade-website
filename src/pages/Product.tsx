@@ -12,8 +12,8 @@ import SelectTrade from '../components/SelectTrade';
 
 import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from '../components/standard/Button';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
-import { FcLike, CgArrowsExchangeAlt } from 'react-icons/all';
+// import { AiOutlineConsoleSql } from 'react-icons/ai';
+import { FcLike } from 'react-icons/all';
 import useLoading from '../hooks/useLoading';
 
 const queryString = require("query-string");

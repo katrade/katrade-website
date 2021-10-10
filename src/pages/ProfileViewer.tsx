@@ -10,9 +10,9 @@ import Recommend from '../components/Recommend';
 
 const queryString = require('query-string');
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-}
+// function getRandomInt(max: number) {
+//     return Math.floor(Math.random() * max);
+// }
 
 export default function ProfileViewer() {
 

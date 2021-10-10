@@ -4,9 +4,10 @@ import { API } from '../app.setting.json'
 import { IAccount } from '../interfaces/IUser'
 import axios from 'axios';
 import { useHistory } from "react-router";
-import { resourceUsage } from "process";
-import { ContactSupportOutlined } from "@material-ui/icons";
+// import { resourceUsage } from "process";
+// import { ContactSupportOutlined } from "@material-ui/icons";
 import { uploadItemPicture } from "..//utils/storage";
+import { IChat } from "../interfaces/Chat";
 
 // test pushing changes
 
@@ -660,6 +661,24 @@ export default function useAuthorization() {
             })
     }
 
+    async function getChatData(roomID: string): Promise<IChat | null> {
+        // show()
+        return await axios.get(`https://socketkatrade.herokuapp.com/chatroom/getroom?roomid=${roomID}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // console.log(res)
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+            ;
+                return null;
+            })
+    }
+
     return {
         getUserData,
         updateProfilePic,
@@ -694,5 +713,6 @@ export default function useAuthorization() {
         finishTrade,
         getHistory,
         getAnotherInventory,
+        getChatData
     }
 }
