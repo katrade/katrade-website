@@ -59,6 +59,7 @@ function Product() {
         resize();
         async function init() {
             var dataDetail = await getDetailProduct(product_id);
+            // console.log(dataDetail)
             if (dataDetail) {
                 setData(dataDetail);
                 var getMatch = await getMatchProduct(dataDetail._id);
@@ -210,6 +211,10 @@ function Product() {
         }
     }
 
+    const handleClickChat = () => {
+        history.push(`/app/chatDashboard?duo_id=${data.owner}&duo_username=${data.username}`);
+    }
+
     if (data && myAccout) {
         var checkpath = window.location.pathname;
         var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
@@ -282,7 +287,7 @@ function Product() {
                                     </div>
 
                                     <div className={forOwner ? "d-none" : "d-flex flex-wrap" }>
-                                        <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px">Chat</TransparentButton>
+                                        <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={handleClickChat}>Chat</TransparentButton>
                                         <div onClick={handleClickFollow}>{follow_btn()}</div>
                                     </div>
                                 </div>

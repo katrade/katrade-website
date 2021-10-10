@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
+import { useLocation } from "react-router-dom";
 // import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
 import useAuthorization from "../../hooks/useAuthorization";
@@ -18,11 +19,13 @@ socket.on("connect", () => {
     // console.log(socket.connected);
 })
 
+const queryString = require("query-string");
+
 export default function Chat() {
     console.log("Reload")
     // Before Login
     const [loggedIn, setLoggedIn] = useState(true);
-    // const [room, setRoom] = useState("");
+    const [roomId, setRoomId] = useState("");
     const [userName, setUserName] = useState("");
 
     // After Login
@@ -30,9 +33,13 @@ export default function Chat() {
     const [messageList, setMessageList] = useState<any[]>([]);
     // const [authorName, setAuthorName] = useState<string>("Other");
     const [chk, setChk] = useState(false);
-    const {getUserData, getChatData} = useAuthorization();
+    const { getUserData, getChatData } = useAuthorization();
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const history = useHistory();
+
+    const { search } = useLocation();
+    const { duo_id, duo_username } = queryString.parse(search);
+
 
     console.log(messageList)
 
@@ -47,21 +54,38 @@ export default function Chat() {
                 console.clear();
                 history.push('/app/signin');
             }
-
-            var chatData = await getChatData('123');
-            // console.log(chatData)
-            if (chatData){
-                setMessageList(chatData.messages)
-            }
-            else {
-                console.log("mai meee naaa ไอบอง")
-            }
         }
 
-        socket.emit("joinroom", 123);
-        
         init();
     }, []);
+
+    useEffect(() => {
+        async function init() {
+            var room;
+            if (account._id) {
+                if (duo_id < account._id) {
+                    room = duo_id + account._id
+                }
+                else {
+                    room = account._id + duo_id
+                }
+                setRoomId(room)
+    
+                var chatData = await getChatData(roomId);
+                // console.log(chatData)
+                if (chatData) {
+                    setMessageList(chatData.messages)
+                }
+                else {
+                    console.log("mai meee naaa ไอบอง")
+                }
+            }
+        }
+        
+        init()
+        socket.emit("joinroom", roomId);
+
+    }, [account])
 
     socket.on("message", (data) => {
         let a = [...messageList]
@@ -72,7 +96,7 @@ export default function Chat() {
         // console.log(messageList);
         setChk(!chk);
     });
-   
+
     // const connectToRoom = () => {
     //     setLoggedIn(true);
     //     socket.emit("joinroom", 123);
@@ -133,7 +157,7 @@ export default function Chat() {
                 <div className="chatContainer">
                     <div className="chatContainer-Header d-flex align-items-center px-5">
                         <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: "47px" }} />
-                        <span className="ms-3 text-white">FranKydeSU</span>
+                        <span className="ms-3 text-white">{duo_username}</span>
                     </div>
                     <div className="messages" style={{ height: "500px", overflow: "auto" }}>
                         {messageList.map((val, key) => {
@@ -157,7 +181,7 @@ export default function Chat() {
                                             </div>
                                         }
                                         <div className={val.sender === account.username ? "yourtextBox" : "othertextBox"}>
-                                            {val.content} FROM:{val.sender}
+                                            {val.content} ({val.sender})
                                         </div>
                                         {/* <div>
                                             {val.timeStamp}
@@ -168,14 +192,14 @@ export default function Chat() {
                         })}
                     </div>
 
-                    <div className="messageInputs p-0 m-0" style={{ width: "100%"}}>
+                    <div className="messageInputs p-0 m-0" style={{ width: "100%" }}>
                         <img
                             src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
                             style={{
                                 maxWidth: "35px",
                                 maxHeight: "35px",
                                 margin: "20px 20px",
-                                cursor:"pointer"
+                                cursor: "pointer"
                             }}
                         />
                         <div className="typingContainer">
@@ -189,15 +213,15 @@ export default function Chat() {
                                 id="messageBox"
                                 style={{
                                     width: "95%",
-                                    border:"none",
-                                    margin:"0px"
+                                    border: "none",
+                                    margin: "0px"
                                 }}
                             />
                             <div className="d-inline-block">
                                 <button onClick={sendMessage}
                                     style={{
                                         width: "30px",
-                                        cursor:"pointer"
+                                        cursor: "pointer"
                                     }}
                                 >
                                     Send
