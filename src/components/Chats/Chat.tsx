@@ -71,7 +71,8 @@ export default function Chat() {
                 }
                 setRoomId(room)
     
-                var chatData = await getChatData(roomId);
+                var chatData = await getChatData(room);
+                console.log(room)
                 // console.log(chatData)
                 if (chatData) {
                     setMessageList(chatData.messages)
@@ -109,7 +110,7 @@ export default function Chat() {
         const content: any = document.getElementById("messageBox")
 
         let messageContent = {
-            room: 123,
+            room: roomId,
             content: {
                 sender: account.username,
                 senderID: account._id,
