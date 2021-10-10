@@ -58,6 +58,7 @@ export function VerifyEmailSuccess() {
         </div>
     );
 }
+
 export function SetUsernamePage() {
     const [,hide] = useLoading();
     hide();

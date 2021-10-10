@@ -107,13 +107,13 @@ const SignInForm = () => {
                             </div>
                             <div className="row mt-2">
                                 <div className="col m-0 p-0">
-                                    <label className="ml-1">
+                                    {/* <label className="ml-1">
                                         <input className="mr-2" type="checkbox" />
                                         Remember me
-                                    </label>
+                                    </label> */}
                                 </div>
                                 <div className="col text-end p-0">
-                                    <label className="blue-font-link" >Forgot Password?</label>
+                                    <a className="blue-font-link" href={`/app/forgotpassword`} target="_blank">Forgot Password?</a>
                                 </div>
                             </div>
                             <div className="text-center mb-5">

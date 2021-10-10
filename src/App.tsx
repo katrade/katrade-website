@@ -31,6 +31,8 @@ import SignUp from './pages/SignUp';
 
 import { Verify, VerifyEmailSuccess, VerifyEmailPending, SetUsernamePage } from './pages/VerifyPages/VerifyTest';
 
+import { ForgotPassword, AfterEnterEmail, ResetPassword, CompleteResetPassword } from './pages/ResetPasswordPages/ResetPassword';
+
 import AboutAccount from './pages/AboutAccount/AboutAccount';
 import Account from './pages/AccountPages/Account';
 import Favorite from './pages/AccountPages/Favorite';
@@ -90,6 +92,11 @@ function App() {
                                 <Route exact path="/app/verify/pending" component={VerifyEmailPending}></Route>
                                 <Route exact path="/app/verify/success" component={VerifyEmailSuccess}></Route>
                                 <Route exact path="/verify" component={Verify}></Route>
+
+                                <Route exact path="/app/forgotpassword" component={ForgotPassword}></Route>
+                                <Route exact path="/app/forgotpassword/verify" component={AfterEnterEmail}></Route>
+                                <Route exact path="/app/resetpassword" component={ResetPassword}></Route>
+                                <Route exact path="/app/completeresetpassword" component={CompleteResetPassword}></Route>
 
                                 <Route exact path="/app/market" component={Market}></Route>
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
