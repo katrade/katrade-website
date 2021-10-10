@@ -82,7 +82,7 @@ function Product() {
             if (getInventory) {
                 setInventory(getInventory);
             }
-            
+            hide(); 
         }
         init();
     }, [])
