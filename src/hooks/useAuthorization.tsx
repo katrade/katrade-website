@@ -329,7 +329,8 @@ export default function useAuthorization() {
                     window.location.reload();
                 }else{
                     alert("ส่งคำขอ สำเร็จ, คำขอจะอยู่ใน pending");
-                    history.push("/app/request")
+                    window.location.reload();
+                    // history.push("/app/request")
                 }
             })
             .catch(err => {
@@ -660,6 +661,22 @@ export default function useAuthorization() {
             })
     }
 
+    async function getMatchProduct(product_id:any) {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getMatchInventory?id=${product_id}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch(() => {
+                hide();
+                return null;
+            })
+    }
     return {
         getUserData,
         updateProfilePic,
@@ -694,5 +711,6 @@ export default function useAuthorization() {
         finishTrade,
         getHistory,
         getAnotherInventory,
+        getMatchProduct,
     }
 }

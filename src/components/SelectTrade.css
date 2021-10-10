@@ -5,8 +5,16 @@
     cursor: pointer;
 }
 .select-items-menu:hover {
-    border: solid rgba(200,200,200,0.4);
+    border: solid #15C777;
     border-width: 0 0 3px 0;
     cursor: pointer;
-    
+}
+
+.currenttap {
+    border: solid 2px #15C777;
+    border-width: 0 0 3px 0;
+}
+.currenttap:hover {
+    border: solid 2px #15C777 !important;
+    border-width: 0 0 3px 0 !important;
 }
