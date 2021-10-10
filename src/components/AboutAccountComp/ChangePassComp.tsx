@@ -16,8 +16,8 @@ export default function AccountComp(data: any) {
 
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
-                <div className="p-3">
+            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                <div className="">
                     <h4 className="mb-4">Change Password</h4>
                         <div className="row mb-3" style={{width:"100%"}}>
                             <label className="col-lg-3 col-form">Current Password</label>

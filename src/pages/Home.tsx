@@ -86,7 +86,7 @@ export default function Home() {
                 <StaticNav />
                 <Block height="300" className="my-5">
                     <div className="row m-0 py-5 full-width">
-                        <div className=" d-flex align-items-center">
+                        <div className="col-lg d-flex align-items-center">
                             <div className="center-content-screen">
                                 <H3>{activeLang[0]}</H3>
                                 <P>{activeLang[1]}</P>

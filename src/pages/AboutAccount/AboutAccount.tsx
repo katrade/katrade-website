@@ -8,8 +8,8 @@ import useAuthorization from '../../hooks/useAuthorization';
 import { TransparentButton } from '../../components/standard/Button';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 
-import NavbarSpare from '../../components/NavbarSpare';
-// import Navbar from '../../components/Navbar';
+// import NavbarSpare from '../../components/NavbarSpare';
+import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Block from '../../components/Block';
 import Accountbar from "../../components/Account/Accountbar";
@@ -23,6 +23,7 @@ import FavoriteComp from '../../components/AboutAccountComp/FavoriteComp';
 import InventoryComp from '../../components/AboutAccountComp/InventoryComp';
 import HistoryComp from '../../components/AboutAccountComp/HistoryComp';
 import { getAllJSDocTagsOfKind } from 'typescript';
+import useLoading from '../../hooks/useLoading';
 
 const queryString = require('query-string');
 
@@ -88,19 +89,28 @@ function AboutAccount(userData:any) {
     const { search } = useLocation();
     const { component } = queryString.parse(search);
 
-    const [ destCompState , destCompDispatch] = useReducer(reducer, "");
+    const [ destCompState, destCompDispatch] = useReducer(reducer, "");
 
-    const { getUserData , updateProfilePic , getMyInventory , getFavourite , getFollow , getUserIdArray} = useAuthorization();    
-    const [ accountData , setAccountData ] = useState<IAccount>(defaultEmptyAccount);
+    const { getUserData, 
+        updateProfilePic, 
+        getMyInventory, 
+        getFavourite, 
+        getFollow, 
+        getUserIdArray, 
+        getHistory } = useAuthorization();    
+    const [ accountData, setAccountData ] = useState<IAccount>(defaultEmptyAccount);
     const [ favoriteData, setFavoriteData ] = useState<any>();
-    const [ inventoryData , setInventoryData ] = useState<any>();
-    const [ followData , setFollowData ] = useState<any>();
+    const [ inventoryData, setInventoryData ] = useState<any>();
+    const [ followData, setFollowData ] = useState<any>();
+    const [ historyData, setHistoryData ] = useState<any>();
     const [ followingUserArrayData, setFollowingUserArrayData ] = useState<any>();
     const [ followerUserArrayData, setFollowerUserArrayData ] = useState<any>();
+    const [show, hide] = useLoading();
     const history = useHistory();
 
     useEffect(() => {
         async function init() {
+            show();
             var userData = await getUserData();
             if (userData) {
                 setAccountData(userData);
@@ -113,6 +123,7 @@ function AboutAccount(userData:any) {
             if (inventory) {
                 setInventoryData(inventory);
             }
+            
             var favourite = await getFavourite();
             if (favourite) {
                 setFavoriteData(favourite);
@@ -128,9 +139,12 @@ function AboutAccount(userData:any) {
                 if (followerUserDataArray) {
                     setFollowerUserArrayData(followerUserDataArray)
                 }
-
             }
- 
+            hide();
+            var history = await getHistory();
+            if (history) {
+                setHistoryData(history);
+            }
         }
         init();
     }, [])
@@ -151,7 +165,7 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "Inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(destCompState.dest === "History"){
-            setComponentPage(<HistoryComp data={accountData}/>);
+            setComponentPage(<HistoryComp data={historyData}/>);
         }
     }
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
@@ -171,14 +185,14 @@ function AboutAccount(userData:any) {
         }else if(component == "inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(component == "history"){
-            setComponentPage(<HistoryComp data={accountData}/>);
+            setComponentPage(<HistoryComp data={historyData}/>);
         }
     }, [accountData,favoriteData,inventoryData])
 
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
         <div>
-            <NavbarSpare image={accountData.profilePic}/>
+            <Navbar image={accountData.profilePic}/>
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>

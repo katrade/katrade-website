@@ -25,10 +25,10 @@ export default function AccountComp(data: any) {
 
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4" style={{ width: "100%" }}>
+            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
 
                 {/* ส่วนของรูปโปรไฟล์ */}
-                <div className="col-md-4 order-md-2 p-3 text-center">
+                <div className="col-md-4 order-md-2 text-center">
                     <div className="d-flex justify-content-center mt-2 mb-3">
                         <div style={{
                             backgroundImage: accountData.profilePic ? `url(${accountData.profilePic})` : `url(https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg)`, backgroundPosition: 'center',
@@ -46,7 +46,7 @@ export default function AccountComp(data: any) {
                 </div>
 
                 {/* ส่วนของข้อมูล */}
-                <div className="col-md-8 order-md-1 p-3">
+                <div className="col-md-8 order-md-1">
                     <label><h4 className="mb-4">Profile</h4></label>
                     <div className="row" style={{ width: "100%" }}>
                         <label className="col-md-3">Username</label>

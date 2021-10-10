@@ -14,6 +14,7 @@ import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from '../components/standard/Button';
 import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { FcLike, CgArrowsExchangeAlt } from 'react-icons/all';
+import useLoading from '../hooks/useLoading';
 
 const queryString = require("query-string");
 
@@ -36,25 +37,33 @@ function Product() {
         onFollow,
         unFollow,
         getFollowCheck,
-        getUserFollowData } = useAuthorization();
+        getUserFollowData,
+        getAnotherUser } = useAuthorization();
     const [data, setData] = useState<any>(null);
-    const [owner, setOwner] = useState<any>(null);
+    const [myAccout, setMyAccout] = useState<any>(null);
     const [inventory, setInventory] = useState<any>();
     const [mobile, setMobile] = useState(false);
     const [followChk , setFollowChk] = useState<boolean>();
     const [followerData, setFollowerData] = useState<any>();
+    const [ anotherUserData , setAnotherUserData ] = useState<any>();
+    const [show, hide] = useLoading();
+
+    // แสดงผลตัวเลขบนหน้าจอ
     const [handleFollow , setHandleFollow] = useState<any>();
 
     const history = useHistory();
 
-
-    // var checkFavorite:any = owner.favourite.includes(data._id);
     useEffect(() => {
         resize();
         async function init() {
             var dataDetail = await getDetailProduct(product_id);
             if (dataDetail) {
                 setData(dataDetail);
+
+                var dataOwner = await getAnotherUser(dataDetail.owner);
+                if (dataOwner) {
+                    setAnotherUserData(dataOwner);
+                }
                 var getFollowChk = await getFollowCheck(dataDetail.owner);
                 if (getFollowChk) {
                     setFollowChk(getFollowChk.value);
@@ -67,27 +76,27 @@ function Product() {
             }
             var getUser: any = await getUserData();
             if (getUser) {
-                setOwner(getUser);
+                setMyAccout(getUser);
             }
             var getInventory = await getMyInventory();
             if (getInventory) {
                 setInventory(getInventory);
             }
-            
+            hide(); 
         }
         init();
     }, [])
 
     const [checkFavoritetmp, setCheckFavoritetmp] = useState<boolean>();
     useEffect(() => {
-        if (owner != null && data != null) {
-            setCheckFavoritetmp(owner.favourite.includes(data._id))
+        if (myAccout != null && data != null) {
+            setCheckFavoritetmp(myAccout.favourite.includes(data._id))
         }
-    }, [data, owner])
+    }, [data, myAccout])
 
     var forOwner = 0;
-    if (data && owner) {
-        if (data.owner == owner._id) {
+    if (data && myAccout) {
+        if (data.owner == myAccout._id) {
             forOwner = 1;
         }
     }
@@ -118,7 +127,7 @@ function Product() {
 
     const [selectTrade, setSelectTrade] = useState<any>(null);
     function clickRequest() {
-        if (owner.inventories.length == 0) {
+        if (myAccout.inventories.length == 0) {
             window.alert("คุณยังไม่มีสิ่งของเลย ไปเพิ่มก่อนสิ")
         } else {
             setSelectTrade("Click")
@@ -196,7 +205,7 @@ function Product() {
         }
     }
 
-    if (data && owner) {
+    if (data && myAccout) {
         var checkpath = window.location.pathname;
         var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
 
@@ -211,12 +220,11 @@ function Product() {
             );
         })
         const tmpRequireDetail = data.require[0].detail;
-
         return (
             <div>
                 {photoPost}
                 {requestTrade}
-                <Navbar image={owner.profilePic} />
+                <Navbar image={myAccout.profilePic} />
                 <Block height="auto" backgroundColor="#f7fafc">
                     {/* <div className="py-3 px-5 my-3 bg-white"> */}
                     <div className={mobile ? "py-2 px-2 my-3 bg-white" : "py-3 px-5 my-3 bg-white"}>
@@ -259,7 +267,7 @@ function Product() {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F170", padding: "10px 0", borderRadius: "7px", boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                     <div className="d-flex">
-                                        <img className="rounded-circle me-3" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" style={{ width: "40x", height: "40px" }} />
+                                        <img className="rounded-circle me-3" src={anotherUserData.profilePic} style={{ width: "40x", height: "40px" }} />
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
@@ -301,10 +309,9 @@ function Product() {
             </div>
         );
     } else {
+        show();
         return (
-            <div>
-                <h4>กำลังโหลดข้อมูล</h4>
-            </div>
+            <></>
         );
     }
 }

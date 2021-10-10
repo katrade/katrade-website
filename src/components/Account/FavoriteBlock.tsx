@@ -30,7 +30,6 @@ export default function FavoriteBlock(data:any , key:any) {
 		history.push(`/app/product?product_id=${favoriteData._id}`);
 	}
 
-    console.log(favoriteData);
     return (
         <AccountBlock padding="15px">
             <div className="d-flex flex-wrap position-relative">

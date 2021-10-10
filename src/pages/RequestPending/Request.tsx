@@ -11,6 +11,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { CgNpm } from 'react-icons/cg';
 import { TransparentButton } from '../../components/standard/Button'
+import useLoading from '../../hooks/useLoading';
 
 export default function Request() {
 
@@ -58,6 +59,7 @@ export default function Request() {
 
     const [component, setComponent] = useState(1);
     const [selectComponent, setSelectComponent] = useState(request_data);
+    const [show, hide] = useLoading();
     function handleComponent(status: any) {
         setComponent(status)
         if (status == 1) {
@@ -76,6 +78,7 @@ export default function Request() {
     }, [dataRequest])
 
     if (dataRequest && dataPending && dataInprogess) {
+        hide();
         return (
             <div>
                 <Navbar />
@@ -95,9 +98,9 @@ export default function Request() {
             </div>
         );
     } else {
+        show();
         return (
             <div>
-                <p>แสดงหน้าโหลดดิ้ง</p>
             </div>
         );
     }

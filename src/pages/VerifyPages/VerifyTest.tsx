@@ -17,6 +17,7 @@ import Block from '../../components/Block';
 import StaticNav from '../../components/StaticNav';
 import Footer from '../../components/Footer';
 import { verify } from 'crypto';
+import useLoading from '../../hooks/useLoading';
 
 const queryString = require('query-string');
 
@@ -59,6 +60,8 @@ export function VerifyEmailSuccess() {
 }
 
 export function SetUsernamePage() {
+    const [,hide] = useLoading();
+    hide();
     return (
         <div>
             <StaticNav />

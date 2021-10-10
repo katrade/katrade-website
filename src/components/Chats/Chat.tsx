@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { borderRadius } from "react-select/src/theme";
 import io from "socket.io-client";
 import "./Chat.css";
 
 // const socket = io("http://localhost:5000");
-const socket = io("https://socketkatrade.herokuapp.com");
+console.log("sus")
+const socket = io("https://socketkatrade.herokuapp.com", {
+    transports: ["polling"],
+    reconnection: false,
+});
 
 socket.on("connect", () => {
     console.log("Connected to WS server");
@@ -19,7 +24,7 @@ export default function Chat() {
     // After Login
     const [message, setMessage] = useState("");
     const [messageList, setMessageList] = useState<any[]>([]);
-
+    // const [authorName, setAuthorName] = useState<string>("Other");
     const [chk, setChk] = useState(false);
 
     useEffect(() => {
@@ -46,7 +51,9 @@ export default function Chat() {
             room: 123,
             content: {
                 author: userName,
+                type: "Text",
                 message: message,
+                timeStamp: new Date()
             },
         };
 
@@ -54,6 +61,13 @@ export default function Chat() {
         // setMessageList([...messageList, messageContent.content]);
         setMessage("");
     };
+
+    // function onKeyDown(event) {
+    //     const title = event.target.value;
+
+    //     if (event.key === 'Enter' && title) {
+    //     }
+    // }
 
     return (
         <div>
@@ -80,37 +94,74 @@ export default function Chat() {
             ) : (
                 <div className="chatContainer">
                     <div className="chatContainer-Header d-flex align-items-center px-5">
-                        <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: 47 }} />
+                        <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: "47px" }} />
                         <span className="ms-3 text-white">FranKydeSU</span>
                     </div>
                     <div className="messages" style={{ height: "500px", overflow: "auto" }}>
                         {messageList.map((val, key) => {
                             return (
-                                <div
-                                    className="messageContainer"
-                                    id={val.author == userName ? "You" : "Other"}
+                                <div className="messageContainer"
+                                // id={val.author == userName ? "You" : "Other"}
                                 >
-                                    {/* <div className="messageIndividual">*/}
-                                        <div className={val.author == userName ? "messageIndividual text-right" : "messageIndividual"}>
-                                            {val.message}
+                                    <div className={val.author === userName ? "yourMsg" : "otherMsg"}>
+                                        {val.author === userName ? "" :
+                                            <div style={{
+                                                minWidth: "47px",
+                                                minHeight: "47px",
+                                                maxWidth: "47px",
+                                                maxHeight: "47px",
+                                                backgroundImage: "url(https://lordsofgaming.net/wp-content/uploads/2020/10/Screen-Shot-2020-10-19-at-11.15.33-PM.png)",
+                                                backgroundSize: 'cover',
+                                                backgroundRepeat: 'no-repeat',
+                                                borderRadius: "50%",
+                                                backgroundPosition: "center"
+                                            }}>
+                                            </div>
+                                        }
+                                        <div className={val.author === userName ? "yourtextBox" : "othertextBox"}>
+                                            {val.message} FROM:{val.author} ({val.timeStamp})
                                         </div>
+                                    </div>
                                 </div>
                             );
                         })}
                     </div>
 
-                    <div className="messageInputs row p-0 m-0" style={{ width: "100%" }}>
-                        <input
-                            className="col-9"
-                            type="text"
-                            placeholder="Message..."
-                            onChange={(e) => {
-                                setMessage(e.target.value);
+                    <div className="messageInputs p-0 m-0" style={{ width: "100%"}}>
+                        <img
+                            src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
+                            style={{
+                                maxWidth: "35px",
+                                maxHeight: "35px",
+                                margin: "20px 20px",
+                                cursor:"pointer"
                             }}
-                            value={message}
-                            style={{ borderBottomLeftRadius: "10px" }}
                         />
-                        <button className="col-3" onClick={sendMessage} style={{ borderBottomRightRadius: "10px" }}>Send</button>
+                        <div className="typingContainer">
+                            <input
+                                type="text"
+                                placeholder="Message..."
+                                onChange={(e) => {
+                                    setMessage(e.target.value);
+                                }}
+                                value={message}
+                                style={{
+                                    width: "95%",
+                                    border:"none",
+                                    margin:"0px"
+                                }}
+                            />
+                            <div className="d-inline-block">
+                                <button onClick={sendMessage}
+                                    style={{
+                                        width: "30px",
+                                        cursor:"pointer"
+                                    }}
+                                >
+                                    Send
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

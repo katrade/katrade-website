@@ -162,7 +162,7 @@ function Navbar({ image }: INavbar) {
     }
     function search() {
         if (!searchText) {
-            return alert('Type something, Idiot!!!')
+            return alert('Search for nothing????')
         }
         history.push(`/app/search/${searchText}`)
     }
@@ -258,7 +258,7 @@ function Navbar({ image }: INavbar) {
                             <a href="/app/request"><FaRegListAlt /></a>
                         </Label>
                         <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
-                            <a onClick={() => { window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ") }}><MdChat /></a>
+                            <a onClick={() => { window.alert("Danger!!! Do not go in to chat page.") }}><MdChat /></a>
                         </Label>
                         <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
                             <a onClick={() => { window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ") }}><IoIosNotifications /></a>

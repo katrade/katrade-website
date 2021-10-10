@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from "react-router";
 
 import useAuthorization from '../../hooks/useAuthorization';
 import { AccountBlock } from './AccountBlock' ;
@@ -6,10 +7,11 @@ import { TransparentButton } from '../standard/Button';
 
 export default function FollowingBlock(props:any) {
     
-    const { data, index, relation } = props;
+    const { data, relation , Noti } = props;
     const {unFollow, onFollow} = useAuthorization();
     const [ follow , setFollow] = useState(true);
     const [ checkFollower, setCheckFollower ] = useState(true);
+    const history = useHistory();
 
     const handleClickFollow = () => setFollow(!follow);
     const handleRemoveFollower = () => setCheckFollower(!checkFollower);
@@ -17,30 +19,25 @@ export default function FollowingBlock(props:any) {
         if (relation == "following"){
             if (follow){
                 return (
-                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => unFollow(data._id)}>unfollow</TransparentButton>
+                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
+                        unFollow(data._id);
+                        Noti("unfollow");
+                    }}>unfollow</TransparentButton>
                 )
             }
             else{
                 return (
-                    <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => onFollow(data._id)}>follow</TransparentButton>
+                    <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => {
+                        onFollow(data._id);
+                        Noti("follow");
+                    }}>follow</TransparentButton>
                 )       
-            }
-        }
-        else{
-            if (checkFollower){
-                return (
-                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
-                        if (window.confirm("ต้องการยกเลิกการติดตามหรือไม่")){
-                            alert("ยกเลิกเรียบร้อย")
-                        }}}>remove
-                    </TransparentButton>
-                )                
             }
         }
     }
     
     return (
-        <div className="col-lg-6">
+        <div className="col-lg-6" onClick={() => history.push(`/app/profileviewer?user_id=${data._id}`)}>
             <AccountBlock padding="10px">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center">
