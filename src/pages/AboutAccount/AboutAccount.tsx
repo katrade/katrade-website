@@ -165,7 +165,7 @@ function AboutAccount(userData:any) {
         }else if(destCompState.dest === "Inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
         }else if(destCompState.dest === "History"){
-            setComponentPage(<HistoryComp data={historyData}/>);
+            setComponentPage(<HistoryComp data={historyData} checkUser={accountData}/>);
         }
     }
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp

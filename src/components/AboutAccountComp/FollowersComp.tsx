@@ -16,9 +16,9 @@ export default function FollowersComp(data:any) {
         })
         return (
             <div>
-                <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                <div className="bg-white mx-auto mb-4 p-3" style={{ width: "100%", minHeight:"400px"}}>
                     <div>
-                        <h4 className="d-inline-block me-3 mb-4">Followers</h4>
+                        <h4 className="d-inline-block me-3 mb-4" style={{padding:"0 12px"}}>Followers</h4>
                         <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({followerLength})</h5>
                     </div>
                     <div className="row mx-auto" style={{width:"100%"}}>

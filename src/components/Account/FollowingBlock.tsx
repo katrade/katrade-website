@@ -28,23 +28,26 @@ export default function FollowingBlock(props:any) {
             else{
                 return (
                     <TransparentButton width="80px" buttonColor="limegreen" padding="0 5px 0 5px" margin="0" onClick={() => {
-                        onFollow(data._id);
-                        Noti("follow");
-                    }}>follow</TransparentButton>
+                            onFollow(data._id);
+                            Noti("follow");
+                        }}
+                    >follow</TransparentButton>
                 )       
             }
         }
     }
     
     return (
-        <div className="col-lg-6" onClick={() => history.push(`/app/profileviewer?user_id=${data._id}`)}>
+        <div className="col-lg-6">
             <AccountBlock padding="10px">
-                <div className="d-flex justify-content-between">
-                    <div className="d-flex align-items-center">
+                <div className="d-flex justify-content-between" >
+                    <div className="d-flex align-items-center pointer" onClick={() => history.push(`/app/profileviewer?user_id=${data._id}`)} style={{width:"70%"}}>
                         <img src={data.profilePic? data.profilePic : "https://png.pngtree.com/png-vector/20191110/ourlarge/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg"} style={{width:"50px", height:"50px", borderRadius:"50%"}}/>
                         <p className="fs-3 ms-3 mb-0">{data.username}</p>
                     </div>
-                    <div className="my-auto" onClick={relation=="following" ? handleClickFollow : handleRemoveFollower}>{follow_btn()}</div>
+                    <div className="my-auto"
+                        onClick={relation=="following" ? handleClickFollow : handleRemoveFollower}
+                    >{follow_btn()}</div>
                 </div>
             </AccountBlock>
         </div>

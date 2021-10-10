@@ -10,41 +10,61 @@ const ItemStlye = {
 }
 
 export default function HistoryBlock(props:any) {
-    const { data } = props;
+    const { data , UidUser } = props;
+    // console.log(data.timeStamp.split("T")[0].split("-").reverse().join("-"))
+    const timeStamp = data.timeStamp.split("T")[0].split("-").reverse().join("-");
+    function leftBlock(){
+        if(UidUser == data.sourceUserId){
+            return (
+                <div>
+                    <h5 className="text-left text-truncate">{data.sourceInventoryName}</h5>
+                    <p className="text-left text-truncate">{data.sourceUsername}</p>
+                </div>
+            );
+        }else{
+            return (
+                <div>
+                    <h5 className="text-left text-truncate">{data.targetInventoryName}</h5>
+                    <p className="text-left text-truncate">{data.targetUsername}</p>
+                </div>
+            ); 
+        }
+    }
+    function rigthBlock(){
+        if(UidUser != data.sourceUserId){
+            return (
+                <div>
+                    <h5 className="text-left text-truncate">{data.sourceInventoryName}</h5>
+                    <p className="text-left text-truncate">{data.sourceUsername}</p>
+                </div>
+            );
+        }else{
+            return (
+                <div>
+                    <h5 className="text-left text-truncate">{data.targetInventoryName}</h5>
+                    <p className="text-left text-truncate">{data.targetUsername}</p>
+                </div>
+            ); 
+        }
+    }
     return (
         <div>
-            <AccountBlock padding="10px">
+            <div className="" style={{backgroundColor:"#15C777", borderTopLeftRadius:"10px", borderTopRightRadius:"10px"}}>
+                <p className="mb-0 me-3 text-right text-white">{timeStamp}</p>
+            </div>
+            <AccountBlock padding="10px" borderTop="none" borderTopLeftRadius="0px" borderTopRightRadius="0px">
                 <div className="d-flex flex-wrap justify-content-between">
                     <div className="d-inline-block" style={ItemStlye}>
-                        <h5 className="text-left text-truncate">{data.targetInventoryName}</h5>
-                        <p className="text-left text-truncate">{data.targetUsername}</p>
+                        {leftBlock()}
                     </div>
-                    <div className="" style={{width:"4%",fontSize:"35px",margin:"auto 0"}}>
+                    <div className="" style={{fontSize:"35px",margin:"auto 0"}}>
                         <IoMdSwap />
                     </div>
                     <div className="d-inline-block" style={ItemStlye}>
-                        <h5 className="text-left text-truncate">{data.sourceInventoryName}</h5>
-                        <p className="text-left text-truncate">{data.sourceUsername}</p>
+                        {rigthBlock()}
                     </div>
                 </div>
             </AccountBlock>
         </div>
-        // <div>
-        //     <AccountBlock padding="10px">
-        //         <div className="row" style={{ width: "100%" , margin:"0"}}>
-        //             <div className="col-lg" style={ItemStlye}>
-        //                 <h5 className="text-left text-truncate">{data.targetInventoryName}</h5>
-        //                 <p className="text-left text-truncate">{data.targetUsername}</p>
-        //             </div>
-        //             <div className="col-lg" style={{width:"10%",fontSize:"35px",margin:"auto 0"}}>
-        //                 <IoMdSwap />
-        //             </div>
-        //             <div className="col-lg" style={ItemStlye}>
-        //                 <h5 className="text-left text-truncate">{data.sourceInventoryName}</h5>
-        //                 <p className="text-left text-truncate">{data.sourceUsername}</p>
-        //             </div>
-        //         </div>
-        //     </AccountBlock>
-        // </div>
     );
 }

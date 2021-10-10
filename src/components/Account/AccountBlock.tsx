@@ -4,6 +4,9 @@ interface AccountBlockProps {
     width?: string
     height?: string
     color?: string
+    borderTop?: string
+    borderTopLeftRadius?: string
+    borderTopRightRadius?: string
     padding?: string
     paddingLeft?: string
     paddingRight?: string
@@ -19,6 +22,9 @@ export const AccountBlockCSS = styled.button`
     
     border-style: solid;
     border-radius: 10px;
+    border-top-style: ${(props: AccountBlockProps) => props.borderTop ? props.borderTop : "solid"};
+    border-top-left-radius: ${(props: AccountBlockProps) => props.borderTopLeftRadius ? props.borderTopLeftRadius : "10px"};
+    border-top-right-radius ${(props: AccountBlockProps) => props.borderTopRightRadius ? props.borderTopRightRadius : "10px"};
     border-color: ${(props: AccountBlockProps) => props.color ? props.color : "#d7d7d7"};
     border-width: 3px;
 
@@ -37,12 +43,15 @@ export const AccountBlockCSS = styled.button`
     cursor: cell;
 `
 
-export function AccountBlock({width, height, color, children, paddingBottom, paddingLeft, paddingRight, paddingTop, padding}: AccountBlockProps) {
+export function AccountBlock({width, height, color, borderTop, borderTopLeftRadius, borderTopRightRadius, children, paddingBottom, paddingLeft, paddingRight, paddingTop, padding}: AccountBlockProps) {
     return (
         <AccountBlockCSS
             width={width} 
             height={height}
             color={color}
+            borderTop={borderTop}
+            borderTopLeftRadius={borderTopLeftRadius}
+            borderTopRightRadius={borderTopRightRadius}
             paddingLeft={paddingLeft}
             paddingRight={paddingRight}
             paddingTop={paddingTop}
