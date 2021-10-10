@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from "react-router";
 
 import useAuthorization from '../../hooks/useAuthorization';
 import { AccountBlock } from './AccountBlock' ;
@@ -10,6 +11,7 @@ export default function FollowingBlock(props:any) {
     const {unFollow, onFollow} = useAuthorization();
     const [ follow , setFollow] = useState(true);
     const [ checkFollower, setCheckFollower ] = useState(true);
+    const history = useHistory();
 
     const handleClickFollow = () => setFollow(!follow);
     const handleRemoveFollower = () => setCheckFollower(!checkFollower);
@@ -32,21 +34,10 @@ export default function FollowingBlock(props:any) {
                 )       
             }
         }
-        else{
-            if (checkFollower){
-                return (
-                    <TransparentButton width="80px" buttonColor="red" padding="0 5px 0 5px" margin="0" onClick={() => {
-                        if (window.confirm("ต้องการยกเลิกการติดตามหรือไม่")){
-                            Noti(data._id);
-                        }}}>remove
-                    </TransparentButton>
-                )                
-            }
-        }
     }
     
     return (
-        <div className="col-lg-6">
+        <div className="col-lg-6" onClick={() => history.push(`/app/profileviewer?user_id=${data._id}`)}>
             <AccountBlock padding="10px">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center">

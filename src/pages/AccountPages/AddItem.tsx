@@ -12,6 +12,7 @@ import useLoading from '../../hooks/useLoading';
 import { IAccount, defaultEmptyAccount } from '../../interfaces/IUser';
 import { ContactSupportOutlined, LocalConvenienceStoreOutlined } from '@material-ui/icons';
 import { AiOutlineConsoleSql } from 'react-icons/ai';
+import { ImCross } from 'react-icons/im';
 
 export default function AddItem() {
 
@@ -78,11 +79,11 @@ export default function AddItem() {
     const [ finalMySubCateTh , setFinalMyMSubCateTh ] = useState();
 
     var mySubCateTag = "unSelect";
-    var mySubCateIndex = 0;
+    var mySubCateIndex = -1;
     function findMySubCate() {
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + mySubCateTag;
         var godhelpme = SubCategoriesEn[mySubCateIndex+1];
-        if(mySubCateIndex == 0){
+        if(mySubCateIndex == -1){
             return <Select options={godhelpme} className="fs-5" name="mySubCate" placeholder="กรุณาเลือก Category หลักก่อน" />;
         }else{
             return <Select options={godhelpme} className="fs-5" name="mySubCate" onChange={(sel:any) => {selectMySubTh(sel)}} placeholder={placeholderString} />;
@@ -122,7 +123,9 @@ export default function AddItem() {
         SetWantInputFields(values);
     }
 
+    const [ countRequire , setCountRequire] = useState<any>(1);
     const handleAddItem = () => {
+        setCountRequire(countRequire + 1);
         SetWantInputFields([...wantInputFields , {
             reqCat: { 
                 parentCategoryEn: "",
@@ -135,6 +138,11 @@ export default function AddItem() {
     }
 
     const handleRemoveItem = (index:any) => {
+        console.log(index)
+        if(countRequire == 1){
+            return 0;
+        }
+        setCountRequire(countRequire - 1);
         const values = [...wantInputFields];
         values.splice(index , 1);
         SetWantInputFields(values);
@@ -236,7 +244,7 @@ export default function AddItem() {
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
-            // addItem(data, arrayOfPicture);
+            addItem(data, arrayOfPicture);
         }else if(!dataItem.name){
             nameFocus.current?.focus();
             alert("กรุณาเพิ่มชื่อสิ่งของ")
@@ -327,7 +335,10 @@ export default function AddItem() {
 
                         <hr className="my-4"/>
                         {/* ประเภทที่ต้องการ */}
-                        <p className="mb-0 mt-4 fw-bold">Requirement</p>
+                        <div className="d-flex justify-content-between mb-3 mt-4">
+                            <p className="fw-bold" style={{fontSize:"24px"}}>Requirement</p>
+                            <ImCross style={{fontSize:"18px"}}/>
+                        </div>
                         { wantInputFields.map((inputField:any , index:any) => (
                             <div key={index}>
                                 <div className="form-group row">

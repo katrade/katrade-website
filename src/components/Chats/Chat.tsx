@@ -133,7 +133,8 @@ export default function Chat() {
                             style={{
                                 maxWidth: "35px",
                                 maxHeight: "35px",
-                                margin: "20px 20px"
+                                margin: "20px 20px",
+                                cursor:"pointer"
                             }}
                         />
                         <div className="typingContainer">
