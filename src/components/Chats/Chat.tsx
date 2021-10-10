@@ -129,7 +129,7 @@ export default function Chat() {
 
                     <div className="messageInputs p-0 m-0" style={{ width: "100%"}}>
                         <img
-                            src="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
+                            src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
                             style={{
                                 maxWidth: "35px",
                                 maxHeight: "35px",
