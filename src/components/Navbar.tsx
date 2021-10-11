@@ -176,7 +176,7 @@ function Navbar({ image }: INavbar) {
     }
     return (
         <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff": "#0f0f0f"}}>
-            <Block height="80px" className="d-flex align-items-center">
+            <Block height="65px" className="d-flex align-items-center">
                 <div className="header-con">
                     <a href="/app/Market">
                         <img className="logo" src={theme === "light" ? Logo : LogoWhite} />
