@@ -57,6 +57,7 @@ export default function Chat() {
         }
 
         init();
+
     }, []);
 
     useEffect(() => {
@@ -82,11 +83,19 @@ export default function Chat() {
                 }
             }
         }
-        
         init()
-        socket.emit("joinroom", roomId);
 
+        // if (roomId){
+        //     socket.emit("joinroom", roomId);
+        // }
+            
     }, [account])
+
+    useEffect(() => {
+        if (roomId){
+            socket.emit("joinroom", roomId);
+        }
+    }, [roomId])  
 
     socket.on("message", (data) => {
         let a = [...messageList]
@@ -107,7 +116,7 @@ export default function Chat() {
     // }, 1000);
 
     const sendMessage = async () => {
-        const content: any = document.getElementById("messageBox")
+        // const content: any = document.getElementById("messageBox")
 
         let messageContent = {
             room: roomId,
@@ -115,7 +124,7 @@ export default function Chat() {
                 sender: account.username,
                 senderID: account._id,
                 content_type: "Text",
-                content: content.value,
+                content: message,
                 timeStamp: new Date()
             },
         };
@@ -207,10 +216,10 @@ export default function Chat() {
                             <input
                                 type="text"
                                 placeholder="Message..."
-                                // onChange={(e) => {
-                                //     setMessage(e.target.value);
-                                // }}
-                                // value={message}
+                                onChange={(e) => {
+                                    setMessage(e.target.value);
+                                }}
+                                value={message}
                                 id="messageBox"
                                 style={{
                                     width: "95%",
