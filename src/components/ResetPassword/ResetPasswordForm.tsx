@@ -1,6 +1,6 @@
 import { SolidButton } from '../standard/Button';
 import { useHistory } from 'react-router-dom';
-// import { useForm } from '../../utils/useForm';
+import { useForm } from '../../utils/useForm';
 import { useEffect, useState } from 'react';
 import useLoading from '../../hooks/useLoading';
 import { API } from '../../app.setting.json';
@@ -154,15 +154,13 @@ export function ResetPasswordForm() {
 }
 
 export function CompleteResetPasswordForm() {
-    const history = useHistory();
 
     return (
         <div className="" style={{ width: "1000px", minWidth: "500px", height: "auto", margin: "70px auto" }}>
             <H4>Successfull Setting Your New Password</H4>
             <div className="bg-white p-5 mt-3" style={{ height: "auto" }}>
                 <P>ตั้งค่ารหัสผ่านใหม่เสร็จสิ้น</P>
-                <P className="mb-5">ขอบคุณที่ใช้บริการ</P>
-                <SolidButton width="120px" buttonColor="#2BC986" padding="5px" margin="0" onClick={() => history.push(`/app/signin`)}>OK</SolidButton>
+                <P className="mb-5">คุณสามารถปิดแท็บนี้ได้</P>
             </div>
         </div>
     );

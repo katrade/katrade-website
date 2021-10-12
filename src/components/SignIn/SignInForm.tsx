@@ -20,7 +20,6 @@ import { useCookies } from 'react-cookie';
 //     lang: string
 // }
 
-
 const SignInForm = () => {
     const [showPassword, setShowPassword] = useState<number>(1);
     const history = useHistory();

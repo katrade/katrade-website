@@ -22,7 +22,7 @@ import Background from '../components/Background';
 import { H5 } from "../components/standard/H";
 import P from '../components/standard/P';
 import { ThemeContext } from '../contexts/Theme';
-
+import SlideCategory from '../components/SlideCategory';
 
 
 // function getRandomInt(max: number) {
@@ -167,9 +167,10 @@ function Market() {
                             </div>
 
                             <div className="category">
-                                <H5>{displayContent[2]}</H5>
-                                <div className="category-box">
-                                </div>
+                                <H5 className="mb-3">{displayContent[2]}</H5>
+                                {/* <div className="category-box">
+                                </div> */}
+                                <SlideCategory />
                             </div>
 
                             <H5 className="mb-3">{displayContent[3]}</H5>

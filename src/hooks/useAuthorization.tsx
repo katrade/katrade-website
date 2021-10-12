@@ -715,6 +715,38 @@ export default function useAuthorization() {
             })
     }
     
+    const changePasswordSubmit  = async (currentPassword: string, newPassword: string, confirmNewPassword: string) =>  {
+        if (currentPassword != null && (newPassword === confirmNewPassword)) {
+            let data: any = {
+                currentPassword: currentPassword,
+                newPassword: newPassword,
+            }
+            console.log(data.currentPassword);
+            console.log(data.newPassword);
+            // show("Changing Password . . .");
+            axios.patch(`${API}/auth/changePassword`, {currentPassword: currentPassword, newPassword: newPassword,},
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log(response);
+                if (response.data.value === true) {
+                   show("Successfull Change Password!");
+                   window.location.reload();
+                }
+                else {
+                    alert("เช็คพาสเดิมดีๆ")
+                }
+            })
+        }
+        else {
+            alert("กรอกให้ครบสิจ้ะ")
+        }
+    }
+    
     return {
         getUserData,
         updateProfilePic,
@@ -751,6 +783,7 @@ export default function useAuthorization() {
         getAnotherInventory,
         getChatData,
         getMatchProduct,
-        getChatList
+        getChatList,
+        changePasswordSubmit,
     }
 }
