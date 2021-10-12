@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 // import { resourceUsage } from "process";
 // import { ContactSupportOutlined } from "@material-ui/icons";
 import { uploadItemPicture } from "..//utils/storage";
-import { IChat } from "../interfaces/Chat";
+import { IChat, IContact } from "../interfaces/Chat";
 
 // test pushing changes
 
@@ -696,6 +696,24 @@ export default function useAuthorization() {
                 return null;
             })
     }
+
+    async function getChatList(userId: string): Promise<IContact | null> {
+        // show()
+        return await axios.get(`https://socketkatrade.herokuapp.com/user/getUserFromId?userId=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // console.log("yu nee" + res)
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+                ;
+                return null;
+            })
+    }
     
     return {
         getUserData,
@@ -733,5 +751,6 @@ export default function useAuthorization() {
         getAnotherInventory,
         getChatData,
         getMatchProduct,
+        getChatList
     }
 }

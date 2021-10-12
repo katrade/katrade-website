@@ -6,11 +6,7 @@ const devMode = true;
 
 const authenticator = "";
 
-
-
 export const UserContext = React.createContext<contextType>({ allow: false });
-
-
 
 interface propsInterface {
     children: any
