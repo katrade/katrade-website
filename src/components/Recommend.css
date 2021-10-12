@@ -16,7 +16,7 @@
 }
 
 .recommend-photo-card {
-    height: 155px;
+    height: 130px;
     width: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -26,7 +26,7 @@
 }
 
 .recommend-text-card {
-    padding: 0 10px;
+    padding: 16px 10px 0px;
 }
 
 .recommend-text-card h5, .recommend-text-card p {

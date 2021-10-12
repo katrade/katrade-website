@@ -746,6 +746,24 @@ export default function useAuthorization() {
             alert("กรอกให้ครบสิจ้ะ")
         }
     }
+
+    async function getMatchMarket() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getMatch`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                hide();
+                return res.data;
+            })
+            .catch((err) => {
+                hide();
+                console.log(err)
+                return null;
+            })
+    }
     
     return {
         getUserData,
@@ -785,5 +803,6 @@ export default function useAuthorization() {
         getMatchProduct,
         getChatList,
         changePasswordSubmit,
+        getMatchMarket,
     }
 }
