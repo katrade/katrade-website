@@ -18,6 +18,8 @@ export default function Tabchat(props: any) {
         duo_id,
         duoId,
         setDuoId,
+        duoUsername,
+        setDuoUsername,
         roomIdForTabChat,
         setRoomIdForTabChat
     } = useContext(SocketContext)
@@ -37,8 +39,9 @@ export default function Tabchat(props: any) {
         }
         setRoomId(room)
         setDuoId(props.data.userIdContact)
+        setDuoUsername(props.data.userNameContact)
         console.log("CLICK RoomId: " + roomId)
-
+        
         // setAccount(account)
     }
 

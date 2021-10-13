@@ -21,6 +21,7 @@ export default function ChatDashboard() {
         // console.log("NO querystring")
     }, [account])
 
+    // console.log(handleHide)
     return (
         <Background>
             <Navbar />

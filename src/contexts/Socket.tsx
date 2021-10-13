@@ -26,6 +26,8 @@ interface ISocketContext {
     setContactList: React.Dispatch<React.SetStateAction<any[]>> | (() => void),
     roomIdForTabChat: string,
     setRoomIdForTabChat: React.Dispatch<React.SetStateAction<string>> | (() => void),
+    duoUsername: string,
+    setDuoUsername: React.Dispatch<React.SetStateAction<string>> | (() => void),
 
 }
 
@@ -56,7 +58,9 @@ export const SocketContext = React.createContext<ISocketContext>({
     contactList: [],
     setContactList: () => {},
     roomIdForTabChat: "",
-    setRoomIdForTabChat: () => {},                        
+    setRoomIdForTabChat: () => {},
+    duoUsername: "",
+    setDuoUsername: () => {}                  
 });
 
 interface propsInterface {
@@ -85,6 +89,7 @@ export function SocketProvider({ children }: propsInterface) {
     const [ duoId, setDuoId ] = useState("")
     const [ contactList, setContactList ] = useState<any[]>([])
     const [ roomIdForTabChat, setRoomIdForTabChat ] = useState("")
+    const [ duoUsername, setDuoUsername ] = useState(duo_username)
 
     useEffect(() => {
 
@@ -226,7 +231,9 @@ export function SocketProvider({ children }: propsInterface) {
             contactList,
             setContactList,
             roomIdForTabChat,
-            setRoomIdForTabChat
+            setRoomIdForTabChat,
+            duoUsername,
+            setDuoUsername
         }}>
             {children}
         </SocketContext.Provider>

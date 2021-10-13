@@ -16,14 +16,22 @@ export default function Chat() {
         messageList,
         setMessageList,
         duoId,
+        duoUsername,
         setDuoId
     } = useContext(SocketContext)
 
     console.log("Chat Reload")
-    const [message, setMessage] = useState("");
+    const [ message, setMessage ] = useState("");
+    const [ usernameNow, setUsernameNow ] = useState("")
 
     console.log("KuAYYYYYYY")
     console.log(messageList)
+
+    useEffect (() => {
+        console.log(duoUsername)
+        setUsernameNow(duoUsername)
+        // console.log()
+    },  [duoUsername])
     
     const sendMessage = async () => {
         let messageContent = {
@@ -47,7 +55,7 @@ export default function Chat() {
             <div className="chatContainer">
                 <div className="chatContainer-Header d-flex align-items-center px-5">
                     <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: "47px" }} />
-                    <span className="ms-3 text-white">{duo_username}</span>
+                    <span className="ms-3 text-white">{usernameNow}</span>
                 </div>
                 <div className="messages" style={{ height: "500px", overflow: "auto" }}>
                     {messageList.map((val) => {
