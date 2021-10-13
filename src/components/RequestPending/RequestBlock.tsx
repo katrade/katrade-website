@@ -29,7 +29,7 @@ export default function RequestBlock({data, status, index}:any) {
             return (
                 <div>
                     <p className="fs-5 m-0">Please deal and confirm for trading in your personal chat</p>
-                    <TransparentButton onClick={() => history.push(`/app/heydude?request_id=${data.requestId}&product_id=${data.ownerInventoryId}`)} buttonColor="blue">Chat หลอกๆ</TransparentButton>
+                    <TransparentButton onClick={() => history.push(`/app/chatDashboard?duo_id=${data.requestId}&duo_username=${data.ownerInventoryId}`)} buttonColor="blue">Chat หลอกๆ</TransparentButton>
                 </div>
             );
         }else if(data.state == 2){

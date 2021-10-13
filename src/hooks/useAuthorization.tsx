@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 // import { resourceUsage } from "process";
 // import { ContactSupportOutlined } from "@material-ui/icons";
 import { uploadItemPicture } from "..//utils/storage";
-import { IChat, IContact } from "../interfaces/Chat";
+import { IChat, IContact, IDealing, IMessage } from "../interfaces/Chat";
 
 // test pushing changes
 
@@ -570,7 +570,6 @@ export default function useAuthorization() {
                 console.log(res);
             })
             .catch((err) => {
-                ;
                 console.log(err)
                 return null;
             })
@@ -675,7 +674,6 @@ export default function useAuthorization() {
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
-                ;
                 return null;
             })
     }
@@ -710,7 +708,6 @@ export default function useAuthorization() {
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
-                ;
                 return null;
             })
     }
@@ -745,6 +742,47 @@ export default function useAuthorization() {
         else {
             alert("กรอกให้ครบสิจ้ะ")
         }
+    }
+
+    async function updateUserContact(userId: string, contactId: string, contactName: string) {
+        console.log("updateUserContact()")
+        axios.put(`https://socketkatrade.herokuapp.com/user/newUserContact`,
+        {
+            userId: userId,
+            contactId: contactId,
+            contactName: contactName
+        },
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                // console.log("yu nee" + res)
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+                return null;
+            })
+    }
+
+    async function getDealingList(userId: string): Promise<IDealing[] | null> {
+        // show()
+        return await axios.get(`${API}/user/getDealing?id=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // console.log("Dealing" + res)
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+                return null;
+            })
     }
     
     return {
@@ -785,5 +823,7 @@ export default function useAuthorization() {
         getMatchProduct,
         getChatList,
         changePasswordSubmit,
+        updateUserContact,
+        getDealingList
     }
 }

@@ -5,23 +5,25 @@ import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
 
 //console.log("sus")
-const socket = io("https://socketkatrade.herokuapp.com", {
-    transports: ["polling"],
-    reconnection: false,
-});
 
-socket.on("connect", () => {
-    console.log("SOCKET is already connected");
-    // console.log(socket.connected);
-})
 
 export default function Chat() {
 
-    const {socket, account , duo_id, duo_username, roomId, setRoomId} = useContext(SocketContext)
+    const {
+        socket, 
+        account , 
+        duo_id, 
+        duo_username, 
+        roomId, 
+        setRoomId,
+        messageList,
+        setMessageList,
+        duoId,
+        setDuoId
+    } = useContext(SocketContext)
+
     console.log("Chat Reload")
     const [message, setMessage] = useState("");
-    const [messageList, setMessageList] = useState<any[]>([]);
-    const [chk, setChk] = useState(false);
     const { getChatData } = useAuthorization();
 
     console.log(messageList)
@@ -57,15 +59,9 @@ export default function Chat() {
         if (roomId) {
             socket.emit("joinroom", roomId);
         }
-    }, [roomId])
+    }, [roomId, duoId])
 
-    socket.on("message", (data: any) => {
-        let a = [...messageList]
-        a.push(data.content)
-        setMessageList(a);
-        setChk(!chk);
-    });
-
+    
     const sendMessage = async () => {
         // const content: any = document.getElementById("messageBox")
 
@@ -79,7 +75,7 @@ export default function Chat() {
                 timeStamp: new Date()
             },
         };
-
+        console.log(socket.connected)
         socket.emit("message", messageContent)
         // setMessageList([...messageList, messageContent.content]);
         setMessage("");

@@ -79,3 +79,15 @@
     display: inline-block;
     padding-left: 15px;
 }
+
+.sidebar {
+    border: solid rgba(158, 158, 158, 0.33);
+    border-width: 0 3px 0 0;
+    height: 70vh;
+}
+
+.LogoBg {
+    width: 50%;
+    opacity: 0.33;
+
+}
