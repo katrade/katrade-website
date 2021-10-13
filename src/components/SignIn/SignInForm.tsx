@@ -10,6 +10,7 @@ import eye_close from '../../pics/hide.png'
 import { API } from '../../app.setting.json'
 import useLoading from '../../hooks/useLoading';
 import { useCookies } from 'react-cookie';
+import Div from '../standard/Div';
 
 
 
@@ -84,14 +85,16 @@ const SignInForm = () => {
                     <div className="d-flex justify-content-center">
                         <div style={{ width: "90%", maxWidth: "500px" }}>
                             <p>Email or username</p>
-                            <input
-                                className={"input-register w-100 px-2"}
-                                value={form.email || ""}
-                                name="email"
-                                onChange={handleForm}
-                                type="text"
-                                placeholder="Enter your email or username"
-                            />
+                            <div>
+                                <input
+                                    className={"input-register w-100 px-2"}
+                                    value={form.email || ""}
+                                    name="email"
+                                    onChange={handleForm}
+                                    type="text"
+                                    placeholder="Enter your email or username"
+                                />
+                            </div>    
                             <br />
                             <p className="mt-2">Password</p>
                             <div className="input-container">
