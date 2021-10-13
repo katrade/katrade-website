@@ -212,14 +212,6 @@ export default function AddItem() {
 
     const [dataItem, handleDataItem] = useForm();
     const nameFocus = useRef<HTMLInputElement>(null);
-    // const myCateFocus = useRef<HTMLInputElement>(null);
-    // const mySubCateFocus = useRef<HTMLInputElement>(null);
-    // const myDetailFocus = useRef<HTMLInputElement>(null);
-    // const nameFocus = useRef<HTMLInputElement>(null);
-    // const nameFocus = useRef<HTMLInputElement>(null);
-    // const nameFocus = useRef<HTMLInputElement>(null);
-    // const [ checkMainSubCate, setCheckMainSubCate ] = useState<boolean>(false);
-    // const [ checkDetail, setCheckDetail ] = useState<boolean>(false);
 
     function handleUnload(event:any){ 
         event.preventDefault();
@@ -237,10 +229,23 @@ export default function AddItem() {
             pictures: [],
             require: wantInputFields
         }
-        console.log(dataCover, finalMyMainCate, finalMySubCate, dataItem.name);
         
-        if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name){
+        var checkReqCat = true;
+        var checkReqDetail = true;
+
+        for (let i=0; i<wantInputFields.length; i++){
+            console.log(wantInputFields[i])
+            if (!wantInputFields[i].reqCat.childCategoryEn){
+                checkReqCat = false;
+            }
+            if (!wantInputFields[i].detail){
+                checkReqDetail = false;
+            }
+        }
+        
+        if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name && checkReqCat && checkReqDetail){
             arrayOfPicture.push(dataCover)
+            // console.log("add success!")
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
@@ -252,14 +257,11 @@ export default function AddItem() {
             alert("คุณใส่ Category ของตัวเองไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
         }else if(!dataCover){
             alert("กรุณาเพิ่มรูปหน้าปก");
+        }else if(!checkReqCat){
+            alert("กรุณาเลือกหมวดหมู่ให้ถูกต้อง (จำเป็นต้องมี)");
+        }else if(!checkReqDetail){
+            alert("กรุณาใส่รายละเอียดของที่ต้องการให้ครบทุกช่อง (จำเป็นต้องมี)");
         }
-        // else if(!checkMainSubCate){
-        //     alert("คุณใส่ Category ที่ต้องการไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
-        // }else if(!checkDetail){
-        //     alert("คุณใส่ Detail Category ที่ต้องการไม่ถูกต้อง โปรดตรวจสอบใหม่อีกครั้ง");
-        // }else{
-        //     alert("บางสิ่งไม่ถูกต้อง");
-        // }
     }
 
     return (
@@ -307,8 +309,6 @@ export default function AddItem() {
                                 </div>
                             </div>
                         </div>
-
-
 
                         {/* ประเภทของเรา */}
                         <div className="form-group row">
@@ -362,11 +362,11 @@ export default function AddItem() {
                                 </div>
                                 <div className="d-flex justify-content-center mb-3">
                                     <div className="bg-info me-4" onClick={()=>{handleAddItem();}}>
-                                        <p className="m-0 px-1">Add requirement</p>
+                                        <p className="m-0 px-1 text-white">Add requirement</p>
                                     </div>
                                     {/* <div className="bg-info" style={{width:"20px"}}/> */}
                                     <div className="bg-warning " onClick={() => {handleRemoveItem(index)}}>
-                                        <p className="m-0 px-1">Remove requirement</p>
+                                        <p className="m-0 px-1 text-white">Remove requirement</p>
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@ export default function AddItem() {
                         {/* ปุ่มยืนยัน */}
                         <hr className="my-4"/>
                         <div className="d-flex justify-content-center">
-                            <SolidButton width="100px" buttonColor="limegreen"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
+                            <SolidButton width="100px" buttonColor="#15C777"><input type="submit" value="Submit" style={{backgroundColor:"transparent",color:"white"}}/></SolidButton>
                             <SolidButton width="100px" buttonColor="red"><a href="/app/aboutaccount?component=inventory" style={{textDecoration:"none",color:"white"}}>Cancel</a></SolidButton>
                         </div>
                     </div>

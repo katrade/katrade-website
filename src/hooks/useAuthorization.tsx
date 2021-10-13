@@ -735,12 +735,12 @@ export default function useAuthorization() {
                    window.location.reload();
                 }
                 else {
-                    alert("เช็คพาสเดิมดีๆ")
+                    alert("เช็คพาสเดิมดีๆหน่อยดิพี่ชุย")
                 }
             })
         }
         else {
-            alert("กรอกให้ครบสิจ้ะ")
+            alert("กรอกให้ครบสิวะเห้ย")
         }
     }
 
@@ -781,6 +781,24 @@ export default function useAuthorization() {
             })
             .catch(() => {
                 setCookie("DaveTheHornyDuck", "");
+                hide();
+                return null;
+            })
+    }
+
+    async function getMatchMarket() {
+        show("โหลดดิ้ง..");
+        return await axios.get(`${API}/inventory/getMatch`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+                hide();
                 return null;
             })
     }
@@ -824,6 +842,7 @@ export default function useAuthorization() {
         getChatList,
         changePasswordSubmit,
         updateUserContact,
-        getDealingList
+        getDealingList,
+        getMatchMarket,
     }
 }

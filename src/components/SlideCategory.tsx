@@ -64,7 +64,7 @@ export default function SlideCategory() {
             return (
                 <div className="position-absolute overflow-hidden pointer" style={{top:"0",left:`${index*400}px`,width:"400px",height:"175px", zIndex:10}} onClick={() => searchBySlide(data.name)}>
                     <div className="zoom">
-                        <img className="d-block zoom" src={data.photo} style={{width:"400px",height:"175px"}}/>
+                        <img className="d-block" src={data.photo} style={{width:"400px",height:"175px"}}/>
                         <div style={{width:"300px",position:"absolute", top:"57.5px", left:"50px"}}><p className="text-center text-white fs-1" >{data.name}</p></div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ export default function SlideCategory() {
             return (
                 <div className="position-absolute overflow-hidden pointer" style={{top:"175px",left:`${(index-5)*400}px`,width:"400px",height:"175px", zIndex:10}} onClick={() => searchBySlide(data.name)}>
                     <div className="zoom">
-                        <img className="d-block zoom" src={data.photo} style={{width:"400px",height:"175px"}}/>
+                        <img className="d-block" src={data.photo} style={{width:"400px",height:"175px"}}/>
                         <div style={{width:"300px",position:"absolute", top:"57.5px", left:"50px"}}><p className="text-center text-white fs-1" >{data.name}</p></div>
                     </div>
                 </div>
@@ -82,8 +82,8 @@ export default function SlideCategory() {
     })
     
     return (
-        <div className="overflow-auto" style={{width:"100%", height:"350px", backgroundColor:"rgb(169, 216, 189)", zIndex:1}}>
-            <div className="bg-info position-relative " style={{width:"2000px", height:"350px"}}>
+        <div className="overflow-scroll" style={{width:"100%", height:"350px", backgroundColor:"rgb(169, 216, 189)", zIndex:1}}>
+            <div className="position-relative " style={{width:"2000px", height:"350px"}}>
                 {slideTop}
             </div>
         </div>

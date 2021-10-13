@@ -23,6 +23,7 @@ import { H5 } from "../components/standard/H";
 import P from '../components/standard/P';
 import { ThemeContext } from '../contexts/Theme';
 import SlideCategory from '../components/SlideCategory';
+import Recommend from '../components/Recommend';
 
 
 // function getRandomInt(max: number) {
@@ -94,10 +95,11 @@ function Market() {
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const [allInventory, setAllInventory] = useState<any>();
+    const [matchInventory, setMatchInventory] = useState<any>();
     const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    const { getUserData, getAllInventory } = useAuthorization();
+    const { getUserData, getAllInventory , getMatchMarket } = useAuthorization();
     const [displayContent, setDisplayContent] = useState<string[]>(th);
     const { lang } = useContext(ThemeContext);
     
@@ -105,7 +107,6 @@ function Market() {
     useEffect(() => {
         resize();
         async function init() {
-            show()
             var userData = await getUserData();
             if (userData) {
                 setAccount(userData);
@@ -116,7 +117,8 @@ function Market() {
             }
             var allInventoryData = await getAllInventory();
             setAllInventory(allInventoryData);
-            hide()
+            var matchInventoryData = await getMatchMarket();
+            setMatchInventory(matchInventoryData);
         }
         init();
     }, []);
@@ -138,7 +140,12 @@ function Market() {
             setDisplayContent(meow);
         }
     }, [lang])
-    if (allInventory) {
+    if (allInventory && matchInventory) {
+        const tmpMatchInventory = matchInventory.map((item: any, index: any) => {
+            if (item.owner != account._id) {
+                return <Recommend item={item.match} match={item.matchWith} key={index} />;
+            }
+        });
         const tmpInventory = allInventory.map((item: any, index: any) => {
             if (item.owner != account._id) {
                 return <Interest item={item} key={index} />;
@@ -156,7 +163,8 @@ function Market() {
                             <div className="full-width">
                                 <div>
                                     <div className="d-flex justify-content-start flex-wrap">
-                                        <P>{displayContent[1]}</P>
+                                        {tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10)}
+                                        {/* <P>{displayContent[1]}</P> */}
                                         {/* {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)} */}
                                     </div>
                                     <div className="d-flex justify-content-center align-items-center my-3">
@@ -166,12 +174,16 @@ function Market() {
                                 </div>
                             </div>
 
+                            <hr/>
+                            
                             <div className="category">
                                 <H5 className="mb-3">{displayContent[2]}</H5>
                                 {/* <div className="category-box">
                                 </div> */}
                                 <SlideCategory />
                             </div>
+
+                            <hr/>
 
                             <H5 className="mb-3">{displayContent[3]}</H5>
                             <div className="full-width">
