@@ -13,6 +13,7 @@ export interface IMessage {
     content_type: string
     content: string
     timestamp: string
+    messages: any[]
 }
 
 export interface IContact extends IAccount {

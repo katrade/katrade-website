@@ -4,9 +4,6 @@ import { SocketContext } from "../../contexts/Socket";
 import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
 
-//console.log("sus")
-
-
 export default function Chat() {
 
     const {
@@ -24,47 +21,11 @@ export default function Chat() {
 
     console.log("Chat Reload")
     const [message, setMessage] = useState("");
-    const { getChatData } = useAuthorization();
 
+    console.log("KuAYYYYYYY")
     console.log(messageList)
-
-    useEffect(() => {
-        async function init() {
-            var room;
-            if (account._id) {
-                if (duo_id < account._id) {
-                    room = duo_id + account._id
-                }
-                else {
-                    room = account._id + duo_id
-                }
-                setRoomId(room)
-
-                var chatData = await getChatData(room);
-                // console.log(room)
-                // console.log(chatData)
-                if (chatData) {
-                    setMessageList(chatData.messages)
-                }
-                else {
-                    console.log("mai meee naaa ไอบอง")
-                }
-            }
-        }
-        init()
-
-    }, [account])
-
-    useEffect(() => {
-        if (roomId) {
-            socket.emit("joinroom", roomId);
-        }
-    }, [roomId, duoId])
-
     
     const sendMessage = async () => {
-        // const content: any = document.getElementById("messageBox")
-
         let messageContent = {
             room: roomId,
             content: {
@@ -75,8 +36,8 @@ export default function Chat() {
                 timeStamp: new Date()
             },
         };
-        console.log(socket.connected)
-        socket.emit("message", messageContent)
+        // console.log(socket.connected)
+        // socket.emit("message", messageContent)
         // setMessageList([...messageList, messageContent.content]);
         setMessage("");
     };

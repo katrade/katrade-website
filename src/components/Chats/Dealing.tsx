@@ -13,25 +13,35 @@ export default function Dealing() {
         account, 
         roomId, 
         dealingList, 
-        setDealingList
+        setDealingList,
+        duoId
     } = useContext(SocketContext)
     const { getDealingList } = useAuthorization()
 
 
     useEffect(() => {
         async function init() {
-            if (duo_id){
-                var dealing = await getDealingList(duo_id)
+            if (duoId){
+                var dealing = await getDealingList(duoId)
                 if (dealing) {
                     setDealingList(dealing)
                 }
             }
+            else{
+                if (duo_id){
+                    var dealing = await getDealingList(duo_id)
+                    if (dealing) {
+                        setDealingList(dealing)
+                    }
+                }
+            }
         }
         init()
+        
+    }, [duoId])
 
-    }, [duo_id])
-
-    console.log(dealingList)
+    if (dealingList)
+        console.log(dealingList)
 
     return (
         <div className="chatContainer mt-2">
