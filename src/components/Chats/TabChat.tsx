@@ -8,12 +8,25 @@ import './Chat.css'
 
 export default function Tabchat(props: any) {
 
-    const { socket, account, setAccount, roomId, setRoomId, messageList, duo_id, duoId, setDuoId} = useContext(SocketContext)
+    const {
+        socket,
+        account,
+        setAccount,
+        roomId,
+        setRoomId,
+        messageList,
+        duo_id,
+        duoId,
+        setDuoId,
+        roomIdForTabChat,
+        setRoomIdForTabChat
+    } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>()
     const [sender, setSender] = useState<string>()
     const [haveMessage, setHaveMessage] = useState(false)
-    const { getChatData } = useAuthorization();
+    const { getChatData, getLastChatData } = useAuthorization();
 
+    // console.log(props.data)
     const handleDivClick = () => {
         var room
         if (props.data.userIdContact < account._id) {
@@ -32,7 +45,7 @@ export default function Tabchat(props: any) {
     useEffect(() => {
         // console.log(account)
         async function init() {
-            if (duo_id){
+            if (duo_id) {
                 if (account._id) {
                     var room
                     if (props.data.userIdContact < account._id) {
@@ -42,23 +55,35 @@ export default function Tabchat(props: any) {
                         room = account._id + props.data.userIdContact
                     }
                     // console.log("Room:"+room)
-                    // array.slice(-1)[0]
-                    var chatData = await getChatData(room)
-                        if (chatData){
-                            if (chatData.messages.length > 0) {
-                                let tmp = [...chatData.messages]
-                                console.log(tmp)
-                                setHaveMessage(true)
-                                setLastMessage(tmp[tmp.length - 1].content)
-                                setSender(tmp[tmp.length - 1].sender)
-                            }
+                    // setRoomIdForTabChat(room)
+                    var chatData = await getLastChatData(room)
+                    console.log(chatData)
+                    if (chatData) {
+                        if (messageList.length > 0) {
+                            setHaveMessage(true)
+                            setLastMessage(chatData.content)
+                            setSender(chatData.sender)
                         }
+                    }
+
                 }
             }
         }
         init()
-        
-    }, [account, messageList])
+
+    }, [account, messageList, roomId])
+
+    // useEffect(() => {
+    //     console.log(messageList)
+    //     if (messageList) {
+    //         if (messageList.length > 0) {
+    //             // console.log(tmp)
+    //             setHaveMessage(true)
+    //             setLastMessage(messageList[messageList.length - 1].content)
+    //             setSender(messageList[messageList.length - 1].sender)
+    //         }
+    //     }
+    // }, [roomIdForTabChat])
 
     return (
         <div onClick={handleDivClick}>

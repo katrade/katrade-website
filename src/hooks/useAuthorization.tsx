@@ -584,8 +584,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
-                ;
+                
             })
             .catch(() => {
                 ;
@@ -802,6 +801,23 @@ export default function useAuthorization() {
                 return null;
             })
     }
+
+    async function getLastChatData(roomID: string): Promise<IMessage | null> {
+        // show()
+        return await axios.get(`https://socketkatrade.herokuapp.com/chatroom/getLastMessage?roomid=${roomID}`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                // console.log(res)
+                return res.data;
+            })
+            .catch(() => {
+                setCookie("DaveTheHornyDuck", "");
+                return null;
+            })
+    }
     
     return {
         getUserData,
@@ -844,5 +860,6 @@ export default function useAuthorization() {
         updateUserContact,
         getDealingList,
         getMatchMarket,
+        getLastChatData
     }
 }
