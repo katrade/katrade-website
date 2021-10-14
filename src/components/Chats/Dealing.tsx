@@ -37,12 +37,15 @@ export default function Dealing() {
             }
         }
         init()
-
     }, [duoId])
 
     useEffect(() => {
         if (dealingList.length != 0) {
             setChkDealing(true)
+            console.log("UNIIIIIII")
+        }
+        else{
+            setChkDealing(false)
         }
     }, [account, dealingList, roomId])
 

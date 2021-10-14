@@ -21,12 +21,15 @@ export default function Tabchat(props: any) {
         duoUsername,
         setDuoUsername,
         roomIdForTabChat,
-        setRoomIdForTabChat
+        setRoomIdForTabChat,
+        currentIndex,
+        setCurrentIndex
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>()
     const [sender, setSender] = useState<string>()
     const [haveMessage, setHaveMessage] = useState(false)
     const { getChatData, getLastChatData } = useAuthorization();
+    const [classNameActive, setClassNameActive] = useState<string>("tabchat row m-0")
 
     // console.log(props.data)
     const handleDivClick = () => {
@@ -41,56 +44,55 @@ export default function Tabchat(props: any) {
         setDuoId(props.data.userIdContact)
         setDuoUsername(props.data.userNameContact)
         console.log("CLICK RoomId: " + roomId)
-        
+        console.log("SET duoId: " + duoId)
+        setCurrentIndex(props.index)
         // setAccount(account)
     }
 
     useEffect(() => {
+        if (props.index === currentIndex) {
+            setClassNameActive("tabchat-active row m-0")
+        }
+        else {
+            setClassNameActive("tabchat row m-0")
+        }
+
+    }, [currentIndex])
+
+    useEffect(() => {
         // console.log(account)
         async function init() {
-            if (duo_id) {
-                if (account._id) {
-                    var room
-                    if (props.data.userIdContact < account._id) {
-                        room = props.data.userIdContact + account._id
-                    }
-                    else {
-                        room = account._id + props.data.userIdContact
-                    }
-                    // console.log("Room:"+room)
-                    // setRoomIdForTabChat(room)
-                    var chatData = await getLastChatData(room)
-                    console.log(chatData)
-                    if (chatData) {
-                        if (messageList.length > 0) {
-                            setHaveMessage(true)
-                            setLastMessage(chatData.content)
-                            setSender(chatData.sender)
-                        }
-                    }
-
+            if (account._id) {
+                var room
+                if (props.data.userIdContact < account._id) {
+                    room = props.data.userIdContact + account._id
                 }
+                else {
+                    room = account._id + props.data.userIdContact
+                }
+                // console.log("Room:"+room)
+                // setRoomIdForTabChat(room)
+                var chatData = await getLastChatData(room)
+                console.log(chatData)
+                if (chatData) {
+                    if (chatData.content) {
+                        setHaveMessage(true)
+                        setLastMessage(chatData.content)
+                        setSender(chatData.sender)
+                    }
+                }
+
             }
         }
         init()
 
     }, [account, messageList, roomId])
 
-    // useEffect(() => {
-    //     console.log(messageList)
-    //     if (messageList) {
-    //         if (messageList.length > 0) {
-    //             // console.log(tmp)
-    //             setHaveMessage(true)
-    //             setLastMessage(messageList[messageList.length - 1].content)
-    //             setSender(messageList[messageList.length - 1].sender)
-    //         }
-    //     }
-    // }, [roomIdForTabChat])
+
 
     return (
         <div onClick={handleDivClick}>
-            <div className="tabchat row m-0">
+            <div className={classNameActive}>
                 <div className="col-3 d-flex justify-content-center align-items-center">
                     <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: 65 }} />
                 </div>

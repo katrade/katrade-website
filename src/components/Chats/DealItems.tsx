@@ -7,14 +7,22 @@ import { SocketContext } from '../../contexts/Socket';
 
 export default function DealItems(props: any) {
 
-    const { LockRequest } = useAuthorization()
+    const { LockRequest, deleteMyRequestPending } = useAuthorization()
     const [disableBtn, setDisableBtn] = useState(false)
     const { duoId } = useContext(SocketContext) 
 
     const handleConfirmBtn = () => {
-        LockRequest(props.data.requestId, props.data.ownerInventoryId)
+        if(window.confirm(`ถ้ากดแล้วจะไม่สามารถกดยกเลิกได้`)){
+            LockRequest(props.data.requestId, props.data.ownerInventoryId)
+            setDisableBtn(true)
+        }
         // console.log(props.data)
-        setDisableBtn(true)
+    }
+
+    const handleCancelBtn = () => {
+        if(window.confirm(`ต้องการลบคำขออีหลีถิ?`)){
+            deleteMyRequestPending(props.data.requestId)
+        }
     }
     // console.log(props.data.userConfirm)
     useEffect (() => {
@@ -59,7 +67,12 @@ export default function DealItems(props: any) {
                             {/* <button className="btn fs-4" style={{ width: "100%", border: "2px solid #00CC52", borderRadius: "10px", color:"#00CC52"}>Confirm Trade</button> */}
                         </div>
                         <div className="col-6">
-                            <TransparentButton buttonColor="#E20000" width="100%" margin="0" padding="0">
+                            <TransparentButton 
+                                buttonColor="#E20000" 
+                                width="100%" 
+                                margin="0" 
+                                padding="0"
+                                onClick={handleCancelBtn}>
                                 Cancel Trade
                             </TransparentButton>
                             {/* <button className="btn fs-4" style={{ width: "100%", border: "2px solid #E20000", borderRadius: "10px", color: "#E20000" }}>Cancel Trade</button> */}

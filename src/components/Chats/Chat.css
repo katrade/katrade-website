@@ -18,7 +18,13 @@
 }
 
 .tabchat:hover {
-    background-color: rgba(158, 158, 158, 0.5);
+    background-color: rgba(158, 158, 158, 0.33);
+}
+
+.tabchat-active {
+    height: 90px;
+    border-radius: 10px;
+    background-color: rgba(158, 158, 158, 0.33);
 }
 
 .chatContainer {

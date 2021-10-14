@@ -11,6 +11,7 @@ export default function SideBar() {
 	
 	const { getChatList, getChatData, updateUserContact, getDealingList} = useAuthorization()
 	const { socket, account, duo_id, duo_username, roomId, setRoomId, contactList } = useContext(SocketContext)
+	
 
 	return (
 		<div>
@@ -20,9 +21,9 @@ export default function SideBar() {
 				</div>
 				<div className="d-flex lineBar border-top mb-2"></div>
 				<div>
-					{contactList.map((ele: any) => {
+					{contactList.map((ele: any, index: number) => {
 						return (
-							<TabChat data={ele} />
+							<TabChat data={ele} index={index+1}/>
 						);
 					})}
 				</div>
