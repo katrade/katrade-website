@@ -744,11 +744,12 @@ export default function useAuthorization() {
     }
 
     async function updateUserContact(userId: string, userName: string, contactId: string, contactName: string) {
-        console.log("updateUserContact()")
+        // console.log("updateUserContact()")
+        // console.log(userName)
         axios.put(`https://socketkatrade.herokuapp.com/user/newUserContact`,
         {
             userId: userId,
-            useName: userName,
+            userName: userName,
             contactId: contactId,
             contactName: contactName
         },
