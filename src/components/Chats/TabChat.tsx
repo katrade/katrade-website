@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react'
 import { SocketContext } from '../../contexts/Socket'
 import useAuthorization from '../../hooks/useAuthorization'
 import './Chat.css'
+import ProfilePic from './ProfilePic'
 // import { IChat, IContact, IMessage } from "../../interfaces/Chat";
 
 
@@ -94,7 +95,17 @@ export default function Tabchat(props: any) {
         <div onClick={handleDivClick}>
             <div className={classNameActive}>
                 <div className="col-3 d-flex justify-content-center align-items-center">
-                    <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: 65 }} />
+                    <div  className="m-0" style={{
+                        minWidth: "65px",
+                        minHeight: "65px",
+                        maxWidth: "65px",
+                        maxHeight: "65px",
+                        backgroundImage: `url(${ProfilePic(props.data.userIdContact)})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        borderRadius: "50%",
+                        backgroundPosition: "center"
+                    }} />
                 </div>
                 <div className="col-9 justify-content-center align-self-center">
                     <span className="fw-bold fs-4">{props.data.userNameContact}</span><br />

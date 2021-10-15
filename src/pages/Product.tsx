@@ -15,6 +15,7 @@ import { SolidButton, TransparentButton } from '../components/standard/Button';
 // import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { FcLike } from 'react-icons/all';
 import useLoading from '../hooks/useLoading';
+import ProfilePic from '../components/Account/ProfilePic';
 
 const queryString = require("query-string");
 
@@ -212,7 +213,7 @@ function Product() {
     }
 
     const handleClickChat = () => {
-        history.push(`/app/chatDashboard?duo_id=${data.owner}&duo_username=${data.username}`);
+        history.push(`/app/chat?duo_id=${data.owner}&duo_username=${data.username}`);
     }
 
     if (data && myAccout) {
@@ -277,7 +278,19 @@ function Product() {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F170", padding: "10px 0", borderRadius: "7px", boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
                                     <div className="d-flex">
-                                        <img className="rounded-circle me-3" src={anotherUserData.profilePic} style={{ width: "40x", height: "40px" }} />
+                                        <div
+                                        className="me-3" 
+                                        style={{ 
+                                            minWidth: "47px",
+                                            minHeight: "47px",
+                                            maxWidth: "47px",
+                                            maxHeight: "47px",
+                                            backgroundImage: `url(${anotherUserData.profilePic})`,
+                                            backgroundSize: 'cover',
+                                            backgroundRepeat: 'no-repeat',
+                                            borderRadius: "50%",
+                                            backgroundPosition: "center"
+                                        }} />
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
