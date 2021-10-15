@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from '../../utils/useForm';
 import { useHistory } from 'react-router-dom';
 import logo from '../../pics/logo_dark_green.png';
@@ -11,6 +11,7 @@ import { API } from '../../app.setting.json'
 import useLoading from '../../hooks/useLoading';
 import { useCookies } from 'react-cookie';
 import Div from '../standard/Div';
+import InputValidation from "../InputValidation";
 
 
 
@@ -27,6 +28,9 @@ const SignInForm = () => {
     const [form, handleForm] = useForm();
     const [show, hide] = useLoading();
     const [cookies, setCookie, removeCookies] = useCookies(['DaveTheHornyDuck']);
+    const [validType, setValidType] = useState("0")
+    const [showAlert1, setShowAlert1] = useState("0")
+    const [showAlert2, setShowAlert2] = useState("0")
     
     // document.addEventListener("keydown", function(event) {
     //     if (event.keyCode === 13) {
@@ -34,12 +38,29 @@ const SignInForm = () => {
     //     }
     // });
 
-    const onFormSubmit = async (e: any) => { // แก้ submit ให้เป็น tag form       
+    const onFormSubmit = async (e: any) => { // แก้ submit ให้เป็น tag form   
         e.preventDefault();  
         console.log("??")
         const _email = form.email;
         const _password = form.password;
-        signIn(_email, _password);
+        if ((_email != null && _password != null) && (_email != "" && _password != "")) {
+            signIn(_email, _password);
+        }   
+        else {
+            setValidType("empty");
+            if (_email == null) {
+                setShowAlert1("1")
+            }
+            if (_password == null) {
+                setShowAlert2("1")
+            }
+            if (_email != null) {
+                setShowAlert1("0")
+            }
+            if (_password != null) {
+                setShowAlert2("0")
+            }
+        }
         // console.log(form.email, form.password)
     }
 
@@ -69,10 +90,31 @@ const SignInForm = () => {
             }
         }).catch(() => {
             hide()
-            alert("You email or password is wrong.");
+            // alert("You email or password is wrong.");
             // window.location.reload();
+            history.push(`/app/signin`)
+            setValidType("wrong")
+            setShowAlert1("1")
+            setShowAlert2("1")
         })
     }
+
+    useEffect (() => {
+        if (form.email != null && form.email != "") {
+            setShowAlert1("0")
+        }
+        if (form.email == "") {
+            setValidType("empty")
+            setShowAlert1("1")
+        }
+        if (form.password != null && form.password != "") {
+            setShowAlert2("0")
+        }
+        if (form.password == "") {
+            setValidType("empty")
+            setShowAlert2("1")
+        }
+    }, [form.email, form.password])
 
     return (
         <>
@@ -88,18 +130,19 @@ const SignInForm = () => {
                             <div>
                                 <input
                                     className={"input-register w-100 px-2"}
-                                    value={form.email || ""}
+                                    value={form.email}
                                     name="email"
                                     onChange={handleForm}
                                     type="text"
                                     placeholder="Enter your email or username"
                                 />
+                                <InputValidation valid={validType} name="Email or Username" showMes={showAlert1} />
                             </div>    
                             <br />
                             <p className="mt-2">Password</p>
                             <div className="input-container">
                                 <input
-                                    value={form.password || ""}
+                                    value={form.password}
                                     onChange={handleForm}
                                     name="password"
                                     className="input-none px-2" type={showPassword === 1 ? "password" : "text"}
@@ -108,7 +151,8 @@ const SignInForm = () => {
                                 <img src={showPassword === 1 ? eye_open : eye_close} width="20" onClick={() => setShowPassword(showPassword * -1)} className="pointer" />
                             </div>
                             <div className="row mt-2">
-                                <div className="col m-0 p-0">
+                                <div className="col">
+                                    <InputValidation valid={validType} name="Password" showMes={showAlert2} />
                                     {/* <label className="ml-1">
                                         <input className="mr-2" type="checkbox" />
                                         Remember me
