@@ -125,7 +125,7 @@ function App() {
                                 <Route exact path="/app/inprogress" component={Inprogress}></Route>
 
                                 <Route exact path="/app/heydude" component={Chat}></Route>
-                                <Route exact path="/app/chatDashboard"><SocketProvider><ChatDashboard /></SocketProvider></Route>
+                                <Route exact path="/app/chat"><SocketProvider><ChatDashboard /></SocketProvider></Route>
 
                                 <Route exact path="/app/testFrontend" component={Test01}></Route>
 

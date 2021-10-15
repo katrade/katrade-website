@@ -14,6 +14,7 @@ interface ISocketContext {
     setAccount: React.Dispatch<React.SetStateAction<IAccount>> | (() => void),
     duo_id: string,
     duo_username: string,
+    index: number,
     roomId: string,
     setRoomId: React.Dispatch<React.SetStateAction<string>> | (() => void),
     messageList: IMessage[],
@@ -34,9 +35,10 @@ interface ISocketContext {
 }
 
 const socket = io("https://socketkatrade.herokuapp.com", {
+    timeout: 2000, 
     secure: true,
-    transports: ["flashsocket", "polling", "websocket"]
-});
+    transports: [ "websocket", "polling", "flashsocket" ],
+})
 
 socket.on("connect", () => {
     console.log("SOCKET is already connected");
@@ -45,13 +47,15 @@ socket.on("connect", () => {
 
 export const SocketContext = React.createContext<ISocketContext>({
     socket: io("https://socketkatrade.herokuapp.com", {
+        timeout: 2000,
         secure: true,
-        transports: ["flashsocket", "polling", "websocket"]
+        transports: [ "polling", "websocket", "flashsocket" ]
     }),
     account: defaultEmptyAccount,
     setAccount: () => { },
     duo_id: "",
     duo_username: "",
+    index: 0,
     roomId: "",
     setRoomId: () => { },
     messageList: [],
@@ -89,7 +93,7 @@ export function SocketProvider({ children }: propsInterface) {
     const history = useHistory();
     const { getUserData, getChatData, getChatList, updateUserContact } = useAuthorization();
     const { search } = useLocation();
-    const { duo_id, duo_username } = queryString.parse(search);
+    const { duo_id, duo_username, index } = queryString.parse(search);
     const [messageList, setMessageList] = useState<IMessage[]>([]);
     const [chk, setChk] = useState(false);
     const [dealingList, setDealingList] = useState<IDealing[]>([])
@@ -151,6 +155,7 @@ export function SocketProvider({ children }: propsInterface) {
                             }])
                             updateUserContact(
                                 account._id,
+                                account.username,
                                 duo_id,
                                 duo_username
                             )
@@ -171,7 +176,11 @@ export function SocketProvider({ children }: propsInterface) {
                                     userNameContact: duo_username
                                 })
                                 setContactList(tmp)
-                                updateUserContact(account._id, duo_id, duo_username)
+                                updateUserContact(
+                                    account._id, 
+                                    account.username, 
+                                    duo_id, 
+                                    duo_username)
                             }
                             else {
                                 setContactList(contactData.userContacts)
@@ -193,6 +202,8 @@ export function SocketProvider({ children }: propsInterface) {
         sidebar()
 
     }, [account])
+
+    // console.log(account.username)
 
     useEffect(() => {
         // console.log(roomId)
@@ -227,6 +238,7 @@ export function SocketProvider({ children }: propsInterface) {
             setAccount,
             duo_id,
             duo_username,
+            index,
             roomId,
             setRoomId,
             messageList,

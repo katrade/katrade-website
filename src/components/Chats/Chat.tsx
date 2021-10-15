@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { SocketContext } from "../../contexts/Socket";
 import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
+import ProfilePic from "./ProfilePic";
 
 export default function Chat() {
 
@@ -54,7 +55,17 @@ export default function Chat() {
         <div>
             <div className="chatContainer">
                 <div className="chatContainer-Header d-flex align-items-center px-5">
-                    <img src="https://data.whicdn.com/images/349884984/original.jpg" className="rounded-circle m-0" style={{ maxWidth: "47px" }} />
+                    <div style={{
+                        minWidth: "47px",
+                        minHeight: "47px",
+                        maxWidth: "47px",
+                        maxHeight: "47px",
+                        backgroundImage: `url(${ProfilePic(duoId)})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        borderRadius: "50%",
+                        backgroundPosition: "center"
+                    }} className="m-0" />
                     <span className="ms-3 text-white">{usernameNow}</span>
                 </div>
                 <div className="messages" style={{ height: "500px", overflow: "auto" }}>
@@ -70,7 +81,7 @@ export default function Chat() {
                                             minHeight: "47px",
                                             maxWidth: "47px",
                                             maxHeight: "47px",
-                                            backgroundImage: "url(https://lordsofgaming.net/wp-content/uploads/2020/10/Screen-Shot-2020-10-19-at-11.15.33-PM.png)",
+                                            backgroundImage: `url(${ProfilePic(duoId)})`,
                                             backgroundSize: 'cover',
                                             backgroundRepeat: 'no-repeat',
                                             borderRadius: "50%",
@@ -79,7 +90,7 @@ export default function Chat() {
                                         </div>
                                     }
                                     <div className={val.sender === account.username ? "yourtextBox" : "othertextBox"}>
-                                        {val.content} ({val.sender})
+                                        {val.content}
                                     </div>
                                     {/* <div>
                                             {val.timeStamp}
