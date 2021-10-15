@@ -4,15 +4,16 @@ import { SocketContext } from "../../contexts/Socket";
 import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
 import ProfilePic from "./ProfilePic";
+import SendIcon from '@material-ui/icons/SendRounded'
 
 export default function Chat() {
 
     const {
-        socket, 
-        account , 
-        duo_id, 
-        duo_username, 
-        roomId, 
+        socket,
+        account,
+        duo_id,
+        duo_username,
+        roomId,
         setRoomId,
         messageList,
         setMessageList,
@@ -22,18 +23,23 @@ export default function Chat() {
     } = useContext(SocketContext)
 
     console.log("Chat Reload")
-    const [ message, setMessage ] = useState("");
-    const [ usernameNow, setUsernameNow ] = useState("")
+    const [message, setMessage] = useState("");
+    const [usernameNow, setUsernameNow] = useState("")
 
     console.log("KuAYYYYYYY")
     console.log(messageList)
 
-    useEffect (() => {
+    useEffect(() => {
         console.log(duoUsername)
         setUsernameNow(duoUsername)
         // console.log()
-    },  [duoUsername])
-    
+    }, [duoUsername])
+
+    useEffect(() => {
+        var msgContainer:any = document.getElementById("messages");
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+    },[messageList])
+
     const sendMessage = async () => {
         let messageContent = {
             room: roomId,
@@ -68,13 +74,14 @@ export default function Chat() {
                     }} className="m-0" />
                     <span className="ms-3 text-white">{usernameNow}</span>
                 </div>
-                <div className="messages" style={{ height: "500px", overflow: "auto" }}>
+                <div className="messages" id="messages" style={{ height: "500px", overflow: "auto" }}>
                     {messageList.map((val) => {
                         return (
                             <div className="messageContainer"
                             >
                                 <div className={val.sender === account.username ? "yourMsg" : "otherMsg"}>
-                                    {val.sender === account.username ? "" :
+                                    {val.sender === account.username ?
+                                        "" :
                                         <div style={{
                                             minWidth: "47px",
                                             minHeight: "47px",
@@ -89,7 +96,7 @@ export default function Chat() {
                                         </div>
                                     }
                                     <div className={val.sender === account.username ? "yourtextBox" : "othertextBox"}>
-                                        {val.content}
+                                        <p>{val.content}</p>
                                     </div>
                                     {/* <div>
                                             {val.timeStamp}
@@ -100,17 +107,19 @@ export default function Chat() {
                     })}
                 </div>
 
-                <div className="messageInputs p-0 m-0" style={{ width: "100%" }}>
-                    <img
-                        src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
-                        style={{
-                            maxWidth: "35px",
-                            maxHeight: "35px",
-                            margin: "20px 20px",
-                            cursor: "pointer"
-                        }}
-                    />
-                    <div className="typingContainer">
+                <div className="messageInputs p-0 m-0 row my-2" style={{ width: "100%" }}>
+                    <div className="col-lg-1">
+                        <img
+                            src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
+                            style={{
+                                maxWidth: "35px",
+                                maxHeight: "35px",
+                                // margin: "20px 20px",
+                                cursor: "pointer"
+                            }}
+                        />
+                    </div>
+                    <div className="typingContainer col-lg-10">
                         <input
                             type="text"
                             placeholder="Message..."
@@ -120,21 +129,30 @@ export default function Chat() {
                             value={message}
                             id="messageBox"
                             style={{
-                                width: "95%",
+                                width: "100%",
                                 border: "none",
                                 margin: "0px"
                             }}
                         />
-                        <div className="d-inline-block">
-                            <button onClick={sendMessage}
-                                style={{
-                                    width: "30px",
-                                    cursor: "pointer"
-                                }}
-                            >
-                                Send
-                            </button>
-                        </div>
+                    </div>
+                    <div className="d-inline-block col-lg-1" >
+                        {/* <button onClick={sendMessage}
+                            style={{
+                                width: "30px",
+                                cursor: "pointer"
+                            }}
+                        > */}
+                        <SendIcon
+                            style={{
+                                //maxWidth: "35px",
+                                fontSize: "35px",
+                                cursor: "pointer"
+                            }}
+                            onClick={sendMessage}
+                            className="material-icons"
+                        />
+                        {/* Send */}
+                        {/* </button> */}
                     </div>
                 </div>
             </div>

@@ -9,8 +9,8 @@ export default function SideBar() {
 	console.log("Sidebar Reload")
 	// console.log(contactList)
 	
-	const { getChatList, getChatData, updateUserContact, getDealingList} = useAuthorization()
-	const { socket, account, duo_id, duo_username, roomId, setRoomId, contactList } = useContext(SocketContext)
+	// const { getChatList, getChatData, updateUserContact, getDealingList} = useAuthorization()
+	const { contactList } = useContext(SocketContext)
 	
 
 	return (

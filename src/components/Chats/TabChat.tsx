@@ -89,6 +89,8 @@ export default function Tabchat(props: any) {
 
     }, [account, messageList, roomId])
 
+    console.log(props.data)
+
     return (
         <div onClick={handleDivClick}>
             <div className={classNameActive}>
@@ -108,8 +110,8 @@ export default function Tabchat(props: any) {
                 <div className="col-9 justify-content-center align-self-center">
                     <span className="fw-bold fs-4">{props.data.userNameContact}</span><br />
                     {haveMessage ?
-                        <span>{sender}: {lastMessage.length > 126 ? '...' : lastMessage}</span>
-                        : <span>No Message</span>
+                        <p className="limit">{sender}: {lastMessage}</p>
+                        : <p>No Message</p>
                     }
 
                 </div>

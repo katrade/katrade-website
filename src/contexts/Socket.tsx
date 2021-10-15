@@ -176,7 +176,11 @@ export function SocketProvider({ children }: propsInterface) {
                                     userNameContact: duo_username
                                 })
                                 setContactList(tmp)
-                                updateUserContact(account._id, account.username, duo_id, duo_username)
+                                updateUserContact(
+                                    account._id, 
+                                    account.username, 
+                                    duo_id, 
+                                    duo_username)
                             }
                             else {
                                 setContactList(contactData.userContacts)
@@ -198,6 +202,8 @@ export function SocketProvider({ children }: propsInterface) {
         sidebar()
 
     }, [account])
+
+    // console.log(account.username)
 
     useEffect(() => {
         // console.log(roomId)
