@@ -25,7 +25,8 @@ export default function Tabchat(props: any) {
         setRoomIdForTabChat,
         currentIndex,
         setCurrentIndex,
-        index
+        index,
+        chkReRenderSidebar
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()

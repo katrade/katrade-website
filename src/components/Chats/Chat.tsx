@@ -5,6 +5,7 @@ import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
 import ProfilePic from "./ProfilePic";
 import SendIcon from '@material-ui/icons/SendRounded'
+import { useHistory } from "react-router";
 
 export default function Chat() {
 
@@ -19,7 +20,9 @@ export default function Chat() {
         setMessageList,
         duoId,
         duoUsername,
-        setDuoId
+        setDuoId,
+        contactList,
+        setContactList
     } = useContext(SocketContext)
 
     console.log("Chat Reload")
@@ -59,6 +62,13 @@ export default function Chat() {
         setMessage("");
     };
 
+    const history = useHistory()
+
+    const handleNameClick = () => {
+        const handleNameClick = () => {
+        history.push(`/app/profileviewer?user_id=${duoId}`)
+    }
+
     return (
         <div>
             <div className="chatContainer">
@@ -74,7 +84,7 @@ export default function Chat() {
                         borderRadius: "50%",
                         backgroundPosition: "center"
                     }} className="m-0" />
-                    <span className="ms-3 text-white">{usernameNow}</span>
+                    <span className="ms-3 text-white" onClick={handleNameClick}>{usernameNow}</span>
                 </div>
                 <div className="messages" id="messages" style={{ height: "500px", overflow: "auto" }}>
                     {messageList.map((val) => {
