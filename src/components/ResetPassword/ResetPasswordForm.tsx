@@ -6,6 +6,7 @@ import useLoading from '../../hooks/useLoading';
 import { API } from '../../app.setting.json';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import InputValidation from "../InputValidation";
 
 import { H4, H5 }  from '../standard/H';
 import Div from '../standard/Div';
@@ -17,12 +18,14 @@ export function ForgotPasswordForm() {
     const history = useHistory();
     const [show, hide] = useLoading();
     const [email , setEmail] = useState<string>("");
+    const [validType, setValidType] = useState("0");
+    const [showAlert, setShowAlert] = useState("0");
 
     const submitEmail = async () => {
         let data: any = {
             email: email,
         }
-        if (data.email != null) {
+        if (data.email != "" && data.email != null) {
             show("Checking your email . . .")
             let result: any = await fetch(`${API}/auth/sendResetPasswordEmail`, {
                 method: 'POST',
@@ -46,9 +49,17 @@ export function ForgotPasswordForm() {
             }
         }
         else {
-            alert("Please enter you email.")
+            // alert("Please enter you email.")
+            setValidType("empty");
+            setShowAlert("1");
         }
     }
+
+    useEffect(() => {
+        if(email != "" && email != null) {
+            setShowAlert("0");
+        }
+    }, [email])
 
     return (
         <>
@@ -65,6 +76,7 @@ export function ForgotPasswordForm() {
                                     value={email || ""}
                                     onChange={(e) => setEmail(e.target.value)}
                             /></p>
+                            <InputValidation valid={validType} name="Email or Username" showMes={showAlert} />
                         </div>
                     </div>
                     <SolidButton className="mb-3" width="120px" buttonColor="#2BC986" padding="5px" margin="0" onClick={() => submitEmail()}>Confirm</SolidButton>
@@ -101,6 +113,9 @@ export function ResetPasswordForm() {
     }
     const [password , setPassword] = useState<string>("");
     const [confirmPassword , setConfirmPassword] = useState<string>("");
+    const [validType, setValidType] = useState("0");
+    const [showAlert1, setShowAlert1] = useState("0");
+    const [showAlert2, setShowAlert2] = useState("0");
 
     const submitResetPass = (password: string, confirmPassword: string) => {
         if (password === confirmPassword) {
@@ -115,9 +130,21 @@ export function ResetPasswordForm() {
             })
         }
         else {
-            alert("Password and Confirm Password does not match.")
+            // alert("Password and Confirm Password does not match.")
+            setValidType("does not match")
+            setShowAlert2("1")
         }
     }
+
+    useEffect (() => {
+        if(password === confirmPassword) {
+            setShowAlert2("0")
+        }
+        if(password === confirmPassword) {
+            setValidType("does not match")
+            setShowAlert2("1")
+        }
+    }, [password, confirmPassword])
 
     return (
         <>
@@ -134,6 +161,7 @@ export function ResetPasswordForm() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                         /></p>
+                        <InputValidation valid={validType} name="Email or Username" showMes={showAlert1} />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="" className="form-label">Confirm New Password</label>
@@ -144,6 +172,7 @@ export function ResetPasswordForm() {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                         /></p>
+                        <InputValidation valid={validType} name="Email or Username" showMes={showAlert2} />
                     </div>
                 </div>
                 <SolidButton className="mb-3" width="120px" buttonColor="#2BC986" padding="5px" margin="0"onClick={() => submitResetPass(password, confirmPassword)}>Confirm</SolidButton>
