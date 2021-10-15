@@ -36,8 +36,10 @@ export default function Chat() {
     }, [duoUsername])
 
     useEffect(() => {
+        if (messageList) {
         var msgContainer:any = document.getElementById("messages");
         msgContainer.scrollTop = msgContainer.scrollHeight;
+        }
     },[messageList])
 
     const sendMessage = async () => {
@@ -106,7 +108,6 @@ export default function Chat() {
                         );
                     })}
                 </div>
-
                 <div className="messageInputs p-0 m-0 row my-2" style={{ width: "100%" }}>
                     <div className="col-lg-1">
                         <img
