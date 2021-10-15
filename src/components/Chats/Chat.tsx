@@ -40,10 +40,10 @@ export default function Chat() {
 
     useEffect(() => {
         if (messageList) {
-        var msgContainer:any = document.getElementById("messages");
-        msgContainer.scrollTop = msgContainer.scrollHeight;
+            var msgContainer: any = document.getElementById("messages");
+            msgContainer.scrollTop = msgContainer.scrollHeight;
         }
-    },[messageList])
+    }, [messageList])
 
     const sendMessage = async () => {
         let messageContent = {
@@ -66,7 +66,8 @@ export default function Chat() {
 
     const handleNameClick = () => {
         const handleNameClick = () => {
-        history.push(`/app/profileviewer?user_id=${duoId}`)
+            history.push(`/app/profileviewer?user_id=${duoId}`)
+        }
     }
 
     return (
