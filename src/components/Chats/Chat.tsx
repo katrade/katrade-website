@@ -45,7 +45,7 @@ export default function Chat() {
             },
         };
         // console.log(socket.connected)
-        // socket.emit("message", messageContent)
+        socket.emit("message", messageContent)
         // setMessageList([...messageList, messageContent.content]);
         setMessage("");
     };
