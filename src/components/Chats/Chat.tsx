@@ -69,7 +69,6 @@ export default function Chat() {
         history.push(`/app/profileviewer?user_id=${duoId}`)
     }
 
-
     return (
         <div>
             <div className="chatContainer">
@@ -83,9 +82,15 @@ export default function Chat() {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         borderRadius: "50%",
-                        backgroundPosition: "center"
-                    }} className="m-0" />
-                    <span className="ms-3 text-white" onClick={handleNameClick}>{usernameNow}</span>
+                        backgroundPosition: "center",
+                        cursor: "pointer"
+                    }}
+                        className="m-0" />
+                    <span
+                        className="ms-3 text-white"
+                        onClick={handleNameClick}
+                        style={{ cursor: "pointer" }}
+                    >{usernameNow}</span>
                 </div>
                 <div className="messages" id="messages" style={{ height: "500px", overflow: "auto" }}>
                     {messageList.map((val) => {
@@ -112,8 +117,8 @@ export default function Chat() {
                                         <p>{val.content}</p>
                                     </div>
                                     {/* <div>
-                                            {val.timeStamp}
-                                        </div> */}
+                                        {val.timeStamp}
+                                    </div> */}
                                 </div>
                             </div>
                         );

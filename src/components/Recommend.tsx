@@ -2,7 +2,6 @@ import { useHistory } from 'react-router-dom';
 import './Recommend.css';
 
 function Recommend(itemData:any, match:any) {
-    
     const item = itemData.item;
     const matchwith = itemData.match;
 
