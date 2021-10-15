@@ -72,7 +72,6 @@ export default function Chat() {
                     {messageList.map((val) => {
                         return (
                             <div className="messageContainer"
-                            // id={val.author == userName ? "You" : "Other"}
                             >
                                 <div className={val.sender === account.username ? "yourMsg" : "otherMsg"}>
                                     {val.sender === account.username ? "" :

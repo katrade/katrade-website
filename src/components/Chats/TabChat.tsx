@@ -27,7 +27,7 @@ export default function Tabchat(props: any) {
         setCurrentIndex,
         index
     } = useContext(SocketContext)
-    const [lastMessage, setLastMessage] = useState<string>()
+    const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()
     const [haveMessage, setHaveMessage] = useState(false)
     const { getChatData, getLastChatData } = useAuthorization();
@@ -89,8 +89,6 @@ export default function Tabchat(props: any) {
 
     }, [account, messageList, roomId])
 
-
-
     return (
         <div onClick={handleDivClick}>
             <div className={classNameActive}>
@@ -110,7 +108,7 @@ export default function Tabchat(props: any) {
                 <div className="col-9 justify-content-center align-self-center">
                     <span className="fw-bold fs-4">{props.data.userNameContact}</span><br />
                     {haveMessage ?
-                        <span>{sender}: {lastMessage}</span>
+                        <span>{sender}: {lastMessage.length > 126 ? '...' : lastMessage}</span>
                         : <span>No Message</span>
                     }
 
