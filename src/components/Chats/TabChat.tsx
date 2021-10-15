@@ -23,7 +23,8 @@ export default function Tabchat(props: any) {
         roomIdForTabChat,
         setRoomIdForTabChat,
         currentIndex,
-        setCurrentIndex
+        setCurrentIndex,
+        index
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>()
     const [sender, setSender] = useState<string>()
@@ -81,7 +82,6 @@ export default function Tabchat(props: any) {
                         setSender(chatData.sender)
                     }
                 }
-
             }
         }
         init()

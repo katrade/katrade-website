@@ -4,12 +4,14 @@ import { IDealing } from '../../interfaces/Chat';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../../contexts/Socket';
+import { useHistory } from 'react-router';
 
 export default function DealItems(props: any) {
 
     const { LockRequest, deleteMyRequestPending } = useAuthorization()
     const [disableBtn, setDisableBtn] = useState(false)
-    const { duoId } = useContext(SocketContext) 
+    const { duoId, currentIndex } = useContext(SocketContext) 
+    const history = useHistory()
 
     const handleConfirmBtn = () => {
         if(window.confirm(`ถ้ากดแล้วจะไม่สามารถกดยกเลิกได้`)){
@@ -18,10 +20,11 @@ export default function DealItems(props: any) {
         }
         // console.log(props.data)
     }
-
+    console.log(props.data)
     const handleCancelBtn = () => {
         if(window.confirm(`ต้องการลบคำขออีหลีถิ?`)){
             deleteMyRequestPending(props.data.requestId)
+            history.push(`/app/chat?duo_id=${props.data.targetInventory.owner}&duo_username=${props.data.targetInventory.username}`)
         }
     }
     // console.log(props.data.userConfirm)

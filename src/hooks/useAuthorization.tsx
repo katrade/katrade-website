@@ -394,7 +394,7 @@ export default function useAuthorization() {
 
     async function deleteMyRequestPending(requestpending_id: any) {
         console.log(requestpending_id);
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.delete(`${API}/user/cancelRequest?id=${requestpending_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -743,11 +743,12 @@ export default function useAuthorization() {
         }
     }
 
-    async function updateUserContact(userId: string, contactId: string, contactName: string) {
+    async function updateUserContact(userId: string, userName: string, contactId: string, contactName: string) {
         console.log("updateUserContact()")
         axios.put(`https://socketkatrade.herokuapp.com/user/newUserContact`,
         {
             userId: userId,
+            useName: userName,
             contactId: contactId,
             contactName: contactName
         },

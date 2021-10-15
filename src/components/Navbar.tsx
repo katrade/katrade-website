@@ -258,7 +258,7 @@ function Navbar({ image }: INavbar) {
                             <a href="/app/request"><FaRegListAlt /></a>
                         </Label>
                         <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
-                            <a onClick={() => history.push("/app/chatDashboard")}><MdChat /></a>
+                            <a onClick={() => history.push("/app/chat")}><MdChat /></a>
                         </Label>
                         <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
                             <a onClick={() => { window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ") }}><IoIosNotifications /></a>
@@ -268,7 +268,7 @@ function Navbar({ image }: INavbar) {
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                             <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                            <a onClick={() => { window.alert("ระบบแชท ยังไม่เสร็จสมบูรณ์ครับ") }}>Chat</a>
+                            <a onClick={() => history.push("/app/chat")}>Chat</a>
                             <a onClick={() => { window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ") }}>Notification</a>
                             <a onClick={() => history.push("/app/request")}>Request</a>
                             <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
