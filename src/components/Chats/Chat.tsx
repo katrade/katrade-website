@@ -64,11 +64,11 @@ export default function Chat() {
 
     const history = useHistory()
 
+
     const handleNameClick = () => {
-        const handleNameClick = () => {
-            history.push(`/app/profileviewer?user_id=${duoId}`)
-        }
+        history.push(`/app/profileviewer?user_id=${duoId}`)
     }
+
 
     return (
         <div>
