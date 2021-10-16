@@ -89,8 +89,6 @@ export default function Tabchat(props: any) {
 
     }, [account, messageList, roomId])
 
-
-
     return (
         <div onClick={handleDivClick}>
             <div className={classNameActive}>
