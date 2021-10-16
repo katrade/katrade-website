@@ -5,47 +5,51 @@ import useAuthorization from "../../hooks/useAuthorization"
 import { SocketContext } from "../../contexts/Socket";
 
 
+
 export default function SideBar() {
 	console.log("Sidebar Reload")
 	// console.log(contactList)
-	const { getChatList, getChatData, updateUserContact, getDealingList } = useAuthorization()
+	const { getChatList, getChatData, updateUserContact, getDealingList, replaceAllUserContact } = useAuthorization()
 	const {
 		contactList,
 		setContactList,
-		messageList,
+		chkReRenderSidebar,
+		setChkReRenderSidebar,
 		duoId,
 		account,
 		duoUsername,
-		chkReRenderSidebar,
-		setChkReRenderSidebar
+		setCurrentIndex,
+		chkMessage
 	} = useContext(SocketContext)
 
-	// useEffect(() => {
-	// 	async function reRenderSidebar() {
-	// 		if (chkReRenderSidebar) {
-	// 			if (duoId) {
-	// 				var contactData = await getChatList(account._id)
-	// 				if (contactData) {
-	// 					let tmp = [...contactData.userContacts]
-	// 					for (var i = 0; i < contactData.userContacts.length; i++) {
-	// 						if (contactData.userContacts[i].userIdContact === duoId) {
-	// 							tmp.splice(i, 1)
-	// 							tmp.splice(0, 0, {
-    //                                 userIdContact: duoId,
-    //                                 userNameContact: duoUsername
-    //                             })
-	// 							setContactList(tmp)
-	// 							console.log(tmp)
-	// 							setChkReRenderSidebar(false)
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// 	reRenderSidebar()
+	useEffect(() => {
+		async function reRenderSidebar() {
+			if (chkReRenderSidebar) {
+				if (duoId) {
+					var contactData = await getChatList(account._id)
+					if (contactData) {
+						let tmp = [...contactData.userContacts]
+						for (var i = 0; i < contactData.userContacts.length; i++) {
+							if (contactData.userContacts[i].userIdContact === duoId) {
+								tmp.splice(i, 1)
+								tmp.splice(0, 0, {
+                                    userIdContact: duoId,
+                                    userNameContact: duoUsername,
+                                })
+								setChkReRenderSidebar(false)
+								setContactList(tmp)
+								setCurrentIndex(1)
+								// console.log(tmp)
+								replaceAllUserContact(account._id, duoId)
+							}
+						}
+					}
+				}
+			}
+		}
+		reRenderSidebar()
 
-	// }, [chkReRenderSidebar])
+	}, [contactList, chkReRenderSidebar])
 
 	return (
 		<div>

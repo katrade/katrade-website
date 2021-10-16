@@ -23,7 +23,7 @@ export default function ChatDashboard() {
     }, [account, duoId])
 
 
-    console.log(duoId)
+    // console.log(duoId)
     // console.log(handleHide)
     return (
         <Background>

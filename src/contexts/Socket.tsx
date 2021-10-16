@@ -33,7 +33,8 @@ interface ISocketContext {
     setCurrentIndex: React.Dispatch<React.SetStateAction<number>> | (() => void),
     chkReRenderSidebar: boolean,
     setChkReRenderSidebar: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
-
+    chkMessage: boolean,
+    setChkMessage: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
 }
 
 const socket = io("https://socketkatrade.herokuapp.com", {
@@ -75,7 +76,9 @@ export const SocketContext = React.createContext<ISocketContext>({
     currentIndex: 0,
     setCurrentIndex: () => { },
     chkReRenderSidebar: false,
-    setChkReRenderSidebar: () => { }
+    setChkReRenderSidebar: () => { },
+    chkMessage: false,
+    setChkMessage: () => { }
 });
 
 interface propsInterface {
@@ -107,6 +110,7 @@ export function SocketProvider({ children }: propsInterface) {
     const [duoUsername, setDuoUsername] = useState(duo_username)
     const [currentIndex, setCurrentIndex] = useState<number>(0)
     const [chkReRenderSidebar, setChkReRenderSidebar] = useState<boolean>(false)
+    const [chkMessage, setChkMessage] = useState(false)
 
     useEffect(() => {
 
@@ -208,8 +212,6 @@ export function SocketProvider({ children }: propsInterface) {
 
     }, [account])
 
-    
-
     // console.log(account.username)
 
     useEffect(() => {
@@ -237,6 +239,7 @@ export function SocketProvider({ children }: propsInterface) {
         setMessageList(a);
         setChk(!chk);
         setChkReRenderSidebar(true)
+        setChkMessage(true)
     });
 
     return (
@@ -264,7 +267,9 @@ export function SocketProvider({ children }: propsInterface) {
             currentIndex,
             setCurrentIndex,
             chkReRenderSidebar,
-            setChkReRenderSidebar
+            setChkReRenderSidebar,
+            chkMessage,
+            setChkMessage
         }}>
             {children}
         </SocketContext.Provider>

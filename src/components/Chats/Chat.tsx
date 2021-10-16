@@ -22,7 +22,8 @@ export default function Chat() {
         duoUsername,
         setDuoId,
         contactList,
-        setContactList
+        setContactList,
+        setChkMessage
     } = useContext(SocketContext)
 
     console.log("Chat Reload")
@@ -58,12 +59,12 @@ export default function Chat() {
         };
         // console.log(socket.connected)
         socket.emit("message", messageContent)
+        // setChkMessage(true)
         // setMessageList([...messageList, messageContent.content]);
         setMessage("");
     };
 
     const history = useHistory()
-
 
     const handleNameClick = () => {
         history.push(`/app/profileviewer?user_id=${duoId}`)

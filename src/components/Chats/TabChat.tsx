@@ -26,7 +26,10 @@ export default function Tabchat(props: any) {
         currentIndex,
         setCurrentIndex,
         index,
-        chkReRenderSidebar
+        chkReRenderSidebar,
+        contactList,
+        chkMessage,
+        setChkMessage
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()
@@ -65,6 +68,7 @@ export default function Tabchat(props: any) {
     useEffect(() => {
         // console.log(account)
         async function init() {
+            console.log("Fetch Last chat data")
             if (account._id) {
                 var room
                 if (props.data.userIdContact < account._id) {
@@ -73,7 +77,7 @@ export default function Tabchat(props: any) {
                 else {
                     room = account._id + props.data.userIdContact
                 }
-                // console.log("Room:"+room)
+                console.log("Room:"+room)
                 // setRoomIdForTabChat(room)
                 var chatData = await getLastChatData(room)
                 console.log(chatData)
@@ -82,15 +86,16 @@ export default function Tabchat(props: any) {
                         setHaveMessage(true)
                         setLastMessage(chatData.content)
                         setSender(chatData.sender)
+                        setChkMessage(false)
                     }
                 }
             }
         }
         init()
 
-    }, [account, messageList, roomId])
+    }, [account, chkMessage])
 
-    console.log(props.data)
+    // console.log(props.data)
 
     return (
         <div onClick={handleDivClick}>
