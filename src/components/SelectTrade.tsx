@@ -4,7 +4,7 @@ import useAuthorization from '../hooks/useAuthorization';
 import { CgShoppingBag } from "react-icons/all"
 import "./SelectTrade.css";
 export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem }: any) {
-    console.log(arrayMatch)
+    // console.log(arrayMatch)
     const { postMyReqeust } = useAuthorization();
     function handleRequest(myIdItem: any) {
         const dataArray = {
@@ -23,7 +23,6 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                 style={{
                     width: "100%",
                     height: "50px",
-                    backgroundColor: "#fff",
                     borderRadius: "8px",
                     margin: "7px 0",
                     whiteSpace: "nowrap",
@@ -32,7 +31,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                     border: "1px solid #d5d7db",
                     cursor: "pointer",
                 }}
-                className="d-flex justify-content-start align-items-center"
+                className="d-flex justify-content-start align-items-center hoverSelect"
             >
                 <p className="m-0 px-3 me-1" style={{ color: "#000", fontWeight: 500 }}>{data.name}</p>
                 <p className="m-0 px-3 me-1" style={{ color: "#999ba1", fontWeight: 400, fontSize: "16px" }}>{data.detail}</p>
@@ -48,7 +47,6 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                 style={{
                     width: "100%",
                     height: "50px",
-                    backgroundColor: "#fff",
                     borderRadius: "8px",
                     margin: "7px 0",
                     whiteSpace: "nowrap",
@@ -57,7 +55,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                     border: "1px solid #d5d7db",
                     cursor: "pointer",
                 }}
-                className="d-flex justify-content-start align-items-center"
+                className="d-flex justify-content-start align-items-center hoverSelect"
             >
                 <p className="m-0 px-3 me-1" style={{ color: "#000", fontWeight: 500 }}>{data.name}</p>
                 <p className="m-0 px-3 me-1" style={{ color: "#999ba1", fontWeight: 400, fontSize: "16px" }}>{data.detail}</p>

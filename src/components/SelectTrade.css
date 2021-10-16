@@ -18,3 +18,7 @@
     border: solid 2px #15C777 !important;
     border-width: 0 0 3px 0 !important;
 }
+
+.hoverSelect:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

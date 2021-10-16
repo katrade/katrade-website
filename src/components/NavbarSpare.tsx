@@ -38,6 +38,14 @@ const google = 'https://google.com'
 interface INavbar {
     image?: string
 }
+const subStyles = {
+    fontWeight: 500,
+    color: "#fff",
+    fontSize: "35px",
+    display: "inline-block",
+    margin: "0 20px",
+    cursor: "pointer",
+}
 
 function NavbarSpare({ image }: INavbar) {
     const { destCompState , destCompDispatch } = useContext(DestCompContext);
@@ -90,6 +98,7 @@ function NavbarSpare({ image }: INavbar) {
 
     const [ category , setCategory ] = useState<any>();
     const { getUserData , getCategory} = useAuthorization();
+    const [ selectMainCate, setSelcetMainCate ] = useState<any>();
 
     useEffect(() => {
         resize();
@@ -97,17 +106,27 @@ function NavbarSpare({ image }: INavbar) {
             var CategoryData = await getCategory();
             if (CategoryData) {
                 setCategory(CategoryData);
+                setSelcetMainCate(CategoryData[0].parentCategoryEn);
             }
         }
         init();
     }, []);
 
     var CategoryData:any;
+    var SubCategoryArrayEn: any = [];
+    var SubCategoryArrayTh: any = [];
+    const [selectIndex, setSelectIndex] = useState<any>(0);
     if(category){
-        CategoryData = category.map((data:any, index:any) => {
-            return <li>{data.parentCategoryEn}</li>
+        CategoryData = category.map((data: any, index: any) => {
+            SubCategoryArrayEn.push(data.childCategoryEn.map((subdata: any) => {
+                return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
+            }));
+            SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
+                return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata}</span>;
+            }));
+
+            return <li className="" onClick={() => {setSelectIndex(index); setSelcetMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
         });
-    }else{
     }
 
     if (mobile) {
@@ -126,6 +145,10 @@ function NavbarSpare({ image }: INavbar) {
             return alert('Type something, Idiot!!!')
         }
         history.push(`/app/search/${searchText}`)
+    }
+    function searchByNav(searchNav: any) {
+        history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
+        window.location.reload();
     }
 
     function signout() {

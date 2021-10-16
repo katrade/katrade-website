@@ -19,7 +19,7 @@ export default function Request() {
     const { getRequest, getPending , getInprogress } = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
-    const [dataInprogess, setDataProfressn] = useState<any>();
+    const [dataInprogess, setDataInprogess] = useState<any>();
     useEffect(() => {
         async function init() {
             var data1 = await getRequest();
@@ -32,7 +32,7 @@ export default function Request() {
             }
             var data3 = await getInprogress();
             if (data3) {
-                setDataProfressn(data3);
+                setDataInprogess(data3);
             }
         }
         init();

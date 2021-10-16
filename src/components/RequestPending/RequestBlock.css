@@ -10,6 +10,7 @@
     max-width: 45%;
     border-radius: 8px;
     background-color: #E2E2E2;
+    cursor: pointer;
 }
 
 .yourItem-request {
@@ -19,4 +20,10 @@
     max-width: 45%;
     border-radius: 8px;
     background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.handleHover:hover {
+    /* background-color: #000; */
+    opacity: 0.9;
 }

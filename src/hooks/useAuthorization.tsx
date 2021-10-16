@@ -7,7 +7,8 @@ import { useHistory } from "react-router";
 // import { resourceUsage } from "process";
 // import { ContactSupportOutlined } from "@material-ui/icons";
 import { uploadItemPicture } from "..//utils/storage";
-import { IChat, IContact, IDealing, IMessage, IUserContacts } from "../interfaces/Chat";
+import { IChat, IContact, IDealing, IMessage } from "../interfaces/Chat";
+// import { connectStorageEmulator } from "@firebase/storage";
 
 // test pushing changes
 
@@ -326,11 +327,13 @@ export default function useAuthorization() {
             .then(res => {
                 ;
                 if (res.data.value == false) {
+                    hide();
                     alert("ส่งคำขอ ล้มเหลว");
-                    window.location.reload();
+                    // window.location.reload();
                 } else {
+                    hide();
                     alert("ส่งคำขอ สำเร็จ, คำขอจะอยู่ใน pending");
-                    window.location.reload();
+                    // window.location.reload();
                     // history.push("/app/request")
                 }
             })
@@ -584,7 +587,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                
+                window.location.reload();
             })
             .catch(() => {
                 ;
@@ -844,6 +847,57 @@ export default function useAuthorization() {
             })
     }
     
+    async function searchByCategory(parentCateEn:any, childCateEn: any) {
+        if (childCateEn != "none"){
+            return await axios.post(`${API}/inventory/searchByCategory`, 
+            {
+                parentCategoryEn: parentCateEn , 
+                childCategoryEn: childCateEn 
+            }, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+                }
+            })
+                .then(res => {
+                    // window.location.reload();
+                    return res.data;
+                })
+                .catch(() => {
+                    return null;
+                })
+        }else{
+            return await axios.post(`${API}/inventory/searchByCategory`, {parentCategoryEn: parentCateEn}, {
+                headers: {
+                    'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+                }
+            })
+                .then(res => {
+                    // window.location.reload();
+                    return res.data;
+                })
+                .catch(() => {
+                    return null;
+                })
+        }
+    }
+
+    // async function getSearch(searchword: any) {
+    //     return await axios.get(`${API}/inventory/search?query=${searchword}`, {
+    //         headers: {
+    //             'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+    //         }
+    //     })
+    //         .then(res => {
+    //             ;
+    //             return res.data;
+    //         })
+    //         .catch(() => {
+    //             ;
+    //             return null;
+    //         })
+    // }
+    
     return {
         getUserData,
         updateProfilePic,
@@ -886,6 +940,7 @@ export default function useAuthorization() {
         getDealingList,
         getMatchMarket,
         getLastChatData,
-        replaceAllUserContact
+        replaceAllUserContact,
+        searchByCategory
     }
 }
