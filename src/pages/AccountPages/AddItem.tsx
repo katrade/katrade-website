@@ -39,7 +39,7 @@ export default function AddItem() {
     var SubCategoriesTh:any = [];
     var MainCateLangTh:any = [];
     var SubCateLangTh:any = [];
-    SubCategoriesEn.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
+    SubCategoriesEn.push([{ value: 'Please select a main category', label: 'Please select a main category'},]);
     SubCategoriesTh.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
     if(category){
         MainCategoriesEn = category.map((data:any, index:any) => {
