@@ -7,6 +7,8 @@ import { API } from '../../app.setting.json'
 import useLoading from '../../hooks/useLoading';
 import eye_open from '../../pics/red-eye.png'
 import eye_close from '../../pics/hide.png'
+import InputValidation from "../InputValidation";
+
 interface p {
     pw: number;
     setPw: any
@@ -17,6 +19,12 @@ export default function SignupForm({ pw, setPw }: p) {
     const [form, handleForm] = useForm();
     const [show, hide] = useLoading();
     const [showPassword, setShowPassword] = useState(1);
+    const [validType, setValidType] = useState("0")
+    const [showAlert1, setShowAlert1] = useState("0")
+    const [showAlert2, setShowAlert2] = useState("0")
+    const [showAlert3, setShowAlert3] = useState("0")
+    const [showAlert4, setShowAlert4] = useState("0")
+    const [showAlert5, setShowAlert5] = useState("0")
     // const checkSame = async () => {
     //     let result = await fetch(`${API}/user/checkUn?username=${form.username}`).then(res => res.json());
     //     if(result.message === "AU"){
@@ -85,14 +93,85 @@ export default function SignupForm({ pw, setPw }: p) {
                     history.push(`/app/verify/pending?email=${form.email}&firstname=${form.firstname}&lastname=${form.surname}`)
                 }
                 else {
-                    alert("Error");
+                    // alert("Error");
+                    setValidType("alreadyused")
+                    setShowAlert3("1")
                 }
             }
         }
         else {
-            alert("please confirm all of your information.")
+            // alert("please confirm all of your information.")
+            setValidType("empty")
+            if (data.firstname == null) {
+                setShowAlert1("1")
+            }
+            if (data.lastname == null) {
+                setShowAlert2("1")
+            }
+            if (data.email == null) {
+                setShowAlert3("1")
+            }
+            if (data.password == null) {
+                setShowAlert4("1")
+            }
+            if (data.phoneNumber == null) {
+                setShowAlert5("1")
+            }
+            if (data.firstname != null) {
+                setShowAlert1("0")
+            }
+            if (data.lastname != null) {
+                setShowAlert2("0")
+            }
+            if (data.email != null) {
+                setShowAlert3("0")
+            }
+            if (data.password != null) {
+                setShowAlert4("0")
+            }
+            if (data.phoneNumber != null) {
+                setShowAlert5("0")
+            }
         }
     }
+
+    useEffect (() => {
+        if (form.firstname == "") {
+            setShowAlert1("1")
+            setValidType("empty")
+        }
+        if (form.surname == "") {
+            setShowAlert2("1")
+            setValidType("empty")
+        }
+        if (form.email == "") {
+            setShowAlert3("1")
+            setValidType("empty")
+        }
+        if (form.password == "") {
+            setShowAlert4("1")
+            setValidType("empty")
+        }
+        if (form.phone == "") {
+            setShowAlert5("1")
+            setValidType("empty")
+        }
+        if (form.firstname != null && form.firstname != "") {
+            setShowAlert1("0")
+        }
+        if (form.surname != null && form.surname != "") {
+            setShowAlert2("0")
+        }
+        if (form.email != null && form.email != "") {
+            setShowAlert3("0")
+        }
+        if (form.password != null && form.password != "") {
+            setShowAlert4("0")
+        }
+        if (form.phone != null && form.phone != "") {
+            setShowAlert5("0")
+        }
+    }, [form.firstname, form.surname, form.email, form.password, form.phone])
 
     return (
         <>
@@ -105,9 +184,10 @@ export default function SignupForm({ pw, setPw }: p) {
                             type="text"
                             placeholder="Please enter your firstname."
                             name="firstname"
-                            value={form.firstname || ""}
+                            value={form.firstname}
                             onChange={handleForm}
                         />
+                        <InputValidation valid={validType} name="firstname" showMes={showAlert1} />
                     </div>
                     <div className="col-lg mb-3">
                         <p className="mb-1">Surname</p>
@@ -116,9 +196,10 @@ export default function SignupForm({ pw, setPw }: p) {
                             type="text"
                             placeholder="Please enter your surname."
                             name="surname"
-                            value={form.surname || ""}
+                            value={form.surname}
                             onChange={handleForm}
                         />
+                        <InputValidation valid={validType} name="surname" showMes={showAlert2} />
                     </div>
                 </div>
                 <div className="row">
@@ -129,15 +210,16 @@ export default function SignupForm({ pw, setPw }: p) {
                             type="text"
                             placeholder="Please enter your e-mail."
                             name="email"
-                            value={form.email || ""}
+                            value={form.email}
                             onChange={handleForm}
                         />
+                        <InputValidation valid={validType} name="email" showMes={showAlert3} />
                     </div>
                     <div className="col-lg mb-3">
                         <p className="mb-1">Password</p>
                         <div className="input-container">
                             <input
-                                value={form.password || ""}
+                                value={form.password}
                                 onChange={handleForm}
                                 name="password"
                                 className="input-none" type={showPassword === 1 ? "password" : "text"}
@@ -146,6 +228,7 @@ export default function SignupForm({ pw, setPw }: p) {
                             <img src={showPassword === 1 ? eye_open : eye_close} width="20" onClick={() => setShowPassword(showPassword * -1)} className="pointer" />
                         </div>
                         {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
+                        <InputValidation valid={validType} name="password" showMes={showAlert4} />
                     </div>
                 </div>
                 <div className="row">
@@ -157,9 +240,10 @@ export default function SignupForm({ pw, setPw }: p) {
                             type="text"
                             placeholder="Please enter your phone number."
                             name="phone"
-                            value={form.phone || ""}
+                            value={form.phone}
                             onChange={handleForm}
                         />
+                        <InputValidation valid={validType} name="phone number" showMes={showAlert5} />
                     </div>
                     <div className="col-lg mb-3">
                         

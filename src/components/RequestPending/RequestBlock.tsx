@@ -15,6 +15,8 @@ export default function RequestBlock({data, status, index}:any) {
             finishTrade(data.requestId)
         }
     };
+    console.log(data)
+
     function btnRPI(){
         if(status == 0){
             return (
@@ -27,9 +29,9 @@ export default function RequestBlock({data, status, index}:any) {
             return <TransparentButton onClick={() => askingDeleteRequest()} buttonColor="red">Cancel Request</TransparentButton>;
         }else if(data.state == 1){
             return (
-                <div>
+                <div className="d-flex align-items-center">
                     <p className="fs-5 m-0">Please deal and confirm for trading in your personal chat</p>
-                    <TransparentButton onClick={() => history.push(`/app/chatDashboard?duo_id=${data.requestId}&duo_username=${data.ownerInventoryId}`)} buttonColor="blue">Chat หลอกๆ</TransparentButton>
+                    <TransparentButton onClick={() => history.push(`/app/chat?duo_id=${data.requestId}&duo_username=${data.ownerInventoryId}`)} buttonColor="blue">Chat</TransparentButton>
                 </div>
             );
         }else if(data.state == 2){

@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Block from '../components/Block';
 import Recommend from '../components/Recommend';
+import Interest from '../components/Interest';
 
 const queryString = require('query-string');
 
@@ -23,7 +24,7 @@ export default function ProfileViewer() {
     
     const [ anotherUserData , setAnotherUserData ] = useState<any>(null);
     const [ followData , setFollowData ] = useState<any>();
-    const [ anotherInventoryData , setAnotherInventoryData ] = useState<any>();
+    const [ anotherInventoryData , setAnotherInventoryData ] = useState<any>([]);
 
     useEffect(() => {
         async function init() {
@@ -34,7 +35,7 @@ export default function ProfileViewer() {
                 if (getFollowerData) {
                     setFollowData(getFollowerData)
                 }
-                var getInventoryById = await getAnotherInventory(user_id)  
+                var getInventoryById = await getAnotherInventory(user_id)
                 if (getInventoryById) {
                     setAnotherInventoryData(getInventoryById)
                 }
@@ -44,9 +45,9 @@ export default function ProfileViewer() {
     }, [])
 
     if(anotherUserData && followData && anotherInventoryData) {
-        console.log(anotherInventoryData)
         const inventory_item = anotherInventoryData.map((item:any, index:any) => {
-            return <Recommend item={item} key={index} />;
+            return <Interest item={item} key={index} />; // ขออนุญาตให้อันนี้แปปนะเภอ เภอน่าจะกำลังทำ match อยู่ใช่ไหมครับ
+            // return <Recommend item={item} key={index} />; //
         });
 
         return (
@@ -58,7 +59,7 @@ export default function ProfileViewer() {
                         <div className="container-profile-data">
                             <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
                                 <div className="d-flex justify-content-center mt-2 mb-3">
-                                    <img className="rounded-circle" src={anotherUserData.profilePic} style={{ width: "130x", height: "130px", borderRadius:"50%", margin:"0 50px" }} />
+                                    {/* <img className="rounded-circle" src={anotherUserData.profilePic} style={{ width: "130x", height: "130px", borderRadius:"50%", margin:"0 50px" }} /> */}
                                     {/* <div style={{
                                         backgroundImage: `${anotherUserData.profilePic}`, backgroundPosition: 'center',
                                         backgroundSize: 'cover',
@@ -68,6 +69,18 @@ export default function ProfileViewer() {
                                         borderRadius: '50%',
                                         margin: '0px 50px',
                                     }}></div> */}
+                                    <div style={{
+                                        minWidth: "130px",
+                                        minHeight: "130px",
+                                        backgroundImage: `url(${anotherUserData.profilePic})`,
+                                        backgroundSize: 'cover',
+                                        backgroundRepeat: 'no-repeat',
+                                        borderRadius: "50%",
+                                        backgroundPosition: "center",
+                                        margin:"0 50px"
+                                    }}>
+                                        
+                                    </div>
                                 </div>
                                 <div>
                                     <h3 style={{ color: "#4a5659" }}>{anotherUserData.firstname} {anotherUserData.lastname}</h3>

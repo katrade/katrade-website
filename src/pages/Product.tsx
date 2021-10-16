@@ -217,6 +217,7 @@ function Product() {
     }
 
     if (data && myAccout) {
+
         var checkpath = window.location.pathname;
         var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
 

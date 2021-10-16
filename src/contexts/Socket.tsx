@@ -30,7 +30,9 @@ interface ISocketContext {
     duoUsername: string,
     setDuoUsername: React.Dispatch<React.SetStateAction<string>> | (() => void),
     currentIndex: number,
-    setCurrentIndex: React.Dispatch<React.SetStateAction<number>> | (() => void)
+    setCurrentIndex: React.Dispatch<React.SetStateAction<number>> | (() => void),
+    chkReRenderSidebar: boolean,
+    setChkReRenderSidebar: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
 
 }
 
@@ -71,7 +73,9 @@ export const SocketContext = React.createContext<ISocketContext>({
     duoUsername: "",
     setDuoUsername: () => { },
     currentIndex: 0,
-    setCurrentIndex: () => { }
+    setCurrentIndex: () => { },
+    chkReRenderSidebar: false,
+    setChkReRenderSidebar: () => { }
 });
 
 interface propsInterface {
@@ -102,6 +106,7 @@ export function SocketProvider({ children }: propsInterface) {
     const [roomIdForTabChat, setRoomIdForTabChat] = useState("")
     const [duoUsername, setDuoUsername] = useState(duo_username)
     const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const [chkReRenderSidebar, setChkReRenderSidebar] = useState<boolean>(false)
 
     useEffect(() => {
 
@@ -176,7 +181,11 @@ export function SocketProvider({ children }: propsInterface) {
                                     userNameContact: duo_username
                                 })
                                 setContactList(tmp)
-                                updateUserContact(account._id, account.username, duo_id, duo_username)
+                                updateUserContact(
+                                    account._id, 
+                                    account.username, 
+                                    duo_id, 
+                                    duo_username)
                             }
                             else {
                                 setContactList(contactData.userContacts)
@@ -198,6 +207,10 @@ export function SocketProvider({ children }: propsInterface) {
         sidebar()
 
     }, [account])
+
+    
+
+    // console.log(account.username)
 
     useEffect(() => {
         // console.log(roomId)
@@ -223,6 +236,7 @@ export function SocketProvider({ children }: propsInterface) {
         a.push(data.content)
         setMessageList(a);
         setChk(!chk);
+        setChkReRenderSidebar(true)
     });
 
     return (
@@ -248,7 +262,9 @@ export function SocketProvider({ children }: propsInterface) {
             duoUsername,
             setDuoUsername,
             currentIndex,
-            setCurrentIndex
+            setCurrentIndex,
+            chkReRenderSidebar,
+            setChkReRenderSidebar
         }}>
             {children}
         </SocketContext.Provider>
