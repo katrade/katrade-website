@@ -50,6 +50,7 @@ export default function ItemBlock(props: any) {
 					</div>
 				</div>
 				<div className="position-absolute" style={{top:"0",right:"0"}}>
+					<p className = "m-0" style={{cursor: "pointer"}}>edit</p>
 					<p className="m-0" onClick={handleDelete} style={{cursor:"pointer"}}>delete</p>
 				</div>
 			</div>
