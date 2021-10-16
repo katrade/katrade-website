@@ -120,6 +120,7 @@ function Navbar({ image }: INavbar) {
 
     const [category, setCategory] = useState<any>();
     const { getCategory } = useAuthorization();
+    const [ selectMainCate, setSelcetMainCate ] = useState<any>();
 
     useEffect(() => {
         resize();
@@ -127,6 +128,7 @@ function Navbar({ image }: INavbar) {
             var CategoryData = await getCategory();
             if (CategoryData) {
                 setCategory(CategoryData);
+                setSelcetMainCate(CategoryData[0].parentCategoryEn);
             }
         }
         init();
@@ -145,7 +147,7 @@ function Navbar({ image }: INavbar) {
                 return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata}</span>;
             }));
 
-            return <li className="" onClick={() => setSelectIndex(index)} key={index}>{data.parentCategoryEn}</li>;
+            return <li className="" onClick={() => {setSelectIndex(index); setSelcetMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
         });
     }
 
@@ -164,10 +166,12 @@ function Navbar({ image }: INavbar) {
         if (!searchText) {
             return alert('Search for nothing????')
         }
-        history.push(`/app/search/${searchText}`)
+        history.push(`/app/search/${searchText+"-byText"}`)
+        window.location.reload();
     }
     function searchByNav(searchNav: any) {
-        history.push(`/app/search/${searchNav}`);
+        history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
+        window.location.reload();
     }
 
     function signout() {
@@ -229,10 +233,7 @@ function Navbar({ image }: INavbar) {
                                                     zIndex: 30,
                                                 }}
                                             ></div>
-
                                         </div>
-
-
                                     </div>
                                 </Block>
                                 : null

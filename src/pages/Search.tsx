@@ -22,14 +22,13 @@ export default function Search() {
     // const { search } = useLocation();
     // const { searchword } = queryString.parse(search);
 
-    const { getUserData , getSearch } = useAuthorization();
+    const { getUserData , getSearch , searchByCategory } = useAuthorization();
 
     const [ searchQuote , setSearchQuote] = useState<string|null>('')
     const [ account , setAccount] = useState<any>();
     const [ searchData , setSearchData ] = useState<any>();
     const [show, hide] = useLoading();
     const params: IParams = useParams();
-
     useEffect(() => {
         async function init() {
             show()
@@ -37,35 +36,45 @@ export default function Search() {
             if (userData) {
                 setAccount(userData);
             }
-            var getSrch:any = await getSearch(params.quote)
-            if (getSrch) {
-                setSearchData(getSrch);
+            if (params.quote.split("-")[params.quote.split("-").length - 1] == "byCategory") {
+                var getSrch:any = await searchByCategory(params.quote.split("-")[0], params.quote.split("-")[1]);
+                if (getSrch){
+                    console.log(params.quote.split("-")[params.quote.split("-").length - 1], getSrch)
+                    setSearchData(getSrch);
+                }
+            }else{
+                var getSrch:any = await getSearch(params.quote.split("-").slice(0, -1).join(""));
+                if (getSrch){
+                    console.log(params.quote.split("-")[params.quote.split("-").length - 1], getSrch)
+                    setSearchData(getSrch);
+                }
             }
             hide()
         }
         init();
-    }, [])
+    }, [params.quote.split("-")[1]])
+
+    // console.log(params.quote.split("-")[0], params.quote.split("-")[1])
 
     var found = 0;
-    if(searchData){
+    if(searchData && params.quote.split("-")[params.quote.split("-").length - 1] == "byText"){
         const rec_item = searchData.map((item:any, index:any) => {
             if (item.item.owner != account._id) {
                 found += 1;
                 return <Interest item={item.item} key={index} />;
             }
         });
+        // console.log(rec_item)
 
         return (
             <Background>
                 <Navbar image={account.profilePic} />
                 <Block  height="800px" backgroundColor="#f7fafc" darkBackgroundColor="transparent">
                     <div className="my-4">
-                        <H5 className="mb-3">Search "{params.quote}".</H5>
-                        <div className="d-flex justify-content-between full-width">
-                            <div className="d-flex justify-content-between flex-wrap">
+                        <H5 className="mb-3">Search "{params.quote.split("-").slice(0, -1).join("")}".</H5>
+                            <div className="d-flex flex-wrap">
                                 {rec_item.slice(0, 50)}
                             </div>
-                        </div>
                         <div className={found == 0 ? "d-flex justify-content-center align-items-center my-5" : "d-none"} style={{height:"300px", backgroundColor:"transparent"}}>
                                 <H4 className="text-center">ไม่พบสิ่งของที่คุณค้นหา</H4>
                         </div>
@@ -75,6 +84,35 @@ export default function Search() {
                 <Footer />
             </Background>
         );
+
+    }else if(searchData && params.quote.split("-")[params.quote.split("-").length - 1] == "byCategory"){
+        const rec_item = searchData.map((item:any, index:any) => {
+            if (item.owner != account._id) {
+                found += 1;
+                return <Interest item={item} key={index} />;
+            }
+        });
+
+        return (
+            <Background>
+                <Navbar image={account.profilePic} />
+                <Block  height="800px" backgroundColor="#f7fafc" darkBackgroundColor="transparent">
+                    <div className="my-4">
+                        <H5 className="mb-3">Search "{params.quote.split("-").slice(0, -1)[1] == "none" ? params.quote.split("-").slice(0, -1)[0] : params.quote.split("-").slice(0, -1).join(": ")}".</H5>
+                        {/* <H5 className="mb-3">Search "{params.quote.split("-").slice(0, -1).join(": ")}".</H5> */}
+                            <div className="d-flex flex-wrap">
+                                {rec_item.slice(0, 50)}
+                            </div>
+                        <div className={found == 0 ? "d-flex justify-content-center align-items-center my-5" : "d-none"} style={{height:"300px", backgroundColor:"transparent"}}>
+                                <H4 className="text-center">ไม่พบสิ่งของที่คุณค้นหา</H4>
+                        </div>
+                    </div>
+                </Block>
+
+                <Footer />
+            </Background>
+        );
+    
     }else{
         return (
             <div>

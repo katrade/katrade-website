@@ -56,7 +56,7 @@ export default function SlideCategory() {
     ]
 
     function searchBySlide(searchNav:any) {
-        history.push(`/app/search/${searchNav}`);
+        history.push(`/app/search/${searchNav+"-"+"none"+"-byCategory"}`);
     }
 
     const slideTop = categorySlide.map((data:any, index:any) => {

@@ -25,7 +25,6 @@ export default function Request() {
             var data1 = await getRequest();
             if (data1) {
                 setDataRequest(data1);
-                console.log(data1)
             }
             var data2 = await getPending();
             if (data2) {
