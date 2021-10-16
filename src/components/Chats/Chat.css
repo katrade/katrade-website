@@ -7,14 +7,15 @@
     font-size: 150%;
 }
 
-.tabchat {
-    height: 90px;
-    border-radius: 10px;
-}
-
 .lineBar {
     border: 1px solid #C4C4C4;
     width: 100%;
+}
+
+.tabchat {
+    height: 90px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .tabchat:hover {
@@ -25,6 +26,7 @@
     height: 90px;
     border-radius: 10px;
     background-color: rgba(158, 158, 158, 0.33);
+    cursor: pointer;
 }
 
 .chatContainer {
@@ -48,6 +50,8 @@
     justify-content: end;
     width: auto;
     align-items: center;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .otherMsg {
@@ -56,25 +60,27 @@
     width: auto;
     align-items: center;
     padding-left: 10px;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .yourtextBox {
 	min-width: 60px;
-	max-width: 700px;
+	max-width: 400px;
 	padding: 14px 18px;
     margin: 6px 8px;
 	border-radius: 16px;
-	border: 1px solid black;
+	border: 1px solid rgb(218, 217, 217);
     background-color: rgb(218, 217, 217);
 }
 
 .othertextBox {
     min-width: 60px;
-	max-width: 700px;
+	max-width: 400px;
 	padding: 14px 18px;
     margin: 6px 8px;
 	border-radius: 16px;
-	border: 1px solid black;
+	border: 1px solid rgb(180, 180, 180);
 }
 
 
@@ -96,4 +102,10 @@
     width: 50%;
     opacity: 0.33;
 
+}
+
+.limit {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

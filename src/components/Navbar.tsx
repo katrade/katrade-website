@@ -139,10 +139,10 @@ function Navbar({ image }: INavbar) {
     if (category) {
         CategoryData = category.map((data: any, index: any) => {
             SubCategoryArrayEn.push(data.childCategoryEn.map((subdata: any) => {
-                return <span onClick={() => {searchByNav(subdata) ; setDrop(!drop)}} style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
+                return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
             }));
             SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
-                return <span onClick={() => {searchByNav(subdata) ; setDrop(!drop)}} style={subStyles}>{subdata}</span>;
+                return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata}</span>;
             }));
 
             return <li className="" onClick={() => setSelectIndex(index)} key={index}>{data.parentCategoryEn}</li>;
@@ -166,7 +166,7 @@ function Navbar({ image }: INavbar) {
         }
         history.push(`/app/search/${searchText}`)
     }
-    function searchByNav(searchNav:any) {
+    function searchByNav(searchNav: any) {
         history.push(`/app/search/${searchNav}`);
     }
 
@@ -175,7 +175,7 @@ function Navbar({ image }: INavbar) {
         history.push('/app/signin');
     }
     return (
-        <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff": "#0f0f0f"}}>
+        <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff" : "#0f0f0f" }}>
             <Block height="65px" className="d-flex align-items-center">
                 <div className="header-con">
                     <a href="/app/Market">
@@ -267,14 +267,15 @@ function Navbar({ image }: INavbar) {
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                            <a onClick={() => history.push("/app/chat")}>Chat</a>
-                            <a onClick={() => { window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ") }}>Notification</a>
-                            <a onClick={() => history.push("/app/request")}>Request</a>
-                            <a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a>
-                            <a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a>
-                            <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
-                            <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
+                            <div><a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a></div>
+                            <div><a onClick={() => history.push("/app/chat")}>Chat</a></div>
+                            <div><a onClick={() => history.push("/app/chat")}>Chat</a></div>
+                            <div><a onClick={() => { window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ") }}>Notification</a></div>
+                            <div><a onClick={() => history.push("/app/request")}>Request</a></div>
+                            <div><a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a></div>
+                            <div><a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a></div>
+                            <div><a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a></div>
+                            <div><a onClick={signout}><FiLogOut />&nbsp;Logout</a></div>
                         </div>
                     </div>
                 </div>

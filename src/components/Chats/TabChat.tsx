@@ -25,9 +25,10 @@ export default function Tabchat(props: any) {
         setRoomIdForTabChat,
         currentIndex,
         setCurrentIndex,
-        index
+        index,
+        chkReRenderSidebar
     } = useContext(SocketContext)
-    const [lastMessage, setLastMessage] = useState<string>()
+    const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()
     const [haveMessage, setHaveMessage] = useState(false)
     const { getChatData, getLastChatData } = useAuthorization();
@@ -110,8 +111,8 @@ export default function Tabchat(props: any) {
                 <div className="col-9 justify-content-center align-self-center">
                     <span className="fw-bold fs-4">{props.data.userNameContact}</span><br />
                     {haveMessage ?
-                        <span>{sender}: {lastMessage}</span>
-                        : <span>No Message</span>
+                        <p className="limit">{sender}: {lastMessage}</p>
+                        : <p>No Message</p>
                     }
 
                 </div>
