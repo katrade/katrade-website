@@ -141,6 +141,7 @@ function Market() {
         }
     }, [lang])
     if (allInventory && matchInventory) {
+        console.log(allInventory)
         const tmpMatchInventory = matchInventory.map((item: any, index: any) => {
             if (item.owner != account._id) {
                 return <Recommend item={item.match} match={item.matchWith} key={index} />;

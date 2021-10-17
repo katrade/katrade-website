@@ -62,6 +62,7 @@ function Product() {
             var dataDetail = await getDetailProduct(product_id);
             // console.log(dataDetail)
             if (dataDetail) {
+                console.log(dataDetail)
                 setData(dataDetail);
                 var getMatch = await getMatchProduct(dataDetail._id);
                 if (getMatch) {
@@ -169,21 +170,27 @@ function Product() {
     function favorite_btn() {
         if (!checkFavoritetmp) {
             return (
+                <div style={{width:"100%"}}>
                 <SolidButton onClick={() => {
                     addFavourite(data._id);
                     setHandleFavorite(handleFavorite + 1);
-                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e" }}>
+                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" 
+                    style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", color: "#ed2b3e", border: "1px solid #ed2b3e", width:"100%" }}>
                     <FcLike />
                 </SolidButton>
+                </div>
             );
         } else {
             return (
+                <div style={{width:"100%"}}>
                 <SolidButton onClick={() => {
                     deleteFavourite(data._id, checkpath);
                     setHandleFavorite(handleFavorite - 1);
-                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff" }}>
+                    }} className="px-3 d-flex justify-content-center align-items-center" width="50px" height="50px" fontSize="24px" buttonColor="transparent" margin="0" 
+                    style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", backgroundColor: "#ed2b3e", border: "1px solid #ed2b3e", color: "#fff", width:"100%" }}>
                     <FcLike style={{ filter: "brightness(10)" }} />
                 </SolidButton>
+                </div>
             );
         }
     }
@@ -225,7 +232,7 @@ function Product() {
             return (
                 <div key={index}
                     onClick={() => changeRequireDetail(index)}
-                    className="bagde bagde-sm rounded-pill px-2 m-1 py-1"
+                    className="bagde bagde-sm rounded-pill px-2 m-1 py-1 pointer"
                     style={{ backgroundColor: "#EDF2F4" }}>
                     <p className="m-0">{data.reqCat.parentCategoryEn} : {data.reqCat.childCategoryEn}</p>
                 </div>
@@ -305,9 +312,9 @@ function Product() {
                                         <div onClick={handleClickFollow}>{follow_btn()}</div>
                                     </div>
                                 </div>
-                                <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-end mt-3"}>
-                                    <div className="me-3" onClick={handleClickFavorite}>{favorite_btn()}</div>
-                                    <SolidButton onClick={clickRequest} className="px-3" fontSize="24px" buttonColor="limegreen" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
+                                <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-between mt-3"}>
+                                    <div className="" onClick={handleClickFavorite} style={{width:"48%"}}>{favorite_btn()}</div>
+                                    <SolidButton onClick={clickRequest} className="" fontSize="24px" buttonColor="#15C777" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)" , width:"48%"}}>
                                         Trade
                                     </SolidButton>
                                 </div>
