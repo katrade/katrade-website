@@ -1,12 +1,14 @@
 import { useState , useContext , useEffect } from "react"
 import iconPic from '..\src\pics\backToTop.png'
 
-const BackToTop = ({showBelow} : {showBelow:any}) => {
+const BackToTop = (probs: any) => {
     
-    const [show, setShow] = useState(showBelow ? false : true)
+    const [show, setShow] = useState(probs.showBelow ? false : true)
+
+    let lang = probs.lang === "en" ? "Bact To Top" : "กลับไปด้านบน"
 
     const handleScroll = () => {
-        if (window.pageYOffset > showBelow) {
+        if (window.pageYOffset > probs.showBelow) {
             if (show == false) {
                 setShow(true)
             }
@@ -19,7 +21,7 @@ const BackToTop = ({showBelow} : {showBelow:any}) => {
     }
 
     useEffect(() => {
-        if (showBelow) {
+        if (probs.showBelow) {
             window.addEventListener(`scroll`, handleScroll)
             return () => window.removeEventListener(`scroll`, handleScroll)
         }
@@ -32,7 +34,7 @@ const BackToTop = ({showBelow} : {showBelow:any}) => {
     return (
         <div>
             {show &&
-                <button type="button" className="btn btn-secondary p-2" id="topbtn" onClick={handleClick} style={{position: "fixed", bottom: "5%", right: "5%", cursor: "pointer"}}>Back To Top</button>
+                <button type="button" className="btn btn-secondary p-2" id="topbtn" onClick={handleClick} style={{position: "fixed", bottom: "10%", right: "2%", cursor: "pointer", zIndex: 100}}>{lang}</button>
             }      
         </div>
     )
