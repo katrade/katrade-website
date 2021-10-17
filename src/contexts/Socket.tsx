@@ -127,6 +127,7 @@ export function SocketProvider({ children }: propsInterface) {
     
     useEffect(() => {
         refMessages.current = messageList;
+        // setChkMessage(true)
     }, [messageList])
 
     useEffect(() => {
