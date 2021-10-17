@@ -20,7 +20,7 @@ export default function DealItems(props: any) {
         }
         // console.log(props.data)
     }
-    console.log(props.data)
+    // console.log(props.data)
     const handleCancelBtn = () => {
         if(window.confirm(`ต้องการลบคำขออีหลีถิ?`)){
             deleteMyRequestPending(props.data.requestId)
@@ -29,7 +29,7 @@ export default function DealItems(props: any) {
     }
     // console.log(props.data.userConfirm)
     useEffect (() => {
-        console.log("TUM LAEWWWW")
+        // console.log("TUM LAEWWWW")
         if (props.data.userConfirm) {
             setDisableBtn(true)
         }

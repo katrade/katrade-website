@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { contextType } from '../types/user';
 import io, { Socket } from "socket.io-client";
 import { useHistory } from "react-router";
@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 interface ISocketContext {
-    socket: Socket<DefaultEventsMap, DefaultEventsMap>,
+    socket: Socket<DefaultEventsMap, DefaultEventsMap> | null,
     account: IAccount,
     setAccount: React.Dispatch<React.SetStateAction<IAccount>> | (() => void),
     duo_id: string,
@@ -37,16 +37,9 @@ interface ISocketContext {
     setChkMessage: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
 }
 
-const socket = io("https://socketkatrade.herokuapp.com", {
-    timeout: 2000, 
-    secure: true,
-    transports: [ "websocket", "polling", "flashsocket" ],
-})
 
-socket.on("connect", () => {
-    console.log("SOCKET is already connected");
-    // console.log(socket.connected);
-})
+
+
 
 export const SocketContext = React.createContext<ISocketContext>({
     socket: io("https://socketkatrade.herokuapp.com", {
@@ -95,6 +88,8 @@ export function SocketProvider({ children }: propsInterface) {
     //     transports: ["flashsocket", "polling", "websocket"]
     // });
 
+    const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
+
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const [roomId, setRoomId] = useState("");
     const history = useHistory();
@@ -110,7 +105,8 @@ export function SocketProvider({ children }: propsInterface) {
     const [duoUsername, setDuoUsername] = useState(duo_username)
     const [currentIndex, setCurrentIndex] = useState<number>(0)
     const [chkReRenderSidebar, setChkReRenderSidebar] = useState<boolean>(false)
-    const [chkMessage, setChkMessage] = useState(false)
+    const [chkMessage, setChkMessage] = useState(false);
+    const refMessages = useRef<IMessage[]>([]);
 
     useEffect(() => {
 
@@ -125,8 +121,39 @@ export function SocketProvider({ children }: propsInterface) {
             }
         }
         init();
+        
 
     }, []);
+    
+    useEffect(() => {
+        refMessages.current = messageList;
+    }, [messageList])
+
+    useEffect(() => {
+        if(socket === null) {
+                setSocket(io("https://socketkatrade.herokuapp.com", {
+                        secure: true,
+                        transports: ["flashsocket", "polling", "websocket"]
+                }));
+        }
+        else {
+            socket.on("connect", () => {
+                console.log("SOCKET is already connected");
+            });
+            socket.on("message", (data: any) => {
+                // console.log(data)
+                // let a = [...messageList]
+                // a.push(data.content)
+                console.log(messageList);
+                setMessageList([...refMessages.current, data.content]);
+                setChk(!chk);
+                setChkReRenderSidebar(true)
+                setChkMessage(true)
+            });
+        }
+        
+            // console.log(socket.connected);
+    }, [socket])
 
     useEffect(() => {
         async function chat() {
@@ -216,7 +243,7 @@ export function SocketProvider({ children }: propsInterface) {
 
     useEffect(() => {
         // console.log(roomId)
-        if (roomId) {
+        if (roomId && socket !== null) {
             socket.emit("joinroom", roomId);
         }
     }, [roomId])
@@ -232,15 +259,7 @@ export function SocketProvider({ children }: propsInterface) {
 
     }, [roomId])
 
-    socket.on("message", (data: any) => {
-        console.log(data)
-        let a = [...messageList]
-        a.push(data.content)
-        setMessageList(a);
-        setChk(!chk);
-        setChkReRenderSidebar(true)
-        setChkMessage(true)
-    });
+    
 
     return (
         <SocketContext.Provider value={{
