@@ -718,8 +718,8 @@ export default function useAuthorization() {
                 currentPassword: currentPassword,
                 newPassword: newPassword,
             }
-            console.log(data.currentPassword);
-            console.log(data.newPassword);
+            // console.log(data.currentPassword);
+            // console.log(data.newPassword);
             // show("Changing Password . . .");
             axios.patch(`${API}/auth/changePassword`, {currentPassword: currentPassword, newPassword: newPassword,},
             {
@@ -729,7 +729,7 @@ export default function useAuthorization() {
                 }
             })
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 if (response.data.value === true) {
                    show("Successfull Change Password!");
                    window.location.reload();

@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import io from "socket.io-client";
 import { SocketContext } from "../../contexts/Socket";
-import useAuthorization from "../../hooks/useAuthorization";
 import "./Chat.css";
 import ProfilePic from "./ProfilePic";
 import SendIcon from '@material-ui/icons/SendRounded'
@@ -26,15 +24,15 @@ export default function Chat() {
         setChkMessage
     } = useContext(SocketContext)
 
-    console.log("Chat Reload")
+    // console.log("Chat Reload")
     const [message, setMessage] = useState("");
     const [usernameNow, setUsernameNow] = useState("")
 
-    console.log("KuAYYYYYYY")
-    console.log(messageList)
+    // console.log("KuAYYYYYYY")
+    // console.log(messageList)
 
     useEffect(() => {
-        console.log(duoUsername)
+        // console.log(duoUsername)
         setUsernameNow(duoUsername)
         // console.log()
     }, [duoUsername])
@@ -47,21 +45,23 @@ export default function Chat() {
     }, [messageList])
 
     const sendMessage = async () => {
-        let messageContent = {
-            room: roomId,
-            content: {
-                sender: account.username,
-                senderID: account._id,
-                content_type: "Text",
-                content: message,
-                timeStamp: new Date()
-            },
-        };
-        // console.log(socket.connected)
-        socket.emit("message", messageContent)
-        // setChkMessage(true)
-        // setMessageList([...messageList, messageContent.content]);
-        setMessage("");
+        if (socket !== null) {
+            let messageContent = {
+                room: roomId,
+                content: {
+                    sender: account.username,
+                    senderID: account._id,
+                    content_type: "Text",
+                    content: message,
+                    timeStamp: new Date()
+                },
+            };
+            // console.log(socket.connected)
+            socket.emit("message", messageContent)
+            // setChkMessage(true)
+            // setMessageList([...messageList, messageContent.content]);
+            setMessage("");
+        }
     };
 
     const history = useHistory()

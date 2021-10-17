@@ -42,7 +42,7 @@ export default function Dealing() {
     useEffect(() => {
         if (dealingList.length != 0) {
             setChkDealing(true)
-            console.log("UNIIIIIII")
+            // console.log("UNIIIIIII")
         }
         else{
             setChkDealing(false)
