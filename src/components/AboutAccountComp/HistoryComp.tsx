@@ -8,7 +8,6 @@ export default function HistoryComp(data:any, checkUser:any) {
     });
 
     if (accountData){
-        console.log(dataHistoryBlock)
         return (
             <div>
                 <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>

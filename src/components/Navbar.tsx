@@ -146,9 +146,11 @@ function Navbar({ image }: INavbar) {
             SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
                 return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata}</span>;
             }));
-
             return <li className="" onClick={() => {setSelectIndex(index); setSelcetMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
         });
+        for (let i=0; i<SubCategoryArrayEn.length; i++){
+            SubCategoryArrayEn[i].push(<span onClick={() => { searchBySlide(subdata); setDrop(!drop) }} style={subStyles}>All</span>)
+        }
     }
 
     if (mobile) {
@@ -167,11 +169,14 @@ function Navbar({ image }: INavbar) {
             return alert('Search for nothing????')
         }
         history.push(`/app/search/${searchText+"-byText"}`)
-        window.location.reload();
+        // window.location.reload();
     }
     function searchByNav(searchNav: any) {
         history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
-        window.location.reload();
+        // window.location.reload();
+    }
+    function searchBySlide(searchNav:any) {
+        history.push(`/app/search/${selectMainCate+"-"+"none"+"-byCategory"}`);
     }
 
     function signout() {
@@ -180,6 +185,8 @@ function Navbar({ image }: INavbar) {
     }
     return (
         <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff" : "#0f0f0f" }}>
+            <div className={drop ? "position-absolute" : "d-none"} onClick={() => setDrop(!drop)} style={{width:"98vw", height:"100vh", opacity:"0.1"}}/>
+            <div className={dropMenu ? "position-absolute" : "d-none"} onClick={() => setDropMenu(!dropMenu)} style={{width:"98vw", height:"100vh", opacity:"0.1"}}/>
             <Block height="65px" className="d-flex align-items-center">
                 <div className="header-con">
                     <a href="/app/Market">

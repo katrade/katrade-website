@@ -7,7 +7,9 @@ export default function FollowersComp(data:any) {
     const [ followerLength , setFollowerLength ] = useState<any>();
 
     useEffect(() => {
-        setFollowerLength(accountData.length);
+        if(accountData){
+            setFollowerLength(accountData.length);
+        }
     } , [accountData])
 
     if (accountData){

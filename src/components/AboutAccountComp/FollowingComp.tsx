@@ -7,7 +7,9 @@ export default function FollowingComp(data: any) {
     const [ followingLength , setFollowingLength ] = useState<any>();
     
     useEffect(() => {
-        setFollowingLength(accountData.length);
+        if(accountData){
+            setFollowingLength(accountData.length);
+        }
     } , [accountData])
 
     function handleFollowingLength(noti:any) {

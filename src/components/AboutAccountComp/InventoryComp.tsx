@@ -1,7 +1,19 @@
+import { useState , useEffect } from 'react';
 import ItemBlock from '../../components/Account/ItemBlock';
 
 export default function InventoryComp(data: any) {
-    const inventoryData = data.data;
+    const inventoryData:any = data.data;
+    const [ inventoryLenght, setInventoryLenght ] = useState<any>();
+
+    useEffect(() => {
+        if(inventoryData){
+            setInventoryLenght(inventoryData.length);
+        }
+    }, [inventoryData])
+
+    function handleInventoryLength() {
+        setInventoryLenght(inventoryLenght - 1);
+    } 
 
     if(inventoryData){
         if(inventoryData.length == 0){
@@ -9,7 +21,7 @@ export default function InventoryComp(data: any) {
                 <div className="bg-white row mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
                     <div>
                         <h4 className="d-inline-block me-3 mb-4">Inventory</h4>
-                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({inventoryData.length})</h5>
+                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({inventoryLenght})</h5>
                     </div>
                     <div>
                         <a href="/app/additem"><h5 className="text-center">คุณยังไม่มีสิ่งของเลย เพิ่มสิ</h5></a>
@@ -17,9 +29,8 @@ export default function InventoryComp(data: any) {
                 </div>
             );
         }else{
-            // console.log(inventoryData)
             const myInventory = inventoryData.reverse().map((data:any, index:any) => {
-                return <ItemBlock data={data} key={index} manage="no"/>;
+                return <ItemBlock data={data} key={index} manage="no" Noti={() => handleInventoryLength()}/>;
             });
             return (
                 <div>
@@ -27,7 +38,7 @@ export default function InventoryComp(data: any) {
                         <div className="d-flex justify-content-between" style={{padding:"0 12px"}}>
                             <div>
                                 <h4 className="d-inline-block me-3 mb-4">Inventory</h4>
-                                <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({inventoryData.length})</h5>
+                                <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({inventoryLenght})</h5>
                             </div>
                             <a href="/app/additem" className="d-flex align-items-center"><h6>add item +</h6></a>
                         </div>

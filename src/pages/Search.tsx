@@ -39,27 +39,27 @@ export default function Search() {
             if (params.quote.split("-")[params.quote.split("-").length - 1] == "byCategory") {
                 var getSrch:any = await searchByCategory(params.quote.split("-")[0], params.quote.split("-")[1]);
                 if (getSrch){
-                    console.log(params.quote.split("-")[params.quote.split("-").length - 1], getSrch)
                     setSearchData(getSrch);
                 }
             }else{
                 var getSrch:any = await getSearch(params.quote.split("-").slice(0, -1).join(""));
                 if (getSrch){
-                    console.log(params.quote.split("-")[params.quote.split("-").length - 1], getSrch)
                     setSearchData(getSrch);
                 }
             }
             hide()
         }
         init();
-    }, [params.quote.split("-")[1]])
+    }, [])
 
     // console.log(params.quote.split("-")[0], params.quote.split("-")[1])
 
     var found = 0;
     if(searchData && params.quote.split("-")[params.quote.split("-").length - 1] == "byText"){
         const rec_item = searchData.map((item:any, index:any) => {
-            if (item.item.owner != account._id) {
+            if (item.item == undefined){
+                window.location.reload();
+            }else if (item.item.owner != account._id) {
                 found += 1;
                 return <Interest item={item.item} key={index} />;
             }
@@ -87,7 +87,9 @@ export default function Search() {
 
     }else if(searchData && params.quote.split("-")[params.quote.split("-").length - 1] == "byCategory"){
         const rec_item = searchData.map((item:any, index:any) => {
-            if (item.owner != account._id) {
+            if(item.owner == undefined){
+                window.location.reload();
+            }else if (item.owner != account._id) {
                 found += 1;
                 return <Interest item={item} key={index} />;
             }

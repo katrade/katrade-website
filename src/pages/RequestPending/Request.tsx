@@ -38,6 +38,19 @@ export default function Request() {
         init();
     }, [])
 
+    const [component, setComponent] = useState(1);
+    const [selectComponent, setSelectComponent] = useState(request_data);
+    const [show, hide] = useLoading();
+    function handleComponent(status: any) {
+        setComponent(status)
+        if (status == 1) {
+            setSelectComponent(request_data);
+        } else if (status == 2) {
+            setSelectComponent(pending_data)
+        } else if (status == 3) {
+            setSelectComponent(inprogress_data)
+        }
+    }
     var request_data: any;
     var pending_data: any;
     var inprogress_data: any;
@@ -55,20 +68,6 @@ export default function Request() {
         inprogress_data = dataInprogess.map((data: any, index: any) => {
             return <RequestBlock data={data} status={2} key={index} />;
         })
-    }
-
-    const [component, setComponent] = useState(1);
-    const [selectComponent, setSelectComponent] = useState(request_data);
-    const [show, hide] = useLoading();
-    function handleComponent(status: any) {
-        setComponent(status)
-        if (status == 1) {
-            setSelectComponent(request_data);
-        } else if (status == 2) {
-            setSelectComponent(pending_data)
-        } else if (status == 3) {
-            setSelectComponent(inprogress_data)
-        }
     }
 
     useEffect(() => {

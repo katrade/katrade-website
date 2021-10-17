@@ -40,7 +40,7 @@ export default function AddItem() {
     var MainCateLangTh:any = [];
     var SubCateLangTh:any = [];
     SubCategoriesEn.push([{ value: 'Please select a main category', label: 'Please select a main category'},]);
-    SubCategoriesTh.push([{ value: 'กรุณาเลือก Category หลักก่อน', label: 'กรุณาเลือก Category หลักก่อน'},]);
+    SubCategoriesTh.push([{ value: 'กรุณาเลือกหมวดหมู่หลักก่อน', label: 'กรุณาเลือกหมวดหมู่หลักก่อน'},]);
     if(category){
         MainCategoriesEn = category.map((data:any, index:any) => {
             var cCatEn = data.childCategoryEn
@@ -138,7 +138,6 @@ export default function AddItem() {
     }
 
     const handleRemoveItem = (index:any) => {
-        console.log(index)
         if(countRequire == 1){
             return 0;
         }
@@ -146,26 +145,36 @@ export default function AddItem() {
         const values = [...wantInputFields];
         values.splice(index , 1);
         SetWantInputFields(values);
-        // window.alert("ยังไม่พร้อมใช้งาน")
     }
 
     var wantSubCateTag = "unSelect";
     var wantSubCateIndex = 0;
-    var [ godHelpMe , setGodHelpMe ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    // const [ arrayOfWantSubIndex, setArrayOfWantSubIndex ] = useState<any>([0, 0, 0, 0, 0]);
+    const [ countWantCate, setCountWantCate ] = useState<any>(1);
+    const [ godHelpMe , setGodHelpMe ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
 
     function selectWantSub(index:any , event:any) { 
         const values = [...wantInputFields];
         values[index]["reqCat"]["parentCategoryEn"] = event.value;
         SetWantInputFields(values);
-
         wantSubCateTag = event.value;
         wantSubCateIndex = event.indexC;
+
+        // var tmp = arrayOfWantSubIndex;
+        // tmp[index] = wantSubCateIndex;
+        // setArrayOfWantSubIndex(tmp);
+
         values[index]["reqCat"]["parentCategoryTh"] = MainCateLangTh[wantSubCateIndex];
 
+        // var placeholderString = "กรุณาเลือก Category ย่อย ของ " + MainCategoriesEn[arrayOfWantSubIndex[index]].label;
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
-        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} placeholder={placeholderString} />);
-        // setGodHelpMe("kuy");
+        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+            className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+            placeholder={placeholderString} />);
     }
+    // console.log(arrayOfWantSubIndex)
+    // console.log(MainCategoriesEn)
+
     function selectedSub(index:any , event:any) {
         const values = [...wantInputFields];
         values[index]["reqCat"]["childCategoryEn"] = event.value;
@@ -196,7 +205,6 @@ export default function AddItem() {
     const [ dataCover, setDataCover ] = useState<File>()
     const [ picture1, setPicture1 ] = useState("https://via.placeholder.com/120")
     const [ dataPicture1, setDataPicture1 ] = useState<File>()
-
     const handleCover = (e:any) => {
         const file = e.target.files[0];
         setDataCover(file);
@@ -287,7 +295,7 @@ export default function AddItem() {
                                 <p className="ms-2">Picture</p>
                                 <div className="d-flex justify-content-around flex-wrap">
                                     {/* Cover Picture */}
-                                    <div className="">
+                                    <div className="position-relative">
                                         <input type="file" ref={coverPictureRef} name="Cover Picture" accept="image/*" onChange={handleCover} style={{display:"none"}}/>
                                         <img src={cover} style={{width:"120px",height:"120px",cursor:"pointer"}}
                                         onClick={() => {
@@ -295,9 +303,12 @@ export default function AddItem() {
                                         }}
                                         ></img>
                                         <p className="d-flex justify-content-center mb-0 mt-2">Cover Pictue</p>
+                                        <ImCross className={dataCover ? "position-absolute rounded-circle bg-secondary pointer" : "d-none"} 
+                                            onClick={() => {setCover("https://via.placeholder.com/120"); setDataCover(undefined);}} 
+                                            style={{top:"-7px", right:"-8px", width:"24px", height:"24px"}} />
                                     </div>
                                     {/* Picture 1 */}
-                                    <div className="">
+                                    <div className="position-relative">
                                         <input type="file" ref={picture1Ref} name="Cover Picture" accept="image/*" onChange={handlePicture1} style={{display:"none"}}/>
                                         <img src={picture1} style={{width:"120px",height:"120px",cursor:"pointer"}}
                                         onClick={() => {
@@ -305,6 +316,9 @@ export default function AddItem() {
                                         }}
                                         ></img>
                                         <p className="d-flex justify-content-center mb-0 mt-2">Picture 1</p>
+                                        <ImCross className={dataPicture1 ? "position-absolute rounded-circle bg-secondary pointer" : "d-none"}
+                                            onClick={() => {setPicture1("https://via.placeholder.com/120"); setDataPicture1(undefined);}} 
+                                            style={{top:"-7px", right:"-8px", width:"24px", height:"24px"}} />
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +360,8 @@ export default function AddItem() {
                                     <div className="col-md-5">
                                         <Select options={MainCategoriesEn} 
                                             className="fs-5" name="wantMainCate" 
-                                            onChange={(selectWantSubCate) => {selectWantSub(index , selectWantSubCate); 
+                                            onChange={(selectWantSubCate) => {
+                                                selectWantSub(index , selectWantSubCate); 
                                                 selectedSub(index, {value:undefined})}} 
                                             placeholder="กรุณาเลือก Category หลัก"/>
                                     </div>
@@ -361,17 +376,17 @@ export default function AddItem() {
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-center mb-3">
-                                    <div className="bg-info me-4" onClick={()=>{handleAddItem();}}>
-                                        <p className="m-0 px-1 text-white">Add requirement</p>
-                                    </div>
-                                    {/* <div className="bg-info" style={{width:"20px"}}/> */}
-                                    <div className="bg-warning " onClick={() => {handleRemoveItem(index)}}>
+                                    <div className={countWantCate == 1 ? "d-none" : "bg-warning pointer"} onClick={() => {handleRemoveItem(index); setCountWantCate(countWantCate - 1)}}>
                                         <p className="m-0 px-1 text-white">Remove requirement</p>
                                     </div>
                                 </div>
                             </div>
                         ))}
-
+                        <div className={countWantCate >= 5 ? "d-none" : "bg-info me-4 pointer"} onClick={()=>{
+                            handleAddItem(); setCountWantCate(countWantCate + 1);}}>
+                            <p className="m-0 px-1 text-white">Add requirement</p>
+                        </div>
+                        <p className="fs-5 text-mute text-right mt-3 mb-0">*เนื่องจากการแสดงผลที่ไม่สมบูรณ์ จึงขอความร่วมมือผู้ใช้งานค่อยๆทำการเลือกแต่ละรายการอย่างใจเย็น</p>
 
 
                         {/* ปุ่มยืนยัน */}

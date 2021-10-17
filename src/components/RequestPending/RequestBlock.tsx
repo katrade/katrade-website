@@ -6,8 +6,10 @@ import { useHistory } from "react-router";
 import { TransparentButton } from '../standard/Button'
 
 import { IoMdSwap } from 'react-icons/io';
+import { BsFillChatDotsFill } from 'react-icons/bs';
 
-export default function RequestBlock({data, status, index}:any) {
+export default function RequestBlock({data, component, status, index}:any) {
+    console.log(data, status)
     const history = useHistory();
     const { deleteMyRequestPending , acceptRequest , deleteMyLockRequestPending, finishTrade } = useAuthorization();
     const handleFinishBtn = () => {
@@ -55,12 +57,14 @@ export default function RequestBlock({data, status, index}:any) {
 
     function askingDeleteRequest() {
         if(window.confirm("ต้องการลบคำขออีหลีถิ?")){
+            setHandleCancel(true);
             deleteMyRequestPending(data.requestId);
 		}
     }
 
     function askingDeleteLockRequest() {
         if(window.confirm("การแลกเปลี่ยนล้มเหลว?")){
+            setHandleCancel(true);
             deleteMyLockRequestPending(data.requestId);
         }
     }
@@ -113,15 +117,34 @@ export default function RequestBlock({data, status, index}:any) {
         }
     }
 
+    const [ handleCancel, setHandleCancel ] = useState<any>(false);
+
+    function Description() {
+        if(status == 0){
+            return "ลองเลือกสิ่งของที่สนใจดูสิ";
+        } else if(status == 1){
+            return "รออีกฝ่ายกดดำเนินการ";
+        } else if(data.state == 1){
+            return "ลองไปพูดคุยกัน";
+        } else if(data.state == 2){
+            if(data.userFinish){
+                return "รออีกฝ่ายกดดำเนินการ";
+            }else{
+                return "รอดำเนินการแลกเปลี่ยน";
+            }
+        }
+    }
+
     return (
-        <div>
+        <div className={handleCancel ? "d-none" : ""}>
             <div className="outline p-3 mb-3">
                 <div className="d-flex justify-content-between">
-                    <div>
+                    <div className="d-flex align-items-center">
                         {/* <img src="https://www.ishida.com/images/popcorn-640x480.gif" style={{width:"45px",height:"45px",borderRadius:"50%"}}/> */}
-                        <span style={{fontSize:"24px",margin:"0 20px",color:"Black"}}>{data.targetInventory.username}</span>
+                        <span style={{fontSize:"24px",margin:"0 20px",color:"Black"}}>{data.userStatus == "source" ? data.targetInventory.username : data.sourceInventory.username}</span>
+                        <BsFillChatDotsFill onClick={findUserNameAndId} style={{width:"24px", height:"24px", cursor:"pointer"}}/>
                     </div>
-                    <p>{data.userFinish ? "รออีกฝ่ายกดดำเนินการ" : "รอดำเนินการแลกเปลี่ยน"}</p>
+                    <p>{Description()}</p>
                 </div>
                 
 

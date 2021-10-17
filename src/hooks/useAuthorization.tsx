@@ -249,8 +249,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
-                ;
             })
             .catch(() => {
                 ;
@@ -384,9 +382,9 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                if (checkpath != "/app/product") {
-                    window.location.reload();
-                }
+                // if (checkpath != "/app/product") {
+                //     window.location.reload();
+                // }
             })
             .catch((err) => {
                 ;
@@ -404,8 +402,8 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
-                ;
+                // window.location.reload();
+                // ;
             })
             .catch(() => {
                 ;
@@ -587,7 +585,7 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
+                // window.location.reload();
             })
             .catch(() => {
                 ;
