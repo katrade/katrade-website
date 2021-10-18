@@ -75,7 +75,7 @@ const subStyles = {
     cursor: "pointer",
 }
 interface INavbar {
-    image?: string
+    image?: string | null
 }
 
 
@@ -103,6 +103,8 @@ function Navbar({ image }: INavbar) {
     const { theme } = useContext(ThemeContext);
     const [cookies, setCookies, removeCookies] = useCookies(['DaveTheHornyDuck']);
 
+    
+
     window.addEventListener("resize", resize);
     function resize() {
         if (window.innerWidth < 600) {
@@ -121,6 +123,7 @@ function Navbar({ image }: INavbar) {
     const [category, setCategory] = useState<any>();
     const { getCategory } = useAuthorization();
     const [ selectMainCate, setSelcetMainCate ] = useState<any>();
+    const image2 = window.localStorage.getItem("uimg");
 
     useEffect(() => {
         resize();
@@ -254,7 +257,7 @@ function Navbar({ image }: INavbar) {
                     <div className="desktop-icon">
 
 
-                        <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
+                        <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image2})` }}>{image2 ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
                                 <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
                                 <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>

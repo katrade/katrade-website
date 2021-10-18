@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material';
 import { useState , useEffect } from 'react';
 import ItemBlock from '../../components/Account/ItemBlock';
 
@@ -52,7 +53,10 @@ export default function InventoryComp(data: any) {
     }else{
         return(
             <div className="bg-white mb-4 p-3 text-center" style={{minHeight:"400px"}}>
-                <h4 className="m-0">กำลังโหลดข้อมูล...</h4>
+                <Skeleton variant="rectangular" height={80} sx={{ margin: "40px 0", width: "100%", borderRadius: "10px"}} />
+                <Skeleton variant="rectangular" height={80} sx={{ margin: "40px 0", width: "100%", borderRadius: "10px"}} />
+                <Skeleton variant="rectangular" height={80} sx={{ margin: "40px 0", width: "100%", borderRadius: "10px"}} />
+                <Skeleton variant="rectangular" height={80} sx={{ margin: "40px 0", width: "100%", borderRadius: "10px"}} />
             </div>
         );
     }

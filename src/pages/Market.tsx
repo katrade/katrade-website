@@ -24,6 +24,7 @@ import P from '../components/standard/P';
 import { ThemeContext } from '../contexts/Theme';
 import SlideCategory from '../components/SlideCategory';
 import Recommend from '../components/Recommend';
+import { Skeleton } from '@mui/material';
 
 
 // function getRandomInt(max: number) {
@@ -94,27 +95,19 @@ function Market() {
 
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
-    const [allInventory, setAllInventory] = useState<any>();
-    const [matchInventory, setMatchInventory] = useState<any>();
+    const [allInventory, setAllInventory] = useState<any>(null);
+    const [matchInventory, setMatchInventory] = useState<any>(null);
     const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
-    const { getUserData, getAllInventory , getMatchMarket } = useAuthorization();
+    const { getUserData, getAllInventory, getMatchMarket } = useAuthorization();
     const [displayContent, setDisplayContent] = useState<string[]>(th);
     const { lang } = useContext(ThemeContext);
-    
+
     window.addEventListener("resize", resize)
     useEffect(() => {
         resize();
         async function init() {
-            var userData = await getUserData();
-            if (userData) {
-                setAccount(userData);
-            }
-            else {
-                console.clear();
-                history.push('/app/signin');
-            }
             var allInventoryData = await getAllInventory();
             setAllInventory(allInventoryData);
             var matchInventoryData = await getMatchMarket();
@@ -139,72 +132,90 @@ function Market() {
         else if (lang === "mw") {
             setDisplayContent(meow);
         }
-    }, [lang])
-    if (allInventory && matchInventory) {
-        console.log(allInventory)
-        const tmpMatchInventory = matchInventory.map((item: any, index: any) => {
-            if (item.owner != account._id) {
-                return <Recommend item={item.match} match={item.matchWith} key={index} />;
-            }
-        });
-        const tmpInventory = allInventory.map((item: any, index: any) => {
-            if (item.owner != account._id) {
-                return <Interest item={item} key={index} />;
-            }
-        });
-        hide();
-        return (
-            // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
-            <Background>
-                <div>
-                    <Navbar image={account.profilePic} />
-                    <Block height="700" backgroundColor="#f7fafc" darkBackgroundColor="#1c1c1f">
-                        <div className="my-4">
-                            <H5 className="mb-3">{displayContent[0]}</H5>
-                            <div className="full-width">
-                                <div>
-                                    <div className="d-flex justify-content-start flex-wrap">
-                                        {tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10)}
-                                        {/* <P>{displayContent[1]}</P> */}
-                                        {/* {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)} */}
-                                    </div>
-                                    <div className="d-flex justify-content-center align-items-center my-3">
-                                        {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
-                                    </div>
+    }, [lang]);
 
-                                </div>
-                            </div>
+    const tmpMatchInventory = matchInventory === null ? [] : matchInventory.map((item: any, index: any) => {
+        if (item.owner != localStorage.getItem("uid")) {
+            return <Recommend item={item.match} match={item.matchWith} key={index} />;
+        }
+    });
+    const tmpInventory = allInventory === null ? [] : allInventory.map((item: any, index: any) => {
+        if (item.owner != localStorage.getItem("uid")) {
+            return <Interest item={item} key={index} />;
+        }
+    });
 
-                            <hr/>
-                            
-                            <div className="category">
-                                <H5 className="mb-3">{displayContent[2]}</H5>
-                                {/* <div className="category-box">
-                                </div> */}
-                                <SlideCategory />
-                            </div>
-
-                            <hr/>
-
-                            <H5 className="mb-3">{displayContent[3]}</H5>
-                            <div className="full-width">
+    return (
+        // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
+        <Background>
+            <div>
+                <Navbar image={localStorage.getItem("uid")} />
+                <Block height="700" backgroundColor="#f7fafc" darkBackgroundColor="#1c1c1f">
+                    <div className="my-4">
+                        <H5 className="mb-3">{displayContent[0]}</H5>
+                        <div className="full-width">
+                            <div>
                                 <div className="d-flex justify-content-start flex-wrap">
-                                    {/* {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)} */}
-                                    {tmpInventory}
+                                    {
+                                        matchInventory !== null ?
+
+                                            (tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10))
+                                            :
+                                            (
+                                                <div className="d-flex">
+                                                    <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                    <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                    <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                </div>
+                                            )
+
+                                    }
                                 </div>
+                                <div className="d-flex justify-content-center align-items-center my-3">
+                                    {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
+                                </div>
+
                             </div>
                         </div>
-                    </Block>
-                    <br /><br />
-                    <Footer />
-                </div>
-            </Background>
-        );
-        // </DestCompContext.Provider>
-    } else {
-        show()
-        return null;
-    }
+
+                        <hr />
+
+                        <div className="category">
+                            <H5 className="mb-3">{displayContent[2]}</H5>
+                            {/* <div className="category-box">
+                                </div> */}
+                            <SlideCategory />
+                        </div>
+
+                        <hr />
+
+                        <H5 className="mb-3">{displayContent[3]}</H5>
+                        <div className="full-width">
+                            <div className="d-flex justify-content-start flex-wrap">
+                                {tmpInventory}
+                                {
+                                    allInventory !== null ?
+
+                                    (tmpInventory <= 10 ? tmpInventory : tmpInventory.slice(0, 10))
+                                    :
+                                    (
+                                        <div className="d-flex">
+                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </Block>
+                <br /><br />
+                <Footer />
+            </div>
+        </Background>
+    );
+    // </DestCompContext.Provider>
 }
 
 // export { DestCompContext };

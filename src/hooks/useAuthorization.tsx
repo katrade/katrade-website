@@ -627,7 +627,7 @@ export default function useAuthorization() {
     }
 
     async function getHistory() {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/user/getUserHistory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -645,7 +645,7 @@ export default function useAuthorization() {
     }
 
     async function getAnotherInventory(user_id: any) {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getInventoryByUserId?id=${user_id}`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -789,7 +789,7 @@ export default function useAuthorization() {
     }
 
     async function getMatchMarket() {
-        show("โหลดดิ้ง..");
+        // show("โหลดดิ้ง..");
         return await axios.get(`${API}/inventory/getMatch`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`

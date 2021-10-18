@@ -74,11 +74,22 @@ const SignInForm = () => {
                 'Content-Type': 'application/json'
             }
         }).then((res) => {
-            hide()
+            
             // console.log(res.data)
             if (res.data.verifyEmail === true) {
                 setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck);
-                history.push("/app/market");
+                axios.get(`${API}/auth/getUserData`, {
+                    headers: {
+                        'Authorization': `Bearer ${res.data.DaveTheHornyDuck}`
+                    }
+                })
+                    .then(async (res2) => {
+                        // console.log(res2.data);
+                        window.localStorage.setItem("uimg", res2.data.data.profilePic);
+                        window.localStorage.setItem("uid", res2.data.data._id);
+                        hide();
+                        history.push("/app/market");
+                    })
             }
             else {
                 axios.get(`${API}/auth/resendVerifyEmail`, {
@@ -88,6 +99,7 @@ const SignInForm = () => {
                 })
                 alert('We have resend the verification link to your email.')
             }
+            
         }).catch(() => {
             hide()
             // alert("You email or password is wrong.");

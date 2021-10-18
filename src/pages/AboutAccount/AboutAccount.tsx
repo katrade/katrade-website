@@ -112,23 +112,16 @@ function AboutAccount(userData:any) {
         async function init() {
             show();
             var userData = await getUserData();
+            var follow = await getFollow();
             if (userData) {
                 setAccountData(userData);
+                hide();
             }
             else {
                 console.clear();
                 history.push('/app/signin');
             }
-            var inventory = await getMyInventory();
-            if (inventory) {
-                setInventoryData(inventory);
-            }
             
-            var favourite = await getFavourite();
-            if (favourite) {
-                setFavoriteData(favourite);
-            }
-            var follow = await getFollow();
             if (follow) {
                 setFollowData(follow);
                 var followingUserDataArray = await getUserIdArray(follow.following) 
@@ -140,7 +133,17 @@ function AboutAccount(userData:any) {
                     setFollowerUserArrayData(followerUserDataArray)
                 }
             }
-            hide();
+            var inventory = await getMyInventory();
+            if (inventory) {
+                setInventoryData(inventory);
+            }
+            
+            var favourite = await getFavourite();
+            if (favourite) {
+                setFavoriteData(favourite);
+            }
+            
+            
             var history = await getHistory();
             if (history) {
                 setHistoryData(history);

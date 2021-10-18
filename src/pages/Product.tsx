@@ -59,8 +59,14 @@ function Product() {
     useEffect(() => {
         resize();
         async function init() {
+            var getUser: any = await getUserData();
+            if (getUser) {
+                setMyAccout(getUser);
+            }
             var dataDetail = await getDetailProduct(product_id);
+            hide();
             // console.log(dataDetail)
+            
             if (dataDetail) {
                 console.log(dataDetail)
                 setData(dataDetail);
@@ -82,6 +88,7 @@ function Product() {
                     setHandleFollow(getFollowerData.follower.length);
                 }
             }
+            
             var getUser: any = await getUserData();
             if (getUser) {
                 setMyAccout(getUser);
@@ -90,7 +97,7 @@ function Product() {
             if (getInventory) {
                 setInventory(getInventory);
             }
-            hide();
+            
         }
         init();
     }, [])
@@ -223,7 +230,7 @@ function Product() {
         history.push(`/app/chat?duo_id=${data.owner}&duo_username=${data.username}`);
     }
 
-    if (data && myAccout) {
+    if (data) {
 
         var checkpath = window.location.pathname;
         var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
@@ -243,7 +250,7 @@ function Product() {
             <div>
                 {photoPost}
                 {requestTrade}
-                <Navbar image={myAccout.profilePic} />
+                <Navbar image={localStorage.getItem("uimg")} />
                 <Block height="auto" backgroundColor="#f7fafc">
                     {/* <div className="py-3 px-5 my-3 bg-white"> */}
                     <div className={mobile ? "py-2 px-2 my-3 bg-white" : "py-3 px-5 my-3 bg-white"}>
@@ -293,7 +300,7 @@ function Product() {
                                             minHeight: "47px",
                                             maxWidth: "47px",
                                             maxHeight: "47px",
-                                            backgroundImage: `url(${anotherUserData.profilePic})`,
+                                            backgroundImage: `url(${ anotherUserData ? anotherUserData.profilePic : ""})`,
                                             backgroundSize: 'cover',
                                             backgroundRepeat: 'no-repeat',
                                             borderRadius: "50%",
@@ -302,7 +309,7 @@ function Product() {
                                         <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
-                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{ handleFollow +" Followers"}</span>
+                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{ ( handleFollow ? handleFollow : "" )+ " Followers"}</span>
                                             </p>
                                         </div>
                                     </div>
