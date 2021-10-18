@@ -31,14 +31,14 @@ import { Skeleton } from '@mui/material';
 //     return Math.floor(Math.random() * max);
 // }
 
-// const SeeMore = styled.button`
-//     width: auto;
-//     height: 40px;
-//     border: 1px solid grey;
-//     background-color: white;
-//     padding: 0px 20px;
-//     font-size: 18px;
-// `
+const SeeMore = styled.button`
+    width: 200px;
+    height: 40px;
+    border: 1px solid grey;
+    background-color: white;
+    padding: 0px 20px;
+    font-size: 18px;
+`
 
 // type DestCompContextType = {
 //     destCompState: any,

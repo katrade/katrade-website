@@ -30,7 +30,7 @@ export default function InventoryComp(data: any) {
                 </div>
             );
         }else{
-            const myInventory = inventoryData.reverse().map((data:any, index:any) => {
+            const myInventory = inventoryData.map((data:any, index:any) => {
                 return <ItemBlock data={data} key={index} manage="no" Noti={() => handleInventoryLength()}/>;
             });
             return (

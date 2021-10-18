@@ -871,6 +871,7 @@ export default function useAuthorization() {
                 }
             })
                 .then(res => {
+                    console.log(res.data)
                     // window.location.reload();
                     return res.data;
                 })

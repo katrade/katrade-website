@@ -195,7 +195,7 @@ function AboutAccount(userData:any) {
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
         <div>
-            <Navbar image={accountData.profilePic}/>
+            <Navbar image={accountData.profilePic} handleComponent={(c:any) => console.log(c)} />
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>

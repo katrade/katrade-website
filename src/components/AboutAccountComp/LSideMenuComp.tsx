@@ -5,7 +5,7 @@ import { BiHistory } from "react-icons/bi";
 
 import { DestCompContext } from '../../pages/AboutAccount/AboutAccount'
 
-function AccountMenu(props: any) {
+function LSideMenuComp(props: any) {
     const { destCompState, destCompDispatch } = useContext(DestCompContext);
     function sendDestComp(event: any) {
         // console.log(event);
@@ -45,4 +45,4 @@ function AccountMenu(props: any) {
     );
 }
 
-export default AccountMenu;
+export default LSideMenuComp;

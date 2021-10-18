@@ -19,18 +19,19 @@ function Recommend(itemData:any, match:any) {
     }
 
     return (
-        <div className="recommend-card" onClick={LinkItemData}>
+        <div className="recommend-card">
             <div 
+                onClick={LinkItemData}
                 className="recommend-photo-card" 
                 style={{ backgroundImage: `url(${item.pictures[0]})` }}
             >
             </div>
-            <div className="recommend-text-card">
+            <div className="recommend-text-card" onClick={LinkItemData}>
                 <p className="text-truncate">{item.name}</p>
                 <p className="d-flex desc item-desc text-truncate">ตรงกับ : {matchlist}</p>
             </div>
-            <div className="text-end px-2">
-                <p style={{ color: "#00b34a", fontSize: "16px"}}>{item.username}</p>
+            <div className="text-end px-2" onClick={() => history.push(`/app/profileviewer?user_id=${item.owner}`)}>
+                <p className="hoverUsername" style={{ color: "#00b34a", fontSize: "16px"}}>{item.username}</p>
             </div>
         </div>
     );

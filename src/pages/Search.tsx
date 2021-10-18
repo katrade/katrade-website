@@ -41,7 +41,7 @@ export default function Search() {
                 if (getSrch){
                     setSearchData(getSrch);
                 }
-            }else{
+            }else if(params.quote.split("-")[params.quote.split("-").length - 1] == "byText"){
                 var getSrch:any = await getSearch(params.quote.split("-").slice(0, -1).join(""));
                 if (getSrch){
                     setSearchData(getSrch);

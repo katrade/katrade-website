@@ -47,7 +47,7 @@ export default function RequestBlock({data, component, status, index}:any) {
             return (
                 <div>
                     <TransparentButton className={data.userFinish ? `d-none` : ``} onClick={() => {handleFinishBtn()}} buttonColor="limegreen">สำเร็จ</TransparentButton>
-                    <TransparentButton onClick={() => askingDeleteLockRequest()} buttonColor="red">ล้มเหลว</TransparentButton>
+                    <TransparentButton className={data.userFinish ? `d-none` : ``} onClick={() => askingDeleteLockRequest()} buttonColor="red">ล้มเหลว</TransparentButton>
                 </div>
             );
         }else {

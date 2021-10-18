@@ -151,7 +151,11 @@ export default function AddItem() {
     var wantSubCateIndex = 0;
     // const [ arrayOfWantSubIndex, setArrayOfWantSubIndex ] = useState<any>([0, 0, 0, 0, 0]);
     const [ countWantCate, setCountWantCate ] = useState<any>(1);
-    const [ godHelpMe , setGodHelpMe ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    const [ godHelpMe0 , setGodHelpMe0 ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    const [ godHelpMe1 , setGodHelpMe1 ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    const [ godHelpMe2 , setGodHelpMe2 ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    const [ godHelpMe3 , setGodHelpMe3 ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
+    const [ godHelpMe4 , setGodHelpMe4 ] = useState<any>(<Select options={SubCategoriesEn[0]} className="fs-5" name="wantSubCate" placeholder="กรุณาเลือก Category หลักก่อน" />);
 
     function selectWantSub(index:any , event:any) { 
         const values = [...wantInputFields];
@@ -168,9 +172,27 @@ export default function AddItem() {
 
         // var placeholderString = "กรุณาเลือก Category ย่อย ของ " + MainCategoriesEn[arrayOfWantSubIndex[index]].label;
         var placeholderString = "กรุณาเลือก Category ย่อย ของ " + wantSubCateTag;
-        setGodHelpMe(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
-            className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
-            placeholder={placeholderString} />);
+        if(index == 0){
+            setGodHelpMe0(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+                className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+                placeholder={placeholderString} />);
+        }else if(index == 1){
+            setGodHelpMe1(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+                className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+                placeholder={placeholderString} />);
+        }else if(index == 2){
+            setGodHelpMe2(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+                className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+                placeholder={placeholderString} />);
+        }else if(index == 3){
+            setGodHelpMe3(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+                className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+                placeholder={placeholderString} />);
+        }else if(index == 4){
+            setGodHelpMe4(<Select options={SubCategoriesEn[wantSubCateIndex+1]} 
+                className="fs-5" name="wantSubCate" onChange={(event) => selectedSub(index , event)} 
+                placeholder={placeholderString} />);
+        }
     }
     // console.log(arrayOfWantSubIndex)
     // console.log(MainCategoriesEn)
@@ -237,6 +259,7 @@ export default function AddItem() {
             pictures: [],
             require: wantInputFields
         }
+        console.log(wantInputFields)
         
         var checkReqCat = true;
         var checkReqDetail = true;
@@ -257,7 +280,7 @@ export default function AddItem() {
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
-            addItem(data, arrayOfPicture);
+            // addItem(data, arrayOfPicture);
         }else if(!dataItem.name){
             nameFocus.current?.focus();
             alert("กรุณาเพิ่มชื่อสิ่งของ")
@@ -366,7 +389,11 @@ export default function AddItem() {
                                             placeholder="กรุณาเลือก Category หลัก"/>
                                     </div>
                                     <div className="col-md-5">
-                                        {godHelpMe}
+                                        {index == 0 ? godHelpMe0 : ""}
+                                        {index == 1 ? godHelpMe1 : ""}
+                                        {index == 2 ? godHelpMe2 : ""}
+                                        {index == 3 ? godHelpMe3 : ""}
+                                        {index == 4 ? godHelpMe4 : ""}
                                     </div>
                                 </div>
                                 <div className="form-group row">
