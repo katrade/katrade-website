@@ -149,7 +149,7 @@ function Navbar({ image }: INavbar) {
             return <li className="" onClick={() => {setSelectIndex(index); setSelcetMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
         });
         for (let i=0; i<SubCategoryArrayEn.length; i++){
-            SubCategoryArrayEn[i].push(<span onClick={() => { searchBySlide(subdata); setDrop(!drop) }} style={subStyles}>All</span>)
+            SubCategoryArrayEn[i].push(<span onClick={() => { searchByNav("none"); setDrop(!drop) }} style={subStyles}>All</span>)
         }
     }
 
@@ -168,15 +168,15 @@ function Navbar({ image }: INavbar) {
         if (!searchText) {
             return alert('Search for nothing????')
         }
+        window.location.reload();
         history.push(`/app/search/${searchText+"-byText"}`)
-        // window.location.reload();
+        // window.location.href= `/app/search/${searchText+"-byText"}`;
+
     }
     function searchByNav(searchNav: any) {
-        history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
-        // window.location.reload();
-    }
-    function searchBySlide(searchNav:any) {
-        history.push(`/app/search/${selectMainCate+"-"+"none"+"-byCategory"}`);
+        window.location.reload();
+        window.location.href= `/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`;
+        // history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
     }
 
     function signout() {
@@ -262,14 +262,14 @@ function Navbar({ image }: INavbar) {
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
                         </a>
-                        <Label content="Requests" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
-                            <a href="/app/request"><FaRegListAlt /></a>
+                        <Label content="Requests" className={theme === "light" ? "icon pointer" : "icon-dark pointer"} onClick={() => history.push("/app/request")}>
+                            <a><FaRegListAlt /></a>
                         </Label>
-                        <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
-                            <a onClick={() => history.push("/app/chat")}><MdChat /></a>
+                        <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"} onClick={() => history.push("/app/chat")}> 
+                            <a><MdChat /></a>
                         </Label>
-                        <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"}>
-                            <a onClick={() => { window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ") }}><IoIosNotifications /></a>
+                        <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"} onClick={() => window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ")}>
+                            <a><IoIosNotifications /></a>
                         </Label>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>

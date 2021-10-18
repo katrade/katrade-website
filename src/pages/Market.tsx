@@ -30,14 +30,14 @@ import Recommend from '../components/Recommend';
 //     return Math.floor(Math.random() * max);
 // }
 
-// const SeeMore = styled.button`
-//     width: auto;
-//     height: 40px;
-//     border: 1px solid grey;
-//     background-color: white;
-//     padding: 0px 20px;
-//     font-size: 18px;
-// `
+const SeeMore = styled.button`
+    width: 200px;
+    height: 40px;
+    border: 1px solid grey;
+    background-color: white;
+    padding: 0px 20px;
+    font-size: 18px;
+`
 
 // type DestCompContextType = {
 //     destCompState: any,
@@ -141,16 +141,15 @@ function Market() {
         }
     }, [lang])
     if (allInventory && matchInventory) {
-        console.log(allInventory)
         const tmpMatchInventory = matchInventory.map((item: any, index: any) => {
-            if (item.owner != account._id) {
-                return <Recommend item={item.match} match={item.matchWith} key={index} />;
-            }
+            // if (item.owner != account._id) {
+            return <Recommend item={item.match} match={item.matchWith} key={index} />;
+            // }
         });
         const tmpInventory = allInventory.map((item: any, index: any) => {
-            if (item.owner != account._id) {
-                return <Interest item={item} key={index} />;
-            }
+            // if (item.owner != account._id) {
+            return <Interest item={item} key={index} />;
+            // }
         });
         hide();
         return (
@@ -162,16 +161,18 @@ function Market() {
                         <div className="my-4">
                             <H5 className="mb-3">{displayContent[0]}</H5>
                             <div className="full-width">
-                                <div>
+                                <div className={tmpMatchInventory.length == 0 ? "d-none" : ""}>
                                     <div className="d-flex justify-content-start flex-wrap">
                                         {tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10)}
                                         {/* <P>{displayContent[1]}</P> */}
                                         {/* {rec_item.length <= 10 ? rec_item : rec_item.slice(0, 10)} */}
                                     </div>
-                                    <div className="d-flex justify-content-center align-items-center my-3">
-                                        {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
+                                    <div className={tmpMatchInventory.length > 10 ? "d-flex justify-content-center align-items-center my-3" : "d-none"}>
+                                        <SeeMore className="mx-1">See more</SeeMore>
                                     </div>
-
+                                </div>
+                                <div className={tmpMatchInventory.length == 0 ? "d-flex justify-content-center align-items-center" : "d-none"} style={{width:"100%", height:"200px"}}>
+                                    <h5 className="m-0 text-secondary">ไม่มีของที่ึความต้องการตรงกับคุณเลย หรือ คุณอาจยังไม่ได้เพิ่มสิ่งของ</h5>
                                 </div>
                             </div>
 
@@ -190,12 +191,15 @@ function Market() {
                             <div className="full-width">
                                 <div className="d-flex justify-content-start flex-wrap">
                                     {/* {interest_item.length <= 35 ? interest_item : interest_item.slice(0, 30)} */}
-                                    {tmpInventory}
+                                    {tmpInventory.lenght > 20 ? tmpInventory : tmpInventory.slice(0,20)}
+                                </div>
+                                <div className={tmpInventory.length > 20 ? "d-flex justify-content-center align-items-center my-3" : "d-none"}>
+                                    <SeeMore className="mx-1">See more</SeeMore>
                                 </div>
                             </div>
                         </div>
+                        <p style={{visibility:"hidden"}}>for space dont worry!</p>
                     </Block>
-                    <br /><br />
                     <Footer />
                 </div>
             </Background>
