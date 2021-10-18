@@ -38,6 +38,7 @@ export default function ItemBlock(props: any) {
 		if(window.confirm(`ต้องการลบ ${data.name} อีหลีถิ?`)){
 			Noti();
 			setHandleDeleteInventory(true);
+			// เก็บไว้ในใจเธอ
 			deleteMyProduct(data._id);
 		}
 	}

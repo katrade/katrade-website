@@ -93,8 +93,10 @@ const NavbarContainer = styled.div`
 
 `
 
-function Navbar({ image }: INavbar) {
 
+function Navbar(props:any) {
+    const { image } = props;
+    // { image }: INavbar, handleComponent:any
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
@@ -149,7 +151,7 @@ function Navbar({ image }: INavbar) {
             return <li className="" onClick={() => {setSelectIndex(index); setSelcetMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
         });
         for (let i=0; i<SubCategoryArrayEn.length; i++){
-            SubCategoryArrayEn[i].push(<span onClick={() => { searchByNav("none"); setDrop(!drop) }} style={subStyles}>All</span>)
+            SubCategoryArrayEn[i].unshift(<span onClick={() => { searchByNav("none"); setDrop(!drop) }} style={subStyles}>All</span>)
         }
     }
 
@@ -256,8 +258,8 @@ function Navbar({ image }: INavbar) {
 
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image})` }}>{image ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                <a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a>
-                                <a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a>
+                                <a onClick={() => {history.push("/app/aboutaccount?component=account")}}>Account</a>
+                                <a onClick={() => {history.push("/app/aboutaccount?component=inventory")}}>Inventory</a>
                                 <a onClick={() => history.push("/app/settings")}>Settings</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>

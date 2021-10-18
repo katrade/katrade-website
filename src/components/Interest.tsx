@@ -15,16 +15,16 @@ export default function Interest(props: any) {
     }
 
     return (
-        <div className={theme === "light" ? "interest-card" : "interest-card-dark"} onClick={LinkItemData}>
-            <div className="interest-photo-card" style={{ backgroundImage: `url(${item.pictures[0]})` }}>
+        <div className={theme === "light" ? "interest-card" : "interest-card-dark"} >
+            <div className="interest-photo-card" onClick={LinkItemData} style={{ backgroundImage: `url(${item.pictures[0]})` }}>
                 <StarRoundedIcon className="star" />
             </div>
-            <div className="interest-text-card pt-3">
+            <div className="interest-text-card pt-3" onClick={LinkItemData}>
                 <P className="text-truncate">{item.name}</P>
                 <P className="desc item-desc text-truncate">{item.detail}</P>
             </div>
-            <div className="text-end px-2">
-                <p style={{ color: "#00b34a", fontSize: "16px"}}>{item.username}</p>
+            <div className="text-end px-2" onClick={() => history.push(`/app/profileviewer?user_id=${item.owner}`)}>
+                <p className="hoverUsername" style={{ color: "#00b34a", fontSize: "16px"}}>{item.username}</p>
             </div>
         </div>
     );

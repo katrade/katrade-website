@@ -38,3 +38,7 @@
 .recommend-text-card a:hover {
     text-decoration: none;
 }
+
+.hoverUsername:hover {
+    text-decoration: underline;
+}
