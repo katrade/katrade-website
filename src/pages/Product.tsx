@@ -62,6 +62,7 @@ function Product() {
             var getUser: any = await getUserData();
             if (getUser) {
                 setMyAccout(getUser);
+                console.log(getUser)
             }
             var dataDetail = await getDetailProduct(product_id);
             hide();
@@ -306,7 +307,13 @@ function Product() {
                                             borderRadius: "50%",
                                             backgroundPosition: "center"
                                         }} />
-                                        <div className="d-flex align-items-center" onClick={() => history.push(`/app/profileviewer?user_id=${data.owner}`)} style={{ cursor: "pointer" }}>
+                                        <div className="d-flex align-items-center" onClick={() => {
+                                            if(myAccout._id == data.owner){
+                                                history.push("/app/aboutaccount?component=account");
+                                            }else{
+                                                history.push(`/app/profileviewer?user_id=${data.owner}`);
+                                            }
+                                            }} style={{ cursor: "pointer" }}>
                                             <p className="m-0 p-0">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
                                                 <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{ ( handleFollow ? handleFollow : "" )+ " Followers"}</span>

@@ -1,5 +1,6 @@
 import { useState , useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
+import { useHistory } from "react-router";
 
 import useAuthorization from '../hooks/useAuthorization';
 
@@ -8,6 +9,8 @@ import Footer from '../components/Footer';
 import Block from '../components/Block';
 import Recommend from '../components/Recommend';
 import Interest from '../components/Interest';
+
+import { BsFillChatDotsFill } from 'react-icons/bs';
 
 const queryString = require('query-string');
 
@@ -19,6 +22,7 @@ export default function ProfileViewer() {
 
     const { search } = useLocation();
     const { user_id } = queryString.parse(search);
+    const history = useHistory();
 
     const { getAnotherUser, getUserFollowData, getAnotherInventory } = useAuthorization(); 
     
@@ -30,6 +34,7 @@ export default function ProfileViewer() {
         async function init() {
             var dataOwner = await getAnotherUser(user_id);
             if (dataOwner) {
+                console.log(dataOwner)
                 setAnotherUserData(dataOwner);
                 var getFollowerData = await getUserFollowData(user_id)  
                 if (getFollowerData) {
@@ -58,7 +63,7 @@ export default function ProfileViewer() {
                     <div className="container-profile">
                         <div className="container-profile-data">
                             <div className="full-width d-flex justify-content-center align-items-center p-5 flex-wrap">
-                                <div className="d-flex justify-content-center mt-2 mb-3">
+                                <div className="d-flex justify-content-center align-items-center mt-2 mb-3">
                                     {/* <img className="rounded-circle" src={anotherUserData.profilePic} style={{ width: "130x", height: "130px", borderRadius:"50%", margin:"0 50px" }} /> */}
                                     {/* <div style={{
                                         backgroundImage: `${anotherUserData.profilePic}`, backgroundPosition: 'center',
@@ -82,9 +87,17 @@ export default function ProfileViewer() {
                                         
                                     </div>
                                 </div>
-                                <div>
+                                <div >
                                     <h3 style={{ color: "#4a5659" }}>{anotherUserData.firstname} {anotherUserData.lastname}</h3>
-                                    <p style={{ color: "#86979c" }}>@{anotherUserData.username}</p>
+                                    <div className="d-flex">
+                                        <p style={{ color: "#86979c", fontSize:"26px" }}>@{anotherUserData.username}</p>
+                                        <div className="d-flex justify-content-center align-items-center ms-3 pointer"
+                                            onClick={() => history.push(`/app/chat?duo_id=${anotherUserData._id}&duo_username=${anotherUserData.username}`)} 
+                                            style={{backgroundColor:"#15C777", borderRadius:"10px", width:"100px"}}>
+                                            <p className="mb-0 me-2 text-white">Chat</p>
+                                            <BsFillChatDotsFill style={{color:"white"}}/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="full-width d-flex justify-content-center align-items-center px-5 mb-3 flex-wrap">

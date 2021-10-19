@@ -154,26 +154,27 @@ function AboutAccount(userData:any) {
 
     const [ componentPage , setComponentPage ] = useState<any>(<AccountComp data={accountData}/>); 
     
-    function SelectComp() {
-        if(destCompState.dest === "Account"){
+    function SelectComp(c:any) {
+        console.log(c)
+        if(destCompState.dest === "Account" || c === "account"){
             setComponentPage(<AccountComp data={accountData}/>);
-        }else if(destCompState.dest === "ChangePassword"){
+        }else if(destCompState.dest === "ChangePassword" || c === "changePassword"){
             setComponentPage(<ChangePassComp data={accountData}/>);
-        }else if(destCompState.dest === "Following"){
+        }else if(destCompState.dest === "Following" || c === "following"){
             setComponentPage(<FollowingComp data={followingUserArrayData}/>);
-        }else if(destCompState.dest === "Followers"){
+        }else if(destCompState.dest === "Followers" || c === "followers"){
             setComponentPage(<FollowersComp data={followerUserArrayData}/>);
-        }else if(destCompState.dest === "Favorite"){
+        }else if(destCompState.dest === "Favorite" || c === "favorite"){
             setComponentPage(<FavoriteComp data={favoriteData}/>);
-        }else if(destCompState.dest === "Inventory"){
+        }else if(destCompState.dest === "Inventory" || c === "inventory"){
             setComponentPage(<InventoryComp data={inventoryData}/>);
-        }else if(destCompState.dest === "History"){
+        }else if(destCompState.dest === "History" || c === "history"){
             setComponentPage(<HistoryComp data={historyData} checkUser={accountData}/>);
         }
     }
     // จะเกิดการเปลี่ยนแปลง component ก็ต่อเมื่อมีการเปลี่ยนแปลงของ destComp
     useEffect(() => {
-        SelectComp();
+        SelectComp("none");
     }, [destCompState])
     // จะเกิดการรีเซ็ตเป็นหน้าข้อมูลaccount ก็ต่อเมื่อข้อมูลaccount มีการอัพเดท
     useEffect(() => {
@@ -195,7 +196,7 @@ function AboutAccount(userData:any) {
     return (
         <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
         <div>
-            <Navbar image={accountData.profilePic} handleComponent={(c:any) => console.log(c)} />
+            <Navbar image={accountData.profilePic} handleComponent={(c:any) => SelectComp(c)} />
                 <Block height="50" backgroundColor="#f7fafc">
                     <div>
                         <div>

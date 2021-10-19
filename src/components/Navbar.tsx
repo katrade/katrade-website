@@ -95,7 +95,7 @@ const NavbarContainer = styled.div`
 
 
 function Navbar(props:any) {
-    const { image } = props;
+    const { image, handleComponent } = props;
     // { image }: INavbar, handleComponent:any
     const [drop, setDrop] = useState(false);
     const [mobile, setMobile] = useState(false);
@@ -173,10 +173,9 @@ function Navbar(props:any) {
         if (!searchText) {
             return alert('Search for nothing????')
         }
-        window.location.reload();
+        // window.location.reload();
         history.push(`/app/search/${searchText+"-byText"}`)
         // window.location.href= `/app/search/${searchText+"-byText"}`;
-
     }
     function searchByNav(searchNav: any) {
         window.location.reload();
@@ -187,6 +186,15 @@ function Navbar(props:any) {
     function signout() {
         setCookies('DaveTheHornyDuck', '', { path: '/' });
         history.push('/app/signin');
+    }
+
+    function checkPathToChange(component:any){
+        var pathname = window.location.pathname.split('/')[2];
+        if (pathname == "aboutaccount"){
+            handleComponent(component)
+        }else{
+            history.push(`/app/aboutaccount?component=${component}`);
+        }
     }
     return (
         <NavbarContainer style={{ backgroundColor: theme === "light" ? "#fff" : "#0f0f0f" }}>
@@ -254,15 +262,15 @@ function Navbar(props:any) {
                     </div>
                     <form className="search">
                         <input type="search" className="search-bar" placeholder="Search an items" id="searchbar" onChange={(e) => setSearchText(e.target.value)} value={searchText}></input>
-                        <button type="submit" className="search-btn" onClick={search}><GoSearch /></button>
+                        <div className="search-btn" onClick={search}><GoSearch /></div>
                     </form>
                     <div className="desktop-icon">
 
 
                         <a className="menu-button" onClick={() => setDropMenu(!dropMenu)} style={{ backgroundImage: `url(${image2})` }}>{image2 ? <></> : <BsPersonFill />}
                             <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                                <a onClick={() => {history.push("/app/aboutaccount?component=account")}}>Account</a>
-                                <a onClick={() => {history.push("/app/aboutaccount?component=inventory")}}>Inventory</a>
+                                <a onClick={() => checkPathToChange("account")}>Account</a>
+                                <a onClick={() => checkPathToChange("inventory")}>Inventory</a>
                                 <a onClick={() => history.push("/app/settings")}>Settings</a>
                                 <a onClick={signout}><FiLogOut />&nbsp;Logout</a>
                             </div>
