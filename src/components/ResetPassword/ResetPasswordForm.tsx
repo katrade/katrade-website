@@ -11,6 +11,7 @@ import InputValidation from "../InputValidation";
 import { H4, H5 }  from '../standard/H';
 import Div from '../standard/Div';
 import P from '../standard/P';
+import Input from '../standard/Input'
 
 import { LanguageContext } from '../../contexts/Language'
 
@@ -80,12 +81,13 @@ export function ForgotPasswordForm() {
     return (
         <>
             <div className="" style={{ width: "1000px", minWidth: "500px", height: "auto", margin: "70px auto"}}>
-                <h4 className="mt-5">{content[0]}</h4>
+                <H4 className="mt-5">{content[0]}</H4>
                 <Div className="bgColor-white mb-5 py-3 round-window" style={{ padding: "0 4%" }} dynamicPair={["#ffffff","#1c1c1c"]}>
                     <div className="row mb-3 py-3">
                         <div className="mb-3">
-                            <label htmlFor="" className="form-label">{content[1]}</label>
-                            <Div dynamicPair={["#ffffff","#1c1c1c"]}><input 
+                            <P>{content[1]}</P>
+                            <Div dynamicPair={["#ffffff","#1c1c1c"]}><Input
+                                    dynamicPair={["#ffffff","#1c1c1c"]}
                                     className={"input-register w-100 px-2 col-md-6"} 
                                     type="text" 
                                     placeholder={content[2]}
@@ -184,7 +186,8 @@ export function ResetPasswordForm() {
                 <div className="row mb-3 py-3">
                     <div className="mb-3">
                         <label htmlFor="" className="form-label">{content[8]}</label>
-                        <p><input 
+                        <p><Input
+                                dynamicPair={["#ffffff","#1c1c1c"]}
                                 className={"input-register w-100 px-2 col-md-6"} 
                                 type="password" 
                                 placeholder={content[9]}

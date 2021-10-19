@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useContext } from "react"
+import { ThemeContext } from "../../contexts/Theme"
 
 interface AccountBlockProps {
     width?: string
@@ -12,21 +14,24 @@ interface AccountBlockProps {
     paddingRight?: string
     paddingTop?: string
     paddingBottom?: string
-    children?: string | JSX.Element | JSX.Element[] | null 
+    children?: string | JSX.Element | JSX.Element[] | null
+    backgroundColor?: string
+    borderColor?: string
 }
 
 export const AccountBlockCSS = styled.button`
     min-width: ${(props: AccountBlockProps) => props.width ? props.width : "100%"};
     min-height: ${(props: AccountBlockProps) => props.height ? props.height : "auto"};
-    background-color: white;
+    background-color: ${(props: AccountBlockProps) => props.backgroundColor};
     
     border-style: solid;
     border-radius: 10px;
     border-top-style: ${(props: AccountBlockProps) => props.borderTop ? props.borderTop : "solid"};
     border-top-left-radius: ${(props: AccountBlockProps) => props.borderTopLeftRadius ? props.borderTopLeftRadius : "10px"};
     border-top-right-radius ${(props: AccountBlockProps) => props.borderTopRightRadius ? props.borderTopRightRadius : "10px"};
-    border-color: ${(props: AccountBlockProps) => props.color ? props.color : "#d7d7d7"};
+    border-color: ${(props: AccountBlockProps) => props.borderColor};
     border-width: 3px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
 
     padding-left: ${(props: AccountBlockProps) => props.paddingLeft ? props.paddingLeft : "20px"};
     padding-right: ${(props: AccountBlockProps) => props.paddingRight ? props.paddingRight : "20px"};
@@ -43,7 +48,8 @@ export const AccountBlockCSS = styled.button`
     cursor: cell;
 `
 
-export function AccountBlock({width, height, color, borderTop, borderTopLeftRadius, borderTopRightRadius, children, paddingBottom, paddingLeft, paddingRight, paddingTop, padding}: AccountBlockProps) {
+export function AccountBlock({width, height, color, borderTop, borderTopLeftRadius, borderTopRightRadius, children, paddingBottom, paddingLeft, paddingRight, paddingTop, padding, backgroundColor}: AccountBlockProps) {
+    const { theme } = useContext(ThemeContext);
     return (
         <AccountBlockCSS
             width={width} 
@@ -57,6 +63,8 @@ export function AccountBlock({width, height, color, borderTop, borderTopLeftRadi
             paddingTop={paddingTop}
             paddingBottom={paddingBottom}
             padding={padding}
+            backgroundColor={theme === "light" ? "#fff" : "#1a1a1a"}
+            borderColor="transparent"
         >{ children }</AccountBlockCSS>
     );
 }

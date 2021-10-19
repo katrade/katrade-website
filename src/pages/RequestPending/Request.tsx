@@ -12,11 +12,14 @@ import Footer from '../../components/Footer';
 import { CgNpm } from 'react-icons/cg';
 import { TransparentButton } from '../../components/standard/Button'
 import useLoading from '../../hooks/useLoading';
+import Background from '../../components/Background';
+import P from '../../components/standard/P';
+import Div from '../../components/standard/Div';
 
 export default function Request() {
 
     const history = useHistory();
-    const { getRequest, getPending , getInprogress } = useAuthorization();
+    const { getRequest, getPending, getInprogress } = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
     const [dataInprogess, setDataInprogess] = useState<any>();
@@ -79,22 +82,24 @@ export default function Request() {
     if (dataRequest && dataPending && dataInprogess) {
         hide();
         return (
-            <div>
-                <Navbar />
-                <Block height="50px" backgroundColor="#f7fafc">
-                    <div className="my-4 py-3 px-4 background">
-                        <div className="mb-3 d-flex flex-row topic-request">
-                            <p className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</p>
-                            <p className={component == 2 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(2)}>Pending</p>
-                            <p className={component == 3 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(3)}>In progress</p>
-                        </div>
-                        <div style={{ minHeight: "350px" }}>
-                            {selectComponent}
-                        </div>
-                    </div>
-                </Block>
-                <Footer />
-            </div>
+            <Background>
+                <div>
+                    <Navbar />
+                    <Block height="50px">
+                        <Div dynamicPair={["#ffffff", "#212121"]}className="my-4 py-3 px-4">
+                            <div className="mb-3 d-flex flex-row topic-request">
+                                <P className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</P>
+                                <P className={component == 2 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(2)}>Pending</P>
+                                <P className={component == 3 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(3)}>In progress</P>
+                            </div>
+                            <div style={{ minHeight: "350px" }}>
+                                {selectComponent}
+                            </div>
+                        </Div>
+                    </Block>
+                    <Footer />
+                </div>
+            </Background>
         );
     } else {
         show();

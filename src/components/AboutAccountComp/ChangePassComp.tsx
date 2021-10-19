@@ -7,6 +7,10 @@ import axios from 'axios';
 import { API } from '../../app.setting.json';
 import useAuthorization from '../../hooks/useAuthorization';
 import InputValidation from "../InputValidation";
+import Div from '../standard/Div';
+import P from '../standard/P';
+import { H4 } from '../standard/H';
+import Input from '../standard/Input';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -41,12 +45,12 @@ export default function AccountComp(data: any) {
     
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
-                <div className="">
-                    <h4 className="mb-4">Change Password</h4>
+            <Div dynamicPair={["#fff", "#212121"]} className="row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                <div>
+                    <H4 className="mb-4">Change Password</H4>
                         <div className="row mb-3" style={{width:"100%"}}>
-                            <label className="col-lg-3 col-form">Current Password</label>
-                            <input 
+                            <P className="col-lg-3 col-form">Current Password</P>
+                            <Input 
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
                                 name="currentPassword"
@@ -57,8 +61,8 @@ export default function AccountComp(data: any) {
                             <div className="offset-lg-3 px-3"><InputValidation valid={validType} name="current password" showMes={showAlert1} /></div>
                         </div>
                         <div className="row mb-3" style={{width:"100%"}}>
-                            <label className="col-lg-3 col-form">New Password</label>
-                            <input
+                            <P className="col-lg-3 col-form">New Password</P>
+                            <Input
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 name="newPassword" 
@@ -68,8 +72,8 @@ export default function AccountComp(data: any) {
                             <div className="offset-lg-3 px-3"><InputValidation valid={validType} name="new password" showMes={showAlert2} /></div>
                         </div>
                         <div className="row mb-5" style={{width:"100%"}}>
-                            <label className="col-lg-3 col-form">Confirm New Password</label>
-                            <input
+                            <P className="col-lg-3 col-form">Confirm New Password</P>
+                            <Input
                                 value={confirmNewPassword}
                                 onChange={(e) => setConfirmNewPassword(e.target.value)}
                                 name="confirmNewPassword" 
@@ -84,7 +88,7 @@ export default function AccountComp(data: any) {
                             </div>
                         </div>
                 </div>
-            </div>
+            </Div>
         </div>
     );
 }

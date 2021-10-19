@@ -10,6 +10,10 @@ import { useHistory } from "react-router";
 import { DynamicSolidButton } from '../standard/Button';
 import { uploadProfilePic } from "../../utils/storage";
 import { profile } from 'console';
+import Div from '../standard/Div';
+import P from '../standard/P';
+import { H4 } from '../standard/H';
+import Input from '../standard/Input';
 
 export default function AccountComp(data: any) {
     const accountData = data.data;
@@ -25,7 +29,7 @@ export default function AccountComp(data: any) {
 
     return (
         <div>
-            <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+            <Div dynamicPair={["#fff", "#212121"]} className="row mx-auto mb-4 p-3" style={{ width: "100%" }}>
 
                 {/* ส่วนของรูปโปรไฟล์ */}
                 <div className="col-md-4 order-md-2 text-center">
@@ -39,24 +43,24 @@ export default function AccountComp(data: any) {
                             borderRadius: '50%'
                         }}></div>
                     </div>
-                    <UploadProfilePic id={accountData._id}/>
-                    <p className="m-0 ">file size: Maximum 1 MB</p>
-                    <p className="m-0">supported files: .JPEG, .PNG</p>
+                    <UploadProfilePic id={accountData._id} />
+                    <P className="m-0 ">file size: Maximum 1 MB</P>
+                    <P className="m-0">supported files: .JPEG, .PNG</P>
 
                 </div>
 
                 {/* ส่วนของข้อมูล */}
                 <div className="col-md-8 order-md-1">
-                    <label><h4 className="mb-4">Profile</h4></label>
-                    <div className="row" style={{ width: "100%",height:"38px",margin:"0 0 8px 0" }}>
-                        <label className="col-md-3 ps-0">Username</label>
-                        <p className="col-md-8 ps-0" style={{ color: "black" }}>{accountData.username}</p>
+                    <H4 className="mb-4">Profile</H4>
+                    <div className="row" style={{ width: "100%", height: "38px", margin: "0 0 8px 0" }}>
+                        <P className="col-md-3 ps-0">Username</P>
+                        <P className="col-md-8 ps-0">{accountData.username}</P>
                     </div>
                     <div className="row mb-2" style={{ width: "100%" }}>
-                        <label className="col-md-3">Firstname</label>
-                        <input
+                        <P className="col-md-3">Firstname</P>
+                        <Input
                             type="text"
-                            className="col-md-8 form-control border border-secondary rounded-3 mx-3"
+                            className="col-md-8 form-control rounded-3 mx-3"
                             aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-sm"
                             value={firstname}
@@ -64,34 +68,34 @@ export default function AccountComp(data: any) {
                         />
                     </div>
                     <div className="row mb-2" style={{ width: "100%" }}>
-                        <label className="col-md-3">Lastname</label>
-                        <input
+                        <P className="col-md-3">Lastname</P>
+                        <Input
                             type="text"
-                            className="col-md-8 form-control border border-secondary rounded-3 mx-3"
+                            className="col-md-8 form-control rounded-3 mx-3"
                             aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-sm"
                             value={lastname}
                             onChange={(e) => setLastname(e.target.value)}
                         />
                     </div>
-                     <label><h4 className="mb-3 mt-4">Contact</h4></label>
+                    <H4 className="mb-3 mt-4">Contact</H4>
                     <div className="row" style={{ width: "100%" }}>
-                        <label className="col-md-3">Email</label>
-                        <p className="col-md-8" style={{ color: "black" }}>{accountData.email}</p>
+                        <P className="col-md-3">Email</P>
+                        <P className="col-md-8">{accountData.email}</P>
                     </div>
                     <div className="row mb-4" style={{ width: "100%" }}>
-                        <label className="col-md-3">Mobile</label>
+                        <P className="col-md-3">Mobile</P>
                         <div className="col-md-8">
-                            <p style={{ color: "black" }}>{accountData.phoneNumber}</p>
+                            <P>{accountData.phoneNumber}</P>
                         </div>
                     </div>
-                    <div className="row mb-3"  style={{width:"100%"}}>
+                    <div className="row mb-3" style={{ width: "100%" }}>
                         <div className="offset-lg-3">
                             <button type="button" onClick={() => changeProfile({ firstname: firstname, lastname: lastname })} className="btn btn-success px-2 mx-1">Save Changes</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Div>
         </div>
     );
 }

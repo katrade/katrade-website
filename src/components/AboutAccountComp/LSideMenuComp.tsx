@@ -4,6 +4,7 @@ import { BsPersonFill, BsBookmarkFill, BsStarFill, BsBagFill } from "react-icons
 import { BiHistory } from "react-icons/bi";
 
 import { DestCompContext } from '../../pages/AboutAccount/AboutAccount'
+import P from '../standard/P';
 
 function LSideMenuComp(props: any) {
     const { destCompState, destCompDispatch } = useContext(DestCompContext);
@@ -28,19 +29,19 @@ function LSideMenuComp(props: any) {
 
     return (
         <div>
-            <p className="d-flex align-items-center fs-4 fw-bold mb-0 text-dark"><BsPersonFill />&nbsp;&nbsp;My Account</p>
+            <P className="d-flex align-items-center fs-4 fw-bold mb-0"><BsPersonFill />&nbsp;&nbsp;My Account</P>
             <div className="mb-3 ms-4">
-                <p className="pointer" onClick={(e) => sendDestComp(e.currentTarget.innerHTML)} style={{ color: "black", fontSize: "20px", margin: "0" }}>Account</p>
-                <p className="pointer" onClick={(e) => sendDestComp(e.currentTarget.innerHTML)} style={{ color: "black", fontSize: "20px", margin: "0" }}>Change Password</p>
+                <P className="pointer" onClick={(e: any) => sendDestComp(e.currentTarget.innerHTML)} style={{fontSize: "20px", margin: "0" }}>Account</P>
+                <P className="pointer" onClick={(e: any) => sendDestComp(e.currentTarget.innerHTML)} style={{fontSize: "20px", margin: "0" }}>Change Password</P>
             </div>
-            <p className="d-flex align-items-center fs-4 fw-bold mb-0 text-dark"><BsBookmarkFill />&nbsp;&nbsp;Follow</p>
+            <P className="d-flex align-items-center fs-4 fw-bold mb-0"><BsBookmarkFill />&nbsp;&nbsp;Follow</P>
             <div className="mb-3 ms-4">
-                <p className="pointer" onClick={(e) => sendDestComp(e.currentTarget.innerHTML)} style={{ color: "black", fontSize: "20px", margin: "0" }}>Following</p>
-                <p className="pointer" onClick={(e) => sendDestComp(e.currentTarget.innerHTML)} style={{ color: "black", fontSize: "20px", margin: "0" }}>Followers</p>
+                <P className="pointer" onClick={(e: any) => sendDestComp(e.currentTarget.innerHTML)} style={{fontSize: "20px", margin: "0" }}>Following</P>
+                <P className="pointer" onClick={(e: any) => sendDestComp(e.currentTarget.innerHTML)} style={{fontSize: "20px", margin: "0" }}>Followers</P>
             </div>
-            <p onClick={(e) => sendDestComp("Favorite")} className="d-flex align-items-center fs-4 fw-bold mb-3 text-dark pointer"><BsStarFill />&nbsp;&nbsp;My Favorite</p>
-            <p onClick={(e) => sendDestComp("Inventory")} className="d-flex align-items-center fs-4 fw-bold mb-3 text-dark pointer"><BsBagFill />&nbsp;&nbsp;Inventory</p>
-            <p onClick={(e) => sendDestComp("History")} className="d-flex align-items-center fs-4 fw-bold mb-3 text-dark pointer"><BiHistory />&nbsp;&nbsp;History</p>
+            <P onClick={(e: any) => sendDestComp("Favorite")} className="d-flex align-items-center fs-4 fw-bold mb-3 pointer"><BsStarFill />&nbsp;&nbsp;My Favorite</P>
+            <P onClick={(e: any) => sendDestComp("Inventory")} className="d-flex align-items-center fs-4 fw-bold mb-3 pointer"><BsBagFill />&nbsp;&nbsp;Inventory</P>
+            <P onClick={(e: any) => sendDestComp("History")} className="d-flex align-items-center fs-4 fw-bold mb-3 pointer"><BiHistory />&nbsp;&nbsp;History</P>
         </div>
     );
 }

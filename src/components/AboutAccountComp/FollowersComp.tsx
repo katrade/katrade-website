@@ -1,6 +1,8 @@
 import { useState , useEffect } from "react";
 
 import FollowingBlock from "../Account/FollowingBlock";
+import Div from "../standard/Div";
+import { H4, H5 } from "../standard/H";
 
 export default function FollowersComp(data:any) {
     const accountData = data.data;
@@ -18,15 +20,15 @@ export default function FollowersComp(data:any) {
         })
         return (
             <div>
-                <div className="bg-white mx-auto mb-4 p-3" style={{ width: "100%", minHeight:"400px"}}>
+                <Div dynamicPair={["#fff", "#212121"]} className="mx-auto mb-4 p-3" style={{ width: "100%", minHeight:"400px"}}>
                     <div>
-                        <h4 className="d-inline-block me-3 mb-4" style={{padding:"0 12px"}}>Followers</h4>
-                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({followerLength})</h5>
+                        <H4 className="d-inline-block me-3 mb-4" style={{padding:"0 12px"}}>Followers</H4>
+                        <H5 className="d-inline-block">({followerLength})</H5>
                     </div>
                     <div className="row mx-auto" style={{width:"100%"}}>
                         {followingBlock}
                     </div>
-                </div>
+                </Div>
             </div>
         );        
     }

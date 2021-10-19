@@ -1,5 +1,7 @@
 import { useState , useEffect } from 'react';
 import FavoriteBlock from '../../components/Account/FavoriteBlock';
+import Div from '../standard/Div';
+import { H4, H5 } from '../standard/H';
 
 export default function FavoriteComp(data: any) {
     const [ favouriteLength, setFavoriteLength] = useState<any>();
@@ -23,15 +25,15 @@ export default function FavoriteComp(data: any) {
         // setFavoriteMap(Favorite);
         if(favouriteData.length == 0){
             return (
-                <div className="bg-white row mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
+                <Div dynamicPair={["#fff", "#212121"]} className="row mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
                     <div>
-                        <h4 className="d-inline-block me-3 mb-4">Favorite</h4>
-                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteLength})</h5>
+                        <H4 className="d-inline-block me-3 mb-4">Favorite</H4>
+                        <H5 className="d-inline-block">({favouriteLength})</H5>
                     </div>
                     <div>
-                        <h5 className="text-center">คุณยังไม่มีของที่ชอบเลย</h5>
+                        <H5 className="text-center">คุณยังไม่มีของที่ชอบเลย</H5>
                     </div>
-                </div>
+                </Div>
             );
         }else{
             return (

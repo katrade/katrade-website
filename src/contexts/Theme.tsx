@@ -5,7 +5,7 @@ import {useLocalStorage} from '../hooks/local-storage'
 // edit theme settings here !!
 const themeDataStorage = {
     light: {
-        backgroundColor: "white",
+        backgroundColor: "rgb(247,250,252)",
     },
     dark: {
         backgroundColor: "#1c1c1c",

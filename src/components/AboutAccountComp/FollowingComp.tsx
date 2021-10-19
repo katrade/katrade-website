@@ -1,47 +1,51 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import FollowingBlock from "../Account/FollowingBlock";
+import Div from "../standard/Div";
+import { H4, H5 } from "../standard/H";
 
 export default function FollowingComp(data: any) {
     const accountData = data.data;
-    const [ followingLength , setFollowingLength ] = useState<any>();
-    
+    const [followingLength, setFollowingLength] = useState<any>();
+
     useEffect(() => {
-        if(accountData){
+        if (accountData) {
             setFollowingLength(accountData.length);
         }
-    } , [accountData])
+    }, [accountData])
 
-    function handleFollowingLength(noti:any) {
-        if(noti == "follow"){
+    function handleFollowingLength(noti: any) {
+        if (noti == "follow") {
             setFollowingLength(followingLength + 1);
-        }else{
+        } else {
             setFollowingLength(followingLength - 1);
         }
     }
 
-    if (accountData){
-        const followingBlock = accountData.map((data:any, index:any) => {
-            return <FollowingBlock data={data} relation={"following"} Noti={(noti:any) => {
+    if (accountData) {
+        const followingBlock = accountData.map((data: any, index: any) => {
+            return <FollowingBlock data={data} relation={"following"} Noti={(noti: any) => {
                 handleFollowingLength(noti);
             }} />;
         })
         return (
             <div>
-                <div className="bg-white mx-auto mb-4 p-3" style={{ width: "100%", minHeight:"400px"}}>
+                <Div dynamicPair={["#fff", "#212121"]} className="mx-auto mb-4 p-3" style={{ width: "100%", minHeight: "400px" }}>
                     <div>
-                        <h4 className="d-inline-block me-3 mb-4" style={{padding:"0 12px"}}>Following</h4>
-                        <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({followingLength})</h5>
+                        <H4 className="d-inline-block me-3 mb-4" style={{ padding: "0 12px" }}>Following</H4>
+                        <H5 className="d-inline-block"
+                        // style={{color:"#95bddfd5"}}
+                        >({followingLength})</H5>
                     </div>
-                    <div className="row mx-auto" style={{width:"100%"}}>
+                    <div className="row mx-auto" style={{ width: "100%" }}>
                         {followingBlock}
                     </div>
-                </div>
+                </Div>
             </div>
         );
     }
-    else{
-        return(
+    else {
+        return (
             <div>Hello</div>
         )
     }
