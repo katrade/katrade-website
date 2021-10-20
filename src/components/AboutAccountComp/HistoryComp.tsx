@@ -18,7 +18,7 @@ export default function HistoryComp(data:any, checkUser:any) {
                             <H5 className="d-inline-block">({accountData.length})</H5>
                         </div>
                         <div className="mx-auto" style={{width:"100%"}}>
-                            {dataHistoryBlock}
+                            {dataHistoryBlock.reverse()}
                         </div>
                 </Div>
             </div>

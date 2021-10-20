@@ -194,7 +194,8 @@ function Market() {
                         <H5 className="mb-3">{displayContent[3]}</H5>
                         <div className="full-width">
                             <div className="d-flex justify-content-start flex-wrap">
-                                {
+                                {tmpInventory}
+                                {/* {
                                     allInventory !== null ?
 
                                     (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
@@ -206,7 +207,7 @@ function Market() {
                                             <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
                                         </div>
                                     )
-                                }
+                                } */}
                             </div>
                             <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p>
                         </div>

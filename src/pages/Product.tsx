@@ -62,14 +62,10 @@ function Product() {
             var getUser: any = await getUserData();
             if (getUser) {
                 setMyAccout(getUser);
-                console.log(getUser)
             }
             var dataDetail = await getDetailProduct(product_id);
             hide();
-            // console.log(dataDetail)
-            
             if (dataDetail) {
-                console.log(dataDetail)
                 setData(dataDetail);
                 var getMatch = await getMatchProduct(dataDetail._id);
                 if (getMatch) {
@@ -231,22 +227,29 @@ function Product() {
         history.push(`/app/chat?duo_id=${data.owner}&duo_username=${data.username}`);
     }
 
+    const [ clickSubRequire, setClickSubRequire ] = useState<any>(0);
+    const [ SubRequire, setSubRequire ] = useState<any>();
+
     if (data) {
 
         var checkpath = window.location.pathname;
         var dateOfProduct = data.timeStamp.split("T")[0].split("-").reverse().join("-");
-
         const wantCate = data.require.map((data: any, index: any) => {
+            // setSubRequire(<p>{data.reqCat.parentCategoryEn} : {data.reqCat.childCategoryEn}</p>);
             return (
                 <div key={index}
-                    onClick={() => changeRequireDetail(index)}
+                    onClick={() => {changeRequireDetail(index); setClickSubRequire(index); setSubRequire(<p>{data.reqCat.parentCategoryEn} : {data.reqCat.childCategoryEn}</p>)}}
                     className="bagde bagde-sm rounded-pill px-2 m-1 py-1 pointer"
-                    style={{ backgroundColor: "#EDF2F4" }}>
-                    <p className="m-0">{data.reqCat.parentCategoryEn} : {data.reqCat.childCategoryEn}</p>
+                    style={clickSubRequire == index ? {backgroundColor:"#15C777"} : {backgroundColor: "#EDF2F4"} }>
+                    {/* style={{ backgroundColor: "#EDF2F4" }}> */}
+                    <p className={clickSubRequire == index ? "m-0 text-white" : "m-0"}>{data.reqCat.parentCategoryEn} : {data.reqCat.childCategoryEn}</p>
                 </div>
             );
         })
+
         const tmpRequireDetail = data.require[0].detail;
+        const tmpRequireTag = `${data.require[0].reqCat.parentCategoryEn} : ${data.require[0].reqCat.childCategoryEn}`
+        
         return (
             <div>
                 {photoPost}
@@ -288,8 +291,9 @@ function Product() {
                                     <p className="m-0 rounded-left px-4 fw-bold p-1 d-flex justify-content-center align-items-center" style={{ color: "white", backgroundColor: "#F66464" }}>Category</p>
                                     <div className="d-inline-block bagde bagde-sm rounded-pill px-2 m-1 py-1" style={{ backgroundColor: "#1c64eb", }}><p className="m-0 text-white px-3">{data.category.parentCategoryEn} : {data.category.childCategoryEn}</p></div>
                                 </div>
-                                <div className="mt-2 px-3 py-1 border border-secondary rounded-3" style={{ height: "150px", overflow: "auto" }}>
+                                <div className="mt-2 px-3 py-1 border border-secondary rounded-3" style={{ height: "190px", overflow: "auto" }}>
                                     <p className="mb-1 fw-bold" style={{ color: "black" }}>Detail</p>
+                                    <hr className="my-2" />
                                     <p className="m-0">{data.detail}</p>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-around mt-3" style={{ backgroundColor: "#F1F1F170", padding: "10px 0", borderRadius: "7px", boxShadow: "0 0 8px rgba(10,10,10,0.1)" }}>
@@ -335,7 +339,7 @@ function Product() {
                             </div>
                         </div>
 
-                        <div className="">
+                        <div>
                             <div className="d-flex mt-3 border border-secondary rounded-3">
                                 <p className="m-0 rounded-left px-4 fw-bold p-1 d-flex justify-content-center align-items-center" style={{ color: "white", backgroundColor: "#64B9F6" }}>Require</p>
                                 <div className="d-flex">
@@ -343,7 +347,10 @@ function Product() {
                                 </div>
                             </div>
                             <div className="mt-3 px-3 pb-4 border border-secondary rounded-3" style={{ minHeight: "250px" }}>
-                                <p className="mb-1 fw-bold fs-3" style={{ color: "black" }}>Details</p>
+                                <p className="my-1 fw-bold fs-3" style={{ color: "black" }}>Details</p>
+                                <hr className="my-2" />
+                                {SubRequire}
+                                <p className={tmpRequireDetailShow}>{tmpRequireTag}</p>
                                 <p className="m-0">{requireDetail}</p>
                                 <p className={tmpRequireDetailShow}>{tmpRequireDetail}</p>
                             </div>

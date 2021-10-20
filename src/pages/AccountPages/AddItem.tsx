@@ -259,13 +259,11 @@ export default function AddItem() {
             pictures: [],
             require: wantInputFields
         }
-        console.log(wantInputFields)
         
         var checkReqCat = true;
         var checkReqDetail = true;
 
         for (let i=0; i<wantInputFields.length; i++){
-            console.log(wantInputFields[i])
             if (!wantInputFields[i].reqCat.childCategoryEn){
                 checkReqCat = false;
             }
@@ -280,7 +278,7 @@ export default function AddItem() {
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
-            // addItem(data, arrayOfPicture);
+            addItem(data, arrayOfPicture);
         }else if(!dataItem.name){
             nameFocus.current?.focus();
             alert("กรุณาเพิ่มชื่อสิ่งของ")

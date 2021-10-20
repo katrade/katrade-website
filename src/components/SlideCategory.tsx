@@ -82,7 +82,7 @@ export default function SlideCategory() {
     })
     
     return (
-        <div className="overflow-scroll" style={{width:"100%", height:"350px", backgroundColor:"rgb(169, 216, 189)", zIndex:1}}>
+        <div style={{width:"100%", height:"350px", backgroundColor:"rgb(169, 216, 189)", zIndex:1, overflowY:"hidden"}}>
             <div className="position-relative " style={{width:"2000px", height:"350px"}}>
                 {slideTop}
             </div>

@@ -59,7 +59,7 @@ export default function ItemBlock(props: any) {
 						</div>
 					</div>
 					<div className="position-absolute" style={{top:"0",right:"0"}}>
-						<P className="m-0" style={{cursor: "pointer"}}>edit</P>
+						<P className="m-0" onClick={() => {window.confirm("love me like you do, love love love")}} style={{cursor: "pointer"}}>edit</P>
 						<P className="m-0" onClick={() => {handleDelete()}} style={{cursor:"pointer"}}>delete</P>
 					</div>
 				</div>

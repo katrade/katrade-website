@@ -44,7 +44,7 @@ export default function FavoriteComp(data: any) {
                             <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteLength})</h5>
                         </div>
                         <div>
-                            {Favorite}
+                            {Favorite.reverse()}
                         </div>
                     </div>
                 </div>

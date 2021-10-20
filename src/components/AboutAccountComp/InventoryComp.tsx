@@ -46,7 +46,7 @@ export default function InventoryComp(data: any) {
                             <a href="/app/additem" className="d-flex align-items-center"><H6>add item +</H6></a>
                         </div>
                         <div style={{ padding: "0 12px" }}>
-                            {myInventory}
+                            {myInventory.reverse()}
                         </div>
                     </Div>
                 </div>
