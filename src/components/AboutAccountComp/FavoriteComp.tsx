@@ -53,7 +53,7 @@ export default function FavoriteComp(data: any) {
     }else{
         return (
             <div>
-               <p>ลาดีด้าดีด้า</p>
+               <h4>Loading</h4>
             </div>
         );
     }
