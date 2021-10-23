@@ -70,21 +70,24 @@ function App() {
 
     return (
         <>
-            <UserProvider>
-                <LanguageProvider>
-                    <ThemeProvider>
-                        <Router>
-                            <Switch>
 
-                                <Route exact path="/test" component={Test}></Route>
+            <LanguageProvider>
+                <ThemeProvider>
+                    <Router>
+                        <Switch>
 
-                                {/* Add path here!!  */}
+                            <Route exact path="/test" component={Test}></Route>
 
-                                {/* Articles and static pages */}
-                                <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
-                                <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
-                                <Route exact path="/articles/termsofservice" component={TermsOfService}></Route>
+                            {/* Add path here!!  */}
 
+                            {/* Articles and static pages */}
+                            <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
+                            <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
+                            <Route exact path="/articles/termsofservice" component={TermsOfService}></Route>
+                            
+                            <Route exact path="/404" component={NotFound}></Route>
+                            <Route exact path="/" component={Home}></Route>
+                            <UserProvider>
                                 <Route exact path="/app/signin" component={SignIn}></Route>
                                 <Route exact path="/app/profile" component={Profile}></Route>
                                 <Route exact path="/app/register" component={SignUp}></Route>
@@ -128,15 +131,13 @@ function App() {
                                 <Route exact path="/app/chat"><SocketProvider><ChatDashboard /></SocketProvider></Route>
 
                                 <Route exact path="/app/testFrontend" component={Test01}></Route>
+                            </UserProvider>
+                            <Route><Redirect to="/404" /></Route>
+                        </Switch>
+                    </Router>
+                </ThemeProvider>
+            </LanguageProvider>
 
-                                <Route exact path="/404" component={NotFound}></Route>
-                                <Route exact path="/" component={Home}></Route>
-                                <Route><Redirect to="/404" /></Route>
-                            </Switch>
-                        </Router>
-                    </ThemeProvider>
-                </LanguageProvider>
-            </UserProvider>
         </>
     );
 }
