@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useAuthorization from '../hooks/useAuthorization';
 
-import { CgShoppingBag } from "react-icons/all"
+import { CgShoppingBag, AiOutlineClose } from "react-icons/all"
 import "./SelectTrade.css";
 export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem }: any) {
     // console.log(arrayMatch)
@@ -31,7 +31,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                     border: "1px solid #d5d7db",
                     cursor: "pointer",
                 }}
-                className="d-flex justify-content-start align-items-center hoverSelect"
+                className="d-flex justify-content-between align-items-center hoverSelect"
             >
                 <p className="m-0 px-3 me-1" style={{ color: "#000", fontWeight: 500 }}>{data.name}</p>
                 <p className="m-0 px-3 me-1" style={{ color: "#999ba1", fontWeight: 400, fontSize: "16px" }}>{data.detail}</p>
@@ -55,7 +55,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                     border: "1px solid #d5d7db",
                     cursor: "pointer",
                 }}
-                className="d-flex justify-content-start align-items-center hoverSelect"
+                className="d-flex justify-content-between align-items-center hoverSelect"
             >
                 <p className="m-0 px-3 me-1" style={{ color: "#000", fontWeight: 500 }}>{data.name}</p>
                 <p className="m-0 px-3 me-1" style={{ color: "#999ba1", fontWeight: 400, fontSize: "16px" }}>{data.detail}</p>
@@ -77,7 +77,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
     return (
         <div className="position-fixed" style={{ zIndex: 99, top: "0", bottom: "0", right: "0", left: "0", }}>
             <div className="position-absolute" onClick={onClose} style={{ backgroundColor: "rgba(0,0,0,0.5)", top: "0", bottom: "0", right: "0", left: "0" }} />
-            <div className="position-relative bg-white rounded-3 py-1" style={{ width: "500px", height: "auto", margin: "auto", marginTop: "100px", boxShadow: "0 0 20px rgba(10,10,10,0.3)" }}>
+            <div className="cardMobile position-relative bg-white rounded-3 py-1" style={{height: "auto", margin: "auto", marginTop: "100px", boxShadow: "0 0 20px rgba(10,10,10,0.3)" }}>
                 <div className="m-0 p-0 rounded-top full-width d-flex justify-content-center align-items-center" style={{ backgroundColor: "#fff", height: "70px" }}>
                     <p className="m-0" style={{ fontWeight: 500, color: "#000" }}><CgShoppingBag className="me-2" />Select your item</p>
                 </div>
@@ -93,7 +93,7 @@ export default function SelectTrade({ onClose, arrayAll, arrayMatch, detailItem 
                 <div className="px-3 py-1" style={{ backgroundColor: '#f0f2f5', height: "400px", overflow:"auto" }}>
                     {handleTrade.length ? handleTrade : noData()}
                 </div>
-
+                <div className="position-absolute pointer" style={{top:"15px", right:"20px"}} onClick={onClose}><AiOutlineClose /></div>
             </div>
         </div>
     );

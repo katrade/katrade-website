@@ -1,3 +1,7 @@
+.cardMobile {
+    width: 500px;
+}
+
 .select-items-menu {
     border: solid transparent;
     border-width: 0 0 3px 0;
@@ -21,4 +25,10 @@
 
 .hoverSelect:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 560px) {
+    .cardMobile{
+        width: 90%;
+    }
 }
