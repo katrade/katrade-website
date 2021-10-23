@@ -74,6 +74,14 @@ const subStyles = {
     margin: "0 20px",
     cursor: "pointer",
 }
+const subStylesMobile = {
+    fontWeight: 500,
+    color: "#fff",
+    fontSize: "14px",
+    display: "inline-block",
+    margin: "0 20px",
+    cursor: "pointer",
+}
 interface INavbar {
     image?: string | null
 }
@@ -159,7 +167,7 @@ function Navbar(props:any) {
     }
 
     if (mobile) {
-        return <MobileNavbar signout={signout} />
+        return <MobileNavbar signout={signout} handleComponentMobile={(e:any) => checkPathToChange(e)} category={category} />
     }
 
     function dropIcon() {
@@ -180,7 +188,6 @@ function Navbar(props:any) {
     function searchByNav(searchNav: any) {
         window.location.reload();
         window.location.href= `/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`;
-        // history.push(`/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`);
     }
 
     function signout() {
@@ -288,14 +295,13 @@ function Navbar(props:any) {
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>
                         <MenuIcon />
                         <div className={"menu-drop" + (dropMenu ? " show" : " hide")}>
-                            <div><a onClick={() => history.push("/app/aboutaccount?component=account")}>Account</a></div>
-                            <div><a onClick={() => history.push("/app/chat")}>Chat</a></div>
+                            <div><a onClick={() => checkPathToChange("account")}>Account</a></div>
                             <div><a onClick={() => history.push("/app/chat")}>Chat</a></div>
                             <div><a onClick={() => { window.alert("ระบบแจ้งเตือน ยังไม่เสร็จสมบูรณ์ครับ") }}>Notification</a></div>
                             <div><a onClick={() => history.push("/app/request")}>Request</a></div>
-                            <div><a onClick={() => history.push("/app/aboutaccount?component=following")}>Following</a></div>
-                            <div><a onClick={() => history.push("/app/aboutaccount?component=followers")}>Followers</a></div>
-                            <div><a onClick={() => history.push("/app/aboutaccount?component=inventory")}>Inventory</a></div>
+                            <div><a onClick={() => checkPathToChange("following")}>Following</a></div>
+                            <div><a onClick={() => checkPathToChange("followers")}>Followers</a></div>
+                            <div><a onClick={() => checkPathToChange("inventory")}>Inventory</a></div>
                             <div><a onClick={signout}><FiLogOut />&nbsp;Logout</a></div>
                         </div>
                     </div>
@@ -315,10 +321,12 @@ const MobileNavbarContainer = styled.div`
     z-index: 50;
 `
 
-function MobileNavbar({ signout }: any) {
+function MobileNavbar(props:any) {
 
     // const [clickMobile, SetClickMobile] = useState(false);
     // const handleClickMobile = () => SetClickMobile(!clickMobile);
+    const history = useHistory();
+    const { signout, handleComponentMobile, category } = props;
 
     const [drop, setDrop] = useState(false);
     const [dropMenu, setDropMenu] = useState(false);
@@ -333,6 +341,47 @@ function MobileNavbar({ signout }: any) {
         }
     }
 
+    
+    const [selectIndex, setSelectIndex] = useState<any>(0);
+    const [selectMainCate, setSelectMainCate] = useState<any>();
+
+    useEffect(() => {
+        if(category){
+            setSelectMainCate(category[0].parentCategoryEn);
+        }
+    }, [category])
+
+    var SubCategoryArrayEn: any = [];
+    var CategoryData;
+    if (category) {
+        CategoryData = category.map((data: any, index: any) => {
+            SubCategoryArrayEn.push(data.childCategoryEn.map((subdata: any) => {
+                return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStylesMobile}>{subdata.includes("Faculty of") ? subdata.split("Faculty of")[1] : subdata}</span>;
+            }));
+            // SubCategoryArrayTh.push(data.childCategoryTh.map((subdata: any) => {
+            //     return <span onClick={() => { searchByNav(subdata); setDrop(!drop) }} style={subStyles}>{subdata}</span>;
+            // }));
+            return <li style={{fontSize:"16px"}} onClick={() => {setSelectIndex(index); setSelectMainCate(data.parentCategoryEn) }} key={index}>{data.parentCategoryEn}</li>;
+        });
+        for (let i=0; i<SubCategoryArrayEn.length; i++){
+            SubCategoryArrayEn[i].unshift(<span onClick={() => { searchByNav("none"); setDrop(!drop) }} style={subStylesMobile}>All</span>)
+        }
+    }
+
+    const [searchText, setSearchText] = useState('');
+    function search() {
+        if (!searchText) {
+            return alert('Search for nothing????')
+        }
+        // window.location.reload();
+        history.push(`/app/search/${searchText+"-byText"}`)
+        // window.location.href= `/app/search/${searchText+"-byText"}`;
+    }
+    function searchByNav(searchNav: any) {
+        window.location.reload();
+        window.location.href= `/app/search/${selectMainCate+"-"+searchNav+"-byCategory"}`;
+    }
+
     return (
         <MobileNavbarContainer style={{ backgroundColor: theme === "light" ? "#ffffff" : "#141414" }}>
             <Block height="60px">
@@ -341,7 +390,7 @@ function MobileNavbar({ signout }: any) {
                         <img className="logo" src={Logo} height="60px" />
                     </a>
 
-                    <div className="categories-button mx-2" onClick={() => setDrop(!drop)}>
+                    <div className="categories-button mx-2" onClick={() => {setDrop(!drop)}}>
                         <WidgetsIcon style={{ color: "#5e5e5e", width: "20px", margin: "4px" }} /><span className="cat-text"></span>{drop ? <ExpandLessIcon style={{ color: "#757d80" }} /> : <ExpandMoreIcon style={{ color: "#757d80" }} />}
                         {/* <div className={"categories-drop" + (drop ? " show" : " hide")}>
                             <p>Cats</p>
@@ -355,69 +404,77 @@ function MobileNavbar({ signout }: any) {
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}><MenuIcon /></div>
                     <div className={dropMenu ? "sidemenu-bg" : "d-none"} onClick={() => setDropMenu(!dropMenu)} />
                     <ul className={dropMenu ? "sidemenu active-sidemenu" : "sidemenu"}>
-                        <div className="sidemenu-content d-block">
-                            <li className="text-center">
-                                <a href="/app/aboutaccount?component=account">Account</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="#">Chat</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/request">Notification</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/following">Following</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/followers">Followers</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/favorite">My Favorite</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/inventory">Inventory</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/request">Request</a>
-                            </li>
-                            <li className="text-center">
-                                <a href="/app/history">History</a>
-                            </li>
-                            <li className="text-center">
-                                <a onClick={signout}>Logout</a>
-                            </li>
+                        <div className="sidemenu-content text-center py-4 fs-1" onClick={() => setDropMenu(!dropMenu)}>
+                            <p onClick={() => {handleComponentMobile("account")}}>Account</p>
+                            <p onClick={() => history.push("/app/chat")}>Chat</p>
+                            <p onClick={() => handleComponentMobile("")}>Notification</p>
+                            <p onClick={() => {handleComponentMobile("following")}}>Following</p>
+                            <p onClick={() => {handleComponentMobile("followers")}}>Followers</p>
+                            <p onClick={() => {handleComponentMobile("favorite")}}>My Favorite</p>
+                            <p onClick={() => {handleComponentMobile("inventory")}}>Inventory</p>
+                            <p onClick={() => history.push("/app/request")}>Request</p>
+                            <p onClick={() => {handleComponentMobile("history")}}>History</p>
+                            <p onClick={signout}>Logout</p>
                         </div>
                     </ul>
                 </div>
                 <div className={displaySearch()}>
                     <form className="search" action="/app/search">
-                        <input type="search" className="search-bar" placeholder="Search an items"></input>
-                        <button type="submit" className="search-btn" ><GoSearch /></button>
+                        <input type="search" className="search-bar" placeholder="Search an items" onChange={(e) => setSearchText(e.target.value)} value={searchText}></input>
+                        <div className="search-btn" onClick={search} ><GoSearch /></div>
                     </form>
                 </div>
             </Block>
             <ul className={drop ? "categories-mobile active-mobile" : "categories-mobile"}>
-                <Block height="50px">
-                    <li>
-                        <a href={google}>Clothes</a>
-                    </li>
-                    <li>
-                        <a href={google}>Book</a>
-                    </li>
-                    <li>
-                        <a href={google}>Sports</a>
-                    </li>
-                    <li>
-                        <a href={google}>Clothes</a>
-                    </li>
-                    <li>
-                        <a href={google}>Book</a>
-                    </li>
-                    <li>
-                        <a href={google}>Sports</a>
-                    </li>
-
-                </Block>
+                {category ?
+                                <Block height="auto">
+                                    <div className="row" style={{ width: "100%" }}>
+                                        <div className="col-3" style={{ width: "150px" }}>
+                                            {CategoryData}
+                                        </div>
+                                        <div className="col-1" />
+                                        <div
+                                            className="col-8"
+                                            style={{
+                                                position: "relative"
+                                            }}
+                                        >
+                                            <div style={{
+                                                position: "absolute",
+                                                top: "0",
+                                                left: "0",
+                                                right: "0",
+                                                bottom: "0",
+                                                zIndex: 59,
+                                                margin: "70px 20px",
+                                                textAlign: "center",
+                                            }}>
+                                                    {/* <h1 className="text-white">{category[selectIndex].parentCategoryEn}</h1> */}
+                                                {/* <hr style={{
+                                                    backgroundColor: "#fff",
+                                                    border: "1px #fff solid",
+                                                    opacity: 0.3,
+                                                    borderRadius: "1px",
+                                                }}/> */}
+                                                    {SubCategoryArrayEn[selectIndex]}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    backgroundImage: `url(${wallpapers[selectIndex]})`,
+                                                    position: "absolute",
+                                                    top: "0",
+                                                    left: "0",
+                                                    right: "0",
+                                                    bottom: "0",
+                                                    ...backgroundImageStyles,
+                                                    zIndex: 30,
+                                                }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </Block>
+                                : null
+                            }
             </ul>
         </MobileNavbarContainer>
     )

@@ -251,40 +251,28 @@
 }
 
 .categories-mobile {
-    padding: 0;
-    list-style-type: none;
     width: 100%;
     height: 0;
     position: absolute;
     z-index: 0;
-    flex-direction: column;
     top: 60px;
     opacity: 0;
     transition: 0.3s ease;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgb(230, 230, 230);
     overflow: hidden;
 }
 
 .active-mobile {
-    background-color: rgba(0, 0, 0, 1);
+    list-style: none;
+    background-color: rgb(230, 230, 230);
     opacity: 1;
-    padding: 10px 0;
-    height: 220px;
+    padding: 10px;
+    height: 420px;
     top: 60px;
     position: absolute;
     z-index: 2;
     align-content: center;
     transition: 0.3s ease;
-}
-
-.categories-mobile li a {
-    padding: 0 50px;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-
-.categories-mobile li:hover {
-    background-color: rgb(88, 88, 88);
 }
 
 .menu-button {
@@ -336,6 +324,15 @@
 }
 .menu-drop p:hover {
     background-color: rgb(221, 253, 241);
+}
+
+.sidemenu-content p {
+    color: white;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.sidemenu-content p:hover {
+    background-color: rgb(124, 124, 124);
 }
 
 .show {

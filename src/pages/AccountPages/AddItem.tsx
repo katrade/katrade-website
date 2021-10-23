@@ -274,7 +274,7 @@ export default function AddItem() {
         
         if(dataCover && finalMyMainCate && finalMySubCate && dataItem.name && checkReqCat && checkReqDetail){
             arrayOfPicture.push(dataCover)
-            // console.log("add success!")
+            console.log("add success!")
             if(dataPicture1){
                 arrayOfPicture.push(dataPicture1)
             }
@@ -291,7 +291,9 @@ export default function AddItem() {
         }else if(!checkReqDetail){
             alert("กรุณาใส่รายละเอียดของที่ต้องการให้ครบทุกช่อง (จำเป็นต้องมี)");
         }
+        // console.log(data)
     }
+    // const [ aaa, setaaa ] = useState<any>("fakelove");
 
     return (
         <div>
@@ -304,6 +306,7 @@ export default function AddItem() {
                         <div className="form-group row">
                             <label className="col-md-2 col-form-label fs-5">Item Name</label>
                             <div className="col-md-10">
+                                {/* <input type="text" ref={nameFocus} className="form-control fs-5" value={aaa} name="name" onChange={(e) => setaaa(e.target.value)} placeholder="Enter your item name" /> */}
                                 <input type="text" ref={nameFocus} className="form-control fs-5" value={dataItem.name || ""} name="name" onChange={handleDataItem} placeholder="Enter your item name" />
                             </div>
                         </div>
