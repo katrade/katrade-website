@@ -63,9 +63,6 @@ import Test from "./components/Test";
 import ChatDashboard from './pages/ChatDashboard'
 import { SocketProvider } from './contexts/Socket';
 
-require('dotenv').config({ path: ".env" })
-console.log(process.env)
-
 function App() {
 
     return (
