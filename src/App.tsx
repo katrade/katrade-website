@@ -78,8 +78,6 @@ function App() {
 
                             <Route exact path="/test" component={Test}></Route>
 
-                            {/* Add path here!!  */}
-
                             {/* Articles and static pages */}
                             <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
                             <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
