@@ -67,23 +67,16 @@ function Product() {
             hide();
             if (dataDetail) {
                 setData(dataDetail);
+                setHandleFavorite(dataDetail.favourite.length)
                 var getMatch = await getMatchProduct(dataDetail._id);
-                if (getMatch) {
-                    setMatchInventory(getMatch);
-                }
+                setMatchInventory(getMatch);
                 var dataOwner = await getAnotherUser(dataDetail.owner);
-                if (dataOwner) {
-                    setAnotherUserData(dataOwner);
-                }
+                setAnotherUserData(dataOwner);
                 var getFollowChk = await getFollowCheck(dataDetail.owner);
-                if (getFollowChk) {
-                    setFollowChk(getFollowChk.value);
-                }
+                setFollowChk(getFollowChk.value);
                 var getFollowerData = await getUserFollowData(dataDetail.owner);
-                if (getFollowerData) {
-                    setFollowerData(getFollowerData.follower.length);
-                    setHandleFollow(getFollowerData.follower.length);
-                }
+                setFollowerData(getFollowerData.follower.length);
+                setHandleFollow(getFollowerData.follower.length);
             }
             
             var getUser: any = await getUserData();
@@ -168,8 +161,7 @@ function Product() {
     });
 
     // const [ favorite , setFavorite] = useState(true);
-    var fakeFollow = 10;
-    const [handleFavorite , setHandleFavorite] = useState<any>(fakeFollow);
+    const [handleFavorite , setHandleFavorite] = useState<any>();
     const handleClickFavorite = () => setCheckFavoritetmp(!checkFavoritetmp);
     function favorite_btn() {
         if (!checkFavoritetmp) {
@@ -229,7 +221,6 @@ function Product() {
 
     const [ clickSubRequire, setClickSubRequire ] = useState<any>(0);
     const [ SubRequire, setSubRequire ] = useState<any>();
-
     if (data) {
 
         var checkpath = window.location.pathname;
@@ -249,7 +240,8 @@ function Product() {
 
         const tmpRequireDetail = data.require[0].detail;
         const tmpRequireTag = `${data.require[0].reqCat.parentCategoryEn} : ${data.require[0].reqCat.childCategoryEn}`
-        
+    console.log(data)
+
         return (
             <div>
                 {photoPost}
@@ -318,9 +310,9 @@ function Product() {
                                                 history.push(`/app/profileviewer?user_id=${data.owner}`);
                                             }
                                             }} style={{ cursor: "pointer" }}>
-                                            <p className="m-0 p-0">
+                                            <p className="m-0 p-0 d-flex flex-wrap align-items-center">
                                                 <b className="me-3" style={{ color: "#000", fontSize: "25px", fontWeight: 500 }}>{data.username}</b>
-                                                <span style={{ color: "#9e9e9e", fontSize: "18px" }}>{ ( handleFollow ? handleFollow : "" )+ " Followers"}</span>
+                                                <p style={{ color: "#9e9e9e", fontSize: "18px" }}>{ ( handleFollow ? handleFollow : "" )+ " Followers"}</p>
                                             </p>
                                         </div>
                                     </div>

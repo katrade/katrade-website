@@ -27,10 +27,6 @@ import Recommend from '../components/Recommend';
 import { Skeleton } from '@mui/material';
 
 
-// function getRandomInt(max: number) {
-//     return Math.floor(Math.random() * max);
-// }
-
 const SeeMore = styled.button`
     width: 200px;
     height: 40px;
@@ -39,32 +35,6 @@ const SeeMore = styled.button`
     padding: 0px 20px;
     font-size: 18px;
 `
-
-// type DestCompContextType = {
-//     destCompState: any,
-//     destCompDispatch: any,
-// }
-
-// const DestCompContext = React.createContext<DestCompContextType  | any >(null);
-
-// function reducer(state:any, action:any) {
-//     if (action.type === "Account") {
-//         return { dest: "Account" };
-//     }else if (action.type === "ChangePassword") {
-//         return { dest: "ChangePassword" };
-//     }else if (action.type === "Following") {
-//         return { dest: "Following" };
-//     }else if (action.type === "Followers") {
-//         return { dest: "Followers" };
-//     }else if (action.type === "Favorite") {
-//         return { dest: "Favorite" };
-//     }else if (action.type === "Inventory") {
-//         return { dest: "Inventory" };
-//     }else if (action.type === "History") {
-//         return { dest: "History" };
-//     }
-//     return state;
-// }
 
 const th: string[] = [
     "ตรงกับคุณ",
@@ -83,15 +53,6 @@ const meow: string[] = [
 ]
 
 function Market() {
-
-    // const [ destCompState , destCompDispatch] = useReducer(reducer, "Account");
-
-    // สร้างตัวอย่างมาโชว์ Just For You
-    // const rec_item = null;
-    // สร้างตัวอย่างมาโชว์ Suggestion
-    // const interest_item = id_item.map((item, index) => {
-    //     return <Interest item={item} key={index} />;
-    // });
 
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
@@ -144,9 +105,8 @@ function Market() {
             return <Interest item={item} key={index} />;
         }
     });
-
+    console.log(matchInventory)
     return (
-        // <DestCompContext.Provider value={{ destCompState , destCompDispatch }}>
         <Background>
             <div>
                 <Navbar image={localStorage.getItem("uid")} />
@@ -159,7 +119,15 @@ function Market() {
                                     {
                                         matchInventory !== null ?
 
-                                            (tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10))
+                                            (tmpMatchInventory.length == 0 ?
+                                                (
+                                                    <div className="mx-auto my-5 text-center">
+                                                        <p className="notfounditem">ไม่พบสิ่งของที่มีความต้องการตรงกับคุณ</p>
+                                                    </div>
+                                                )
+                                                :
+                                                (tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10))
+                                            )
                                             :
                                             (
                                                 <div className="d-flex">
@@ -172,6 +140,7 @@ function Market() {
                                             )
 
                                     }
+                        
                                 </div>
                                 <div className="d-flex justify-content-center align-items-center my-3">
                                     {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
@@ -184,8 +153,6 @@ function Market() {
 
                         <div className="category">
                             <H5 className="mb-3">{displayContent[2]}</H5>
-                            {/* <div className="category-box">
-                                </div> */}
                             <SlideCategory />
                         </div>
 
@@ -194,20 +161,29 @@ function Market() {
                         <H5 className="mb-3">{displayContent[3]}</H5>
                         <div className="full-width">
                             <div className="d-flex justify-content-start flex-wrap">
-                                {tmpInventory}
-                                {/* {
+                                {
                                     allInventory !== null ?
 
-                                    (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
+                                    (tmpInventory.length == 0 ?
+                                        (
+                                            <div className="mx-auto my-5 text-center">
+                                                <p className="notfounditem">ไม่พบสิ่งของบน katrade marlet เลย</p>
+                                            </div>
+                                        )
+                                        :
+                                        (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
+                                    )
                                     :
                                     (
                                         <div className="d-flex">
                                             <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
                                             <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
                                             <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
                                         </div>
                                     )
-                                } */}
+                                }
                             </div>
                             <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p>
                         </div>
@@ -217,10 +193,6 @@ function Market() {
             </div>
         </Background>
     );
-    // </DestCompContext.Provider>
 }
 
-// export { DestCompContext };
 export default Market;
-
-
