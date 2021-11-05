@@ -257,10 +257,10 @@ export default function useAuthorization() {
     }
 
     async function getAllInventory(): Promise<any> {
-        if (!cookies.DaveTheHornyDuck) {
-            alert("Please sign in again");
-            window.location.reload();
-        }
+        // if (!cookies.DaveTheHornyDuck) {
+        //     alert("Please sign in again");
+        //     window.location.reload();
+        // }
         return await axios.get(`${API}/inventory/getAllInventory`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`

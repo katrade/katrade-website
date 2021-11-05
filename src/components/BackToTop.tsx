@@ -1,5 +1,6 @@
 import { useState , useContext , useEffect } from "react"
 import iconPic from '..\src\pics\backToTop.png'
+import styled from "styled-components"
 
 const BackToTop = (probs: any) => {
     
