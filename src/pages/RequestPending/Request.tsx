@@ -86,7 +86,7 @@ export default function Request() {
                 <div>
                     <Navbar />
                     <Block height="50px">
-                        <Div dynamicPair={["#ffffff", "#212121"]}className="my-4 py-3 px-4">
+                        <Div dynamicPair={["#ffffff", "#212121"]} className="my-4 py-3 px-4">
                             <div className="mb-3 d-flex flex-row topic-request">
                                 <P className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</P>
                                 <P className={component == 2 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(2)}>Pending</P>

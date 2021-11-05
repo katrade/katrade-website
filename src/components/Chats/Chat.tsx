@@ -4,9 +4,12 @@ import "./Chat.css";
 import ProfilePic from "./ProfilePic";
 import SendIcon from '@material-ui/icons/SendRounded'
 import { useHistory } from "react-router";
+import P from "../standard/P";
+
+import { ThemeContext } from "../../contexts/Theme"
 
 export default function Chat() {
-
+    const { theme } = useContext(ThemeContext);
     const {
         socket,
         account,
@@ -46,7 +49,7 @@ export default function Chat() {
 
     const sendMessage = async () => {
         if (socket !== null) {
-            if (message === "") return 
+            if (message === "") return
             let messageContent = {
                 room: roomId,
                 content: {
@@ -111,12 +114,13 @@ export default function Chat() {
                                             backgroundSize: 'cover',
                                             backgroundRepeat: 'no-repeat',
                                             borderRadius: "50%",
-                                            backgroundPosition: "center"
+                                            backgroundPosition: "center",
+                                            border: "1px solid rgb(180, 180, 180)"
                                         }}>
                                         </div>
                                     }
-                                    <div className={val.sender === account.username ? "yourtextBox" : "othertextBox"}>
-                                        <p>{val.content}</p>
+                                    <div className={val.sender === account.username ? "yourtextBox" : theme === "light" ? "othertextBox" : "othertextBox-Dark"}>
+                                        <P className={val.sender === account.username ? "text-white" : ""}> {val.content}</P>
                                     </div>
                                     {/* <div>
                                         {val.timeStamp}
@@ -150,7 +154,9 @@ export default function Chat() {
                             style={{
                                 width: "100%",
                                 border: "none",
-                                margin: "0px"
+                                margin: "0px",
+                                backgroundColor: theme === "light" ? "white" : "#212121",
+                                color: theme === "light" ? "black" : "white"
                             }}
                         />
                     </div>
@@ -165,7 +171,8 @@ export default function Chat() {
                             style={{
                                 //maxWidth: "35px",
                                 fontSize: "35px",
-                                cursor: "pointer"
+                                cursor: "pointer",
+                                color: "rgb(32, 201, 108)"
                             }}
                             onClick={sendMessage}
                             className="material-icons"
@@ -175,6 +182,6 @@ export default function Chat() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

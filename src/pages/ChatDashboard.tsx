@@ -9,11 +9,14 @@ import { SocketContext, SocketProvider } from '../contexts/Socket'
 import { useContext, useEffect, useState } from 'react'
 import '../components/Chats/Chat.css'
 import LogoBg from '../pics/mainlogo-black.png'
+import LogoBgDarkMode from '../pics/mainlogo-white.png'
+import Div from '../components/standard/Div'
+import { ThemeContext } from "../contexts/Theme"
 
 export default function ChatDashboard() {
     const { socket, account, duo_id, duo_username, roomId, setRoomId, duoId } = useContext(SocketContext)
     const [handleHide, setHandleHide] = useState(true)
-
+    const { theme } = useContext(ThemeContext);
     useEffect(() => {
         // console.log("UNIIIIIII")
         if (duo_id || duoId) {
@@ -28,8 +31,8 @@ export default function ChatDashboard() {
     return (
         <Background>
             <Navbar />
-            <Block height="90vh" backgroundColor="#f7f7f7" darkBackgroundColor="#3d3d3d">
-                <div className="row bg-white p-2 mt-4 pt-3">
+            <Block height="90vh">
+                <Div dynamicPair={["#ffffff", "#212121"]} className="row p-2 mt-4 pt-3">
                     {!handleHide ?
                         <>
                             <div className="col-lg-4 pe-0">
@@ -40,16 +43,17 @@ export default function ChatDashboard() {
                                 <Dealing />
                             </div>
                         </>
-                        :<>
+                        :
+                        <>
                             <div className="col-lg-4 pe-0 sidebar">
                                 <SideBar />
                             </div>
                             <div className="col-lg-8 d-flex justify-content-center align-items-center">
-                                <img src={LogoBg} className="LogoBg" />
+                                <img src={theme === "light" ? LogoBg : LogoBgDarkMode} className="LogoBg" />
                             </div>
                         </>
                     }
-                </div>
+                </Div>
             </Block>
             <Footer />
         </Background>

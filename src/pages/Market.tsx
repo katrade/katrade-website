@@ -140,7 +140,7 @@ function Market() {
                                             )
 
                                     }
-                        
+
                                 </div>
                                 <div className="d-flex justify-content-center align-items-center my-3">
                                     {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
@@ -164,25 +164,25 @@ function Market() {
                                 {
                                     allInventory !== null ?
 
-                                    (tmpInventory.length == 0 ?
-                                        (
-                                            <div className="mx-auto my-5 text-center">
-                                                <p className="notfounditem">ไม่พบสิ่งของบน katrade marlet เลย</p>
-                                            </div>
+                                        (tmpInventory.length == 0 ?
+                                            (
+                                                <div className="mx-auto my-5 text-center">
+                                                    <p className="notfounditem">ไม่พบสิ่งของบน katrade marlet เลย</p>
+                                                </div>
+                                            )
+                                            :
+                                            (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
                                         )
                                         :
-                                        (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
-                                    )
-                                    :
-                                    (
-                                        <div className="d-flex">
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                        </div>
-                                    )
+                                        (
+                                            <div className="d-flex">
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            </div>
+                                        )
                                 }
                             </div>
                             <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p>

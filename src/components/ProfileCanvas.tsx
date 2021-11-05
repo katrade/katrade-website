@@ -184,7 +184,6 @@ const Embed = styled.div`
     padding-right: 50px;
     text-align: center;
     transition: 400ms ease;
-
     
     &:hover {
         transform: scale(1.2);
@@ -200,9 +199,22 @@ function Profile({ name, img, label, fb, ig, git }: boxPropsInterface) {
 
     return (
         <>
-            <div className="col-lg m-0 p-4">
+            <div className="col-lg m-0 p-4 d-flex">
                 <Embed style={{ backgroundColor: theme === "light" ? "#f2f4f7" : "#2a2c2e" }}>
-                    <img className="round" src={img} width="66%" height="131px" />
+                    <div className="d-flex justify-content-center">
+                        <div style={{
+                            minWidth: "131px",
+                            minHeight: "131px",
+                            maxWidth: "131px",
+                            maxHeight: "131px",
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            borderRadius: "50%",
+                            backgroundPosition: "center",
+                            cursor: "pointer"
+                        }}></div>
+                    </div>
                     <H6 className="mt-3">{name}</H6>
                     <P>{label}</P>
                     <Icon src={facebookForDark} onClick={() => window.location.href = `${fb}`} width="30px" />

@@ -2,6 +2,7 @@ import { SettingsSystemDaydreamOutlined } from '@material-ui/icons'
 import { useState, useContext, useEffect } from 'react'
 import { SocketContext } from '../../contexts/Socket'
 import useAuthorization from '../../hooks/useAuthorization'
+import P from '../standard/P'
 import './Chat.css'
 import ProfilePic from './ProfilePic'
 // import { IChat, IContact, IMessage } from "../../interfaces/Chat";
@@ -114,10 +115,10 @@ export default function Tabchat(props: any) {
                     }} />
                 </div>
                 <div className="col-9 justify-content-center align-self-center">
-                    <span className="fw-bold fs-4">{props.data.userNameContact}</span><br />
+                    <P className="fw-bold fs-4">{props.data.userNameContact}</P>
                     {haveMessage ?
-                        <p className="limit">{sender}: {lastMessage}</p>
-                        : <p>No Message</p>
+                        <P className="limit">{sender}: {lastMessage}</P>
+                        : <P>No Message</P>
                     }
 
                 </div>
