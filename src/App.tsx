@@ -80,6 +80,11 @@ function App() {
                             <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
                             <Route exact path="/articles/termsofservice" component={TermsOfService}></Route>
                             
+                            <Route exact path="/app/forgotpassword" component={ForgotPassword}></Route>
+                            <Route exact path="/app/forgotpassword/verify" component={AfterEnterEmail}></Route>
+                            <Route exact path="/app/resetpassword" component={ResetPassword}></Route>
+                            <Route exact path="/app/completeresetpassword" component={CompleteResetPassword}></Route>
+
                             <Route exact path="/404" component={NotFound}></Route>
                             <Route exact path="/" component={Home}></Route>
                             <UserProvider>
@@ -92,10 +97,7 @@ function App() {
                                 <Route exact path="/app/verify/success" component={VerifyEmailSuccess}></Route>
                                 <Route exact path="/verify" component={Verify}></Route>
 
-                                <Route exact path="/app/forgotpassword" component={ForgotPassword}></Route>
-                                <Route exact path="/app/forgotpassword/verify" component={AfterEnterEmail}></Route>
-                                <Route exact path="/app/resetpassword" component={ResetPassword}></Route>
-                                <Route exact path="/app/completeresetpassword" component={CompleteResetPassword}></Route>
+                                
 
                                 <Route exact path="/app/market" component={Market}></Route>
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
