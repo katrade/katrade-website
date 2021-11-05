@@ -32,3 +32,13 @@ input.searchbar {
     left: 100%;
     right: 0;
 }
+
+.notfounditem {
+    font-size: 40px;
+}
+
+@media only screen and (max-width: 630px) {
+    .notfounditem {
+        font-size: 25px;
+    }
+}

@@ -59,7 +59,7 @@ export default function SlideCategory() {
         history.push(`/app/search/${searchNav+"-"+"none"+"-byCategory"}`);
     }
 
-    const slideTop = categorySlide.map((data:any, index:any) => {
+    const slide = categorySlide.map((data:any, index:any) => {
         if(index < 5){
             return (
                 <div className="position-absolute overflow-hidden pointer" style={{top:"0",left:`${index*400}px`,width:"400px",height:"175px", zIndex:10}} onClick={() => searchBySlide(data.name)}>
@@ -84,7 +84,7 @@ export default function SlideCategory() {
     return (
         <div style={{width:"100%", height:"350px", backgroundColor:"rgb(169, 216, 189)", zIndex:1, overflowY:"hidden"}}>
             <div className="position-relative " style={{width:"2000px", height:"350px"}}>
-                {slideTop}
+                {slide}
             </div>
         </div>
     );
