@@ -46,6 +46,7 @@ export default function Chat() {
 
     const sendMessage = async () => {
         if (socket !== null) {
+            if (message === "") return 
             let messageContent = {
                 room: roomId,
                 content: {
