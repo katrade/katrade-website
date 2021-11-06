@@ -22,8 +22,6 @@ export default function DealItems(props: any) {
         if (window.confirm(`ถ้ากดแล้วจะไม่สามารถกดยกเลิกได้`)) {
             LockRequest(props.data.requestId, props.data.ownerInventoryId)
             setDisableBtn(true)
-            dealingList.splice(props.index, 1)
-            setDealingList(dealingList)
         }
         // console.log(props.data)
     }
@@ -34,6 +32,7 @@ export default function DealItems(props: any) {
             deleteMyRequestPending(props.data.requestId)
             props.chk();
             setChkDealingItem(false)
+            dealingList.splice(props.index, 1)
             setDealingList(dealingList)
             // history.push(`/app/chat?duo_id=${props.data.targetInventory.owner}&duo_username=${props.data.targetInventory.username}`)
         }
