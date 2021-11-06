@@ -19,6 +19,7 @@ export default function Tabchat(props: any) {
         messageList,
         duo_id,
         duoId,
+        duo_username,
         setDuoId,
         duoUsername,
         setDuoUsername,
@@ -78,7 +79,7 @@ export default function Tabchat(props: any) {
                 else {
                     room = account._id + props.data.userIdContact
                 }
-                console.log("Room:"+room)
+                console.log("Room:" + room)
                 // setRoomIdForTabChat(room)
                 var chatData = await getLastChatData(room)
                 console.log(chatData)
@@ -96,33 +97,38 @@ export default function Tabchat(props: any) {
 
     }, [account, chkMessage])
 
-    // console.log(props.data)
+    
 
-    return (
-        <div onClick={handleDivClick}>
-            <div className={classNameActive}>
-                <div className="col-3 d-flex justify-content-center align-items-center">
-                    <div  className="m-0" style={{
-                        minWidth: "65px",
-                        minHeight: "65px",
-                        maxWidth: "65px",
-                        maxHeight: "65px",
-                        backgroundImage: `url(${ProfilePic(props.data.userIdContact)})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        borderRadius: "50%",
-                        backgroundPosition: "center"
-                    }} />
-                </div>
-                <div className="col-9 justify-content-center align-self-center">
-                    <P className="fw-bold fs-4">{props.data.userNameContact}</P>
-                    {haveMessage ?
-                        <P className="limit">{sender}: {lastMessage}</P>
-                        : <P>No Message</P>
-                    }
+    if (duo_id === account._id || duo_username === account.username || props.data.userNameContact == account.username) {
+        return null
+    } 
+    else {
+        return (
+            <div onClick={handleDivClick}>
+                <div className={classNameActive}>
+                    <div className="col-3 d-flex justify-content-center align-items-center">
+                        <div className="m-0" style={{
+                            minWidth: "65px",
+                            minHeight: "65px",
+                            maxWidth: "65px",
+                            maxHeight: "65px",
+                            backgroundImage: `url(${ProfilePic(props.data.userIdContact)})`,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            borderRadius: "50%",
+                            backgroundPosition: "center"
+                        }} />
+                    </div>
+                    <div className="col-9 justify-content-center align-self-center">
+                        <P className="fw-bold fs-4">{props.data.userNameContact}</P>
+                        {haveMessage ?
+                            <P className="limit">{sender}: {lastMessage}</P>
+                            : <P>No Message</P>
+                        }
 
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
