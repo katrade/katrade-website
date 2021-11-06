@@ -1,16 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import { SocketContext } from '../../contexts/Socket'
 import useAuthorization from '../../hooks/useAuthorization'
-import P from '../standard/P'
-// import { IDealing } from '../../interfaces/Chat'
 import DealItems from './DealItems'
 
 
 export default function Dealing() {
-
     const {
         duo_id,
-        duo_username,
         account,
         roomId,
         dealingList,

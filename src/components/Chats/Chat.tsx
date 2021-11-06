@@ -13,18 +13,10 @@ export default function Chat() {
     const {
         socket,
         account,
-        duo_id,
-        duo_username,
         roomId,
-        setRoomId,
         messageList,
-        setMessageList,
         duoId,
         duoUsername,
-        setDuoId,
-        contactList,
-        setContactList,
-        setChkMessage
     } = useContext(SocketContext)
 
     // console.log("Chat Reload")

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from "react-router";
 import useAuthorization from '../../hooks/useAuthorization';
 
 import './Request.css';
@@ -9,8 +8,6 @@ import RequestBlock from '../../components/RequestPending/RequestBlock';
 import Block from '../../components/Block'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { CgNpm } from 'react-icons/cg';
-import { TransparentButton } from '../../components/standard/Button'
 import useLoading from '../../hooks/useLoading';
 import Background from '../../components/Background';
 import P from '../../components/standard/P';
@@ -22,6 +19,7 @@ export default function Request() {
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
     const [dataInprogess, setDataInprogess] = useState<any>();
+    
     useEffect(() => {
         async function init() {
             var data1 = await getRequest();
@@ -43,6 +41,7 @@ export default function Request() {
     const [component, setComponent] = useState(1);
     const [selectComponent, setSelectComponent] = useState(request_data);
     const [show, hide] = useLoading();
+
     function handleComponent(status: any) {
         setComponent(status)
         if (status == 1) {
@@ -53,9 +52,11 @@ export default function Request() {
             setSelectComponent(inprogress_data.reverse())
         }
     }
+
     var request_data: any;
     var pending_data: any;
     var inprogress_data: any;
+
     if (dataRequest) {
         request_data = dataRequest.map((data: any, index: any) => {
             return <RequestBlock data={data} status={0} key={index} />;

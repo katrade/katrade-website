@@ -11,32 +11,21 @@ import ProfilePic from './ProfilePic'
 export default function Tabchat(props: any) {
 
     const {
-        socket,
         account,
-        setAccount,
-        roomId,
         setRoomId,
-        messageList,
         duo_id,
-        duoId,
         duo_username,
         setDuoId,
-        duoUsername,
         setDuoUsername,
-        roomIdForTabChat,
-        setRoomIdForTabChat,
         currentIndex,
         setCurrentIndex,
-        index,
-        chkReRenderSidebar,
-        contactList,
         chkMessage,
         setChkMessage
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()
     const [haveMessage, setHaveMessage] = useState(false)
-    const { getChatData, getLastChatData } = useAuthorization();
+    const { getLastChatData } = useAuthorization();
     const [classNameActive, setClassNameActive] = useState<string>("tabchat row m-0")
 
     // console.log(props.data)
@@ -51,8 +40,8 @@ export default function Tabchat(props: any) {
         setRoomId(room)
         setDuoId(props.data.userIdContact)
         setDuoUsername(props.data.userNameContact)
-        console.log("CLICK RoomId: " + roomId)
-        console.log("SET duoId: " + duoId)
+        // console.log("CLICK RoomId: " + roomId)
+        // console.log("SET duoId: " + duoId)
         setCurrentIndex(props.index)
         // setAccount(account)
     }
@@ -79,10 +68,10 @@ export default function Tabchat(props: any) {
                 else {
                     room = account._id + props.data.userIdContact
                 }
-                console.log("Room:" + room)
+                // console.log("Room:" + room)
                 // setRoomIdForTabChat(room)
                 var chatData = await getLastChatData(room)
-                console.log(chatData)
+                // console.log(chatData)
                 if (chatData) {
                     if (chatData.content) {
                         setHaveMessage(true)

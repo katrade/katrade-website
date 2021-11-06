@@ -1,6 +1,5 @@
 import { TransparentButton } from '../../components/standard/Button'
 import { AiOutlineSwap } from 'react-icons/ai';
-import { IDealing } from '../../interfaces/Chat';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../../contexts/Socket';
@@ -10,7 +9,7 @@ export default function DealItems(props: any) {
 
     const { LockRequest, deleteMyRequestPending } = useAuthorization()
     const [disableBtn, setDisableBtn] = useState(false)
-    const { duoId, currentIndex } = useContext(SocketContext) 
+    const { duoId } = useContext(SocketContext) 
     const history = useHistory()
 
     const handleConfirmBtn = () => {
