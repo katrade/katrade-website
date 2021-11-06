@@ -334,11 +334,11 @@ export default function TermsOfService() {
 
     return (
         <>
-            <Background>
-                <StaticNav />
+            <StaticNav />
+            <Block height="auto" backgroundColor="#f7f7f7" darkBackgroundColor="#3d3d3d">
                 <BackToTop showBelow={250} lang={lang}/>
-                <div className="row justify-content-center m-0 py-3 full-width">
-                    <div className="center-content-screen col-8 mb-5 px-5">
+                <div className="row justify-content-center py-3 full-width">
+                    <div className="center-content-screen col-8 mb-5 ">
                         <div className="text-center mb-5">
                             <H4>{content[0]}</H4>
                         </div>
@@ -524,7 +524,7 @@ export default function TermsOfService() {
                         </div>
                     </div>
                 </div>
-            </Background>
+            </Block>
         </>
     )
 }
