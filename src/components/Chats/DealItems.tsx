@@ -22,6 +22,8 @@ export default function DealItems(props: any) {
         if (window.confirm(`ถ้ากดแล้วจะไม่สามารถกดยกเลิกได้`)) {
             LockRequest(props.data.requestId, props.data.ownerInventoryId)
             setDisableBtn(true)
+            dealingList.splice(props.index, 1)
+            setDealingList(dealingList)
         }
         // console.log(props.data)
     }
