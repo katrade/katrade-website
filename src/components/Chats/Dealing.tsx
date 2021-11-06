@@ -3,7 +3,6 @@ import { SocketContext } from '../../contexts/Socket'
 import useAuthorization from '../../hooks/useAuthorization'
 import DealItems from './DealItems'
 
-
 export default function Dealing() {
     const {
         duo_id,

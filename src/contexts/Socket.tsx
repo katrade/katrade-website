@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { contextType } from '../types/user';
 import io, { Socket } from "socket.io-client";
 import { useHistory } from "react-router";
 import { defaultEmptyAccount, IAccount } from '../interfaces/IUser';
@@ -36,10 +35,6 @@ interface ISocketContext {
     chkMessage: boolean,
     setChkMessage: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
 }
-
-
-
-
 
 export const SocketContext = React.createContext<ISocketContext>({
     socket: io("https://socketkatrade.herokuapp.com", {
@@ -82,14 +77,7 @@ const queryString = require("query-string");
 
 export function SocketProvider({ children }: propsInterface) {
 
-    // const socket = null;
-    // const socket = io("https://socketkatrade.herokuapp.com", {
-    //     secure: true,
-    //     transports: ["flashsocket", "polling", "websocket"]
-    // });
-
     const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
-
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const [roomId, setRoomId] = useState("");
     const history = useHistory();
@@ -133,8 +121,8 @@ export function SocketProvider({ children }: propsInterface) {
     useEffect(() => {
         if(socket === null) {
                 setSocket(io("https://socketkatrade.herokuapp.com", {
-                        secure: true,
-                        transports: ["flashsocket", "polling", "websocket"]
+                    secure: true,
+                    transports: ["flashsocket", "polling", "websocket"]
                 }));
         }
         else {
@@ -145,15 +133,14 @@ export function SocketProvider({ children }: propsInterface) {
                 // console.log(data)
                 // let a = [...messageList]
                 // a.push(data.content)
-                console.log(messageList);
+                // console.log(messageList);
                 setMessageList([...refMessages.current, data.content]);
                 setChk(!chk);
                 setChkReRenderSidebar(true)
                 setChkMessage(true)
             });
         }
-        
-            // console.log(socket.connected);
+
     }, [socket])
 
     useEffect(() => {

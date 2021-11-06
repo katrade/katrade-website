@@ -4,8 +4,6 @@ import { useEffect, useContext } from "react"
 import useAuthorization from "../../hooks/useAuthorization"
 import { SocketContext } from "../../contexts/Socket";
 
-
-
 export default function SideBar() {
 	console.log("Sidebar Reload")
 	// console.log(contactList)
