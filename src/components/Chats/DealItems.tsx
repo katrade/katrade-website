@@ -32,6 +32,7 @@ export default function DealItems(props: any) {
         
         if (window.confirm(`ต้องการลบคำขอ? ถ้ากดแล้วจะไม่สามารถกดยกเลิกได้`)) {
             deleteMyRequestPending(props.data.requestId)
+            props.chk();
             setChkDealingItem(false)
             setDealingList(dealingList)
             // history.push(`/app/chat?duo_id=${props.data.targetInventory.owner}&duo_username=${props.data.targetInventory.username}`)
