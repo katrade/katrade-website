@@ -1,3 +1,4 @@
+import './Product.css';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 
@@ -39,6 +40,7 @@ function Product() {
     const { theme } = useContext(ThemeContext);
 
     const { getMyInventory,
+        getSelectInventory,
         getDetailProduct,
         getUserData,
         postMyReqeust,
@@ -92,7 +94,7 @@ function Product() {
             if (getUser) {
                 setMyAccout(getUser);
             }
-            var getInventory = await getMyInventory();
+            var getInventory = await getSelectInventory();
             if (getInventory) {
                 setInventory(getInventory);
             }
@@ -152,7 +154,9 @@ function Product() {
     }
     let requestTrade = null;
     if (!!selectTrade) {
-        requestTrade = <SelectTrade onClose={closeRequest} arrayAll={inventory} arrayMatch={matchInventory} detailItem={data} />
+        if(inventory && matchInventory){
+            requestTrade = <SelectTrade onClose={closeRequest} arrayAll={inventory} arrayMatch={matchInventory} detailItem={data} />
+        }
     }
 
     const [requireDetail, SetRequireDetail] = useState<any>();
@@ -200,7 +204,6 @@ function Product() {
         }
     }
 
-    // const [handleFollow , setHandleFollow] = useState<any>(10);
     const handleClickFollow = () => setFollowChk(!followChk);
     function follow_btn() {
         if (!followChk) {
@@ -249,7 +252,7 @@ function Product() {
 
         const tmpRequireDetail = data.require[0].detail;
         const tmpRequireTag = `${data.require[0].reqCat.parentCategoryEn} : ${data.require[0].reqCat.childCategoryEn}`
-        console.log(data)
+
         return (
             <Background>
                 <div>
@@ -335,11 +338,25 @@ function Product() {
                                             <div onClick={handleClickFollow}>{follow_btn()}</div>
                                         </div>
                                     </div>
-                                    <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-between mt-3"}>
-                                        <div className="" onClick={handleClickFavorite} style={{ width: "48%" }}>{favorite_btn()}</div>
-                                        <SolidButton onClick={clickRequest} className="" fontSize="24px" buttonColor="#15C777" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", width: "48%" }}>
+                                    <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-between mt-3"} style={{height:"50px"}}>
+                                        {/* <div className="" onClick={handleClickFavorite} style={{ width: "48%" }}>{favorite_btn()}</div>
+                                        <SolidButton onClick={clickRequest} fontSize="24px" buttonColor="#15C777" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", width: "48%" }}>
                                             Trade
-                                        </SolidButton>
+                                        </SolidButton> */}
+                                        {inventory != null ? 
+                                            (
+                                                <>
+                                                    <div className="" onClick={handleClickFavorite} style={{ width: "48%" }}>{favorite_btn()}</div>
+                                                    <SolidButton onClick={clickRequest} fontSize="24px" buttonColor="#15C777" padding="5px" margin="0" style={{ boxShadow: "0 0 8px rgba(10,10,10,0.1)", width: "48%" }}>
+                                                        Trade
+                                                    </SolidButton>
+                                                </>
+                                            )
+                                            :
+                                            (
+                                                <div className="loader"></div>
+                                            )
+                                        }
                                     </div>
                                 </Div>
                             </div>

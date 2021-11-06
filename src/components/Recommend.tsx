@@ -1,7 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import './Recommend.css';
 
+import { useContext } from 'react';
+import { ThemeContext } from '../contexts/Theme';
+
 function Recommend(itemData:any, match:any) {
+    const { theme } = useContext(ThemeContext);
     const item = itemData.item;
     const matchwith = itemData.match;
 
@@ -19,7 +23,7 @@ function Recommend(itemData:any, match:any) {
     }
 
     return (
-        <div className="recommend-card">
+        <div className={theme === "light" ? "recommend-card" : "recommend-card-dark"}>
             <div 
                 onClick={LinkItemData}
                 className="recommend-photo-card" 

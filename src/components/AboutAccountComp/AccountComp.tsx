@@ -131,14 +131,11 @@ function UploadProfilePic({ id }: IUpload) {
             },
         })
             .then(function (response) {
-                //handle success            
                 window.location.reload();
 
 
             })
             .catch(function (response) {
-                //handle error
-                // console.log(response);
                 alert('Can not update profile picture.')
                 hide();
             });

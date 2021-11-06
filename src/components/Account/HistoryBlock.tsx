@@ -11,7 +11,6 @@ const ItemStlye = {
 
 export default function HistoryBlock(props:any) {
     const { data , UidUser } = props;
-    // console.log(data.timeStamp.split("T")[0].split("-").reverse().join("-"))
     const timeStamp = data.timeStamp.split("T")[0].split("-").reverse().join("-");
     function leftBlock(){
         if(UidUser == data.sourceUserId){

@@ -14,7 +14,6 @@ export default function Background({children}: backgroundPropsInterface) {
         maxWidth: "100%",
         transition: "400ms ease"
     }
-    // console.log(themeData);
     return (
         <div style={style}>
             { children }

@@ -22,7 +22,6 @@ export default function FavoriteComp(data: any) {
         const Favorite = favouriteData.map((data:any, index:any) => {
             return <FavoriteBlock data={data} index={index} Noti={(index:any) => {handleFavouriteLength(index)}}/>;
         })
-        // setFavoriteMap(Favorite);
         if(favouriteData.length == 0){
             return (
                 <Div dynamicPair={["#fff", "#212121"]} className="row mb-4 p-3" style={{ width:"100%", minHeight:"400px"}}>
@@ -38,15 +37,15 @@ export default function FavoriteComp(data: any) {
         }else{
             return (
                 <div>
-                    <div className="bg-white row mx-auto mb-4 p-3" style={{ width: "100%" }}>
+                    <Div dynamicPair={["#fff", "#212121"]} className="row mx-auto mb-4 p-3" style={{ width: "100%" }}>
                         <div>  
-                            <h4 className="d-inline-block me-3 mb-4">Favorite</h4>
-                            <h5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteLength})</h5>
+                            <H4 className="d-inline-block me-3 mb-4">Favorite</H4>
+                            <H5 className="d-inline-block" style={{color:"#95bddfd5"}}>({favouriteLength})</H5>
                         </div>
                         <div>
                             {Favorite.reverse()}
                         </div>
-                    </div>
+                    </Div>
                 </div>
             );
         }

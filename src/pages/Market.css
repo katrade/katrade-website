@@ -38,10 +38,10 @@ input.searchbar {
 }
 
 .seemore {
-    width: 200px;
+    width: 160px;
     height: 40px;
-    border: 1px solid grey;
-    background-color: white;
+    border: 1px solid black;
+    background-color: #15C777;
     padding: 0 20px;
     font-size: 18px;
     text-align: center;

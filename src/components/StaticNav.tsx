@@ -57,7 +57,6 @@ export default function StaticNav({ forAuth }: navPropsInterface) {
 
     const { theme, setTheme } = useContext(ThemeContext);
     const { lang, toggleLanguage } = useContext(LanguageContext);
-    console.log(lang)
     const [mobile, setMobile] = useState<boolean>(false);
     const history = useHistory();
     window.addEventListener("resize", resize)

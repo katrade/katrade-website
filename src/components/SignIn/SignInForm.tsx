@@ -40,7 +40,6 @@ const SignInForm = () => {
 
     const onFormSubmit = async (e: any) => { // แก้ submit ให้เป็น tag form   
         e.preventDefault();  
-        console.log("??")
         const _email = form.email;
         const _password = form.password;
         if ((_email != null && _password != null) && (_email != "" && _password != "")) {
@@ -61,7 +60,6 @@ const SignInForm = () => {
                 setShowAlert2("0")
             }
         }
-        // console.log(form.email, form.password)
     }
 
     async function signIn(_email: string, _password: string) {
@@ -75,7 +73,6 @@ const SignInForm = () => {
             }
         }).then((res) => {
             
-            // console.log(res.data)
             if (res.data.verifyEmail === true) {
                 setCookie('DaveTheHornyDuck', res.data.DaveTheHornyDuck);
                 axios.get(`${API}/auth/getUserData`, {
@@ -84,7 +81,6 @@ const SignInForm = () => {
                     }
                 })
                     .then(async (res2) => {
-                        // console.log(res2.data);
                         window.localStorage.setItem("uimg", res2.data.data.profilePic);
                         window.localStorage.setItem("uid", res2.data.data._id);
                         hide();

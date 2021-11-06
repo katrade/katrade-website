@@ -16,7 +16,7 @@ export default function FollowersComp(data:any) {
 
     if (accountData){
         const followingBlock = accountData.map((data:any, index:any) => {
-            return <FollowingBlock data={data} relation={"follower"} Noti={(tmp:any) => {console.log(tmp) ; setFollowerLength(followerLength - 1)}} />;
+            return <FollowingBlock data={data} relation={"follower"} Noti={(tmp:any) => {setFollowerLength(followerLength - 1)}} />;
         })
         return (
             <div>

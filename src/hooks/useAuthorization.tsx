@@ -208,8 +208,23 @@ export default function useAuthorization() {
     }
 
     async function getMyInventory() {
-
         return await axios.get(`${API}/inventory/getUserInventory`, {
+            headers: {
+                'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
+            }
+        })
+            .then(res => {
+                ;
+                return res.data;
+            })
+            .catch(() => {
+                ;
+                return null;
+            })
+    }
+
+    async function getSelectInventory() {
+        return await axios.get(`${API}/inventory/getSelectItem`, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
             }
@@ -429,7 +444,7 @@ export default function useAuthorization() {
     }
 
     async function acceptRequest(request_id: any) {
-        window.location.reload();
+        show();
         return await axios.patch(`${API}/user/acceptRequest`, { id: request_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -437,10 +452,9 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
+                window.location.reload();
             })
             .catch((err) => {
-                ;
-                console.log(err)
                 return null;
             })
     }
@@ -610,6 +624,7 @@ export default function useAuthorization() {
     }
 
     async function finishTrade(request_id: any) {
+        show();
         return await axios.post(`${API}/user/finishTrade`, { requestId: request_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`
@@ -903,6 +918,7 @@ export default function useAuthorization() {
         isUserActive,
         addItem,
         getMyInventory,
+        getSelectInventory,
         changeProfile,
         getDetailProduct,
         deleteMyProduct,
