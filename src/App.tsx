@@ -54,11 +54,8 @@ import Request from './pages/RequestPending/Request'
 // import Pending from './pages/RequestPending/Pending'
 // import Inprogress from './pages/RequestPending/Inprogress'
 
-import Chat from './pages/Chat'
-
 import ProfileCanvas from './components/ProfileCanvas';
 
-import Test01 from './components/TestFrontend/Test01';
 import Test from "./components/Test";
 import ChatDashboard from './pages/ChatDashboard'
 import { SocketProvider } from './contexts/Socket';
@@ -79,30 +76,23 @@ function App() {
                             <Route exact path="/articles/about/developers" component={ProfileCanvas}></Route>
                             <Route exact path="/articles/why-katrade" component={WhyKatrade}></Route>
                             <Route exact path="/articles/termsofservice" component={TermsOfService}></Route>
-                            
                             <Route exact path="/app/forgotpassword" component={ForgotPassword}></Route>
                             <Route exact path="/app/forgotpassword/verify" component={AfterEnterEmail}></Route>
                             <Route exact path="/app/resetpassword" component={ResetPassword}></Route>
                             <Route exact path="/app/completeresetpassword" component={CompleteResetPassword}></Route>
-
+                            <Route exact path="/app/signin" component={SignIn}></Route>
+                            <Route exact path="/app/register" component={SignUp}></Route>
                             <Route exact path="/404" component={NotFound}></Route>
                             <Route exact path="/" component={Home}></Route>
-                            <UserProvider>
-                                <Route exact path="/app/signin" component={SignIn}></Route>
+                            <Route exact path="/verify" component={Verify}></Route>
+                            <UserProvider>          
                                 <Route exact path="/app/profile" component={Profile}></Route>
-                                <Route exact path="/app/register" component={SignUp}></Route>
                                 <Route exact path="/app/changepassword" component={ChangePassword}></Route>
-
                                 <Route exact path="/app/verify/pending" component={VerifyEmailPending}></Route>
                                 <Route exact path="/app/verify/success" component={VerifyEmailSuccess}></Route>
-                                <Route exact path="/verify" component={Verify}></Route>
-
-                                
-
                                 <Route exact path="/app/market" component={Market}></Route>
                                 <Route exact path="/app/search/:quote" component={Search}></Route>
                                 <Route exact path="/app/product" component={Product}></Route>
-
                                 <Route exact path="/app/setup" component={SetUsernamePage}></Route>
                                 <Route exact path="/app/aboutaccount" component={AboutAccount}></Route>
                                 <Route exact path="/app/account" component={Account}></Route>
@@ -113,21 +103,14 @@ function App() {
                                 <Route exact path="/app/inventory" component={Inventory}></Route>
                                 <Route exact path="/app/settings" component={Settings}></Route>
                                 <Route exact path="/app/manageinventory" component={ManageInventory}></Route>
-
                                 <Route exact path="/app/profileviewer" component={ProfileViewer}></Route>
-
                                 <Route exact path="/app/additem" component={AddItem}></Route>
                                 <Route exact path="/app/testadditem" component={TestAddItem}></Route>
                                 <Route exact path="/app/edititem" component={EditItem}></Route>
-
                                 <Route exact path="/app/request" component={Request}></Route>
                                 {/* <Route exact path="/app/pending" component={Pending}></Route>
                                 <Route exact path="/app/inprogress" component={Inprogress}></Route> */}
-
-                                <Route exact path="/app/heydude" component={Chat}></Route>
                                 <Route exact path="/app/chat"><SocketProvider><ChatDashboard /></SocketProvider></Route>
-
-                                <Route exact path="/app/testFrontend" component={Test01}></Route>
                             </UserProvider>
                             <Route><Redirect to="/404" /></Route>
                         </Switch>
