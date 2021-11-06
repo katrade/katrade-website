@@ -2,27 +2,21 @@
     background-color: white;
 }
 
-.topic-request > a {
-    width: 150px;
-    text-align: center;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    color: #212529;
-    background-color: transparent;
+.content-request {
+    margin: 24px 0;
+    padding: 16px 24px;
 }
 
 .topic-request > p {
     min-width: 150px;
-    padding: 0 20px;
-    margin: 0;
+    /* padding: 0 20px; */
+    /* margin: 0; */
     text-align: center;
     cursor: pointer;
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
 .topic-request > p:hover {
-    /* background-color: rgba(218, 218, 218, 0.2); */
     border: solid 2px rgba(200,200,200,0.6);
     border-width: 0 0 3px 0;
 }
@@ -35,3 +29,15 @@
     border: solid 2px #04d66d !important;
     border-width: 0 0 3px 0 !important;
 }
+
+@media only screen and (max-width: 630px) {
+    .topic-request > p {
+        font-size: 18px;
+        min-width: 33%;
+        text-align: center;
+    }
+    .content-request {
+        margin: 16px 0;
+        padding: 10px 12px;
+    }
+  }

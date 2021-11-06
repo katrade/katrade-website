@@ -51,8 +51,8 @@ import ChangePassword from './pages/AccountPages/ChangePasswordPage';
 import Profile from './pages/AccountPages/Profile';
 
 import Request from './pages/RequestPending/Request'
-import Pending from './pages/RequestPending/Pending'
-import Inprogress from './pages/RequestPending/Inprogress'
+// import Pending from './pages/RequestPending/Pending'
+// import Inprogress from './pages/RequestPending/Inprogress'
 
 import Chat from './pages/Chat'
 
@@ -119,8 +119,8 @@ function App() {
                                 <Route exact path="/app/edititem" component={EditItem}></Route>
 
                                 <Route exact path="/app/request" component={Request}></Route>
-                                <Route exact path="/app/pending" component={Pending}></Route>
-                                <Route exact path="/app/inprogress" component={Inprogress}></Route>
+                                {/* <Route exact path="/app/pending" component={Pending}></Route>
+                                <Route exact path="/app/inprogress" component={Inprogress}></Route> */}
 
                                 <Route exact path="/app/heydude" component={Chat}></Route>
                                 <Route exact path="/app/chat"><SocketProvider><ChatDashboard /></SocketProvider></Route>

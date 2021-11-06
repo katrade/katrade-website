@@ -105,7 +105,6 @@ function Market() {
             return <Interest item={item} key={index} />;
         }
     });
-    console.log(matchInventory)
     return (
         <Background>
             <div>
@@ -145,7 +144,6 @@ function Market() {
                                 <div className="d-flex justify-content-center align-items-center my-3">
                                     {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
                                 </div>
-
                             </div>
                         </div>
 
@@ -185,7 +183,7 @@ function Market() {
                                     )
                                 }
                             </div>
-                            <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p>
+                            {/* <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p> */}
                         </div>
                     </div>
                 </Block>
