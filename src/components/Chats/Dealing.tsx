@@ -54,9 +54,9 @@ export default function Dealing() {
                     <div className="chatContainer-Header d-flex align-items-center">
                         <span className="ms-5 text-white">Dealing</span>
                     </div>
-                    {dealingList.map((ele) => {
+                    {dealingList.map((ele, index) => {
                         return (
-                            <DealItems data={ele} />
+                            <DealItems data={ele} index={index}/>
                         )
                     })}
                 </div>
