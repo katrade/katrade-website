@@ -99,7 +99,7 @@
     width: 90%;
     border:1px solid #C4C4C4;
     border-radius: 30px;
-    display: inline-block;
+    display: flex;
     padding-left: 15px;
 }
 

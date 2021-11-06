@@ -122,8 +122,8 @@ export default function Chat() {
                         );
                     })}
                 </div>
-                <div className="messageInputs p-0 m-0 row my-2" style={{ width: "100%" }}>
-                    <div className="col-lg-1">
+                <div className="messageInputs p-0 m-0 my-2 d-flex" style={{ width: "100%" }}>
+                    {/* <div className="col-lg-1">
                         <img
                             src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
                             style={{
@@ -133,8 +133,8 @@ export default function Chat() {
                                 cursor: "pointer"
                             }}
                         />
-                    </div>
-                    <div className="typingContainer col-lg-10">
+                    </div> */}
+                    <div className="typingContainer mx-3">
                         <input
                             type="text"
                             placeholder="Message..."
@@ -144,7 +144,7 @@ export default function Chat() {
                             value={message}
                             id="messageBox"
                             style={{
-                                width: "100%",
+                                width: "98%",
                                 border: "none",
                                 margin: "0px",
                                 backgroundColor: theme === "light" ? "white" : "#212121",
@@ -152,25 +152,18 @@ export default function Chat() {
                             }}
                         />
                     </div>
-                    <div className="d-inline-block col-lg-1" >
-                        {/* <button onClick={sendMessage}
-                            style={{
-                                width: "30px",
-                                cursor: "pointer"
-                            }}
-                        > */}
+                    <div className="">
                         <SendIcon
                             style={{
                                 //maxWidth: "35px",
                                 fontSize: "35px",
                                 cursor: "pointer",
-                                color: "rgb(32, 201, 108)"
+                                color: "rgb(32, 201, 108)",
+                                padding: "0px"
                             }}
                             onClick={sendMessage}
                             className="material-icons"
                         />
-                        {/* Send */}
-                        {/* </button> */}
                     </div>
                 </div>
             </div>

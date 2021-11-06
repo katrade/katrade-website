@@ -45,6 +45,10 @@ export default function ItemBlock(props: any) {
 		}
 	}
 
+	function handleEdit(){
+        history.push(`/app/edititem?product_id=${data._id}`);
+    }
+
 	const [ handleDeleteInventory, setHandleDeleteInventory ] = useState<boolean>(false);
 	return (
 		<div className={handleDeleteInventory ? "d-none" : ""}>
@@ -59,7 +63,7 @@ export default function ItemBlock(props: any) {
 						</div>
 					</div>
 					<div className="position-absolute" style={{top:"0",right:"0"}}>
-						<P className="m-0" onClick={() => {window.confirm("love me like you do, love love love")}} style={{cursor: "pointer"}}>edit</P>
+						<P className="m-0" onClick={() => {handleEdit()}} style={{cursor: "pointer"}}>edit</P>
 						<P className="m-0" onClick={() => {handleDelete()}} style={{cursor:"pointer"}}>delete</P>
 					</div>
 				</div>
