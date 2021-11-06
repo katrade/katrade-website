@@ -85,7 +85,7 @@ export default function Request() {
             <Background>
                 <div>
                     <Navbar />
-                    <Block height="50px">
+                    <Block height="500px">
                         <Div dynamicPair={["#ffffff", "#212121"]} className="content-request">
                             <div className="mb-3 d-flex flex-row topic-request">
                                 <P className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</P>

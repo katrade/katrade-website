@@ -4,6 +4,8 @@ import { AccountBlock } from './AccountBlock' ;
 
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useState } from 'react';
+import { H5 } from '../standard/H';
+import P from '../standard/P';
 
 const backgroundImageStyles = {
     backgroundSize: "cover",
@@ -42,9 +44,9 @@ export default function FavoriteBlock(props:any) {
             <div className="d-flex flex-wrap position-relative">
 				<div className="p-0" onClick={detailProduct} style={{width:"170px", height:"110px", cursor:"pointer", ...backgroundImageStyles, backgroundImage: `url(${favoriteData.pictures[0]})`}} />
                 <div className="ps-3 text-start col-md-9" style={{borderRadius:"8px",cursor:"pointer"}} onClick={detailProduct}>
-					<h5 className="mb-3">{favoriteData.name}</h5>
+					<H5 className="mb-3">{favoriteData.name}</H5>
 					<div className="d-flex flex-wrap">
-						<p className="m-0">require : </p>
+						<P className="m-0">require : </P>
 						{dataTag}
 					</div>
 				</div>

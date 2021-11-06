@@ -18,16 +18,11 @@ export default function ChatDashboard() {
     const [handleHide, setHandleHide] = useState(true)
     const { theme } = useContext(ThemeContext);
     useEffect(() => {
-        // console.log("UNIIIIIII")
         if (duo_id || duoId) {
             setHandleHide(false)
         }
-        // console.log("NO querystring")
     }, [account, duoId])
 
-
-    // console.log(duoId)
-    // console.log(handleHide)
     return (
         <Background>
             <Navbar />

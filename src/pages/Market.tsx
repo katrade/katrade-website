@@ -96,6 +96,7 @@ function Market() {
             return <Interest item={item} key={index} />;
         }
     });
+
     return (
         <Background>
             <div>
@@ -136,7 +137,7 @@ function Market() {
                                 {tmpMatchInventory.length > 10 ? 
                                     (
                                         <div className="d-flex justify-content-center align-items-center my-3">
-                                            <div className="seemore" onClick={() => history.push(`/app/search/match-byseemore`)} ><p>see more</p></div>
+                                            <div className="seemore" onClick={() => history.push(`/app/search/match-byseemore`)} ><p className="text-white font-weight-bold">see more</p></div>
                                         </div>
                                     )
                                     :
@@ -186,7 +187,7 @@ function Market() {
                             {tmpInventory.length > 20 ? 
                                     (
                                         <div className="d-flex justify-content-center align-items-center my-3">
-                                            <div className="seemore" onClick={() => history.push(`/app/search/favorite-byseemore`)}><p>see more</p></div>
+                                            <div className="seemore" onClick={() => history.push(`/app/search/favorite-byseemore`)}><p className="text-white font-weight-bold">see more</p></div>
                                         </div>
                                     )
                                     :

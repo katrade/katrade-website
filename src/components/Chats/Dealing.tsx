@@ -47,6 +47,14 @@ export default function Dealing() {
 
     // console.log("status chkDealing: " + chkDealing)
 
+    var tmparray = dealingList.length;
+    function chkArray() {
+        tmparray = tmparray - 1;
+        if(tmparray == 0){
+            setChkDealing(false)
+        }
+    }
+
     return (
         <div>
             {chkDealing ?
@@ -54,9 +62,9 @@ export default function Dealing() {
                     <div className="chatContainer-Header d-flex align-items-center">
                         <span className="ms-5 text-white">Dealing</span>
                     </div>
-                    {dealingList.map((ele) => {
+                    {dealingList.map((ele, index) => {
                         return (
-                            <DealItems data={ele} />
+                            <DealItems data={ele} chk={chkArray} index={index}/>
                         )
                     })}
                 </div>
@@ -67,7 +75,7 @@ export default function Dealing() {
                     <div
                         className="p-2 m-2 d-flex justify-content-center align-items-center"
                         style={{
-                            height: "300px",
+                            height: "150px",
                             fontSize: "30px",
                             fontWeight: "bold",
                             color: "#c4c4c4"

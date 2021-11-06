@@ -156,7 +156,6 @@ function AboutAccount(userData: any) {
     const [componentPage, setComponentPage] = useState<any>(<AccountComp data={accountData} />);
 
     function SelectComp(c: any) {
-        console.log(c)
         if (destCompState.dest === "Account" || c === "account") {
             setComponentPage(<AccountComp data={accountData} />);
         } else if (destCompState.dest === "ChangePassword" || c === "changePassword") {

@@ -25,24 +25,10 @@ export default function SignupForm({ pw, setPw }: p) {
     const [showAlert3, setShowAlert3] = useState("0")
     const [showAlert4, setShowAlert4] = useState("0")
     const [showAlert5, setShowAlert5] = useState("0")
-    // const checkSame = async () => {
-    //     let result = await fetch(`${API}/user/checkUn?username=${form.username}`).then(res => res.json());
-    //     if(result.message === "AU"){
-    //         console.log("This username is already in use.")
-    //     }
-    //     else{
-    //         console.log("OK")
-    //     }  
-    // }
 
     var read: any = document.getElementById("readTerms");
 
     useEffect(() => {
-        // console.log('render');
-        // let timeoutid:any = setTimeout(() => {
-        //     checkSame();
-        // },2000)
-        // return () => clearTimeout(timeoutid);
     }, [form.username]);
 
 
@@ -60,7 +46,7 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
-        console.log(data.email.includes("@ku"));
+        // console.log(data.email.includes("@ku"));
         if (data.firstname != null && data.lastname != null && data.email != null && data.password != null && data.phoneNumber != null) {
             if (read.checked == false) {
                 alert("please confirm terms of service.")
@@ -84,7 +70,6 @@ export default function SignupForm({ pw, setPw }: p) {
                 }).then(res => res.json());
 
                 console.clear();
-                console.log(result);
 
                 hide();
                 if (result.message === "Please check your email to verify") {

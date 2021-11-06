@@ -9,7 +9,6 @@ import P from '../standard/P';
 function LSideMenuComp(props: any) {
     const { destCompState, destCompDispatch } = useContext(DestCompContext);
     function sendDestComp(event: any) {
-        // console.log(event);
         if (event === "Account") {
             destCompDispatch({ type: "Account" });
         } else if (event === "Change Password") {

@@ -8,9 +8,24 @@
     background-color: #ffffff;
     transition: 400ms ease;
     border: solid rgb(218, 224, 231) 1px;
-
 }
 .recommend-card:hover {   
+    transform: scale(1.05);
+    cursor: pointer ;
+}
+
+.recommend-card-dark {
+    margin: 5px;
+    min-width: 157px;
+    width: 19%;
+    max-width: 226px;
+    height: 250px;
+    border-radius: 3px;
+    background-color: #1a1a1a;
+    transition: 400ms ease;
+    border: solid rgb(218, 224, 231) 1px;
+}
+.recommend-card-dark:hover {   
     transform: scale(1.05);
     cursor: pointer ;
 }

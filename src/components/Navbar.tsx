@@ -12,7 +12,6 @@ import './Navbar.css';
 
 // icon
 import { FaSignOutAlt } from 'react-icons/fa';
-import { IoIosNotifications } from "react-icons/io";
 import { MdChat } from "react-icons/md";
 import { FaRegListAlt } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
@@ -287,9 +286,6 @@ function Navbar(props:any) {
                         </Label>
                         <Label content="Chat" className={theme === "light" ? "icon pointer" : "icon-dark pointer"} onClick={() => history.push("/app/chat")}> 
                             <a><MdChat /></a>
-                        </Label>
-                        <Label content="Notification" className={theme === "light" ? "icon pointer" : "icon-dark pointer"} onClick={() => window.alert("ระบบแจ้งเดือน ยังไม่เสร็จสมบูรณ์ครับ")}>
-                            <a><IoIosNotifications /></a>
                         </Label>
                     </div>
                     <div className="menu-button mx-2" onClick={() => setDropMenu(!dropMenu)}>

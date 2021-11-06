@@ -34,7 +34,6 @@ export default function ProfileViewer() {
         async function init() {
             var dataOwner = await getAnotherUser(user_id);
             if (dataOwner) {
-                console.log(dataOwner)
                 setAnotherUserData(dataOwner);
                 var getFollowerData = await getUserFollowData(user_id)  
                 if (getFollowerData) {
