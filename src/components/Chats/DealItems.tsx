@@ -1,6 +1,5 @@
 import { TransparentButton } from '../../components/standard/Button'
 import { AiOutlineSwap } from 'react-icons/ai';
-import { IDealing } from '../../interfaces/Chat';
 import useAuthorization from '../../hooks/useAuthorization';
 import { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../../contexts/Socket';
@@ -10,7 +9,7 @@ export default function DealItems(props: any) {
 
     const { LockRequest, deleteMyRequestPending } = useAuthorization()
     const [disableBtn, setDisableBtn] = useState(false)
-    const { duoId, currentIndex } = useContext(SocketContext) 
+    const { duoId } = useContext(SocketContext) 
     const history = useHistory()
 
     const handleConfirmBtn = () => {
@@ -43,7 +42,7 @@ export default function DealItems(props: any) {
             <div className="d-flex justify-content-between">
                 <div className="d-flex">
                     <img src={props.data.sourceInventory.pictures[0]} alt="" style={{ height: "80px", borderRadius: "10px" }} />
-                    <p className="ms-2">Your Item</p>
+                    <p className="ms-2">{props.data.sourceInventory.username}</p>
                 </div>
                 <div style={{ width: "30px" }}>
                     <AiOutlineSwap />

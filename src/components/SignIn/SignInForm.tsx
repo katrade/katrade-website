@@ -31,7 +31,7 @@ const SignInForm = () => {
     const [validType, setValidType] = useState("0")
     const [showAlert1, setShowAlert1] = useState("0")
     const [showAlert2, setShowAlert2] = useState("0")
-    
+
     // document.addEventListener("keydown", function(event) {
     //     if (event.keyCode === 13) {
     //         document.getElementById("signin")?.click();
@@ -44,7 +44,7 @@ const SignInForm = () => {
         const _password = form.password;
         if ((_email != null && _password != null) && (_email != "" && _password != "")) {
             signIn(_email, _password);
-        }   
+        }
         else {
             setValidType("empty");
             if (_email == null) {
@@ -95,7 +95,7 @@ const SignInForm = () => {
                 })
                 alert('We have resend the verification link to your email.')
             }
-            
+
         }).catch(() => {
             hide()
             // alert("You email or password is wrong.");
@@ -107,7 +107,7 @@ const SignInForm = () => {
         })
     }
 
-    useEffect (() => {
+    useEffect(() => {
         if (form.email != null && form.email != "") {
             setShowAlert1("0")
         }
@@ -145,7 +145,7 @@ const SignInForm = () => {
                                     placeholder="Enter your email or username"
                                 />
                                 <InputValidation valid={validType} name="Email or Username" showMes={showAlert1} />
-                            </div>    
+                            </div>
                             <br />
                             <p className="mt-2">Password</p>
                             <div className="input-container">

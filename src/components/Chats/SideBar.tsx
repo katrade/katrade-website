@@ -1,15 +1,13 @@
 import TabChat from "./TabChat"
 import './Chat.css'
-import { useState, useEffect, useContext } from "react"
+import { useEffect, useContext } from "react"
 import useAuthorization from "../../hooks/useAuthorization"
 import { SocketContext } from "../../contexts/Socket";
-
-
 
 export default function SideBar() {
 	console.log("Sidebar Reload")
 	// console.log(contactList)
-	const { getChatList, getChatData, updateUserContact, getDealingList, replaceAllUserContact } = useAuthorization()
+	const { getChatList, replaceAllUserContact } = useAuthorization()
 	const {
 		contactList,
 		setContactList,
@@ -18,8 +16,7 @@ export default function SideBar() {
 		duoId,
 		account,
 		duoUsername,
-		setCurrentIndex,
-		chkMessage
+		setCurrentIndex
 	} = useContext(SocketContext)
 
 	useEffect(() => {

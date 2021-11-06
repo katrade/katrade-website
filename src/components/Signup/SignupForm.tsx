@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router';
-import { SolidButton } from '../../components/standard/Button';
+import { SolidButton, SubmitButton } from '../../components/standard/Button';
 import { useForm } from '../../utils/useForm';
 import { useEffect } from 'react';
 import { API } from '../../app.setting.json'
@@ -28,18 +28,13 @@ export default function SignupForm({ pw, setPw }: p) {
 
     var read: any = document.getElementById("readTerms");
 
-    document.addEventListener("keydown", function(event) {
-        if (event.keyCode === 13) {
-            onFormSubmit();
-        }
-    });
-
     useEffect(() => {
     }, [form.username]);
 
 
 
-    const onFormSubmit = async () => {
+    const onFormSubmit = async (e: any) => {
+        e.preventDefault();
         let data: any = {
             firstname: form.firstname,
             lastname: form.surname,
@@ -51,9 +46,13 @@ export default function SignupForm({ pw, setPw }: p) {
             profilePic: "",
             verifyEmail: 0,
         }
-        if(data.firstname != null && data.lastname != null && data.email != null && data.password != null && data.phoneNumber != null) {
+        console.log(data.email.includes("@ku"));
+        if (data.firstname != null && data.lastname != null && data.email != null && data.password != null && data.phoneNumber != null) {
             if (read.checked == false) {
-                alert("please confirm terms of service.") 
+                alert("please confirm terms of service.")
+            }
+            else if (!(data.email.includes("@ku") || data.email.includes("@live.ku"))) {
+                alert("Please use KU account email.");
             }
             else {
                 show("Creating you account...")
@@ -120,7 +119,7 @@ export default function SignupForm({ pw, setPw }: p) {
         }
     }
 
-    useEffect (() => {
+    useEffect(() => {
         if (form.firstname == "") {
             setShowAlert1("1")
             setValidType("empty")
@@ -160,91 +159,93 @@ export default function SignupForm({ pw, setPw }: p) {
 
     return (
         <>
-            <div className="bgColor-white mb-5 py-3 round-window" style={{ padding: "0 4%" }}>
-                <div className="row">
-                    <div className="col-lg mb-3">
-                        <p className="mb-1">Firstname</p>
-                        <input
-                            className="input-register"
-                            type="text"
-                            placeholder="Please enter your firstname."
-                            name="firstname"
-                            value={form.firstname}
-                            onChange={handleForm}
-                        />
-                        <InputValidation valid={validType} name="firstname" showMes={showAlert1} />
-                    </div>
-                    <div className="col-lg mb-3">
-                        <p className="mb-1">Surname</p>
-                        <input
-                            className="input-register"
-                            type="text"
-                            placeholder="Please enter your surname."
-                            name="surname"
-                            value={form.surname}
-                            onChange={handleForm}
-                        />
-                        <InputValidation valid={validType} name="surname" showMes={showAlert2} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-lg mb-3">
-                        <p className="mb-1">Email</p>
-                        <input
-                            className="input-register"
-                            type="text"
-                            placeholder="Please enter your e-mail."
-                            name="email"
-                            value={form.email}
-                            onChange={handleForm}
-                        />
-                        <InputValidation valid={validType} name="email" showMes={showAlert3} />
-                    </div>
-                    <div className="col-lg mb-3">
-                        <p className="mb-1">Password</p>
-                        <div className="input-container">
+            <form onSubmit={onFormSubmit}>
+                <div className="bgColor-white mb-5 py-3 round-window" style={{ padding: "0 4%" }}>
+                    <div className="row">
+                        <div className="col-lg mb-3">
+                            <p className="mb-1">Firstname</p>
                             <input
-                                value={form.password}
+                                className="input-register"
+                                type="text"
+                                placeholder="Please enter your firstname."
+                                name="firstname"
+                                value={form.firstname}
                                 onChange={handleForm}
-                                name="password"
-                                className="input-none" type={showPassword === 1 ? "password" : "text"}
-                                placeholder="Your password">
-                            </input>
-                            <img src={showPassword === 1 ? eye_open : eye_close} width="20" onClick={() => setShowPassword(showPassword * -1)} className="pointer" />
+                            />
+                            <InputValidation valid={validType} name="firstname" showMes={showAlert1} />
                         </div>
-                        {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
-                        <InputValidation valid={validType} name="password" showMes={showAlert4} />
+                        <div className="col-lg mb-3">
+                            <p className="mb-1">Surname</p>
+                            <input
+                                className="input-register"
+                                type="text"
+                                placeholder="Please enter your surname."
+                                name="surname"
+                                value={form.surname}
+                                onChange={handleForm}
+                            />
+                            <InputValidation valid={validType} name="surname" showMes={showAlert2} />
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    
-                    <div className="col-lg mb-3">
-                        <p className="mb-1">Phone number</p>
-                        <input
-                            className="input-register"
-                            type="text"
-                            placeholder="Please enter your phone number."
-                            name="phone"
-                            value={form.phone}
-                            onChange={handleForm}
-                        />
-                        <InputValidation valid={validType} name="phone number" showMes={showAlert5} />
+                    <div className="row">
+                        <div className="col-lg mb-3">
+                            <p className="mb-1">Email</p>
+                            <input
+                                className="input-register"
+                                type="email"
+                                placeholder="Please enter your e-mail."
+                                name="email"
+                                value={form.email}
+                                onChange={handleForm}
+                            />
+                            <InputValidation valid={validType} name="email" showMes={showAlert3} />
+                        </div>
+                        <div className="col-lg mb-3">
+                            <p className="mb-1">Password</p>
+                            <div className="input-container">
+                                <input
+                                    value={form.password}
+                                    onChange={handleForm}
+                                    name="password"
+                                    className="input-none" type={showPassword === 1 ? "password" : "text"}
+                                    placeholder="Your password">
+                                </input>
+                                <img src={showPassword === 1 ? eye_open : eye_close} width="20" onClick={() => setShowPassword(showPassword * -1)} className="pointer" />
+                            </div>
+                            {pw === 1 ? null : <p>*password must be contained with 8-16 characters</p>}
+                            <InputValidation valid={validType} name="password" showMes={showAlert4} />
+                        </div>
                     </div>
-                    <div className="col-lg mb-3">
-                        
+                    <div className="row">
+
+                        <div className="col-lg mb-3">
+                            <p className="mb-1">Phone number</p>
+                            <input
+                                className="input-register"
+                                type="text"
+                                placeholder="Please enter your phone number."
+                                name="phone"
+                                value={form.phone}
+                                onChange={handleForm}
+                            />
+                            <InputValidation valid={validType} name="phone number" showMes={showAlert5} />
+                        </div>
+                        <div className="col-lg mb-3">
+
+                        </div>
                     </div>
-                </div>
-                
-                <div className="text-center">
-                    <br />
-                    <label className="mx-2"><input id="readTerms" value="confirmTerms" className="mr-2" type="checkbox" />Accept the Terms of Service.</label>
-                    <a href="/articles/termsofservice" target="_blank" className="blue-font-link mx-1">learn more</a>
-                    <br />
-                    <SolidButton type="button" className="mybutton-grey pl-5 pr-5 mt-3" margin="0 auto" onClick={onFormSubmit}>Sign up</SolidButton>
+
+                    <div className="text-center">
+                        <br />
+                        <label className="mx-2"><input id="readTerms" value="confirmTerms" className="mr-2" type="checkbox" />Accept the Terms of Service.</label>
+                        <a href="/articles/termsofservice" target="_blank" className="blue-font-link mx-1">learn more</a>
+                        <br />
+                        <SubmitButton type="submit" className="mybutton-grey pl-5 pr-5 mt-3" margin="0 auto" value="Sign up"></SubmitButton>
+                    </div>
+                    <br /><br />
                 </div>
                 <br /><br />
-            </div>
-            <br /><br />
+            </form>
         </>
     );
 }

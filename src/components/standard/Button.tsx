@@ -74,6 +74,32 @@ export const SolidButton = styled.button`
     }
 `
 
+export const SubmitButton = styled.input`
+    min-width: ${(props: ButtonProps) => props.width ? props.width : "40px"};
+    min-height: ${(props: ButtonProps) => props.height ? props.height : "40px"};
+    background-color: ${(props: ButtonProps) => props.buttonColor ? props.buttonColor : "black"};
+    color: ${(props: ButtonProps) => props.color ? props.color : "white"};
+
+    opacity: 0.8;
+
+    font-size: ${(props: ButtonProps) => props.fontSize ? props.fontSize : "20px"};
+
+    border-radius: 5px;
+
+    padding: ${(props: ButtonProps) => props.padding ? props.padding : "0 20px 0 20px"};
+
+    margin: ${(props: ButtonProps) => props.margin ? props.margin : "10px 20px"};
+
+    display: ${(props: ButtonProps) => props.display ? props.display : "block"};
+
+    transition: 300ms ease;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+`
+
 export function DynamicTransparentButton({width , height , buttonColor , darkButtonColor , color , children , onClick}: ButtonProps) {
     
     const { theme } = useContext(ThemeContext)
