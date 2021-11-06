@@ -20,7 +20,8 @@ export default function Tabchat(props: any) {
         currentIndex,
         setCurrentIndex,
         chkMessage,
-        setChkMessage
+        setChkMessage,
+        setChkTabChatClick
     } = useContext(SocketContext)
     const [lastMessage, setLastMessage] = useState<string>('')
     const [sender, setSender] = useState<string>()
@@ -44,6 +45,7 @@ export default function Tabchat(props: any) {
         // console.log("SET duoId: " + duoId)
         setCurrentIndex(props.index)
         // setAccount(account)
+        setChkTabChatClick(true)
     }
 
     useEffect(() => {
@@ -86,11 +88,11 @@ export default function Tabchat(props: any) {
 
     }, [account, chkMessage])
 
-    
+
 
     if (duo_id === account._id || duo_username === account.username || props.data.userNameContact == account.username) {
         return null
-    } 
+    }
     else {
         return (
             <div onClick={handleDivClick}>

@@ -16,7 +16,8 @@ export default function SideBar() {
 		duoId,
 		account,
 		duoUsername,
-		setCurrentIndex
+		setCurrentIndex,
+		chkTabChatClick
 	} = useContext(SocketContext)
 
 	useEffect(() => {
@@ -50,12 +51,15 @@ export default function SideBar() {
 
 	return (
 		<div>
-			<div>
+			<div className="mb-3">
 				<div className="tab d-flex align-items-center justify-content-center">
 					<span className="text-white fw-bold fs-3">Chat</span>
 				</div>
 				<div className="d-flex lineBar mb-2"></div>
-				<div>
+				<div style={{
+					maxHeight: chkTabChatClick === true ? "750px" : "600px",
+					overflowY: "scroll"
+				}}>
 					{contactList.map((ele: any, index: number) => {
 						return (
 							<TabChat data={ele} index={index + 1} />

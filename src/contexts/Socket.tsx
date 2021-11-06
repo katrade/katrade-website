@@ -6,6 +6,7 @@ import { IDealing, IMessage, IChat } from '../interfaces/Chat';
 import useAuthorization from "../hooks/useAuthorization";
 import { useLocation } from 'react-router-dom';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
+import { BooleanLiteral } from 'typescript';
 
 interface ISocketContext {
     socket: Socket<DefaultEventsMap, DefaultEventsMap> | null,
@@ -31,16 +32,18 @@ interface ISocketContext {
     currentIndex: number,
     setCurrentIndex: React.Dispatch<React.SetStateAction<number>> | (() => void),
     chkReRenderSidebar: boolean,
-    setChkReRenderSidebar: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
+    setChkReRenderSidebar: React.Dispatch<React.SetStateAction<boolean>> | (() => void),
     chkMessage: boolean,
-    setChkMessage: React.Dispatch<React.SetStateAction<boolean>> | (() => void)
+    setChkMessage: React.Dispatch<React.SetStateAction<boolean>> | (() => void),
+    chkTabChatClick: Boolean,
+    setChkTabChatClick: React.Dispatch<React.SetStateAction<boolean>> | (() => void),
 }
 
 export const SocketContext = React.createContext<ISocketContext>({
     socket: io("https://socketkatrade.herokuapp.com", {
         timeout: 2000,
         secure: true,
-        transports: [ "polling", "websocket", "flashsocket" ]
+        transports: ["polling", "websocket", "flashsocket"]
     }),
     account: defaultEmptyAccount,
     setAccount: () => { },
@@ -66,7 +69,9 @@ export const SocketContext = React.createContext<ISocketContext>({
     chkReRenderSidebar: false,
     setChkReRenderSidebar: () => { },
     chkMessage: false,
-    setChkMessage: () => { }
+    setChkMessage: () => { },
+    chkTabChatClick: false,
+    setChkTabChatClick: () => { }
 });
 
 interface propsInterface {
@@ -95,6 +100,7 @@ export function SocketProvider({ children }: propsInterface) {
     const [chkReRenderSidebar, setChkReRenderSidebar] = useState<boolean>(false)
     const [chkMessage, setChkMessage] = useState(false);
     const refMessages = useRef<IMessage[]>([]);
+    const [chkTabChatClick, setChkTabChatClick] = useState(false);
 
     useEffect(() => {
 
@@ -109,21 +115,21 @@ export function SocketProvider({ children }: propsInterface) {
             }
         }
         init();
-        
+
 
     }, []);
-    
+
     useEffect(() => {
         refMessages.current = messageList;
         // setChkMessage(true)
     }, [messageList])
 
     useEffect(() => {
-        if(socket === null) {
-                setSocket(io("https://socketkatrade.herokuapp.com", {
-                    secure: true,
-                    transports: ["flashsocket", "polling", "websocket"]
-                }));
+        if (socket === null) {
+            setSocket(io("https://socketkatrade.herokuapp.com", {
+                secure: true,
+                transports: ["flashsocket", "polling", "websocket"]
+            }));
         }
         else {
             socket.on("connect", () => {
@@ -201,9 +207,9 @@ export function SocketProvider({ children }: propsInterface) {
                                 })
                                 setContactList(tmp)
                                 updateUserContact(
-                                    account._id, 
-                                    account.username, 
-                                    duo_id, 
+                                    account._id,
+                                    account.username,
+                                    duo_id,
                                     duo_username)
                             }
                             else {
@@ -247,7 +253,7 @@ export function SocketProvider({ children }: propsInterface) {
 
     }, [roomId])
 
-    
+
 
     return (
         <SocketContext.Provider value={{
@@ -276,7 +282,9 @@ export function SocketProvider({ children }: propsInterface) {
             chkReRenderSidebar,
             setChkReRenderSidebar,
             chkMessage,
-            setChkMessage
+            setChkMessage,
+            chkTabChatClick,
+            setChkTabChatClick
         }}>
             {children}
         </SocketContext.Provider>
