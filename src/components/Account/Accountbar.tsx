@@ -31,7 +31,7 @@ export default function Profilebar({ accountData, followData }: any) {
                         </div>
                     </div>
                     <div className="full-width d-flex justify-content-center align-items-center px-5 mb-3 flex-wrap">
-                        <Div dynamicPair={["#fff", "#171717"]}className="d-flex justify-content-center align-items-center followers mx-2 px-5 py-3 my-2">
+                        <Div dynamicPair={["#fff", "#171717"]} className="d-flex justify-content-center align-items-center followers mx-2 px-5 py-3 my-2">
                             <P>{followData.follower.length} followers</P>
                         </Div>
                         <Div dynamicPair={["#fff", "#171717"]} className="d-flex justify-content-center align-items-center following mx-2 px-5 py-3 my-2">

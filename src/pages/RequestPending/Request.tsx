@@ -18,7 +18,6 @@ import Div from '../../components/standard/Div';
 
 export default function Request() {
 
-    const history = useHistory();
     const { getRequest, getPending, getInprogress } = useAuthorization();
     const [dataRequest, setDataRequest] = useState<any>();
     const [dataPending, setDataPending] = useState<any>();
@@ -47,11 +46,11 @@ export default function Request() {
     function handleComponent(status: any) {
         setComponent(status)
         if (status == 1) {
-            setSelectComponent(request_data);
+            setSelectComponent(request_data.reverse());
         } else if (status == 2) {
-            setSelectComponent(pending_data)
+            setSelectComponent(pending_data.reverse())
         } else if (status == 3) {
-            setSelectComponent(inprogress_data)
+            setSelectComponent(inprogress_data.reverse())
         }
     }
     var request_data: any;
@@ -86,7 +85,7 @@ export default function Request() {
                 <div>
                     <Navbar />
                     <Block height="50px">
-                        <Div dynamicPair={["#ffffff", "#212121"]}className="my-4 py-3 px-4">
+                        <Div dynamicPair={["#ffffff", "#212121"]} className="content-request">
                             <div className="mb-3 d-flex flex-row topic-request">
                                 <P className={component == 1 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(1)}>Requested to you</P>
                                 <P className={component == 2 ? "p-1 fs-4 currenttap" : "p-1 fs-4"} onClick={() => handleComponent(2)}>Pending</P>

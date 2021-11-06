@@ -37,6 +37,17 @@ input.searchbar {
     font-size: 40px;
 }
 
+.seemore {
+    width: 200px;
+    height: 40px;
+    border: 1px solid grey;
+    background-color: white;
+    padding: 0 20px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 630px) {
     .notfounditem {
         font-size: 25px;

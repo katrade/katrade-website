@@ -26,16 +26,6 @@ import SlideCategory from '../components/SlideCategory';
 import Recommend from '../components/Recommend';
 import { Skeleton } from '@mui/material';
 
-
-const SeeMore = styled.button`
-    width: 200px;
-    height: 40px;
-    border: 1px solid grey;
-    background-color: white;
-    padding: 0px 20px;
-    font-size: 18px;
-`
-
 const th: string[] = [
     "ตรงกับคุณ",
     "เศร้าจัง, ไม่มีของที่ึความต้องการตรงกับคุณเลย",
@@ -54,11 +44,12 @@ const meow: string[] = [
 
 function Market() {
 
+    const history = useHistory();
+
     const [mobile, setMobile] = useState(false);
     const [account, setAccount] = useState<IAccount>(defaultEmptyAccount);
     const [allInventory, setAllInventory] = useState<any>(null);
     const [matchInventory, setMatchInventory] = useState<any>(null);
-    const history = useHistory();
     const [cookies] = useCookies(['DaveTheHornyDuck']);
     const [show, hide] = useLoading();
     const { getUserData, getAllInventory, getMatchMarket } = useAuthorization();
@@ -105,7 +96,6 @@ function Market() {
             return <Interest item={item} key={index} />;
         }
     });
-    console.log(matchInventory)
     return (
         <Background>
             <div>
@@ -126,7 +116,7 @@ function Market() {
                                                     </div>
                                                 )
                                                 :
-                                                (tmpMatchInventory <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10))
+                                                (tmpMatchInventory.length <= 10 ? tmpMatchInventory : tmpMatchInventory.slice(0, 10))
                                             )
                                             :
                                             (
@@ -140,12 +130,20 @@ function Market() {
                                             )
 
                                     }
-                        
-                                </div>
-                                <div className="d-flex justify-content-center align-items-center my-3">
-                                    {/* <SeeMore className="mx-1">Page number or see more? </SeeMore> */}
-                                </div>
 
+                                </div>
+                            
+                                {tmpMatchInventory.length > 10 ? 
+                                    (
+                                        <div className="d-flex justify-content-center align-items-center my-3">
+                                            <div className="seemore" onClick={() => history.push(`/app/search/match-byseemore`)} ><p>see more</p></div>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        <></>
+                                    )
+                                }
                             </div>
                         </div>
 
@@ -164,28 +162,38 @@ function Market() {
                                 {
                                     allInventory !== null ?
 
-                                    (tmpInventory.length == 0 ?
-                                        (
-                                            <div className="mx-auto my-5 text-center">
-                                                <p className="notfounditem">ไม่พบสิ่งของบน katrade marlet เลย</p>
-                                            </div>
+                                        (tmpInventory.length == 0 ?
+                                            (
+                                                <div className="mx-auto my-5 text-center">
+                                                    <p className="notfounditem">ไม่พบสิ่งของบน katrade marlet เลย</p>
+                                                </div>
+                                            )
+                                            :
+                                            (tmpInventory.length > 20 ? tmpInventory.slice(0, 20) : tmpInventory)
                                         )
                                         :
-                                        (tmpInventory > 20 ? tmpInventory : tmpInventory.slice(0, 20))
+                                        (
+                                            <div className="d-flex">
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                                <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
+                                            </div>
+                                        )
+                                }
+                            </div>
+                            {tmpInventory.length > 20 ? 
+                                    (
+                                        <div className="d-flex justify-content-center align-items-center my-3">
+                                            <div className="seemore" onClick={() => history.push(`/app/search/favorite-byseemore`)}><p>see more</p></div>
+                                        </div>
                                     )
                                     :
                                     (
-                                        <div className="d-flex">
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                            <Skeleton variant="rectangular" width={210} height={118} sx={{ margin: "0px 10px" }} />
-                                        </div>
+                                        <></>
                                     )
-                                }
-                            </div>
-                            <p className="text-right">ทำไว้ให้โชว์แค่ 20 ตอนนี้</p>
+                            }
                         </div>
                     </div>
                 </Block>

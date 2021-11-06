@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { SocketContext } from '../../contexts/Socket'
 import useAuthorization from '../../hooks/useAuthorization'
+import P from '../standard/P'
 // import { IDealing } from '../../interfaces/Chat'
 import DealItems from './DealItems'
 
@@ -44,7 +45,7 @@ export default function Dealing() {
             setChkDealing(true)
             // console.log("UNIIIIIII")
         }
-        else{
+        else {
             setChkDealing(false)
         }
     }, [account, dealingList, roomId])
@@ -68,9 +69,9 @@ export default function Dealing() {
                     <div className="chatContainer-Header d-flex align-items-center">
                         <span className="ms-5 text-white">Dealing</span>
                     </div>
-                    <div 
-                        className="p-2 m-2 d-flex justify-content-center align-items-center" 
-                        style={{ 
+                    <div
+                        className="p-2 m-2 d-flex justify-content-center align-items-center"
+                        style={{
                             height: "300px",
                             fontSize: "30px",
                             fontWeight: "bold",

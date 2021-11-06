@@ -429,6 +429,7 @@ export default function useAuthorization() {
     }
 
     async function acceptRequest(request_id: any) {
+        window.location.reload();
         return await axios.patch(`${API}/user/acceptRequest`, { id: request_id }, {
             headers: {
                 'Authorization': `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -436,7 +437,6 @@ export default function useAuthorization() {
             }
         })
             .then(res => {
-                window.location.reload();
             })
             .catch((err) => {
                 ;
@@ -871,8 +871,6 @@ export default function useAuthorization() {
                 }
             })
                 .then(res => {
-                    console.log(res.data)
-                    // window.location.reload();
                     return res.data;
                 })
                 .catch(() => {

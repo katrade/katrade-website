@@ -43,7 +43,7 @@ export default function DealItems(props: any) {
             <div className="d-flex justify-content-between">
                 <div className="d-flex">
                     <img src={props.data.sourceInventory.pictures[0]} alt="" style={{ height: "80px", borderRadius: "10px" }} />
-                    <p className="ms-2">Your Item</p>
+                    <p className="ms-2">{props.data.sourceInventory.username}</p>
                 </div>
                 <div style={{ width: "30px" }}>
                     <AiOutlineSwap />

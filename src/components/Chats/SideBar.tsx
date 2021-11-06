@@ -33,9 +33,9 @@ export default function SideBar() {
 							if (contactData.userContacts[i].userIdContact === duoId) {
 								tmp.splice(i, 1)
 								tmp.splice(0, 0, {
-                                    userIdContact: duoId,
-                                    userNameContact: duoUsername,
-                                })
+									userIdContact: duoId,
+									userNameContact: duoUsername,
+								})
 								setChkReRenderSidebar(false)
 								setContactList(tmp)
 								setCurrentIndex(1)
@@ -57,7 +57,7 @@ export default function SideBar() {
 				<div className="tab d-flex align-items-center justify-content-center">
 					<span className="text-white fw-bold fs-3">Chat</span>
 				</div>
-				<div className="d-flex lineBar border-top mb-2"></div>
+				<div className="d-flex lineBar mb-2"></div>
 				<div>
 					{contactList.map((ele: any, index: number) => {
 						return (

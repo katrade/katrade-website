@@ -8,6 +8,7 @@ import { ThemeContext } from '../contexts/Theme';
 
 export default function Interest(props: any) {
     const { item, index } = props;
+    // console.log(item)
     const history = useHistory();
     const { theme } = useContext(ThemeContext);
     function LinkItemData() {

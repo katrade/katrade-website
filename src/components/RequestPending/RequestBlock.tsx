@@ -14,7 +14,6 @@ import { ThemeContext } from "../../contexts/Theme"
 import { H5 } from '../standard/H';
 
 export default function RequestBlock({ data, component, status, index }: any) {
-    console.log(data, status)
     const history = useHistory();
     const { deleteMyRequestPending, acceptRequest, deleteMyLockRequestPending, finishTrade } = useAuthorization();
     const handleFinishBtn = () => {
@@ -147,7 +146,7 @@ export default function RequestBlock({ data, component, status, index }: any) {
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center">
                         {/* <img src="https://www.ishida.com/images/popcorn-640x480.gif" style={{width:"45px",height:"45px",borderRadius:"50%"}}/> */}
-                        <P style={{ fontSize: "24px", margin: "0 20px"}}>{data.userStatus == "source" ? data.targetInventory.username : data.sourceInventory.username}</P>
+                        <P style={{margin: "0 20px"}}>{data.userStatus == "source" ? data.targetInventory.username : data.sourceInventory.username}</P>
                         <BsFillChatDotsFill onClick={findUserNameAndId} style={{ width: "24px", height: "24px", cursor: "pointer" , color: theme === "light" ? "black" : "white"}} />
                     </div>
                     <P>{Description()}</P>
@@ -155,29 +154,13 @@ export default function RequestBlock({ data, component, status, index }: any) {
 
                 <hr style={{ backgroundColor: "#c7c7c7" }} />
                 <div className="d-flex align-items-center justify-content-center flex-wrap zoneItem">
-                    <Div dynamicPair={["#E2E2E2","#3a3b3c"]} className="d-flex handleHover" onClick={() => detailProduct(data.sourceInventory._id)}
-                        style={{
-                            padding: "13px",
-                            width: "5000px",
-                            minWidth: "400px",
-                            maxWidth: "45%",
-                            borderRadius: "8px",
-                            cursor: "pointer"
-                        }}>
+                    <Div dynamicPair={["#E2E2E2","#3a3b3c"]} className="d-flex content-item handleHover" onClick={() => detailProduct(data.sourceInventory._id)}>
                         {myProductLeft("my")};
                     </Div>
-                    <div style={{ minWidth: "10%", textAlign: "center", fontSize: "30px" }}>
+                    <div style={{ minWidth: "5%", textAlign: "center", fontSize: "30px" }}>
                         <IoMdSwap style={{ color: theme === "light" ? "black" : "white" }} />
                     </div>
-                    <Div dynamicPair={["#F5F5F5","#595959"]} className="d-flex handleHover" onClick={() => detailProduct(data.targetInventory._id)}
-                        style={{
-                            padding: "13px",
-                            width: "5000px",
-                            minWidth: "400px",
-                            maxWidth: "45%",
-                            borderRadius: "8px",
-                            cursor: "pointer"
-                        }}>
+                    <Div dynamicPair={["#F5F5F5","#595959"]} className="d-flex content-item handleHover" onClick={() => detailProduct(data.targetInventory._id)}>
                         {myProductLeft("another")};
                     </Div>
                 </div>

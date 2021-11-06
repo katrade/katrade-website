@@ -24,7 +24,7 @@ const HeadTab = styled.div`
     align-items: center;
     background-color: #137a63;
     min-height: 400px;
-    background-image: url(https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y29tcHV0ZXIlMjB3b3JraW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80);
+    background-image: url(https://cdn.discordapp.com/attachments/858916776029323274/864017674770317352/NFT2.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -42,23 +42,113 @@ export default function ProfileCanvas() {
                     <div className="full-width d-flex justify-content-center">
                         <div className="row m-0 p-0" style={{ width: "80%" }}>
 
-                            <Profile name="Chalanthorn Aengaguga" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN0pHtVBVeyi8OjaGf1tw1IY8ctQfkAedvt8cIZb5kEQtxmp-jtxFrDp0jGETAeohYn5k&usqp=CAU" label="Developer"/>
-                            <Profile name="Chonchanat Tubtiang" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NIFM8QiRrDJqNRJ9xj-_b09MQwQK0Io5xg3Ge9z2wnmdglim2PCOzHdWsjq0qT_Y8v4&usqp=CAU" label="Developer"/>
-                            <Profile name="Jirat Wangsalee" img="https://scontent.fbkk5-7.fna.fbcdn.net/v/t1.6435-9/159533743_3813574848727932_8129907599228003219_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=HdrFNADFiz4AX-b-Hfn&_nc_ht=scontent.fbkk5-7.fna&oh=3bc9cc50df39c34ffc298a7b08d28f20&oe=61AB1E15" label="Developer"/>
-                            <Profile name="Napasin Saengthong" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuiaJ3au5xztqR3mOekUEnNHdnI1l_BxfiDQ7M4CX1QRKz59NFFWPNkfRY2tmRHlzUyUk&usqp=CAU" label="Developer"/>
-                            <Profile name="Nattawat Mmmm" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBlT6tWFRvqh1_3Y59fCt0Ml7kQaCECCCHt7IvZRfy3wWwqFW3_EP2qF_nkcKfYgD-rnU&usqp=CAU" label="Developer"/>
-                            <Profile name="Nik Watchporn" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNeNr1-vSeAA27f-UXwXKfkNy-7QoGz4QmjPCabheZURu4j8_qoySTOKzIJr7RP4oPx2I&usqp=CAU" label="UX/UI Designer"/>
-                            <Profile name="Nutchanon Chalalalala" img="https://www.shareicon.net/data/2016/07/05/791214_man_512x512.png" label="Developer"/>
-                            <Profile name="Pandin Lewewe" img="https://image.flaticon.com/icons/png/512/168/168726.png" label="UX/UI Designer"/>
-                            <Profile name="Passawit Sanggrab" img="https://image.flaticon.com/icons/png/512/168/168723.png" label="Product Analyst"/>
-                            <Profile name="Pokpong Nopakhun" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJcSqgPOCILzq4SGOHxKr6Iv7S9FwELMDJujbyfQXLSF_1NJ03WH4X7crOnJevYEoIvco&usqp=CAU" label="Developer"/>
-                            <Profile name="Sorrawich Supbro" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqmLEM7M9WzpqFLYb7GhrP76gpZ4gFK1mdvJL2MGMDJBhxTD8tEB9fLoHaMN87fxYQbJs&usqp=CAU" label="Developer"/>
-                            <Profile name="Teratat Uvuvwevwevwe" img="https://previews.123rf.com/images/yuzach/yuzach1607/yuzach160700007/60379520-cute-black-cat-in-flat-style-with-funny-cartoon-square-head.jpg" label="Product Analyst"/>
-                            <Profile name="Thanapon Omg" img="https://i.imgflip.com/4/db5xf.jpg" label="Product Analyst"/>           
-                            
+                            <Profile
+                                name="Chalanthorn Aenguthaivadt"
+                                img="https://scontent.fbkk5-8.fna.fbcdn.net/v/t1.6435-9/253219901_1789702971228362_837928978607209626_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=8bfeb9&_nc_eui2=AeFbmyqS1MtREMPTlxrGFu6q4Ejp1dybaIjgSOnV3JtoiOcZTIwe-jaErffuoX5RwtHpLDt4jfjYHoGeEMlB--IR&_nc_ohc=p2E5-0UsEH4AX93ZAqO&_nc_ht=scontent.fbkk5-8.fna&oh=1f80435ca5977885c3746e1a2ae666d4&oe=61AC701E"
+                                label="Developer"
+                                fb="https://www.facebook.com/chalantorn.aenguthaivadt.1/"
+                                ig="https://www.instagram.com/palm_aenguthaivadt/"
+                                git="https://github.com/ChalanthornA"
+                            />
+                            <Profile
+                                name="Chonchanat Tubtiang"
+                                img="https://scontent.fbkk5-1.fna.fbcdn.net/v/t1.15752-9/254072032_939577723315500_659662443586134755_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=ae9488&_nc_ohc=f8B8cfU22SkAX9kfIJ7&tn=xAJSmbmbiInJf8Zt&_nc_ht=scontent.fbkk5-1.fna&oh=20b50a153d5de331d8bdccaff02553d6&oe=61A8FFDA"
+                                label="Developer"
+                                fb="https://www.facebook.com/profile.php?id=100005067424673"
+                                ig="https://www.instagram.com/p.chonchanat/"
+                                git="https://github.com/chonchanat"
+                            />
+                            <Profile
+                                name="Nutchanon Chan O cha"
+                                img="https://cdn.discordapp.com/attachments/866358992674619432/906207987381723176/IMG_1563.png"
+                                label="Developer"
+                                fb="https://www.facebook.com/beammnc"
+                                ig="https://www.instagram.com/beamuuuu/"
+                                git="https://github.com/nutchanonc"
+                            />
+                            <Profile
+                                name="Napasin Saengthong"
+                                img="https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.6435-1/p320x320/211360014_1169341693598638_9088511854271659223_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=Xik1In3bKPYAX95YLCw&_nc_pt=1&_nc_ht=scontent.fbkk22-7.fna&oh=c166aded6597ed677ad3805c6d8e0c9e&oe=61AB9DB4"
+                                label="Developer"
+                                fb="https://www.facebook.com/FranKydeSU/"
+                                ig="https://www.instagram.com/franky_desu/"
+                                git="https://github.com/FranKydeSU"
+                            />
+                            <Profile
+                                name="Pokpong Noppakhun"
+                                img="https://avatars.githubusercontent.com/u/74798166?v=4"
+                                label="Developer"
+                                fb="https://www.facebook.com/dave.noppakhun/"
+                                ig="https://www.instagram.com/dave_pokpong/"
+                                git="https://github.com/davepokpong"
+                            />
+                            <Profile
+                                name="Sorrawich Supmee"
+                                img="https://cdn.discordapp.com/attachments/866358992674619432/906221221664948234/bond.jpg"
+                                label="Developer"
+                                fb="https://www.facebook.com/bonsupmee"
+                                ig="https://www.instagram.com/ryuoh_bon"
+                                git="https://github.com/RyuohNagito" />
+                            <Profile
+                                name="Jirat Wangman"
+                                img="https://cdn.discordapp.com/attachments/866358992674619432/906220282249879592/20211105_233529.jpg"
+                                label="Developer"
+                                fb="https://www.facebook.com/jirat.wangman/"
+                                ig="https://www.instagram.com/aimsomer/"
+                                git="https://github.com/aimsomer"
+                            />
+                            <Profile
+                                name="Nathawat Mianlamai"
+                                img="https://media-exp1.licdn.com/dms/image/C4D03AQG_YJOMg3Qsxw/profile-displayphoto-shrink_800_800/0/1634955182523?e=1641427200&v=beta&t=fD_ymvGmY289G_kGrFtGuT6iixq9CO2jRz7OWxoQvMU"
+                                label="Developer"
+                                fb="https://www.facebook.com/nat.mianlamai"
+                                ig="https://www.instagram.com/nathawat.m/"
+                                git="https://github.com/nathawat1008"
+                            />
+                            <Profile
+                                name="Nik Kunraho struyf"
+                                img="https://media-exp1.licdn.com/dms/image/C4E03AQEOAM6lyBcSzg/profile-displayphoto-shrink_800_800/0/1635187633392?e=1641427200&v=beta&t=NMwerfrSuQZxmME1UdZO_0rg8iVUSZF4F8_he8TGu0Q"
+                                label="UX/UI Designer"
+                                fb="https://www.facebook.com/profile.php?id=100011701389794"
+                                ig="https://www.instagram.com/nik.nks/"
+                                git="https://github.com/nikstruyf"
+                            />
+                            <Profile
+                                name="Pandin Lailert"
+                                img="https://scontent.fbkk22-3.fna.fbcdn.net/v/t1.15752-9/253497211_281035580516264_1313280695369541646_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=ae9488&_nc_ohc=C986ba_Qe6wAX8QoZ_w&_nc_oc=AQma3rimx5UU_deeCmrAe1Taxnc2oFnt3WMThZln4KvWtNpLPZ6cEkxalgxpu9AzwhoPVXP-P10YmLug_H3RM0DU&_nc_ht=scontent.fbkk22-3.fna&oh=a2e3560fcf70ef42dc95a0a36e53f3f0&oe=61AA8CF6"
+                                label="UX/UI Designer"
+                                fb="https://www.facebook.com/PandinFalcon"
+                                ig="https://www.instagram.com/dandinlion/"
+                                git="https://github.com/DanCPE"
+                            />
+                            <Profile
+                                name="Passawit Sungtoop"
+                                img="https://cdn.discordapp.com/attachments/866358992674619432/906217792615890954/245505696_4496868017072643_4714610721154475658_n.jpg"
+                                label="Product Analyst"
+                                fb="https://www.facebook.com/profile.php?id=100002484674760"
+                                ig="https://www.instagram.com/ryupunipuni/"
+                                git="https://github.com/PassawitRyu"
+                            />
+                            <Profile
+                                name="Teeratat Pisarnsint"
+                                img="https://scontent.fbkk22-1.fna.fbcdn.net/v/t1.15752-9/253575660_690041568636108_3490688804313451652_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=ae9488&_nc_ohc=WTc1EN6yRUIAX8dl-Mr&tn=gA4ckqsxHkq0wYE1&_nc_ht=scontent.fbkk22-1.fna&oh=ffb7e924052e6fce65d2cea80a0cca37&oe=61A966A4"
+                                label="Product Analyst"
+                                fb="https://www.facebook.com/teeratat.pisarnsint/"
+                                ig="https://www.instagram.com/mteeratat/"
+                                git="https://github.com/mteeratat"
+                            />
+                            <Profile
+                                name="Thanaphol Ovatvoravarunyou"
+                                img="https://scontent.fbkk29-1.fna.fbcdn.net/v/t1.6435-9/80799169_3280701942001249_1449720250319765504_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_ohc=1RLJAOMbUasAX9EuBB9&tn=SMhMyTwwCtzMROpY&_nc_ht=scontent.fbkk29-1.fna&oh=31cfc01609a50ef45ac77d223b05ae65&oe=61A9D1C4"
+                                label="Product Analyst"
+                                fb="https://www.facebook.com/thanapol.ovatvoravarunyou/"
+                                ig="https://www.instagram.com/s_thanaphol_/"
+                                git="https://github.com/s-thanaphol"
+                            />
+
                             <ProfilePlaceHolder />
                             <ProfilePlaceHolder />
-         
+
                         </div>
 
 
@@ -76,6 +166,9 @@ interface boxPropsInterface {
     img?: string
     name?: string
     label?: string
+    fb?: string
+    ig?: string
+    git?: string
 }
 
 const Embed = styled.div`
@@ -91,7 +184,6 @@ const Embed = styled.div`
     padding-right: 50px;
     text-align: center;
     transition: 400ms ease;
-
     
     &:hover {
         transform: scale(1.2);
@@ -100,21 +192,34 @@ const Embed = styled.div`
 `
 
 
-function Profile({ name , img , label }: boxPropsInterface) {
+function Profile({ name, img, label, fb, ig, git }: boxPropsInterface) {
 
     const { theme } = useContext(ThemeContext);
     const history = useHistory();
 
     return (
         <>
-            <div className="col-lg m-0 p-4">
-                <Embed style={{ backgroundColor: theme === "light" ? "#f2f4f7" : "#2a2c2e"}}>
-                    <img className="round" src={img} width="66%" height="131px"/>
+            <div className="col-lg m-0 p-4 d-flex">
+                <Embed style={{ backgroundColor: theme === "light" ? "#f2f4f7" : "#2a2c2e" }}>
+                    <div className="d-flex justify-content-center">
+                        <div style={{
+                            minWidth: "131px",
+                            minHeight: "131px",
+                            maxWidth: "131px",
+                            maxHeight: "131px",
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            borderRadius: "50%",
+                            backgroundPosition: "center",
+                            cursor: "pointer"
+                        }}></div>
+                    </div>
                     <H6 className="mt-3">{name}</H6>
                     <P>{label}</P>
-                    <Icon src={facebookForDark} onClick={() => window.location.href = "https://www.facebook.com/jirat.wangman"} width="30px"/>
-                    <Icon src={instagramForDark} width="30px"/>
-                    <Icon src={theme === "light" ? github : githubForDark} width="30px"/>
+                    <Icon src={facebookForDark} onClick={() => window.location.href = `${fb}`} width="30px" />
+                    <Icon src={instagramForDark} onClick={() => window.location.href = `${ig}`} width="30px" />
+                    <Icon src={theme === "light" ? github : githubForDark} onClick={() => window.location.href = `${git}`} width="30px" />
                 </Embed>
             </div>
         </>
