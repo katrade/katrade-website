@@ -23,7 +23,7 @@
     border-radius: 3px;
     background-color: #1a1a1a;
     transition: 400ms ease;
-    border: solid rgb(218, 224, 231) 1px;
+    border: solid rgb(71, 72, 73) 1px;
 }
 .recommend-card-dark:hover {   
     transform: scale(1.05);

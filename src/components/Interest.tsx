@@ -17,7 +17,7 @@ export default function Interest(props: any) {
     return (
         <div className={theme === "light" ? "interest-card" : "interest-card-dark"} >
             <div className="interest-photo-card" onClick={LinkItemData} style={{ backgroundImage: `url(${item.pictures[0]})` }}>
-                <StarRoundedIcon className="star" />
+                {/* <StarRoundedIcon className="star" /> */}
             </div>
             <div className="interest-text-card pt-3" onClick={LinkItemData}>
                 <P className="text-truncate">{item.name}</P>

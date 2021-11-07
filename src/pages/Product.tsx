@@ -64,6 +64,7 @@ function Product() {
 
     // แสดงผลตัวเลขบนหน้าจอ
     const [handleFollow, setHandleFollow] = useState<any>();
+    const [ waiting, setWaiting ] = useState<boolean>(false);
 
     const history = useHistory();
 
@@ -88,6 +89,7 @@ function Product() {
                 var getFollowerData = await getUserFollowData(dataDetail.owner);
                 setFollowerData(getFollowerData.follower.length);
                 setHandleFollow(getFollowerData.follower.length);
+                setWaiting(true)
             }
 
             var getUser: any = await getUserData();
@@ -269,7 +271,7 @@ function Product() {
                                         <div style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data.pictures[0]})` }} onClick={() => clickPhoto(0)}>
                                         </div>
                                     </div>
-                                    <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "#F1F1F1" }}>
+                                    <div className="d-flex align-items-center justify-content-around" style={{ width: "auto", height: "120px", backgroundColor: "transparent" }}>
                                         {data.pictures.map((data: any, index: any) => {
                                             return (
                                                 <div key={index} className="pointer" style={{ aspectRatio: "6/4", height: "auto", backgroundColor: "#F1F1F1", padding: "0", ...backgroundImageStyles, backgroundImage: `url(${data})`, minHeight: "100%" }} onClick={() => clickPhoto(index)}>
@@ -332,11 +334,20 @@ function Product() {
                                                 </P>
                                             </div>
                                         </div>
-
-                                        <div className={forOwner ? "d-none" : "d-flex flex-wrap"}>
-                                            <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={handleClickChat}>Chat</TransparentButton>
-                                            <div onClick={handleClickFollow}>{follow_btn()}</div>
-                                        </div>
+                                        
+                                        {waiting ? 
+                                            (
+                                            <div className={forOwner ? "d-none" : "d-flex flex-wrap"}>
+                                                <TransparentButton width="80px" height="30px" buttonColor="blue" padding="0" margin="10px 5px" onClick={handleClickChat}>Chat</TransparentButton>
+                                                <div onClick={handleClickFollow}>{follow_btn()}</div>
+                                            </div>
+                                            )
+                                            :
+                                            (
+                                                <></>
+                                            )
+                                        }
+                                        
                                     </div>
                                     <div className={forOwner ? "d-none" : "d-flex flew-wrap justify-content-between mt-3"} style={{height:"50px"}}>
                                         {/* <div className="" onClick={handleClickFavorite} style={{ width: "48%" }}>{favorite_btn()}</div>

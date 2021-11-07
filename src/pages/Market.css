@@ -40,7 +40,7 @@ input.searchbar {
 .seemore {
     width: 160px;
     height: 40px;
-    border: 1px solid black;
+    border: 1px solid transparent;
     background-color: #15C777;
     padding: 0 20px;
     font-size: 18px;

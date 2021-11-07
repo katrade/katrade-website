@@ -9,7 +9,7 @@
     background-color: #ffffff;
     transition: 400ms ease;
     /* z-index: 0; */
-    border: solid rgb(218, 224, 231) 1px;
+    border: solid rgb(218, 224, 231)z 1px;
 }
 .interest-card:hover {   
     transform: scale(1.05);
