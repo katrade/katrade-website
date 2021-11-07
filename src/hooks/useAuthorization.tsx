@@ -84,7 +84,7 @@ export default function useAuthorization() {
             })
             .then(res => {
                 if (res.data.value) {
-
+                    hide()
                     return history.push('/app/market');
                 }
                 else {

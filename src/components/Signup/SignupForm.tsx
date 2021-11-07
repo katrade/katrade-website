@@ -51,7 +51,7 @@ export default function SignupForm({ pw, setPw }: p) {
             if (read.checked == false) {
                 alert("please confirm terms of service.")
             }
-            else if (!(data.email.includes("@ku") || data.email.includes("@live.ku"))) {
+            else if (!(data.email.includes("@ku.") || data.email.includes("@live.ku."))) {
                 alert("Please use KU account email.");
             }
             else {

@@ -1,7 +1,6 @@
 import { render } from 'react-dom';
 import styled from 'styled-components';
 
-
 export default function useLoading() {
     const element = document.getElementById('portal');
     function show(str?: string) {
@@ -12,7 +11,6 @@ export default function useLoading() {
     }
     return [show, hide]
 }
-
 
 const Container = styled.div`
     width: 100vw;

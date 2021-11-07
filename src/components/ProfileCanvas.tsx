@@ -59,7 +59,7 @@ export default function ProfileCanvas() {
                                 git="https://github.com/chonchanat"
                             />
                             <Profile
-                                name="Nutchanon Chan O cha"
+                                name="Nutchanon Chantrasup"
                                 img="https://cdn.discordapp.com/attachments/866358992674619432/906207987381723176/IMG_1563.png"
                                 label="Developer"
                                 fb="https://www.facebook.com/beammnc"
@@ -106,7 +106,7 @@ export default function ProfileCanvas() {
                                 git="https://github.com/nathawat1008"
                             />
                             <Profile
-                                name="Nik Kunraho struyf"
+                                name="Nik Kunraho Struyf"
                                 img="https://media-exp1.licdn.com/dms/image/C4E03AQEOAM6lyBcSzg/profile-displayphoto-shrink_800_800/0/1635187633392?e=1641427200&v=beta&t=NMwerfrSuQZxmME1UdZO_0rg8iVUSZF4F8_he8TGu0Q"
                                 label="UX/UI Designer"
                                 fb="https://www.facebook.com/profile.php?id=100011701389794"
