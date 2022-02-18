@@ -2,128 +2,153 @@ import { useState, useEffect, useContext } from "react";
 import { SocketContext } from "../../contexts/Socket";
 import "./Chat.css";
 import ProfilePic from "./ProfilePic";
-import SendIcon from '@material-ui/icons/SendRounded'
+import SendIcon from "@material-ui/icons/SendRounded";
 import { useHistory } from "react-router";
 import P from "../standard/P";
 
-import { ThemeContext } from "../../contexts/Theme"
+import { ThemeContext } from "../../contexts/Theme";
 
 export default function Chat() {
-    const { theme } = useContext(ThemeContext);
-    const {
-        socket,
-        account,
-        roomId,
-        messageList,
-        duoId,
-        duoUsername,
-    } = useContext(SocketContext)
+  const { theme } = useContext(ThemeContext);
+  const { socket, account, roomId, messageList, duoId, duoUsername } =
+    useContext(SocketContext);
 
-    // console.log("Chat Reload")
-    const [message, setMessage] = useState("");
-    const [usernameNow, setUsernameNow] = useState("")
+  // console.log("Chat Reload")
+  const [message, setMessage] = useState("");
+  const [usernameNow, setUsernameNow] = useState("");
 
-    // console.log("KuAYYYYYYY")
-    // console.log(messageList)
+  // console.log("KuAYYYYYYY")
+  // console.log(messageList)
 
-    useEffect(() => {
-        // console.log(duoUsername)
-        setUsernameNow(duoUsername)
-        // console.log()
-    }, [duoUsername])
+  useEffect(() => {
+    // console.log(duoUsername)
+    setUsernameNow(duoUsername);
+    // console.log()
+  }, [duoUsername]);
 
-    useEffect(() => {
-        if (messageList) {
-            var msgContainer: any = document.getElementById("messages");
-            msgContainer.scrollTop = msgContainer.scrollHeight;
-        }
-    }, [messageList])
-
-    const sendMessage = async () => {
-        if (socket !== null) {
-            if (message === "") return
-            let messageContent = {
-                room: roomId,
-                content: {
-                    sender: account.username,
-                    senderID: account._id,
-                    content_type: "Text",
-                    content: message,
-                    timeStamp: new Date()
-                },
-            };
-            // console.log(socket.connected)
-            socket.emit("message", messageContent)
-            // setChkMessage(true)
-            // setMessageList([...messageList, messageContent.content]);
-            setMessage("");
-        }
-    };
-
-    const history = useHistory()
-
-    const handleNameClick = () => {
-        history.push(`/app/profileviewer?user_id=${duoId}`)
+  useEffect(() => {
+    if (messageList) {
+      var msgContainer: any = document.getElementById("messages");
+      msgContainer.scrollTop = msgContainer.scrollHeight;
     }
+  }, [messageList]);
 
-    return (
-        <div>
-            <div className="chatContainer">
-                <div className="chatContainer-Header d-flex align-items-center px-5">
-                    <div style={{
+  const sendMessage = async () => {
+    if (socket !== null) {
+      if (message === "") return;
+      let messageContent = {
+        room: roomId,
+        content: {
+          sender: account.username,
+          senderID: account._id,
+          content_type: "Text",
+          content: message,
+          timeStamp: new Date(),
+        },
+      };
+      // console.log(socket.connected)
+      socket.emit("message", messageContent);
+      // setChkMessage(true)
+      // setMessageList([...messageList, messageContent.content]);
+      setMessage("");
+    }
+  };
+
+  const history = useHistory();
+
+  const handleNameClick = () => {
+    history.push(`/app/profileviewer?user_id=${duoId}`);
+  };
+
+  return (
+    <div>
+      <div className="chatContainer">
+        <div className="chatContainer-Header d-flex align-items-center px-5">
+          <div
+            style={{
+              minWidth: "47px",
+              minHeight: "47px",
+              maxWidth: "47px",
+              maxHeight: "47px",
+              backgroundImage: `url(${ProfilePic(duoId)})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              borderRadius: "50%",
+              backgroundPosition: "center",
+              cursor: "pointer",
+            }}
+            className="m-0"
+          />
+          <span
+            className="ms-3 text-white"
+            onClick={handleNameClick}
+            style={{ cursor: "pointer" }}
+          >
+            {usernameNow}
+          </span>
+        </div>
+        <div
+          className="messages"
+          id="messages"
+          style={{ height: "500px", overflow: "auto" }}
+        >
+          {messageList.map((val) => {
+            return (
+              <div className="messageContainer">
+                <div
+                  className={
+                    val.sender === account.username ? "yourMsg" : "otherMsg"
+                  }
+                >
+                  {val.sender === account.username ? (
+                    ""
+                  ) : (
+                    <div
+                      style={{
                         minWidth: "47px",
                         minHeight: "47px",
                         maxWidth: "47px",
                         maxHeight: "47px",
                         backgroundImage: `url(${ProfilePic(duoId)})`,
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
                         borderRadius: "50%",
                         backgroundPosition: "center",
-                        cursor: "pointer"
-                    }}
-                        className="m-0" />
-                    <span
-                        className="ms-3 text-white"
-                        onClick={handleNameClick}
-                        style={{ cursor: "pointer" }}
-                    >{usernameNow}</span>
-                </div>
-                <div className="messages" id="messages" style={{ height: "500px", overflow: "auto" }}>
-                    {messageList.map((val) => {
-                        return (
-                            <div className="messageContainer"
-                            >
-                                <div className={val.sender === account.username ? "yourMsg" : "otherMsg"}>
-                                    {val.sender === account.username ?
-                                        "" :
-                                        <div style={{
-                                            minWidth: "47px",
-                                            minHeight: "47px",
-                                            maxWidth: "47px",
-                                            maxHeight: "47px",
-                                            backgroundImage: `url(${ProfilePic(duoId)})`,
-                                            backgroundSize: 'cover',
-                                            backgroundRepeat: 'no-repeat',
-                                            borderRadius: "50%",
-                                            backgroundPosition: "center",
-                                            border: "1px solid rgb(180, 180, 180)"
-                                        }}>
-                                        </div>
-                                    }
-                                    <div className={val.sender === account.username ? "yourtextBox" : theme === "light" ? "othertextBox" : "othertextBox-Dark"}>
-                                        <P className={val.sender === account.username ? "text-white" : ""}> {val.content}</P>
-                                    </div>
-                                    {/* <div>
+                        border: "1px solid rgb(180, 180, 180)",
+                      }}
+                    ></div>
+                  )}
+                  <div
+                    className={
+                      val.sender === account.username
+                        ? "yourtextBox"
+                        : theme === "light"
+                        ? "othertextBox"
+                        : "othertextBox-Dark"
+                    }
+                  >
+                    <P
+                      className={
+                        val.sender === account.username ? "text-white" : ""
+                      }
+                    >
+                      {" "}
+                      {val.content}
+                    </P>
+                  </div>
+                  {/* <div>
                                         {val.timeStamp}
                                     </div> */}
-                                </div>
-                            </div>
-                        );
-                    })}
                 </div>
-                <div className="messageInputs p-0 m-0 my-2 d-flex" style={{ width: "100%" }}>
-                    {/* <div className="col-lg-1">
+              </div>
+            );
+          })}
+        </div>
+        <div
+          className="messageInputs p-0 m-0 my-2 d-flex"
+          style={{ width: "100%" }}
+        >
+          {/* <div className="col-lg-1">
                         <img
                             src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
                             style={{
@@ -134,39 +159,39 @@ export default function Chat() {
                             }}
                         />
                     </div> */}
-                    <div className="typingContainer mx-3">
-                        <input
-                            type="text"
-                            placeholder="Message..."
-                            onChange={(e) => {
-                                setMessage(e.target.value);
-                            }}
-                            value={message}
-                            id="messageBox"
-                            style={{
-                                width: "98%",
-                                border: "none",
-                                margin: "0px",
-                                backgroundColor: theme === "light" ? "white" : "#212121",
-                                color: theme === "light" ? "black" : "white"
-                            }}
-                        />
-                    </div>
-                    <div className="">
-                        <SendIcon
-                            style={{
-                                //maxWidth: "35px",
-                                fontSize: "35px",
-                                cursor: "pointer",
-                                color: "rgb(32, 201, 108)",
-                                padding: "0px"
-                            }}
-                            onClick={sendMessage}
-                            className="material-icons"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div >
-    );
+          <div className="typingContainer mx-3">
+            <input
+              type="text"
+              placeholder="Message..."
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+              value={message}
+              id="messageBox"
+              style={{
+                width: "98%",
+                border: "none",
+                margin: "0px",
+                backgroundColor: theme === "light" ? "white" : "#212121",
+                color: theme === "light" ? "black" : "white",
+              }}
+            />
+          </div>
+          <div className="">
+            <SendIcon
+              style={{
+                //maxWidth: "35px",
+                fontSize: "35px",
+                cursor: "pointer",
+                color: "rgb(32, 201, 108)",
+                padding: "0px",
+              }}
+              onClick={sendMessage}
+              className="material-icons"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

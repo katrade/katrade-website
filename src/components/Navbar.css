@@ -1,400 +1,395 @@
-
 .logo {
-    height: 30px;
+  height: 30px;
 }
 
 .header-con {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-    /* flex-wrap: wrap; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  /* flex-wrap: wrap; */
 }
 
 .cate {
-    margin: 0;
-    cursor: pointer;
-    transition: 0.5s ease;;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.5s ease;
 }
 
 .cate:hover {
-    transition: 0.5s ease;
-    color: rgb(0, 179, 95);
+  transition: 0.5s ease;
+  color: rgb(0, 179, 95);
 }
 
 .cate-hidden {
-    display: none;
-    margin: 5px 10px 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #5e5e5e;
+  display: none;
+  margin: 5px 10px 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #5e5e5e;
 }
 
 .categories {
-    padding: 0;
-    list-style-type: none;
-    width: 100%;
-    height: 0;
-    position: absolute;
-    z-index: 0;
-    flex-direction: column;
-    top: 65px;
-    left: 0;
-    opacity: 0;
-    transition: 0.3s ease;
-    background-color: rgba(0, 0, 0, 1);
-    overflow: hidden;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  height: 0;
+  position: absolute;
+  z-index: 0;
+  flex-direction: column;
+  top: 65px;
+  left: 0;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: rgba(0, 0, 0, 1);
+  overflow: hidden;
 }
 
 .active {
-    background-color: rgba(255, 255, 255, 0.97);
-    padding: 10px 0;
-    height: 500px;
-    overflow: auto;
-    opacity: 1;
-    top: 65px;
-    position: absolute;
-    z-index: 2;
-    align-content: center;
-    transition: 0.3s ease;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+  background-color: rgba(255, 255, 255, 0.97);
+  padding: 10px 0;
+  height: 500px;
+  overflow: auto;
+  opacity: 1;
+  top: 65px;
+  position: absolute;
+  z-index: 2;
+  align-content: center;
+  transition: 0.3s ease;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .categories li a {
-    
-    text-decoration: none;
-    color: rgb(43, 43, 43);
+  text-decoration: none;
+  color: rgb(43, 43, 43);
 }
 .categories li {
-    margin: 1px 0;
-    padding: 0 10px;
-    border-radius: 7px;
-    
+  margin: 1px 0;
+  padding: 0 10px;
+  border-radius: 7px;
 }
 .categories li:hover {
-    cursor: pointer;
-    background-color: rgba(14, 14, 14, 0.1);
-    
+  cursor: pointer;
+  background-color: rgba(14, 14, 14, 0.1);
 }
 
 .search {
-    margin: auto 0 auto 0;
-    min-width: 300px;
-    width: 460px;
-    max-width: 700px;
-    height: auto;
-    border: solid 1px rgb(182, 182, 182);
-    border-radius: 25px;
-    background-color: #fff;
+  margin: auto 0 auto 0;
+  min-width: 300px;
+  width: 460px;
+  max-width: 700px;
+  height: auto;
+  border: solid 1px rgb(182, 182, 182);
+  border-radius: 25px;
+  background-color: #fff;
 }
 
 .search-bar {
-    padding: 0 25px;
-    font-size: 22px;
-    border: 0px;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    float: left;
-    width: 85%;
-    height: 40px;
-    background: white;
+  padding: 0 25px;
+  font-size: 22px;
+  border: 0px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  float: left;
+  width: 85%;
+  height: 40px;
+  background: white;
 }
 
 .search-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: right;
-    padding: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 25px;
-    background: rgb(21, 199, 119);
-    color: white;
-    font-size: 17px;
-    border: 0px;
-    border-left: none;
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 400ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  background: rgb(21, 199, 119);
+  color: white;
+  font-size: 17px;
+  border: 0px;
+  border-left: none;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 400ms ease;
 }
 .search-btn:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .desktop-icon > div.icon {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    background-color: rgb(236, 241, 247);
-    color: rgb(94, 108, 124);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: right;
-    margin: 0 10px;
-    padding: 10px;
-    border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background-color: rgb(236, 241, 247);
+  color: rgb(94, 108, 124);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .desktop-icon > div.icon-dark {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    background-color: rgb(66, 66, 66);
-    color: rgb(94, 108, 124);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: right;
-    margin: 0 10px;
-    padding: 10px;
-    border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background-color: rgb(66, 66, 66);
+  color: rgb(94, 108, 124);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.desktop-icon > div.icon-dark > div > a{
-    filter: brightness(10);
+.desktop-icon > div.icon-dark > div > a {
+  filter: brightness(10);
 }
 .desktop-icon > a {
-    border: solid 1px rgb(236, 241, 247);
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    background-color: rgb(236, 241, 247);
-    color: rgb(94, 108, 124);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: right;
-    margin: 0 10px;
-    padding: 10px;
-    border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  border: solid 1px rgb(236, 241, 247);
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background-color: rgb(236, 241, 247);
+  color: rgb(94, 108, 124);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .profile-pic {
-    min-width: 30px;
-    min-height: 30px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: rgb(236, 241, 247);
-    background-size: cover;
+  min-width: 30px;
+  min-height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(236, 241, 247);
+  background-size: cover;
 }
 
 .sidemenu {
-    padding: 0;
-    list-style-type: none;
-    width: 249px;
-    height: 100vh;
-    position: absolute;
-    top: 60px;
-    left: -100vh;
-    opacity: 0;
-    transition: 0.3s ease;
-    background-color: rgba(0, 0, 0, 1);
-    text-transform: uppercase;
-    /* display: none; */
+  padding: 0;
+  list-style-type: none;
+  width: 249px;
+  height: 100vh;
+  position: absolute;
+  top: 60px;
+  left: -100vh;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: rgba(0, 0, 0, 1);
+  text-transform: uppercase;
+  /* display: none; */
 }
 
 .active-sidemenu {
-    background-color: rgb(82, 82, 82);
-    opacity: 1;
-    top: 60px;
-    left: calc(100% - 250px);
-    position: absolute;
-    z-index: 30;
-    align-content: center;
-    transition: 0.3s ease;
-    /* display: block; */
+  background-color: rgb(82, 82, 82);
+  opacity: 1;
+  top: 60px;
+  left: calc(100% - 250px);
+  position: absolute;
+  z-index: 30;
+  align-content: center;
+  transition: 0.3s ease;
+  /* display: block; */
 }
 
 .sidemenu-bg {
-    background-color: rgba(0, 0, 0, 0.8);
-    position: absolute;
-    top: 60px;
-    right: 0;
-    bottom: -100vh;
-    left: 0;
-    z-index: 30;
-    transition: 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: -100vh;
+  left: 0;
+  z-index: 30;
+  transition: 0.3s ease;
 }
 
 .categories-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: 400ms ease;
-    border-radius: 10px;
-    padding: 5px 10px;
-    color: rgb(48, 63, 75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 400ms ease;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: rgb(48, 63, 75);
 
-    user-select: none; /* supported by Chrome and Opera */
-   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 .categories-button:hover {
-    cursor: pointer;
-    background-color: rgb(241, 245, 248);
+  cursor: pointer;
+  background-color: rgb(241, 245, 248);
 }
 
 .categories-mobile {
-    width: 100%;
-    height: 0;
-    position: absolute;
-    z-index: 0;
-    top: 60px;
-    opacity: 0;
-    transition: 0.3s ease;
-    background-color: rgb(230, 230, 230);
-    overflow: hidden;
+  width: 100%;
+  height: 0;
+  position: absolute;
+  z-index: 0;
+  top: 60px;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: rgb(230, 230, 230);
+  overflow: hidden;
 }
 
 .active-mobile {
-    list-style: none;
-    background-color: rgb(230, 230, 230);
-    opacity: 1;
-    padding: 10px;
-    height: 420px;
-    top: 60px;
-    position: absolute;
-    z-index: 2;
-    align-content: center;
-    transition: 0.3s ease;
+  list-style: none;
+  background-color: rgb(230, 230, 230);
+  opacity: 1;
+  padding: 10px;
+  height: 420px;
+  top: 60px;
+  position: absolute;
+  z-index: 2;
+  align-content: center;
+  transition: 0.3s ease;
 }
 
 .menu-button {
-    z-index: 100;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: 400ms ease;
-    border-radius: 10px;
-    padding: 5px 10px;
-    color: rgb(48, 63, 75);
+  z-index: 100;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 400ms ease;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: rgb(48, 63, 75);
 
-    user-select: none; /* supported by Chrome and Opera */
-   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 .menu-button:hover {
-    cursor: pointer;
-    background-color: rgb(241, 245, 248);
+  cursor: pointer;
+  background-color: rgb(241, 245, 248);
 }
 .menu-drop {
-    display: none;
-    position: absolute;
-    top: 120%;
-    left: -107px;
-    right: -40%;
-    height: auto;
-    background-color: rgb(255, 255, 255);
-    /* min-width: 100px; */
-    width: 150px;
-    box-shadow: 0px 0px 20px rgba(141, 144, 148, 0.4);
-    /* border: solid 1px rgb(217, 227, 236); */
-    border-radius: 10px;
-    z-index: 1;
-    padding: 6px 30px;
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: -107px;
+  right: -40%;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  /* min-width: 100px; */
+  width: 150px;
+  box-shadow: 0px 0px 20px rgba(141, 144, 148, 0.4);
+  /* border: solid 1px rgb(217, 227, 236); */
+  border-radius: 10px;
+  z-index: 1;
+  padding: 6px 30px;
 }
 .menu-drop a {
-    margin: 6px 0;
-    font-size: 20px;
-    color: rgb(108, 121, 135);
-    cursor: pointer;
-    transition: 400ms ease;
-    z-index: 67;
-    display: block;
+  margin: 6px 0;
+  font-size: 20px;
+  color: rgb(108, 121, 135);
+  cursor: pointer;
+  transition: 400ms ease;
+  z-index: 67;
+  display: block;
 }
 .menu-drop p:hover {
-    background-color: rgb(221, 253, 241);
+  background-color: rgb(221, 253, 241);
 }
 
 .sidemenu-content p {
-    color: white;
-    margin-bottom: 10px;
-    cursor: pointer;
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 .sidemenu-content p:hover {
-    background-color: rgb(124, 124, 124);
+  background-color: rgb(124, 124, 124);
 }
 
 .show {
-    display: block;
-    animation: showcat 400ms ease;
+  display: block;
+  animation: showcat 400ms ease;
 }
 .hide {
-    display: none;
-    animation: hidecat 400ms ease;
+  display: none;
+  animation: hidecat 400ms ease;
 }
 
 @keyframes showcat {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes hidecat {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .cat-text::after {
-    content: "Categories";
+  content: "Categories";
 }
 
 @media screen and (max-width: 1130px) {
-    .cat-text::after {
-        content: "";
-    }
+  .cat-text::after {
+    content: "";
+  }
 }
 
 @media screen and (max-width: 1010px) {
-    .desktop-icon {
-        display: none;
-    }
-    .mobile-icon {
-        display: flex;
-    }
-    .cate {
-        display: none;
-    }
-    .cate-hidden {
-        display: flex;
-    }
-    .menu-button {
-        display: flex;
-    }
+  .desktop-icon {
+    display: none;
+  }
+  .mobile-icon {
+    display: flex;
+  }
+  .cate {
+    display: none;
+  }
+  .cate-hidden {
+    display: flex;
+  }
+  .menu-button {
+    display: flex;
+  }
 }
 div.cate-wallpaper-background {
-    background-color: black;
+  background-color: black;
 }
 
 .nav-bg-light {
-    background-color: #fff
+  background-color: #fff;
 }
 .nav-bg-dark {
-    background-color: #262626;
+  background-color: #262626;
 }

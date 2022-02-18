@@ -1,55 +1,56 @@
 .category {
-    height: auto;
-    margin: 20px 0 40px 0;
+  height: auto;
+  margin: 20px 0 40px 0;
 }
 
 .category-box {
-    height: 282px;
-    width: 100%;
-    background-color: rgb(169, 216, 189);
+  height: 282px;
+  width: 100%;
+  background-color: rgb(169, 216, 189);
 }
 
 div.menu {
-    min-height: 250px;
+  min-height: 250px;
 }
 input.searchbar {
-    width: 100%;
+  width: 100%;
 }
 
-.prev , .next {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background-color: crimson;
+.prev,
+.next {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: crimson;
 }
 .prev {
-    top: 50%;
-    left: 0;
-    right: 100%;
+  top: 50%;
+  left: 0;
+  right: 100%;
 }
 .next {
-    top: 50%;
-    left: 100%;
-    right: 0;
+  top: 50%;
+  left: 100%;
+  right: 0;
 }
 
 .notfounditem {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .seemore {
-    width: 160px;
-    height: 40px;
-    border: 1px solid transparent;
-    background-color: #15C777;
-    padding: 0 20px;
-    font-size: 18px;
-    text-align: center;
-    cursor: pointer;
+  width: 160px;
+  height: 40px;
+  border: 1px solid transparent;
+  background-color: #15c777;
+  padding: 0 20px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 630px) {
-    .notfounditem {
-        font-size: 25px;
-    }
+  .notfounditem {
+    font-size: 25px;
+  }
 }

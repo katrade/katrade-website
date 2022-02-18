@@ -1,43 +1,43 @@
 .background {
-    background-color: white;
+  background-color: white;
 }
 
 .content-request {
-    margin: 24px 0;
-    padding: 16px 24px;
+  margin: 24px 0;
+  padding: 16px 24px;
 }
 
 .topic-request > p {
-    min-width: 150px;
-    /* padding: 0 20px; */
-    /* margin: 0; */
-    text-align: center;
-    cursor: pointer;
-    /* text-decoration: none; */
+  min-width: 150px;
+  /* padding: 0 20px; */
+  /* margin: 0; */
+  text-align: center;
+  cursor: pointer;
+  /* text-decoration: none; */
 }
 
 .topic-request > p:hover {
-    border: solid 2px rgba(200,200,200,0.6);
-    border-width: 0 0 3px 0;
+  border: solid 2px rgba(200, 200, 200, 0.6);
+  border-width: 0 0 3px 0;
 }
 
 .currenttap {
-    border: solid 2px #04d66d;
-    border-width: 0 0 3px 0;
+  border: solid 2px #04d66d;
+  border-width: 0 0 3px 0;
 }
 .currenttap:hover {
-    border: solid 2px #04d66d !important;
-    border-width: 0 0 3px 0 !important;
+  border: solid 2px #04d66d !important;
+  border-width: 0 0 3px 0 !important;
 }
 
 @media only screen and (max-width: 630px) {
-    .topic-request > p {
-        font-size: 18px;
-        min-width: 33%;
-        text-align: center;
-    }
-    .content-request {
-        margin: 16px 0;
-        padding: 10px 12px;
-    }
+  .topic-request > p {
+    font-size: 18px;
+    min-width: 33%;
+    text-align: center;
   }
+  .content-request {
+    margin: 16px 0;
+    padding: 10px 12px;
+  }
+}

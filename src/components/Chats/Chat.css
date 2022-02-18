@@ -1,122 +1,120 @@
 .tab {
-    border-radius: 10px 10px 0px 0px;
-    background-color: black;
-    color: white;
-    width: 160px;
-    height: 70px;
-    font-size: 150%;
+  border-radius: 10px 10px 0px 0px;
+  background-color: black;
+  color: white;
+  width: 160px;
+  height: 70px;
+  font-size: 150%;
 }
 
 .lineBar {
-    border: 1px solid #C4C4C4;
-    width: 100%;
-    background-color: #C4C4C4;
+  border: 1px solid #c4c4c4;
+  width: 100%;
+  background-color: #c4c4c4;
 }
 
 .tabchat {
-    height: 90px;
-    border-radius: 10px;
-    cursor: pointer;
+  height: 90px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .tabchat:hover {
-    background-color: rgba(158, 158, 158, 0.33);
+  background-color: rgba(158, 158, 158, 0.33);
 }
 
 .tabchat-active {
-    height: 90px;
-    border-radius: 10px;
-    background-color: rgba(158, 158, 158, 0.33);
-    cursor: pointer;
+  height: 90px;
+  border-radius: 10px;
+  background-color: rgba(158, 158, 158, 0.33);
+  cursor: pointer;
 }
 
 .chatContainer {
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid grey;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid grey;
 }
 
 .chatContainer-Header {
-    height: 70px;
-    background-color: black;
-    border-radius: 10px 10px 0px 0px;
+  height: 70px;
+  background-color: black;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .dealHover:hover {
-    background-color: rgba(158, 158, 158, 0.07);
+  background-color: rgba(158, 158, 158, 0.07);
 }
 
 .yourMsg {
-    display: flex;
-    justify-content: end;
-    width: auto;
-    align-items: center;
-    overflow: hidden;
-    word-wrap: break-word;
+  display: flex;
+  justify-content: end;
+  width: auto;
+  align-items: center;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .otherMsg {
-    display: flex;
-    justify-content: start;
-    width: auto;
-    align-items: center;
-    padding-left: 10px;
-    overflow: hidden;
-    word-wrap: break-word;
+  display: flex;
+  justify-content: start;
+  width: auto;
+  align-items: center;
+  padding-left: 10px;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .yourtextBox {
-	min-width: 60px;
-	max-width: 400px;
-	padding: 14px 18px;
-    margin: 6px 8px;
-	border-radius: 16px;
-	border: 1px solid rgb(32, 201, 108);
-    background-color: rgb(32, 201, 108);
-    color: white;
+  min-width: 60px;
+  max-width: 400px;
+  padding: 14px 18px;
+  margin: 6px 8px;
+  border-radius: 16px;
+  border: 1px solid rgb(32, 201, 108);
+  background-color: rgb(32, 201, 108);
+  color: white;
 }
 
 .othertextBox {
-    min-width: 60px;
-	max-width: 400px;
-	padding: 14px 18px;
-    margin: 6px 8px;
-	border-radius: 16px;
-	border: 1px solid rgb(180, 180, 180);
+  min-width: 60px;
+  max-width: 400px;
+  padding: 14px 18px;
+  margin: 6px 8px;
+  border-radius: 16px;
+  border: 1px solid rgb(180, 180, 180);
 }
 
 .othertextBox-Dark {
-    min-width: 60px;
-	max-width: 400px;
-	padding: 14px 18px;
-    margin: 6px 8px;
-	border-radius: 16px;
-	border: 1px solid rgb(180, 180, 180);
+  min-width: 60px;
+  max-width: 400px;
+  padding: 14px 18px;
+  margin: 6px 8px;
+  border-radius: 16px;
+  border: 1px solid rgb(180, 180, 180);
 }
 
-
 .typingContainer {
-    width: 90%;
-    border:1px solid #C4C4C4;
-    border-radius: 30px;
-    display: flex;
-    padding-left: 15px;
+  width: 90%;
+  border: 1px solid #c4c4c4;
+  border-radius: 30px;
+  display: flex;
+  padding-left: 15px;
 }
 
 .sidebar {
-    border: solid rgba(158, 158, 158, 0.33);
-    border-width: 0 3px 0 0;
-    height: 700px;
+  border: solid rgba(158, 158, 158, 0.33);
+  border-width: 0 3px 0 0;
+  height: 700px;
 }
 
 .LogoBg {
-    width: 50%;
-    opacity: 0.33;
-
+  width: 50%;
+  opacity: 0.33;
 }
 
 .limit {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

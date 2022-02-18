@@ -1,34 +1,34 @@
 .cardMobile {
-    width: 500px;
+  width: 500px;
 }
 
 .select-items-menu {
-    border: solid transparent;
-    border-width: 0 0 3px 0;
-    transition: 300ms ease;
-    cursor: pointer;
+  border: solid transparent;
+  border-width: 0 0 3px 0;
+  transition: 300ms ease;
+  cursor: pointer;
 }
 .select-items-menu:hover {
-    border: solid #15C777;
-    border-width: 0 0 3px 0;
-    cursor: pointer;
+  border: solid #15c777;
+  border-width: 0 0 3px 0;
+  cursor: pointer;
 }
 
 .currenttap {
-    border: solid 2px #15C777;
-    border-width: 0 0 3px 0;
+  border: solid 2px #15c777;
+  border-width: 0 0 3px 0;
 }
 .currenttap:hover {
-    border: solid 2px #15C777 !important;
-    border-width: 0 0 3px 0 !important;
+  border: solid 2px #15c777 !important;
+  border-width: 0 0 3px 0 !important;
 }
 
 .hoverSelect:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: 560px) {
-    .cardMobile{
-        width: 90%;
-    }
+  .cardMobile {
+    width: 90%;
+  }
 }

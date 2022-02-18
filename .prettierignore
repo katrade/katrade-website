@@ -1,0 +1,5 @@
+.firebase
+build
+node_modules
+docs
+public
