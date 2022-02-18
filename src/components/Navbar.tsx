@@ -12,8 +12,8 @@ import {
 
 export function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const navBorderColor = useColorModeValue("gray.200", "gray.600")
-  const navBg = useColorModeValue("white", "gray.800")
+  const navBorderColor = useColorModeValue("gray.200", "gray.600");
+  const navBg = useColorModeValue("white", "gray.800");
   return (
     <Flex
       alignItems="center"

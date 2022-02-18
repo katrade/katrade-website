@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import "./styles/animation.css"
+import "./styles/animation.css";
 import theme from "./styles/theme";
 import { Home } from "./views/Home";
 
