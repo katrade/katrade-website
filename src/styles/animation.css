@@ -1,27 +1,27 @@
 .fly-in-top-1 {
-  animation: fly-in-top 500ms ease-out;
-}
-.fly-in-top-2 {
   animation: fly-in-top 800ms ease-out;
 }
+.fly-in-top-2 {
+  animation: fly-in-top 1300ms ease-out;
+}
 .fly-in-top-3 {
-  animation: fly-in-top 1000ms ease-out;
+  animation: fly-in-top 1900ms ease-out;
 }
 .fly-in-top-4 {
-  animation: fly-in-top 1300ms ease-out;
+  animation: fly-in-top 2300ms ease-out;
 }
 
 .fly-in-bottom-1 {
-  animation: fly-in-bottom 500ms ease-out;
-}
-.fly-in-bottom-2 {
   animation: fly-in-bottom 800ms ease-out;
 }
+.fly-in-bottom-2 {
+  animation: fly-in-bottom 1300ms ease-out;
+}
 .fly-in-bottom-3 {
-  animation: fly-in-bottom 1000ms ease-out;
+  animation: fly-in-bottom 1900ms ease-out;
 }
 .fly-in-bottom-4 {
-  animation: fly-in-bottom 1300ms ease-out;
+  animation: fly-in-bottom 2300ms ease-out;
 }
 
 @keyframes fly-in-top {

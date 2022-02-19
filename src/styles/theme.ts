@@ -1,24 +1,24 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme } from '@chakra-ui/react'
 
 const config = {
-  initialColorMode: "light",
+  initialColorMode: 'light',
   useSystemColorMode: false,
-};
-const colors = {};
+}
+const colors = {}
 
 const components = {
   Button: {
     sizes: {
       sm: {
-        fontSize: "1rem",
+        fontSize: '1rem',
         fontWeight: 400,
       },
       md: {
-        fontSize: "1rem",
+        fontSize: '1rem',
         fontWeight: 400,
       },
       lg: {
-        fontSize: "1rem",
+        fontSize: '1rem',
         fontWeight: 400,
       },
     },
@@ -38,19 +38,24 @@ const components = {
       fontWeight: 300,
     },
   },
-};
+  MenuItem: {
+    baseStyle: {
+      fontWeight: 300
+    }
+  }
+}
 
 const font = {
   body: `Inter, Helvetica, sans-serif`,
   heading: `Inter, Helvetica, sans-serif`,
-};
+}
 
 const overrides = {
   config,
   colors,
   components,
   font,
-};
+}
 
-const theme = extendTheme(overrides);
-export default theme;
+const theme = extendTheme(overrides)
+export default theme
