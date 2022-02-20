@@ -1,4 +1,4 @@
-import { Require } from "./Match"
+import { Require } from './Match'
 
 export interface Item {
   category: {

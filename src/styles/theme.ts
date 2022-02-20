@@ -40,9 +40,9 @@ const components = {
   },
   MenuItem: {
     baseStyle: {
-      fontWeight: 300
-    }
-  }
+      fontWeight: 300,
+    },
+  },
 }
 
 const font = {

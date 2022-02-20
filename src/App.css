@@ -10,3 +10,19 @@
 b {
   font-weight: 500 !important;
 }
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+@media screen and (max-width: 440px) {
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+}

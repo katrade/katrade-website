@@ -7,7 +7,7 @@ export default function Card({ data }: { data: MatchInstance }) {
   return (
     <Box
       maxW='300px'
-      w={window.innerWidth < 430 ? '175px' : '100%'}
+      w={window.innerWidth < 430 ? '169px' : '100%'}
       mt='10px'
       me='10px'
       overflow='hidden'

@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
 import {
   Avatar,
   Box,
@@ -11,6 +11,8 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Switch,
+  Text,
   Tooltip,
   useColorMode,
   useColorModeValue,
@@ -43,45 +45,85 @@ export function Navbar() {
         <HStack>
           <Heading fontSize='xl'>katrade</Heading>
         </HStack>
-        <HStack spacing='20px'>
-          <Tooltip label='แชท' aria-label='chat-tooltip'>
-            <IconButton aria-label='' rounded='full' icon={<BsFillChatDotsFill />} />
-          </Tooltip>
-          <Tooltip label='คำขอแลกเปลี่ยน' aria-label='request-tooltip'>
-            <IconButton rounded='full' aria-label='' icon={<BsFillCartFill />} />
-          </Tooltip>
-          <Tooltip label='คลังของฉัน' aria-label='inventory-tooltip'>
-            <IconButton rounded='full' aria-label='' icon={<MdBackpack />} />
-          </Tooltip>
-          <Tooltip
-            label={colorMode === 'light' ? 'พระจันทร์ช่างเงียบเหงา' : 'สวัสดีพระอาทิตย์'}
-            aria-label='chat-tooltip'
-          >
-            <IconButton
-              onClick={toggleColorMode}
-              aria-label='Search database'
-              rounded='full'
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            />
-          </Tooltip>
+        <div className='desktop-only'>
+          <HStack spacing='20px'>
+            <Tooltip label='แชท' aria-label='chat-tooltip'>
+              <IconButton aria-label='' rounded='full' icon={<BsFillChatDotsFill />} />
+            </Tooltip>
+            <Tooltip label='คำขอแลกเปลี่ยน' aria-label='request-tooltip'>
+              <IconButton rounded='full' aria-label='' icon={<BsFillCartFill />} />
+            </Tooltip>
+            <Tooltip label='คลังของฉัน' aria-label='inventory-tooltip'>
+              <IconButton rounded='full' aria-label='' icon={<MdBackpack />} />
+            </Tooltip>
+            <Tooltip
+              label={colorMode === 'light' ? 'พระจันทร์ช่างเงียบเหงา' : 'สวัสดีพระอาทิตย์'}
+              aria-label='chat-tooltip'
+            >
+              <IconButton
+                onClick={toggleColorMode}
+                aria-label='Search database'
+                rounded='full'
+                icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              />
+            </Tooltip>
+            <Menu>
+              <MenuButton
+                as={Avatar}
+                w='fit-content'
+                h='fit-content'
+                bg='transparent'
+                icon={
+                  <Avatar
+                    w='40px'
+                    h='40px'
+                    size='sm'
+                    cursor='pointer'
+                    name={user ? `${user?.firstname} ${user?.lastname}` : ''}
+                    src={user?.profilePic}
+                  />
+                }
+              />
+              <MenuList>
+                <MenuItem fontWeight={300}>สิ่งของของคุณ</MenuItem>
+                <MenuItem fontWeight={300}>คำขอ</MenuItem>
+                <MenuItem fontWeight={300}>แชท</MenuItem>
+                <MenuItem fontWeight={300}>บัญชี</MenuItem>
+                <MenuItem
+                  fontWeight={400}
+                  color={useColorModeValue('red.400', 'red.200')}
+                  _hover={{ bg: useColorModeValue('red.100', 'red.600') }}
+                  onClick={signout}
+                >
+                  <FaSignOutAlt className='me-2' /> ออกจากระบบ
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </HStack>
+        </div>
+        <div className='mobile-only'>
           <Menu>
-            <MenuButton
-              as={Avatar}
-              w='fit-content'
-              h='fit-content'
-              bg='transparent'
-              icon={
+            <MenuButton as={IconButton} aria-label='Options' icon={<HamburgerIcon />} variant='outline' />
+            <MenuList>
+              <Flex p='20px' alignItems='center' bg='green.400' color='white'>
                 <Avatar
-                  w='40px'
-                  h='40px'
                   size='sm'
                   cursor='pointer'
                   name={user ? `${user?.firstname} ${user?.lastname}` : ''}
                   src={user?.profilePic}
+                  me='20px'
                 />
-              }
-            />
-            <MenuList>
+                <Text fontWeight={500} fontSize='md'>
+                  {user ? `${user.firstname}  ${user?.lastname[0]}.`.toUpperCase() : ''}
+                </Text>
+              </Flex>
+              <Flex alignItems='center' padding='20px' bg={useColorModeValue('gray.200', 'gray.800')}>
+                <Text me='20px'>
+                  <MoonIcon me='10px' />
+                  โหมดกลางคืน
+                </Text>
+                <Switch colorScheme='green' isChecked={colorMode === 'dark'} onChange={toggleColorMode} />
+              </Flex>
               <MenuItem fontWeight={300}>สิ่งของของคุณ</MenuItem>
               <MenuItem fontWeight={300}>คำขอ</MenuItem>
               <MenuItem fontWeight={300}>แชท</MenuItem>
@@ -92,11 +134,11 @@ export function Navbar() {
                 _hover={{ bg: useColorModeValue('red.100', 'red.600') }}
                 onClick={signout}
               >
-                <FaSignOutAlt className="me-2"/> ออกจากระบบ
+                <FaSignOutAlt className='me-2' /> ออกจากระบบ
               </MenuItem>
             </MenuList>
           </Menu>
-        </HStack>
+        </div>
       </Container>
     </Flex>
   )

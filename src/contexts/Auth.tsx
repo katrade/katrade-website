@@ -6,7 +6,7 @@ import { User } from '../interfaces/user'
 interface IAuthContext {
   signin: (email: string, password: string) => Promise<void>
   getUserData: () => Promise<any>
-  user?: User,
+  user?: User
   signout: () => void
 }
 
@@ -15,7 +15,7 @@ const a: any = {}
 const defaultContextValue: IAuthContext = {
   signin: () => new Promise(() => {}),
   getUserData: () => new Promise(() => {}),
-  signout: () => {}
+  signout: () => {},
 }
 
 export const AuthContext = createContext<IAuthContext>(defaultContextValue)
@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: any }) {
         getUserData,
         signin,
         user,
-        signout
+        signout,
       }}
     >
       {children}

@@ -42,7 +42,9 @@ export function SimpleNavbar() {
             </MenuButton>
             <MenuList>
               <MenuItem fontWeight={300}>Katrade คือ?</MenuItem>
-              <MenuItem fontWeight={300}>คุณจะทำให้โลก <b> ดีขึ้น</b></MenuItem>
+              <MenuItem fontWeight={300}>
+                คุณจะทำให้โลก <b> ดีขึ้น</b>
+              </MenuItem>
               <MenuItem fontWeight={300}>ทีมพัฒนา</MenuItem>
             </MenuList>
           </Menu>
