@@ -1,6 +1,8 @@
 import { Box, Center, Container, Flex, Grid, GridItem, Heading, HStack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { backendRoot } from '../../axios/instance'
+import Footer from '../../components/Footer'
 import { Navbar } from '../../components/Navbar'
 import AuthWrapper from '../../components/Wrapper/AuthWrapper'
 import { useAuth } from '../../hooks/useAuth'
@@ -63,6 +65,7 @@ export default function Market() {
           </Flex>
         </Box>
       </Container>
+      <Footer />
     </>
   )
 }

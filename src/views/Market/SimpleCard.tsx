@@ -1,10 +1,13 @@
 import { AspectRatio, Box, HStack, Image, Tag, TagLabel, Text, useColorModeValue } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Item } from './interfaces/Item'
 import { MatchInstance } from './interfaces/Match'
 
 export default function SimpleCard({ data }: { data: Item }) {
   const { name, detail, _id, username, pictures } = data
   const bg = useColorModeValue('gray.50', 'gray.900')
+  const navigate = useNavigate()
+
   return (
     <Box
       maxW='220px'
@@ -16,6 +19,8 @@ export default function SimpleCard({ data }: { data: Item }) {
       borderColor={useColorModeValue('gray.300', 'gray.700')}
       rounded={6}
       bg={bg}
+      cursor='pointer'
+      onClick={() => navigate(`/i/${_id}`)}
     >
       <AspectRatio ratio={4 / 3} w='100%'>
         <Image src={pictures[0]} alt={`item-${_id}`} objectFit='cover' />

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 
-export default function AuthWrapper({ children }: { children: any }) {
+export default function AuthWrapper({ children, title }: { children: any, title?: string }) {
   const { user } = useAuth()
   const navigate = useNavigate()
   // const [pass, setPass] = useState<boolean>(false)
@@ -23,6 +24,13 @@ export default function AuthWrapper({ children }: { children: any }) {
     if (localStorage.getItem('t') === null) navigate('/')
   }, [user])
   console.log(localStorage.getItem('t'), user)
-  if (!user) return null
-  return children
+
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      { user ? children: null }
+    </>
+  )
 }

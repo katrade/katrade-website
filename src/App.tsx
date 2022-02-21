@@ -6,6 +6,7 @@ import { AuthProvider } from './contexts/Auth'
 import './styles/animation.css'
 import theme from './styles/theme'
 import { Home } from './views/Home'
+import ItemPage from './views/Item'
 import Market from './views/Market'
 import Signup from './views/Signup'
 
@@ -18,8 +19,16 @@ function App() {
             <Route
               path='/market'
               element={
-                <AuthWrapper>
+                <AuthWrapper title='Market - Place where you find what you want.'>
                   <Market />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path='/i/:itemId'
+              element={
+                <AuthWrapper>
+                  <ItemPage />
                 </AuthWrapper>
               }
             />

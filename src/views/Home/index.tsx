@@ -34,6 +34,7 @@ import { backendRoot } from '../../axios/instance'
 import PromoteCard from './PromoteCard'
 import { BiWorld } from 'react-icons/bi'
 import Footer from '../../components/Footer'
+import { Helmet } from 'react-helmet'
 
 export function Home() {
   const inputBorderColor = useColorModeValue('gray.200', 'gray.700')
@@ -80,6 +81,9 @@ export function Home() {
 
   return (
     <>
+    <Helmet>
+      <title>Katrade - Trade your items</title>
+    </Helmet>
       <SimpleNavbar />
       <Center minHeight='100vh'>
         <Modal isOpen={isLoading} onClose={onClose} isCentered closeOnOverlayClick={false}>
