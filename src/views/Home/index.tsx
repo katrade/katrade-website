@@ -1,6 +1,7 @@
 import {
   Alert,
   AlertIcon,
+  AspectRatio,
   Avatar,
   Box,
   Button,
@@ -8,7 +9,9 @@ import {
   CircularProgress,
   Container,
   Divider,
+  Flex,
   Heading,
+  Image,
   Input,
   List,
   ListIcon,
@@ -22,10 +25,15 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { MdCheckCircle } from 'react-icons/md'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { SimpleNavbar } from '../../components/SimpleNavbar'
+import { Item } from '../Market/interfaces/Item'
+import { backendRoot } from '../../axios/instance'
+import PromoteCard from './PromoteCard'
+import { BiWorld } from 'react-icons/bi'
+import Footer from '../../components/Footer'
 
 export function Home() {
   const inputBorderColor = useColorModeValue('gray.200', 'gray.700')
@@ -36,6 +44,8 @@ export function Home() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState(false)
+
+  const [allItems, setAllItems] = useState<Item[]>()
 
   const { signin, user } = useAuth()
   const navigate = useNavigate()
@@ -56,6 +66,18 @@ export function Home() {
   function onClose() {
     setIsLoading(false)
   }
+
+  async function getAllItems() {
+    const response = await backendRoot.get('/inventory/getAllInventory', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('t')}` },
+    })
+    setAllItems(response.data)
+  }
+
+  useEffect(() => {
+    getAllItems()
+  }, [])
+
   return (
     <>
       <SimpleNavbar />
@@ -175,8 +197,58 @@ export function Home() {
               </Box>
             </Box>
           </Box>
+          {!allItems ? null : (
+            <Box my='60px' className='fly-in-top-2'>
+              <Heading textAlign='center' mb='30px'>
+                มองหาสิ่งเหล่านี้อยู่หรือไม่?
+              </Heading>
+              <Flex overflow='auto' py='30px'>
+                {allItems
+                  .filter((item) => item.favourite.length > 0)
+                  .map((item: Item, id: number) => (
+                    <PromoteCard data={item} key={id} />
+                  ))}
+              </Flex>
+            </Box>
+          )}
         </Container>
       </Center>
+      <Box bg='gray.900'>
+        <Container maxW='container.lg' py='60px' color='white'>
+          <Box className='row m-0'>
+            <Box className='col-lg'>
+              <Heading fontSize='5.5rem'>
+                ลด
+                <Heading as='span' color='green.200' fontSize='5.5rem'>
+                  ขยะ
+                </Heading>
+              </Heading>
+              <Text fontSize='3rem' fontWeight={400}>
+                จากสิ่งของที่ไม่ใช้แล้ว
+              </Text>
+              <Box my='50px'>
+                <Text fontSize='lg'>
+                  สิ่งของที่คุณไม่ใช้แล้ว ไม่ใช่ขยะเสมอไปเพราะอาจมีคนต้องการมัน ลองนำไปแลกดูสิ
+                  คุณอาจจะได้สิ่งที่เป็นประโยชน์สำหรับคุณกลับมา
+                </Text>
+                <Button bg='green.400' color='white' my='20px' _hover={{ bg: undefined }}>
+                  อ่านบทความ
+                </Button>
+              </Box>
+            </Box>
+            <Flex className='col-lg' justifyContent='center'>
+              {/* <BiWorld color='#09e89e' size='80%'/> */}
+                <Image
+                  src='https://cdn-icons.flaticon.com/png/512/2949/premium/2949040.png?token=exp=1645438571~hmac=0923bd20d1019285ca37ab9908b23acc'
+                  alt='earth'
+                  boxSize='300px'
+                  
+                />
+            </Flex>
+          </Box>
+        </Container>
+      </Box>
+      <Footer />
     </>
   )
 }
