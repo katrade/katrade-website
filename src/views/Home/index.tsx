@@ -243,7 +243,7 @@ export function Home() {
             <Flex className='col-lg' justifyContent='center'>
               {/* <BiWorld color='#09e89e' size='80%'/> */}
                 <Image
-                  src='https://cdn-icons.flaticon.com/png/512/2949/premium/2949040.png?token=exp=1645438571~hmac=0923bd20d1019285ca37ab9908b23acc'
+                  src='https://cdn-icons.flaticon.com/png/512/2949/premium/2949040.png?token=exp=1645469427~hmac=68bb4504cd7c1653339eb2be7d6169ad'
                   alt='earth'
                   boxSize='300px'
                   
