@@ -67,6 +67,7 @@ export function AuthProvider({ children }: { children: any }) {
       })
       .then((res) => res.data.data)
       .catch(() => {
+        localStorage.setItem('t', '')
         alert('Session expired, please signin.')
         navigate('/')
       })

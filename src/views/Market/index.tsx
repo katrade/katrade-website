@@ -1,4 +1,4 @@
-import { Box, Center, Container, Flex, Grid, GridItem, Heading, HStack, Text } from '@chakra-ui/react'
+import { Box, Center, CircularProgress, Container, Flex, Grid, GridItem, Heading, HStack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { backendRoot } from '../../axios/instance'
@@ -40,7 +40,11 @@ export default function Market() {
     if (matchItems && allItems) setShow(true)
   }, [matchItems, allItems])
 
-  if (!show) return null
+  if (!show) return (
+    <Center minH='90vh'>
+      <CircularProgress isIndeterminate color='green.300' />
+    </Center>
+  )
   return (
     <>
       <Navbar />

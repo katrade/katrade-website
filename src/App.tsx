@@ -9,6 +9,8 @@ import { Home } from './views/Home'
 import ItemPage from './views/Item'
 import Market from './views/Market'
 import Signup from './views/Signup'
+import Nontsri from './views/Signup/Nontsri'
+import VerifyEmail from './views/VerifyEmail'
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
                 </AuthWrapper>
               }
             />
+            <Route path='/v/email/sent' element={<VerifyEmail />}/>
+            <Route path='/signup/nontsri' element={<Nontsri />}/>
             <Route path='/signup' element={<Signup />} />
             <Route path='/' element={<Home />} />
           </Routes>

@@ -35,7 +35,8 @@ import PromoteCard from './PromoteCard'
 import { BiWorld } from 'react-icons/bi'
 import Footer from '../../components/Footer'
 import { Helmet } from 'react-helmet'
-
+import { StyledLink } from '../../components/StyledLink'
+import earthImg from '../../images/earth.png'
 export function Home() {
   const inputBorderColor = useColorModeValue('gray.200', 'gray.700')
   const signUpCardBg = useColorModeValue('gray.50', 'gray.900')
@@ -81,9 +82,9 @@ export function Home() {
 
   return (
     <>
-    <Helmet>
-      <title>Katrade - Trade your items</title>
-    </Helmet>
+      <Helmet>
+        <title>Katrade - Trade your items</title>
+      </Helmet>
       <SimpleNavbar />
       <Center minHeight='100vh'>
         <Modal isOpen={isLoading} onClose={onClose} isCentered closeOnOverlayClick={false}>
@@ -193,9 +194,11 @@ export function Home() {
                       เข้าสู่ระบบ
                     </Button>
                     <Divider color={loginDivider} marginY='20px !important' />
-                    <Button size='lg' w='100%' colorScheme='messenger' marginTop='30px !important'>
-                      สมัครสมาชิก
-                    </Button>
+                    <StyledLink to='/signup' style={{ width: '100%' }}>
+                      <Button size='lg' w='100%' colorScheme='messenger' marginTop='30px !important'>
+                        สมัครสมาชิก
+                      </Button>
+                    </StyledLink>
                   </VStack>
                 </form>
               </Box>
@@ -242,12 +245,11 @@ export function Home() {
             </Box>
             <Flex className='col-lg' justifyContent='center'>
               {/* <BiWorld color='#09e89e' size='80%'/> */}
-                <Image
-                  src='https://cdn-icons.flaticon.com/png/512/2949/premium/2949040.png?token=exp=1645469427~hmac=68bb4504cd7c1653339eb2be7d6169ad'
-                  alt='earth'
-                  boxSize='300px'
-                  
-                />
+              <Image
+                src={earthImg}
+                alt='earth'
+                boxSize='300px'
+              />
             </Flex>
           </Box>
         </Container>

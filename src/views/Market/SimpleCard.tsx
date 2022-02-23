@@ -21,6 +21,10 @@ export default function SimpleCard({ data }: { data: Item }) {
       bg={bg}
       cursor='pointer'
       onClick={() => navigate(`/i/${_id}`)}
+      _hover={{
+        border: '1px solid',
+        borderColor: 'green.300',
+      }}
     >
       <AspectRatio ratio={4 / 3} w='100%'>
         <Image src={pictures[0]} alt={`item-${_id}`} objectFit='cover' />
