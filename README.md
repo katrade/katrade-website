@@ -2,6 +2,7 @@
 
 <p align="center"><b>V2 IS UNDER DEVELOPMENT</b></p>
 <p align="center">This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a></p>
+<p align="center"><b>DEMO deploys at <a href="https://katrade.vercel.app">v2.katrade</a></b></p>
 
 <br /><br /><br />
 <a href="https://letskatrade.web.app/">
