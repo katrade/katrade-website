@@ -1,46 +1,68 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<p align="center"><b>V2 IS UNDER DEVELOPMENT</b></p>
+<p align="center">This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a></p>
 
-In the project directory, you can run:
+<br /><br /><br />
+<a href="https://letskatrade.web.app/">
+<p align="center">
+  <img src="https://github.com/katrade/katrade-website/blob/master/src/pics/logo_green_white.png?raw=true" width="300px"/>
+</p>
+</a>
+<br /><br />
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Hey! Welcome to Katrade
 
-### `yarn test`
+Katrade is a items trading platform for Kasetsart University students. Our goal is to reduce waste and trash from unused items. [Join us](https://letskatrade.web.app/app/register) now. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For any development plans and suggestions, please contact `contact.nutchanon@gmail.com`
 
-### `yarn build`
+## Contributors
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Chonchanat Tubtiang](https://github.com/chonchanat)
+- [Pokpong Noppakhun](https://github.com/davepokpong)
+- [Nik Kunraho Struyf](https://github.com/nikstruyf)
+- [Napasin Saengthong](https://github.com/FranKydeSU)
+- [Nathawat Mianlamai](https://github.com/nathawat1008)
+- [Jirat Wangman](https://github.com/aimsomer)
+- [Nutchanon Chantrasup](https://github.com/nutchanonc)
+- [Chalanthorn Aenguthaivadt](https://github.com/ChalanthornA)
+- [Sorrawich Supmee](https://github.com/Sorrawichsu)
+- [Teeratat Pisarnsint](https://github.com/mteeratat)
+- [Passawit Sungtoop](https://github.com/PassawitRyu)
+- [Thanaphol Ovatvoravarunyou](https://github.com/s-thanaphol)
+- [Pandin Lailert](https://github.com/DanCPE)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Related Components
+- [`katrade-backend-v2`](https://github.com/katrade/katrade-backend-v2)
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Getting started
+Cloning this repository
+```
+$ git clone https://github.com/NUTPEDTeam/katrade-website
+```
+Install dependencies
+```
+$ yarn
+```
+Run the project
+```
+$ yarn start
+```
+Building static files
+```
+$ yarn build
+```
+Formatting files
+```
+$ yarn format
+```
