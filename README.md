@@ -44,6 +44,7 @@ For any development plans and suggestions, please contact `contact.nutchanon@gma
 
 ## Related Components
 - [`katrade-backend-v2`](https://github.com/katrade/katrade-backend-v2)
+- [`go-katrade`](https://github.com/katrade/go-katrade)
 
 
 ## Getting started
