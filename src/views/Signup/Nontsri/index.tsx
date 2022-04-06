@@ -16,9 +16,9 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import axios from 'axios'
 import { useState } from 'react'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
+import { backendRoot } from '../../../axios/instance'
 import Field from './Field'
 import { Student } from './interfaces/student'
 export default function Nontsri() {
@@ -31,14 +31,12 @@ export default function Nontsri() {
   const [loading, setLoading] = useState<boolean>(false)
   const dividerColor = useColorModeValue('gray.300', 'gray.600')
 
-  
-
   async function verify() {
     setError(false)
     setLoading(true)
-    await axios
+    await backendRoot
       .post(
-        'https://katrade-backend.herokuapp.com/auth/validateNontsriAccount',
+        '/auth/validateNontsriAccount',
         {
           username: username,
           password: password,
@@ -51,6 +49,10 @@ export default function Nontsri() {
       )
       .then((res) => {
         setNontsriAccount(res.data.student)
+        setConfirmation({
+          username: username,
+          password: password,
+        })
         setLoading(false)
       })
       .catch((error) => {
@@ -62,6 +64,19 @@ export default function Nontsri() {
   function handleSubmit(e: any) {
     e.preventDefault()
     verify()
+  }
+
+  async function selectThisAccount() {
+    await backendRoot.post('/auth/signupNontsri', 
+    {
+      username: confirmation?.username,
+      password: confirmation?.password
+    })
+    .then(res => {
+      if (res.data.success) {
+        console.log(res.data.token)
+      }
+    })
   }
 
   return (
@@ -143,7 +158,14 @@ export default function Nontsri() {
                 <Field title='วิทยาเขต' text={nontsriAccount.campusNameTh} />
                 <Field title='ระดับปริญญา' text={nontsriAccount.edulevelNameTh} />
               </Box>
-              <Button w='100%' size='lg' colorScheme='messenger' my='20px' className='fly-in-top-2'>
+              <Button
+                w='100%'
+                size='lg'
+                colorScheme='messenger'
+                my='20px'
+                className='fly-in-top-2'
+                onClick={selectThisAccount}
+              >
                 <BsFillCheckCircleFill className='me-2' />
                 ฉันจะสมัครบัญชีในนามของบุคคลคนนี้
               </Button>

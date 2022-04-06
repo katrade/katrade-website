@@ -8,6 +8,7 @@ interface IAuthContext {
   getUserData: () => Promise<any>
   user?: User
   signout: () => void
+  signinNontsri: (username: string, password: string) => Promise<void>
 }
 
 const a: any = {}
@@ -16,6 +17,7 @@ const defaultContextValue: IAuthContext = {
   signin: () => new Promise(() => {}),
   getUserData: () => new Promise(() => {}),
   signout: () => {},
+  signinNontsri: () => new Promise(() => {}),
 }
 
 export const AuthContext = createContext<IAuthContext>(defaultContextValue)
@@ -56,6 +58,25 @@ export function AuthProvider({ children }: { children: any }) {
     setUser(undefined)
   }
 
+  async function signinNontsri(username: string, password: string) {
+    await backendRoot
+      .post('/auth/signinWithNontsri', {
+        username: username,
+        password: password,
+      })
+      .then(async (res) => {
+        const { success, DaveTheHornyDuck: t } = res.data
+        // console.log(res.data)
+        if (success && t) {
+          localStorage.setItem('t', t)
+          setUser(await getUserData())
+        }
+        else {
+          throw new Error("Cannot signin")
+        }
+      })
+  }
+
   async function getUserData() {
     const t = localStorage.getItem('t')
     if (!t) return undefined
@@ -86,6 +107,7 @@ export function AuthProvider({ children }: { children: any }) {
         signin,
         user,
         signout,
+        signinNontsri,
       }}
     >
       {children}

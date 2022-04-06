@@ -8,6 +8,7 @@ import theme from './styles/theme'
 import { Home } from './views/Home'
 import ItemPage from './views/Item'
 import Market from './views/Market'
+import NontsriLoginPage from './views/Signin/Nontsri'
 import Signup from './views/Signup'
 import Nontsri from './views/Signup/Nontsri'
 import VerifyEmail from './views/VerifyEmail'
@@ -34,6 +35,7 @@ function App() {
                 </AuthWrapper>
               }
             />
+            <Route path='/signin/nontsri' element={<NontsriLoginPage />} />
             <Route path='/v/email/sent' element={<VerifyEmail />}/>
             <Route path='/signup/nontsri' element={<Nontsri />}/>
             <Route path='/signup' element={<Signup />} />

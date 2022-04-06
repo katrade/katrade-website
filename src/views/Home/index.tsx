@@ -194,8 +194,13 @@ export function Home() {
                       เข้าสู่ระบบ
                     </Button>
                     <Divider color={loginDivider} marginY='20px !important' />
+                    <StyledLink to='/signin/nontsri' style={{ width: '100%' }}>
+                      <Button size='lg' w='100%' colorScheme='teal' marginTop='30px !important'>
+                        เข้าสู่ระบบด้วย KU
+                      </Button>
+                    </StyledLink>
                     <StyledLink to='/signup' style={{ width: '100%' }}>
-                      <Button size='lg' w='100%' colorScheme='messenger' marginTop='30px !important'>
+                      <Button size='lg' w='100%' colorScheme='messenger' marginTop='10px !important'>
                         สมัครสมาชิก
                       </Button>
                     </StyledLink>
