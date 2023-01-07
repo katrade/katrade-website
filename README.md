@@ -1,8 +1,5 @@
 
-
-<p align="center"><b>V2 IS UNDER DEVELOPMENT</b></p>
 <p align="center">This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a></p>
-<p align="center"><b>DEMO deploys at <a href="https://v2dem-katrade.web.app">v2.katrade</a></b></p>
 <p align="center"><b>See our original version at <a href="https://letskatrade.web.app">letskatrade</a></b></p>
 
 <br /><br /><br />
