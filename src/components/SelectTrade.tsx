@@ -1,7 +1,8 @@
 import { useState } from "react";
 import useAuthorization from "../hooks/useAuthorization";
 
-import { CgShoppingBag, AiOutlineClose } from "react-icons/all";
+import { CgShoppingBag } from "react-icons/cg";
+import { AiOutlineClose } from "react-icons/ai";
 import "./SelectTrade.css";
 export default function SelectTrade({
   onClose,

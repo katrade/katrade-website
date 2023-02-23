@@ -1,7 +1,7 @@
 import { ThemeContext } from "../../contexts/Theme";
 import P from "../../components/standard/P";
 import { H4 } from "../../components/standard/H";
-import { FiSun } from "react-icons/all";
+import { FiSun } from "react-icons/fi";
 import moon from "../../pics/moon.png";
 import { useContext } from "react";
 const buttonStyle = {

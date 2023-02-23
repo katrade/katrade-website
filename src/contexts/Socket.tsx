@@ -48,7 +48,7 @@ interface ISocketContext {
 }
 
 export const SocketContext = React.createContext<ISocketContext>({
-  socket: io("https://socketkatrade.herokuapp.com", {
+  socket: io("https://socketkatrade-backend.kraikub.com", {
     timeout: 2000,
     secure: true,
     transports: ["polling", "websocket", "flashsocket"],
@@ -134,7 +134,7 @@ export function SocketProvider({ children }: propsInterface) {
   useEffect(() => {
     if (socket === null) {
       setSocket(
-        io("https://socketkatrade.herokuapp.com", {
+        io("https://katrade-backend.kraikub.com", {
           secure: true,
           transports: ["flashsocket", "polling", "websocket"],
         })

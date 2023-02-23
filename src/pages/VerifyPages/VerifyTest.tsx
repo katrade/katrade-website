@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import axios from "axios";
 
 import { useLocation } from "react-router";

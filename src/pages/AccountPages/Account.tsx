@@ -4,7 +4,7 @@ import MenuAccount from "../../templates/MenuAccount";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router";
 import useAuthorization from "../../hooks/useAuthorization";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import { TransparentButton } from "../../components/standard/Button";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { ContactSupportOutlined } from "@material-ui/icons";

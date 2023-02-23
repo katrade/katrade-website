@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../../hooks/useLoading";
 import axios from "axios";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import useAuthorization from "../../hooks/useAuthorization";
 import InputValidation from "../InputValidation";
 import Div from "../standard/Div";

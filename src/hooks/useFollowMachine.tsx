@@ -1,7 +1,7 @@
 import axios from "axios";
 import { MouseEvent, useState } from "react";
 import { useCookies } from "react-cookie";
-import { API } from "../app.setting.json";
+import { API } from "../app.setting";
 
 export function useFollowMachine(_following: string[], _followers: string[]) {
   const [cookies, ,] = useCookies(["DaveTheHornyDuck"]);

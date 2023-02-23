@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { API } from "../app.setting.json";
+import { API } from "../app.setting";
 import useAuthorization from "../hooks/useAuthorization";
 import { Label } from "./Label";
 import { ThemeContext } from "../contexts/Theme";

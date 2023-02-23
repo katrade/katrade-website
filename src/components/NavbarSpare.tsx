@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { API } from "../app.setting.json";
+import { API } from "../app.setting";
 import useAuthorization from "../hooks/useAuthorization";
 
 import "./Navbar.css";

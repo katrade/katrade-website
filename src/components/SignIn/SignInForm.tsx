@@ -7,18 +7,12 @@ import axios from "axios";
 
 import eye_open from "../../pics/red-eye.png";
 import eye_close from "../../pics/hide.png";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import useLoading from "../../hooks/useLoading";
 import { useCookies } from "react-cookie";
 import Div from "../standard/Div";
 import InputValidation from "../InputValidation";
-
-// const eye1: string = "https://cdn.discordapp.com/attachments/858916776029323274/863822479667363851/image0.jpg"
-// const eye2: string = "https://media.discordapp.net/attachments/858916776029323274/863825153997799435/image0.jpg?width=273&height=485"
-
-// interface paramsInterface {
-//     lang: string
-// }
+import { Button, Container } from "@mui/material";
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState<number>(1);
@@ -35,7 +29,6 @@ const SignInForm = () => {
   //         document.getElementById("signin")?.click();
   //     }
   // });
-
   const onFormSubmit = async (e: any) => {
     // แก้ submit ให้เป็น tag form
     e.preventDefault();
@@ -116,6 +109,8 @@ const SignInForm = () => {
       });
   }
 
+  const oauthUrl = `https://app.kraikub.com/signin?client_id=69fc3096578268c1893ee6edbec7f08a&scope=openid&redirect_uri=${window.location.origin}/oauth2/callback&scope=openid&response_type=code`;
+
   useEffect(() => {
     if (form.email != null && form.email != "") {
       setShowAlert1("0");
@@ -140,76 +135,101 @@ const SignInForm = () => {
           <Icon src={logo} width="200px" onClick={() => history.push(`/`)} />
         </div>
         <br />
-        <form onSubmit={onFormSubmit}>
-          <div className="d-flex justify-content-center">
-            <div style={{ width: "90%", maxWidth: "500px" }}>
-              <p>Email or username</p>
-              <div>
-                <input
-                  className={"input-register w-100 px-2"}
-                  value={form.email}
-                  name="email"
-                  onChange={handleForm}
-                  type="text"
-                  placeholder="Enter your email or username"
-                />
-                <InputValidation
-                  valid={validType}
-                  name="Email or Username"
-                  showMes={showAlert1}
-                />
-              </div>
-              <br />
-              <p className="mt-2">Password</p>
-              <div className="input-container">
-                <input
-                  value={form.password}
-                  onChange={handleForm}
-                  name="password"
-                  className="input-none px-2"
-                  type={showPassword === 1 ? "password" : "text"}
-                  placeholder="Your password"
-                ></input>
-                <img
-                  src={showPassword === 1 ? eye_open : eye_close}
-                  width="20"
-                  onClick={() => setShowPassword(showPassword * -1)}
-                  className="pointer"
-                />
-              </div>
-              <div className="row mt-2">
-                <div className="col">
+        <Container maxWidth="sm">
+          <form onSubmit={onFormSubmit}>
+            <div className="d-flex justify-content-center">
+              <div style={{ width: "90%", maxWidth: "500px" }}>
+                <p>Email or username</p>
+                <div>
+                  <input
+                    className={"input-register w-100 px-2"}
+                    value={form.email}
+                    name="email"
+                    onChange={handleForm}
+                    type="text"
+                    placeholder="Enter your email or username"
+                  />
                   <InputValidation
                     valid={validType}
-                    name="Password"
-                    showMes={showAlert2}
+                    name="Email or Username"
+                    showMes={showAlert1}
                   />
-                  {/* <label className="ml-1">
+                </div>
+                <br />
+                <p className="mt-2">Password</p>
+                <div className="input-container">
+                  <input
+                    value={form.password}
+                    onChange={handleForm}
+                    name="password"
+                    className="input-none px-2"
+                    type={showPassword === 1 ? "password" : "text"}
+                    placeholder="Your password"
+                  ></input>
+                  <img
+                    src={showPassword === 1 ? eye_open : eye_close}
+                    width="20"
+                    onClick={() => setShowPassword(showPassword * -1)}
+                    className="pointer"
+                  />
+                </div>
+                <div className="row mt-2">
+                  <div className="col">
+                    <InputValidation
+                      valid={validType}
+                      name="Password"
+                      showMes={showAlert2}
+                    />
+                    {/* <label className="ml-1">
                                         <input className="mr-2" type="checkbox" />
                                         Remember me
                                     </label> */}
+                  </div>
+                  <div className="col text-end p-0">
+                    <a
+                      className="blue-font-link"
+                      href={`/app/forgotpassword`}
+                      target="_blank"
+                    >
+                      Forgot Password?
+                    </a>
+                  </div>
                 </div>
-                <div className="col text-end p-0">
-                  <a
-                    className="blue-font-link"
-                    href={`/app/forgotpassword`}
-                    target="_blank"
+                <div className="text-center mb-5">
+                  <button
+                    id="signin"
+                    type="submit"
+                    className="mybutton-grey pl-5 pr-5 mt-3"
+                    value="Sign in"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      fontSize: "22px",
+                    }}
                   >
-                    Forgot Password?
-                  </a>
+                    Sign in
+                  </button>
+                  {/* <a href={oauthUrl}>
+                    <button
+                      className="mybutton-grey mt-2"
+                      style={{
+                        width: "100%",
+                        height: "60px",
+                        border: "1px solid #00000030",
+                        backgroundColor: "transparent",
+                        fontSize: "22px",
+                        color: "#000",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Sign in with Kasetsart
+                    </button>
+                  </a> */}
                 </div>
-              </div>
-              <div className="text-center mb-5">
-                <input
-                  id="signin"
-                  type="submit"
-                  className="mybutton-grey pl-5 pr-5 mt-3"
-                  value="Sign in"
-                />
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </Container>
       </div>
     </>
   );

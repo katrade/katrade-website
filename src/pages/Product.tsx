@@ -14,7 +14,7 @@ import SelectTrade from "../components/SelectTrade";
 import { BsStarFill } from "react-icons/bs";
 import { SolidButton, TransparentButton } from "../components/standard/Button";
 // import { AiOutlineConsoleSql } from 'react-icons/ai';
-import { FcLike } from "react-icons/all";
+import { FcLike } from "react-icons/fc";
 import useLoading from "../hooks/useLoading";
 import ProfilePic from "../components/Account/ProfilePic";
 

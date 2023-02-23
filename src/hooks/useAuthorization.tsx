@@ -1,6 +1,6 @@
 import { useCookies } from "react-cookie";
 import useLoading from "./useLoading";
-import { API } from "../app.setting.json";
+import { API } from "../app.setting";
 import { IAccount } from "../interfaces/IUser";
 import axios from "axios";
 import { useHistory } from "react-router";
@@ -701,7 +701,7 @@ export default function useAuthorization() {
     // show()
     return await axios
       .get(
-        `https://socketkatrade.herokuapp.com/chatroom/getroom?roomid=${roomID}`,
+        `https://katrade-backend.kraikub.com/chatroom/getroom?roomid=${roomID}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -740,7 +740,7 @@ export default function useAuthorization() {
     // show()
     return await axios
       .get(
-        `https://socketkatrade.herokuapp.com/user/getUserFromId?userId=${userId}`,
+        `https://katrade-backend.kraikub.com/user/getUserFromId?userId=${userId}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -805,7 +805,7 @@ export default function useAuthorization() {
     // console.log(userName)
     axios
       .put(
-        `https://socketkatrade.herokuapp.com/user/newUserContact`,
+        `https://katrade-backend.kraikub.com/user/newUserContact`,
         {
           userId: userId,
           userName: userName,
@@ -870,7 +870,7 @@ export default function useAuthorization() {
     // show()
     return await axios
       .get(
-        `https://socketkatrade.herokuapp.com/chatroom/getLastMessage?roomid=${roomID}`,
+        `https://katrade-backend.kraikub.com/chatroom/getLastMessage?roomid=${roomID}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.DaveTheHornyDuck}`,
@@ -891,7 +891,7 @@ export default function useAuthorization() {
     // console.log("updateUserContact()")
     axios
       .put(
-        `https://socketkatrade.herokuapp.com/user/updateUserContact`,
+        `https://katrade-backend.kraikub.com/user/updateUserContact`,
         {
           userId: userId,
           contactId: duoId,

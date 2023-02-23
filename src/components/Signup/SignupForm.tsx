@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { SolidButton, SubmitButton } from "../../components/standard/Button";
 import { useForm } from "../../utils/useForm";
 import { useEffect } from "react";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import useLoading from "../../hooks/useLoading";
 import eye_open from "../../pics/red-eye.png";
 import eye_close from "../../pics/hide.png";

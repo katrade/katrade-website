@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import useLoading from "../../hooks/useLoading";
 import axios from "axios";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import { useHistory } from "react-router";
 import { DynamicSolidButton } from "../standard/Button";
 import { uploadProfilePic } from "../../utils/storage";

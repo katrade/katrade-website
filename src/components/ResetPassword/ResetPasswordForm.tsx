@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useForm } from "../../utils/useForm";
 import { useEffect, useState, useContext } from "react";
 import useLoading from "../../hooks/useLoading";
-import { API } from "../../app.setting.json";
+import { API } from "../../app.setting";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import InputValidation from "../InputValidation";
